@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="Asciidoctor 1.5.4" name="generator"/>
+  <title>
+   eProcurement Ontology 3.0.0
+  </title>
+  <link href="https://asciidoclive.com/assets/asciidoctor.js/css/asciidoctor.css" rel="stylesheet"/>
+ </head>
+ <body class="article">
+  <div id="header">
+  </div>
+  <div id="content">
+   <div class="sect1">
+    <h2 id="__strong_epo_eprocurement_ontology_3_0_0_strong">
+     <strong>
+      ePO - eProcurement Ontology 3.0.0
+     </strong>
+    </h2>
+    <div class="sectionbody">
+     <div class="paragraph">
+      <p>
+       The ultimate objective of the e-procurement ontology (ePO) is to put forth
+            a commonly agreed OWL ontology that will conceptualise, formally encode
+            and make available in an open, structured and machine-readable format
+            data about public procurement, covering it from end to end, i.e. from
+            notification, through tendering to awarding, ordering, invoicing and
+            payment. It is the intention of the e-procurement ontology to unify existing
+            practices, thus facilitating seamless exchange, access and reuse of data.
+      </p>
+     </div>
+     <div class="paragraph">
+      <p>
+       In the framework of this project, we will identify and give examples of
+            each step of the process for creating the e-procurement ontology. Clearly
+            specifying the roles of the different actors and the input required of
+            them within the timeline of creating the ontology. The different phases
+            needed to create the ontology and the intermediary processes within these
+            phases will be clearly defined giving examples taken from the 3 use cases.
+            In parallel to this process, a working group composed of stakeholders
+            from multiple interested groups will be set up. This working group will
+            decide by consensus on how the ontology should be developed at all stages
+            and may decide to adopt the first draft of the specification proposed
+            and described during the first meeting. This project will provide the
+            working group with the process, methodology and technology to be followed
+            for developing the final version of the e-procurement ontology.
+      </p>
+     </div>
+     <div class="paragraph">
+      <p>
+       The release of version 3.0.0 and its corresponding technical files can
+            be found
+       <a href="https://github.com/OP-TED/ePO/tree/v3.0.0">
+        here
+       </a>
+       .
+      </p>
+     </div>
+     <div class="paragraph">
+      <p>
+       RDF representation of the eProcurement ontology can be downloaded
+       <a href="https://github.com/OP-TED/ePO/tree/v3.0.0/analysis_and_design/transformation_output/ePO/owl_ontology">
+        here
+       </a>
+       .
+      </p>
+     </div>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="_release_notes_2">
+     Release notes
+    </h2>
+    <div class="sectionbody">
+     <div class="sect2">
+      <h3 id="_general_changes_2">
+       General changes
+      </h3>
+      <table class="tableblock frame-all grid-all spread">
+       <colgroup>
+        <col style="width: 50%;"/>
+        <col style="width: 50%;"/>
+       </colgroup>
+       <thead>
+        <tr>
+         <th class="tableblock halign-left valign-top">
+          <strong>
+           Metadata
+          </strong>
+         </th>
+         <th class="tableblock halign-left valign-top">
+          <strong>
+           Value
+          </strong>
+         </th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr>
+         <td class="tableblock halign-left valign-top">
+          <p class="tableblock">
+           Reference ePO version
+          </p>
+         </td>
+         <td class="tableblock halign-left valign-top">
+          <p class="tableblock">
+           3.0.0 beta
+          </p>
+         </td>
+        </tr>
+        <tr>
+         <td class="tableblock halign-left valign-top">
+          <p class="tableblock">
+           Target ePO version
+          </p>
+         </td>
+         <td class="tableblock halign-left valign-top">
+          <p class="tableblock">
+           3.0.0
+          </p>
+         </td>
+        </tr>
+        <tr>
+         <td class="tableblock halign-left valign-top">
+          <p class="tableblock">
+           Authors
+          </p>
+         </td>
+         <td class="tableblock halign-left valign-top">
+          <p class="tableblock">
+           Andreea Pasăre, Eugeniu Costetchi
+          </p>
+         </td>
+        </tr>
+        <tr>
+         <td class="tableblock halign-left valign-top">
+          <p class="tableblock">
+           Date
+          </p>
+         </td>
+         <td class="tableblock halign-left valign-top">
+          <p class="tableblock">
+           2022-07-28
+          </p>
+         </td>
+        </tr>
+       </tbody>
+      </table>
+      <div class="ulist">
+       <ul>
+        <li>
+         <p>
+          Attributes were consistently added with the “
+          <em>
+           has
+          </em>
+          ”/“
+          <em>
+           is
+          </em>
+          ”
+                  prefix in order to conform to the convention that attribute and
+                  relation names must start with a lowercase letter. Previously all
+                  attributes started with the capital letter.
+         </p>
+        </li>
+        <li>
+         <p>
+          Attribute types were migrated from
+          <em>
+           UML
+          </em>
+          and
+          <em>
+           epo
+          </em>
+          datatypes into XSD/RDFS datatypes. The inventory of used data types
+                  is provided in the
+          <em>
+           datatype
+          </em>
+          package of the model.
+         </p>
+        </li>
+        <li>
+         <p>
+          Packages have been reorganised as presented below.
+         </p>
+        </li>
+        <li>
+         <p>
+          New modules (as EA
+          <em>
+           root nodes
+          </em>
+          ) have been created (organisation
+                  and inventory to be provided elsewhere). Some classes from the
+          <em>
+           epo
+          </em>
+          module were moved into other modules for future modelling,
+                  as may be mentioned in this document as deleted.
+         </p>
+        </li>
+        <li>
+         <p>
+          The main requirements considered in this refactoring exercise was
+                  conformance to a) the TED
+          <a href="https://simap.ted.europa.eu/web/simap/eforms">
+           eForms
+          </a>
+          as specified in the regulation Annexe and b) the TED
+          <a href="https://simap.ted.europa.eu/web/simap/standard-forms-for-public-procurement">
+           Standard Forms
+          </a>
+          .
+         </p>
+        </li>
+        <li>
+         <p>
+          The conceptual guidelines considered in this refactoring were a)
+                  pinning of the concepts under an upper level ontology, while taking
+                  into consideration b) multi phase life cycle of the procurement
+                  process. This will be detailed elsewhere.
+         </p>
+        </li>
+       </ul>
+      </div>
+     </div>
+     </div>
+   </div>
+   <div class="sect1">
+    <h2 id="_new_classes_2">
+     New classes
+    </h2>
+    <div class="ulist">
+     <ul>
+      <li>
+       <p>
+        epo:ProcurementProcessInformation
+       </p>
+      </li>
+      <li>
+       <p>
+        cccev:Evidence
+       </p>
+      </li>
+      <li>
+       <p>
+        cccev:InformationConcept
+       </p>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="_deleted_classes">
+     Deleted classes
+    </h2>
+    <div class="ulist">
+     <ul>
+      <li>
+       <p>
+        epo:CompetitionTerminationInformation
+       </p>
+      </li>
+      <li>
+       <p>
+        epo:RecurrenceInformation
+       </p>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="_new_controlled_vocabularies">
+     New Controlled Vocabularies
+    </h2>
+    <div class="ulist">
+     <ul>
+      <li>
+       <p>
+        at-voc:confidentiality-level
+       </p>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <div class="sect1">
+    <h2 id="_changed_classes_2">
+     Changed classes
+    </h2>
+   <div class="sect2">
+    <h3 id="_procurement_object_package_2">
+     Procurement object package
+    </h3>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added attributes
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted attributes
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:Lot
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasRecurrenceDescription
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:Lot
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:isRecurrent
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:Procedure
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasAdditionalInformation
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:Procedure
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasRecurrenceDescription
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:Procedure
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:isCoveredByGPA
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:Procedure
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:isJointProcurement
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:Procedure
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:isRecurrent
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:Tender
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:isVariant
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasVariant
+        </p>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added property
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted property
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:Lot
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:foreseesContractSpecificTerm → epo:ContractSpecificTerm
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:foreseesContractTerm → epo:ContractSpecificTerm
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:PlannedProcurementPart
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:foreseesTechnique → epo:TechniqueUsage
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:Procedure
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:usesTechnique → epo:TechniqueUsage
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:Procedure
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:isResponsabilityOfBuyer → epo:Buyer
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="sect2">
+    <h3 id="_agent_package_2">
+     Agent package
+    </h3>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added attributes
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted attributes
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cpv:Person
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         person:birthName
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasBirthFamilyName
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cpv:Person
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cv:birthDate
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasDateOfBirth
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cpv:Person
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cv:deathDate
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasDateOfDeath
+        </p>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added property
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted property
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cpv:Person
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         legal:registeredAddress → locn:Address
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasRegisteredAddress → locn:Address
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         org:OrganisationGroup
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         generalisation → org:Organization
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         org:Organization
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasMainActivityType → at-voc:main-activity
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         org:Organization
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         legal:registeredAddress → locn:Address
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasRegisteredAddress → locn:Address
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         org:Organization
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cv:address → locn:Address
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasAddress → locn:Address
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         org:Organization
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasBuyerType → at-voc:buyer-legal-type
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         org:Organization
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasLegalType → at-voc:buyer-legal-type
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasBuyerType → at-voc:buyer-legal-type
+        </p>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="sect2">
+    <h3 id="_role_package_2">
+     Role package
+    </h3>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added attributes
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted attributes
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:Buyer
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:isResponsibleForProcedure
+        </p>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added property
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted property
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:Buyer
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasMainActivityType → at-voc:main-activity
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:Buyer
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasBuyerType → at-voc:buyer-legal-type
+        </p>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="sect2">
+    <h3 id="_location_package">
+     Location package
+    </h3>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added attributes
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted attributes
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cpov:ContactPoint
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cpov:email
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cpov:hasEmail
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cpov:ContactPoint
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cpov:telephone
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cpov:hasTelephone
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         locn:Address
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         locn:adminUnitL1
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         locn:Address
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         locn:adminUnitL2
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         locn:Geometry:Class
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cv:coordinates
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         locn:coordinates
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         locn:Geometry:Class
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cv:latitude
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         locn:latitude
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         locn:Geometry:Class
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         locn:longitude
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cv:longitude
+        </p>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added property
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted property
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cpov:ContactPoint
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cv:address → locn:Address
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasAddress → locn:Address
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         locn:Address
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasNutsCode → at-voc:nuts
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         locn:adminUnitL2 → at-voc:nuts
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         locn:Address
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasCountryCode → at-voc:country
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         locn:adminUnitL1 → at-voc:country
+        </p>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="sect2">
+    <h3 id="_term_package_2">
+     Term package
+    </h3>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added attributes
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted attributes
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:FrameworkAgreementTerm
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasBuyerCoverage
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:FrameworkAgreementTerm
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         hasBuyerCategoryDescription
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         renamed from epo:hasFrameworkBuyerCategory
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:FrameworkAgreementTerm
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasMaximumNumberOfAwardedTenderers
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:FrameworkAgreementTerm
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasMaximumParticipantsNumber
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:ProcedureTerm
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasCrossBorderLaw
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:ProcedureTerm
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:isAwardedByCPB
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:SubmissionTerm
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasEAuctionURL
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+     </tbody>
+    </table>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added property
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted property
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:ReviewTerm
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         generalisation → epo:ProcedureSpecificTerm
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="sect2">
+    <h3 id="_criterion_package">
+     Criterion package
+    </h3>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added attributes
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted attributes
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cccev:InformationConcept
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasDescription
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cccev:InformationConcept
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasName
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+     </tbody>
+    </table>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added property
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted property
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cccev:Constraint
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cccev:constrains → cccev:InformationConcept
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cccev:Evidence
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cccev:supportsRequirement → cccev:Requirement
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cccev:Evidence
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cccev:supportsConcept → cccev:InformationConcept
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cccev:Evidence
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cccev:confidentialityLevelType → at-voc:confidentiality-level
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         cccev:InformationConcept
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasID → epo:Identifier
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="sect2">
+    <h3 id="_technique_package">
+     Technique package
+    </h3>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added attributes
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted attributes
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:DynamicPurchaseSystemTechniqueUsage (renamed from epo:DynamicPurchaseSystemTechnique)
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasDPSTermination
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:EAuctionTechniqueUsage (renamed from epo:EAuctionTechnique)
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasEAuctionURL
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:FrameworkAgreementTechniqueUsage (renamed from epo:FrameworkAgreementTechnique)
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasFrameworkBuyerCategory
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:FrameworkAgreementTechniqueUsage (renamed from epo:FrameworkAgreementTechnique)
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasFrameworkDurationJustification
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:FrameworkAgreementTechniqueUsage (renamed from epo:FrameworkAgreementTechnique)
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasMaximumParticipantsNumber
+        </p>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added property
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted property
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:EAuctionTechniqueUsage (renamed from epo:EAuctionTechnique)
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasEAuctionUsage → at-voc:usage
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:TechniqueUsage (renamed from epo:Technique)
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasUsage → at-voc:usage
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         renamed from epo:hasEAuctionUsage → at-voc:usage
+        </p>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="sect2">
+    <h3 id="_contextual_description_package_2">
+     Contextual description package
+    </h3>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added attributes
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted attributes
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:SubmissionStatisticalInformation
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasEUReceivedTenders
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:SubmissionStatisticalInformation
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasReceivedNonEUTenders
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:ProcurementProcessInformation
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:isCompetitionTerminated
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:ProcurementProcessInformation
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:isDPSTerminated
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:ProcurementProcessInformation
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:isToBeRelaunched
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+     </tbody>
+    </table>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added property
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted property
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:NoticeAwardInformation
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasMaximumFrameworkAgreementAwardedValue → epo:MonetaryValue
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasTotalFrameworkAgreementAwardedValue → epo:MonetaryValue
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:NoticeAwardInformation
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasProcurementHighestReceivedTenderValue → epo:MonetaryValue
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:NoticeAwardInformation
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasProcurementLowestReceivedTenderValue → epo:MonetaryValue
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:NoticeAwardInformation
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasTotalAwardedValue → epo:MonetaryValue
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:hasTotalContractAwardedValue → epo:MonetaryValue
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:ProcurementProcessInformation
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         generalisation → epo:ProcurementProcessInformation
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:ProcurementProcessInformation
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:concernsLot → epo:Lot
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:concernsLotRelaunch → epo:Lot (epo:RelaunchInformation
+                  as target class)
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:ProcurementProcessInformation
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:concernsProcedure → epo:Procedure
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:concernsProcedureRelaunch → epo:Procedure (epo:RelaunchInformation
+                  as target class)
+        </p>
+       </td>
+      </tr>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:ProcurementProcessInformation
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:concernsPreviousNotice → epo:Notice
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="sect2">
+    <h3 id="_document_package_2">
+     Document package
+    </h3>
+    <table class="tableblock frame-all grid-all spread">
+     <colgroup>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3333%;"/>
+      <col style="width: 33.3334%;"/>
+     </colgroup>
+     <thead>
+      <tr>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         class
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         added property
+        </strong>
+       </th>
+       <th class="tableblock halign-left valign-top">
+        <strong>
+         deleted property
+        </strong>
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:ResultNotice
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+        <p class="tableblock">
+         epo:refersToRole → epo:AgentInRole
+        </p>
+       </td>
+       <td class="tableblock halign-left valign-top">
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+  </div>
+ </body>
+</html>
