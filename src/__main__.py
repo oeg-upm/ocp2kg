@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 import re
 import csv
 
-#TODO: David, en las cabeceras de las nuevas clases y clases que se borran aparece el módulo al que pertenecen dentro de la ontología, ¿no es de interés representarlo?
 def get_classes(html_doc, search_string):
     classes = []
     for h in html_doc.find_all('h2'):
@@ -13,7 +12,6 @@ def get_classes(html_doc, search_string):
                 classes.append(values.find('p').getText().strip())
     return classes
 
-#TODO: En el documento de cambios está la inserción y borrado de los vocabularios controlados, ¿Es de interés para lo nuestro?
 def get_attributes(html_doc):
     attributes = []
     for h in html_doc.find_all('h2'):
@@ -42,7 +40,10 @@ def get_attributes(html_doc):
 
 #Espera de recibir feedback de David de como quiere que lo representemos.
 def get_properties(html_doc):
-    properties = []
+    added_triples = []
+    deleted_triples = []
+    added_subclass = []
+    deleted_subclass = []
     for h in html_doc.find_all('h2'):
         if re.match(f".*changed_classes*", h.get('id')):
             for entries in h.parent.find_all("tr"):
@@ -52,21 +53,44 @@ def get_properties(html_doc):
                     #Caso en el que se modifica property
                     if entries.find_all("td")[2].find('p')!=None and entries.find_all("td")[3].find('p')!=None:
                         if "→" in entries.find_all("td")[2].find('p').getText().strip() and "→" in entries.find_all("td")[3].find('p').getText().strip():
-                            addatt = entries.find_all("td")[2].find('p').getText().strip()
-                            delatt = entries.find_all("td")[3].find('p').getText().strip()
-                            properties.append((clase,addatt,delatt))
+                            if "generalisation" in entries.find_all("td")[2].find('p').getText().strip():                               
+                                addtriple = entries.find_all("td")[2].find('p').getText().strip()
+                                deltriple = entries.find_all("td")[3].find('p').getText().strip()
+                                words_add = addtriple.split(" ")
+                                words_del = deltriple.split(" ")
+                                added_subclass.append((clase,"rdfs:subClassOf",words_add[2]))
+                                deleted_subclass.append((clase, "rdfs:subClassOf",words_del[2]))                            
+                            else:
+                                addtriple = entries.find_all("td")[2].find('p').getText().strip()
+                                deltriple = entries.find_all("td")[3].find('p').getText().strip()
+                                words_add = addtriple.split(" ")
+                                words_del = deltriple.split(" ")
+                                added_triples.append((clase,words_add[0],words_add[2]))
+                                deleted_triples.append((clase, words_del[0],words_del[2]))                                             
                     #Caso en el que se crea la property    
                     elif entries.find_all("td")[2].find('p')!=None and entries.find_all("td")[3].find('p')==None:
                         if "→" in entries.find_all("td")[2].find('p').getText().strip():
-                            addatt = entries.find_all("td")[2].find('p').getText().strip()
-                            properties.append((clase,addatt,""))
+                            if "generalisation" in entries.find_all("td")[2].find('p').getText().strip():                               
+                                addtriple = entries.find_all("td")[2].find('p').getText().strip()
+                                words_add = addtriple.split(" ")
+                                added_subclass.append((clase,"rdfs:subClassOf",words_add[2]))
+                            else:
+                                addtriple = entries.find_all("td")[2].find('p').getText().strip()
+                                words_add = addtriple.split(" ")
+                                added_triples.append((clase,words_add[0],words_add[2]))
                     #Caso en el que se elimina la property    
                     elif entries.find_all("td")[2].find('p')==None and entries.find_all("td")[3].find('p')!=None:
                         if "→" in entries.find_all("td")[3].find('p').getText().strip():
-                            delatt = entries.find_all("td")[3].find('p').getText().strip()
-                            properties.append((clase,"",delatt))
+                            if "generalisation" in entries.find_all("td")[3].find('p').getText().strip():                               
+                                    deltriple = entries.find_all("td")[3].find('p').getText().strip()
+                                    words_del = deltriple.split(" ")
+                                    deleted_subclass.append((clase, "rdfs:subClassOf",words_del[2]))                            
+                            else:
+                                    deltriple = entries.find_all("td")[3].find('p').getText().strip()
+                                    words_del = deltriple.split(" ")
+                                    deleted_triples.append((clase, words_del[0],words_del[2]))      
     #print(properties)
-    return properties
+    return added_triples, deleted_triples, added_subclass, deleted_subclass
 
 
 def write_csv(classes, name, metadata):
@@ -84,14 +108,13 @@ def write_csv_attributes(attributes, name, metadata):
         for c in attributes:
             writer.writerow([c[0],c[1],c[2], metadata["Reference ePO version"], metadata["Target ePO version"]])
 
-def write_csv_properties(attributes, name, metadata):
+def write_csv_properties(triples, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
-        writer.writerow(["class","added_properties","deleted_properties","reference_version", "target_version"])
-        for c in attributes:
+        writer.writerow(["subject","predicate","object","reference_version", "target_version"])
+        for c in triples:
             writer.writerow([c[0],c[1],c[2], metadata["Reference ePO version"], metadata["Target ePO version"]])
 
-#TODO: David, de los metadatos que estamos obteniendo realmente solo le damos uso a la versión origen y la de destino pero, ¿no son de interés los autores y fecha?
 def get_metadata(html_doc):
     metadata = {}
     for h in html_doc.find_all('h2'):
@@ -113,8 +136,11 @@ if __name__ == "__main__":
     deleted_classes = get_classes(html_content, "deleted_classes")
     metadata_changes = get_metadata(html_content)
     attribute_changes = get_attributes(html_content)
-    property_changes = get_properties(html_content)
-    write_csv(new_classes, "added_clases.csv", metadata_changes)
-    write_csv(deleted_classes, "deleted_sclasses.csv", metadata_changes)
+    added_triples,deleted_triples,added_subclass,deleted_subclass = get_properties(html_content)
+    write_csv(new_classes, "added_classes.csv", metadata_changes)
+    write_csv(deleted_classes, "deleted_classes.csv", metadata_changes)
     write_csv_attributes(attribute_changes,"modified_attributes.csv",metadata_changes)
-    write_csv_properties(property_changes,"modified_properties.csv",metadata_changes)
+    write_csv_properties(added_triples,"added_triples.csv",metadata_changes)
+    write_csv_properties(deleted_triples,"deleted_triples.csv",metadata_changes)
+    write_csv_properties(deleted_subclass,"deleted_subclass.csv",metadata_changes)
+    write_csv_properties(added_subclass,"added_subclass.csv",metadata_changes)
