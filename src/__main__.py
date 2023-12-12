@@ -99,21 +99,21 @@ def write_csv(classes, name, metadata):
         writer.writerow(["name","comment","reference_version","target_version"])
 
         for c in classes:
-            writer.writerow([c.split(" ")[0]," ".join(c.split(" ")[1:]),metadata["Reference ePO version"], metadata["Target ePO version"]])
+            writer.writerow([parse_full_URI(c.split(" ")[0])," ".join(c.split(" ")[1:]),metadata["Reference ePO version"], metadata["Target ePO version"]])
 
 def write_csv_attributes(attributes, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
         writer.writerow(["class","comment","added_attributes","deleted_attributes","reference_version", "target_version"])
         for c in attributes:
-            writer.writerow([c[0].split(" ")[0]," ".join(c[0].split(" ")[1:]),c[1],c[2], metadata["Reference ePO version"], metadata["Target ePO version"]])
+            writer.writerow([parse_full_URI(c[0].split(" ")[0])," ".join(c[0].split(" ")[1:]),parse_full_URI(c[1]),parse_full_URI(c[2]), metadata["Reference ePO version"], metadata["Target ePO version"]])
 
 def write_csv_properties(triples, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
         writer.writerow(["subject","comment","predicate","object","reference_version", "target_version"])
         for c in triples:
-            writer.writerow([c[0].split(" ")[0]," ".join(c[0].split(" ")[1:]),c[1],c[2], metadata["Reference ePO version"], metadata["Target ePO version"]])
+            writer.writerow([parse_full_URI(c[0].split(" ")[0])," ".join(c[0].split(" ")[1:]),parse_full_URI(c[1]),parse_full_URI(c[2]), metadata["Reference ePO version"], metadata["Target ePO version"]])
 
 def get_metadata(html_doc):
     metadata = {}
@@ -127,6 +127,67 @@ def get_metadata(html_doc):
 
     return metadata
 
+def parse_full_URI(term):    
+    if term.startswith("epo-cat"):
+        return "<http://data.europa.eu/a4g/ontology#"+term.split(":")[1]+">"
+    elif term.startswith("epo-con"):
+        return "<http://data.europa.eu/a4g/ontology#"+term.split(":")[1]+">"
+    elif term.startswith("epo-ord"):
+        return "<http://data.europa.eu/a4g/ontology#"+term.split(":")[1]+">"
+    elif term.startswith("epo-not"):
+        return "<http://data.europa.eu/a4g/ontology#"+term.split(":")[1]+">"
+    elif term.startswith("epo-ful"):
+        return "<http://data.europa.eu/a4g/ontology#"+term.split(":")[1]+">"
+    elif term.startswith("epo-acc"):
+        return "<http://data.europa.eu/a4g/ontology#"+term.split(":")[1]+">"
+    elif term.startswith("epo-sub"):
+        return "<http://data.europa.eu/a4g/ontology#"+term.split(":")[1]+">"
+    elif term.startswith("epo"):
+        return "<http://data.europa.eu/a4g/ontology#"+term.split(":")[1]+">"
+    elif term.startswith("adms"):
+        return "<http://www.w3.org/ns/adms#"+term.split(":")[1]+">"
+    elif term.startswith("at-voc-new"):
+        return "<http://publications.europa.eu/resource/authority/new/"+term.split(":")[1]+">"
+    elif term.startswith("at-voc"):
+        return "<http://publications.europa.eu/resource/authority/"+term.split(":")[1]+">"  
+    elif term.startswith("bibo"):
+        return "<http://purl.org/ontology/bibo/"+term.split(":")[1]+">"
+    elif term.startswith("cc"):
+        return "<http://creativecommons.org/ns#"+term.split(":")[1]+">"
+    elif term.startswith("cccev"):
+        return "<http://data.europa.eu/m8g/"+term.split(":")[1]+">"
+    elif term.startswith("dct"):
+        return "<http://purl.org/dc/terms/"+term.split(":")[1]+">"
+    elif term.startswith("foaf"):
+        return "<http://xmlns.com/foaf/0.1/"+term.split(":")[1]+">"
+    elif term.startswith("locn"):
+        return "<http://www.w3.org/ns/locn#"+term.split(":")[1]+">"
+    elif term.startswith("org"):
+        return "<http://www.w3.org/ns/org#"+term.split(":")[1]+">"
+    elif term.startswith("owl"):
+        return "<http://www.w3.org/2002/07/owl#"+term.split(":")[1]+">"
+    elif term.startswith("person"):
+        return "<http://www.w3.org/ns/person#"+term.split(":")[1]+">"
+    elif term.startswith("rdf"):
+        return "<http://www.w3.org/1999/02/22-rdf-syntax-ns#"+term.split(":")[1]+">"
+    elif term.startswith("rdfs"):
+        return "<http://www.w3.org/2000/01/rdf-schema#"+term.split(":")[1]+">"
+    elif term.startswith("skos"):
+        return "<http://www.w3.org/2004/02/skos/core#"+term.split(":")[1]+">"
+    elif term.startswith("time"):
+        return "<http://www.w3.org/2006/time#"+term.split(":")[1]+">"
+    elif term.startswith("vann"):
+        return "<http://purl.org/vocab/vann/"+term.split(":")[1]+">"
+    elif term.startswith("xsd"):
+        return "<http://www.w3.org/2001/XMLSchema#"+term.split(":")[1]+">"
+    elif term.startswith("cv"):
+        return "<http://data.europa.eu/m8g/"+term.split(":")[1]+">"
+    elif term.startswith("cv"):
+        return "<http://data.europa.eu/m8g/"+term.split(":")[1]+">"
+    elif term.startswith("cpv"):
+        return "<http://data.europa.eu/m8g/"+term.split(":")[1]+">"
+    elif term.startswith("cpv"):
+        return "<http://data.europa.eu/m8g/"+term.split(":")[1]+">" 
 
 if __name__ == "__main__":
     with open("../epo-data/changes_v4.0.0.html",encoding="utf-8") as input_file:
