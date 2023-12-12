@@ -96,24 +96,24 @@ def get_properties(html_doc):
 def write_csv(classes, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
-        writer.writerow(["name", "reference_version", "target_version"])
+        writer.writerow(["name","comment","reference_version","target_version"])
 
         for c in classes:
-            writer.writerow([c, metadata["Reference ePO version"], metadata["Target ePO version"]])
+            writer.writerow([c.split(" ")[0]," ".join(c.split(" ")[1:]),metadata["Reference ePO version"], metadata["Target ePO version"]])
 
 def write_csv_attributes(attributes, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
-        writer.writerow(["class","added_attributes","deleted_attributes","reference_version", "target_version"])
+        writer.writerow(["class","comment","added_attributes","deleted_attributes","reference_version", "target_version"])
         for c in attributes:
-            writer.writerow([c[0],c[1],c[2], metadata["Reference ePO version"], metadata["Target ePO version"]])
+            writer.writerow([c[0].split(" ")[0]," ".join(c[0].split(" ")[1:]),c[1],c[2], metadata["Reference ePO version"], metadata["Target ePO version"]])
 
 def write_csv_properties(triples, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
-        writer.writerow(["subject","predicate","object","reference_version", "target_version"])
+        writer.writerow(["subject","comment","predicate","object","reference_version", "target_version"])
         for c in triples:
-            writer.writerow([c[0],c[1],c[2], metadata["Reference ePO version"], metadata["Target ePO version"]])
+            writer.writerow([c[0].split(" ")[0]," ".join(c[0].split(" ")[1:]),c[1],c[2], metadata["Reference ePO version"], metadata["Target ePO version"]])
 
 def get_metadata(html_doc):
     metadata = {}
