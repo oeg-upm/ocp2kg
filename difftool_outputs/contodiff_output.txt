@@ -1,0 +1,58 @@
+ move LotGroupAwardInformation is_a ContextualProjection ContextDescription 
+ move ProcurementProcessInformation is_a ContextSpecificDescription ContextDescription 
+ move Contract is_a ProcurementElement Document 
+ move Estimate is_a Thing ContextDescription 
+ move StatisticalInformation is_a ContextSpecificDescription ContextDescription 
+ move ContractLotCompletionInformation is_a ContextualProjection ContextDescription 
+ move LotAwardOutcome is_a ContextualProjection AwardOutcome 
+ move ReviewObject is_a ProcurementElement Document 
+ move ExclusionGround is_a ProcurementCriterion QualificationCriterion 
+ move AwardDecision is_a ProcurementElement Document 
+ move NoticeAwardInformation is_a ContextSpecificDescription ContextDescription 
+ move Tender is_a ProcurementElement Document 
+ move SelectionCriterion is_a ProcurementCriterion QualificationCriterion 
+ move PlannedProcurementPart is_a ProcurementObject ProcurementElement 
+ move AccessTerm is_a [AcquiringCentralPurchasingBody, Address, AwardCriterion, AwardDecision, AwardEvaluationTerm, Awarder, AwardingCentralPurchasingBody, BudgetProvider, Business, CatalogueProvider, CatalogueReceiver, Channel, Concept, ConceptScheme, ConcessionContract, ConcessionEstimate, Constraint, ContactPoint, ContractLotCompletionInformation, ContractModification, ContractTerm, Contractor, DesignContestRegimeTerm, DirectAwardTerm, DynamicPurchaseSystemTechniqueUsage, EAuctionTechniqueUsage, ElementChangeDescription, ElementConfidentialityDescription, ElementModificationDescription, EmploymentInformationProvider, EnvironmentalProtectionInformationProvider, Evidence, ExclusionGround, ExpressionOfInterest, FrameworkAgreement, FrameworkAgreementTechniqueUsage, Fund, Geometry, GreenProcurement, Identifier, IndefiniteDuration, InformationConcept, InnovativeProcurement, LeadBuyer, Location, Lot, LotAwardOutcome, LotGroup, LotGroupAwardInformation, Mediator, MonetaryValue, MultipleStageProcedureTerm, Notice, NoticeAwardInformation, NoticeChange, OfflineAccessProvider, OpeningTerm, OrderedCollection, OrganisationGroup, OtherEntity, ParticipationRequestProcessor, ParticipationRequestReceiver, ParticipationRequestTerm, PaymentExecutor, Period, Person, PlannedProcurementPart, Prize, Procedure, ProcedureTerm, ProcessPlanningTerm, ProcurementDocument, ProcurementProcedureInformationProvider, ProcurementProcessInformation, ProcurementServiceProvider, PublicOrganisation, PublicationProvision, PurchaseContract, Purpose, Quantity, RequestForClarification, RequestForParticipation, ReviewDecision, ReviewIrregularitySummary, ReviewProcedureInformationProvider, ReviewRequest, ReviewRequestSummary, ReviewRequester, Reviewer, SecurityClearanceTerm, SelectionCriterion, SelectionEvaluationTerm, SocialProcurement, SpecificDuration, SubcontractTerm, SubcontractingEstimate, Subcontractor, SubmissionStatisticalInformation, System, TaxInformationProvider, Tender, TenderAwardOutcome, TenderGroup, TenderProcessor, TenderReceiver, Tenderer, Winner] [LotSpecificTerm, ProcedureSpecificTerm] 
+ move Duration is_a Thing [Duration, TemporalDuration] 
+ move FrameworkAgreementTerm is_a [AcquiringCentralPurchasingBody, Address, AwardCriterion, AwardDecision, AwardEvaluationTerm, Awarder, AwardingCentralPurchasingBody, BudgetProvider, Business, CatalogueProvider, CatalogueReceiver, Channel, Concept, ConceptScheme, ConcessionContract, ConcessionEstimate, Constraint, ContactPoint, ContractLotCompletionInformation, ContractModification, ContractTerm, Contractor, DesignContestRegimeTerm, DirectAwardTerm, DynamicPurchaseSystemTechniqueUsage, EAuctionTechniqueUsage, ElementChangeDescription, ElementConfidentialityDescription, ElementModificationDescription, EmploymentInformationProvider, EnvironmentalProtectionInformationProvider, Evidence, ExclusionGround, ExpressionOfInterest, FrameworkAgreement, FrameworkAgreementTechniqueUsage, Fund, Geometry, GreenProcurement, Identifier, IndefiniteDuration, InformationConcept, InnovativeProcurement, LeadBuyer, Location, Lot, LotAwardOutcome, LotGroup, LotGroupAwardInformation, Mediator, MonetaryValue, MultipleStageProcedureTerm, Notice, NoticeAwardInformation, NoticeChange, OfflineAccessProvider, OpeningTerm, OrderedCollection, OrganisationGroup, OtherEntity, ParticipationRequestProcessor, ParticipationRequestReceiver, ParticipationRequestTerm, PaymentExecutor, Period, Person, PlannedProcurementPart, Prize, Procedure, ProcedureTerm, ProcessPlanningTerm, ProcurementDocument, ProcurementProcedureInformationProvider, ProcurementProcessInformation, ProcurementServiceProvider, PublicOrganisation, PublicationProvision, PurchaseContract, Purpose, Quantity, RequestForClarification, RequestForParticipation, ReviewDecision, ReviewIrregularitySummary, ReviewProcedureInformationProvider, ReviewRequest, ReviewRequestSummary, ReviewRequester, Reviewer, SecurityClearanceTerm, SelectionCriterion, SelectionEvaluationTerm, SocialProcurement, SpecificDuration, SubcontractTerm, SubcontractingEstimate, Subcontractor, SubmissionStatisticalInformation, System, TaxInformationProvider, Tender, TenderAwardOutcome, TenderGroup, TenderProcessor, TenderReceiver, Tenderer, Winner] [ContractSpecificTerm, LotSpecificTerm, ProcedureSpecificTerm] 
+ move ReviewTerm is_a [AcquiringCentralPurchasingBody, Address, AwardCriterion, AwardDecision, AwardEvaluationTerm, Awarder, AwardingCentralPurchasingBody, BudgetProvider, Business, CatalogueProvider, CatalogueReceiver, Channel, Concept, ConceptScheme, ConcessionContract, ConcessionEstimate, Constraint, ContactPoint, ContractLotCompletionInformation, ContractModification, ContractTerm, Contractor, DesignContestRegimeTerm, DirectAwardTerm, DynamicPurchaseSystemTechniqueUsage, EAuctionTechniqueUsage, ElementChangeDescription, ElementConfidentialityDescription, ElementModificationDescription, EmploymentInformationProvider, EnvironmentalProtectionInformationProvider, Evidence, ExclusionGround, ExpressionOfInterest, FrameworkAgreement, FrameworkAgreementTechniqueUsage, Fund, Geometry, GreenProcurement, Identifier, IndefiniteDuration, InformationConcept, InnovativeProcurement, LeadBuyer, Location, Lot, LotAwardOutcome, LotGroup, LotGroupAwardInformation, Mediator, MonetaryValue, MultipleStageProcedureTerm, Notice, NoticeAwardInformation, NoticeChange, OfflineAccessProvider, OpeningTerm, OrderedCollection, OrganisationGroup, OtherEntity, ParticipationRequestProcessor, ParticipationRequestReceiver, ParticipationRequestTerm, PaymentExecutor, Period, Person, PlannedProcurementPart, Prize, Procedure, ProcedureTerm, ProcessPlanningTerm, ProcurementDocument, ProcurementProcedureInformationProvider, ProcurementProcessInformation, ProcurementServiceProvider, PublicOrganisation, PublicationProvision, PurchaseContract, Purpose, Quantity, RequestForClarification, RequestForParticipation, ReviewDecision, ReviewIrregularitySummary, ReviewProcedureInformationProvider, ReviewRequest, ReviewRequestSummary, ReviewRequester, Reviewer, SecurityClearanceTerm, SelectionCriterion, SelectionEvaluationTerm, SocialProcurement, SpecificDuration, SubcontractTerm, SubcontractingEstimate, Subcontractor, SubmissionStatisticalInformation, System, TaxInformationProvider, Tender, TenderAwardOutcome, TenderGroup, TenderProcessor, TenderReceiver, Tenderer, Winner] [LotSpecificTerm, ProcedureSpecificTerm] 
+ move SubmissionTerm is_a [AcquiringCentralPurchasingBody, Address, AwardCriterion, AwardDecision, AwardEvaluationTerm, Awarder, AwardingCentralPurchasingBody, BudgetProvider, Business, CatalogueProvider, CatalogueReceiver, Channel, Concept, ConceptScheme, ConcessionContract, ConcessionEstimate, Constraint, ContactPoint, ContractLotCompletionInformation, ContractModification, ContractTerm, Contractor, DesignContestRegimeTerm, DirectAwardTerm, DynamicPurchaseSystemTechniqueUsage, EAuctionTechniqueUsage, ElementChangeDescription, ElementConfidentialityDescription, ElementModificationDescription, EmploymentInformationProvider, EnvironmentalProtectionInformationProvider, Evidence, ExclusionGround, ExpressionOfInterest, FrameworkAgreement, FrameworkAgreementTechniqueUsage, Fund, Geometry, GreenProcurement, Identifier, IndefiniteDuration, InformationConcept, InnovativeProcurement, LeadBuyer, Location, Lot, LotAwardOutcome, LotGroup, LotGroupAwardInformation, Mediator, MonetaryValue, MultipleStageProcedureTerm, Notice, NoticeAwardInformation, NoticeChange, OfflineAccessProvider, OpeningTerm, OrderedCollection, OrganisationGroup, OtherEntity, ParticipationRequestProcessor, ParticipationRequestReceiver, ParticipationRequestTerm, PaymentExecutor, Period, Person, PlannedProcurementPart, Prize, Procedure, ProcedureTerm, ProcessPlanningTerm, ProcurementDocument, ProcurementProcedureInformationProvider, ProcurementProcessInformation, ProcurementServiceProvider, PublicOrganisation, PublicationProvision, PurchaseContract, Purpose, Quantity, RequestForClarification, RequestForParticipation, ReviewDecision, ReviewIrregularitySummary, ReviewProcedureInformationProvider, ReviewRequest, ReviewRequestSummary, ReviewRequester, Reviewer, SecurityClearanceTerm, SelectionCriterion, SelectionEvaluationTerm, SocialProcurement, SpecificDuration, SubcontractTerm, SubcontractingEstimate, Subcontractor, SubmissionStatisticalInformation, System, TaxInformationProvider, Tender, TenderAwardOutcome, TenderGroup, TenderProcessor, TenderReceiver, Tenderer, Winner] [LotSpecificTerm, ProcedureSpecificTerm] 
+ delInner NoticeChange 
+ delInner ElementModificationDescription 
+ delInner Thing 
+ delInner NoticeDescription 
+ delInner FrameworkAgreementTechniqueUsage 
+ delInner ElementChangeDescription 
+ delInner PublicationProvision 
+ delInner ElementDescription 
+ delInner ElementConfidentialityDescription 
+ delInner EAuctionTechniqueUsage 
+ delInner DynamicPurchaseSystemTechniqueUsage 
+ delInner TechniqueUsage 
+ delInner ContractModification 
+ delInner ContextSpecificDescription 
+ addSubGraph AwardOutcome MiniCompetitionAwardOutcome 
+ addSubGraph ContextDescription [ChangeInformation, NonPublishedInformation] 
+ addSubGraph ProcurementCriteriaSummary [AwardCriteriaSummary, EconomicStandingSummary, ExclusionGroundsSummary, ParticipationConditionsSummary, ProfessionalSuitabilitySummary, QualificationCriteriaSummary, SelectionCriteriaSummary, TechnicalAbilitySummary] 
+ addSubGraph Technique [DynamicPurchaseSystemTechnique, EAuctionTechnique, FrameworkAgreementTechnique] 
+ addLeaf ConceptScheme 
+ addLeaf Project 
+ addLeaf OriginatorRequest 
+ addLeaf DirectContract 
+ addLeaf CertificationLabel 
+ addLeaf OfferIssuer 
+ addLeaf ParticipationCondition 
+ addLeaf SelectedCandidateList 
+ addLeaf Candidate 
+ addLeaf ElectronicSignature 
+ addLeaf VehicleInformation 
+ addLeaf Offer 
+ addLeaf Certificate 
+ addLeaf NonDisclosureAgreementTerm 
+ addLeaf AdHocChannel 
+ addLeaf JuryMember 
+ addLeaf Certifier 
+ addInner QualificationCriterion 
+ addR Person is_a SpatialThing 
+ addR DesignContestRegimeTerm is_a ProcedureSpecificTerm 
+ addR OpeningTerm is_a ProcedureSpecificTerm 
