@@ -36,7 +36,7 @@ prefixes:
 mappings:
   AddedClasses:
     sources:
-    - [addded_classes.csv~csv]
+    - [added_classes.csv~csv]
     s: http://epo-changes.org/$(reference_version)-$(target_version)/AddClass/$(name)
     po:
     - [rdf:type, omv:AddClass]
@@ -55,7 +55,7 @@ mappings:
 
   AddedSubClasses:
     sources:
-    - [addded_subclasses.csv~csv]
+    - [added_subclasses.csv~csv]
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/AddSubClass/$(subject)-$(object)
     po:
@@ -77,7 +77,7 @@ mappings:
 
   AddedProperties:
     sources:
-    - [addded_triples.csv~csv]
+    - [added_triples.csv~csv]
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/AddProperty/$(predicate)
     po:

@@ -44,7 +44,7 @@
 
 	rml:logicalSource [
 		a rml:LogicalSource;
-		rml:source "addded_classes.csv";
+		rml:source "added_classes.csv";
 		rml:referenceFormulation ql:CSV
 	];
 	rr:subjectMap [
@@ -59,16 +59,6 @@
 		rr:objectMap [
 			a rr:ObjectMap;
 			rr:constant omv:AddClass;
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
-			rr:constant rdfs:comment;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rml:reference "comment";
 		];
 	];
 	rr:predicateObjectMap [
@@ -108,16 +98,6 @@
 	rr:predicateObjectMap [
 		rr:predicateMap [
 			a rr:PredicateMap;
-			rr:constant rdfs:comment;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rml:reference "comment";
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
 			rr:constant omv:deletedClass;
 		];
 		rr:objectMap [
@@ -132,7 +112,7 @@
 
 	rml:logicalSource [
 		a rml:LogicalSource;
-		rml:source "addded_subclasses.csv";
+		rml:source "added_subclasses.csv";
 		rml:referenceFormulation ql:CSV
 	];
 	rr:subjectMap [
@@ -152,21 +132,11 @@
 	rr:predicateObjectMap [
 		rr:predicateMap [
 			a rr:PredicateMap;
-			rr:constant rdfs:comment;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rml:reference "comment";
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
 			rr:constant omv:subAddSubClass;
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "name";
+			rml:reference "subject";
 			rr:termType rr:IRI
 		];
 	];
@@ -207,21 +177,11 @@
 	rr:predicateObjectMap [
 		rr:predicateMap [
 			a rr:PredicateMap;
-			rr:constant rdfs:comment;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rml:reference "comment";
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
 			rr:constant omv:subRemoveSubClass;
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "name";
+			rml:reference "subject";
 			rr:termType rr:IRI
 		];
 	];
@@ -242,7 +202,7 @@
 
 	rml:logicalSource [
 		a rml:LogicalSource;
-		rml:source "addded_triples.csv";
+		rml:source "added_triples.csv";
 		rml:referenceFormulation ql:CSV
 	];
 	rr:subjectMap [
@@ -257,16 +217,6 @@
 		rr:objectMap [
 			a rr:ObjectMap;
 			rr:constant omv:AddProperty;
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
-			rr:constant rdfs:comment;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rml:reference "comment";
 		];
 	];
 	rr:predicateObjectMap [
@@ -323,16 +273,6 @@
 		rr:objectMap [
 			a rr:ObjectMap;
 			rr:constant omv:RemoveProperty;
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
-			rr:constant rdfs:comment;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rml:reference "comment";
 		];
 	];
 	rr:predicateObjectMap [
