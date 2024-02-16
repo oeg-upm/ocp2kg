@@ -1,0 +1,100 @@
+prefixes:
+  brick: https://brickschema.org/schema/Brick#
+  csvw: http://www.w3.org/ns/csvw#
+  dc: http://purl.org/dc/elements/1.1/
+  dcat: http://www.w3.org/ns/dcat#
+  dcmitype: http://purl.org/dc/dcmitype/
+  dcterms: http://purl.org/dc/terms/
+  dcam: http://purl.org/dc/dcam/
+  doap: http://usefulinc.com/ns/doap#
+  foaf: http://xmlns.com/foaf/0.1/
+  geo: http://www.opengis.net/ont/geosparql#
+  odrl: http://www.w3.org/ns/odrl/2/
+  org: http://www.w3.org/ns/org#
+  prof: http://www.w3.org/ns/dx/prof/
+  prov: http://www.w3.org/ns/prov#
+  qb: http://purl.org/linked-data/cube#
+  schema: https://schema.org/
+  sh: http://www.w3.org/ns/shacl#
+  skos: http://www.w3.org/2004/02/skos/core#
+  sosa: http://www.w3.org/ns/sosa/
+  ssn: http://www.w3.org/ns/ssn/
+  time: http://www.w3.org/2006/time#
+  vann: http://purl.org/vocab/vann/
+  void: http://rdfs.org/ns/void#
+  wgs: https://www.w3.org/2003/01/geo/wgs84_pos#
+  owl: http://www.w3.org/2002/07/owl#
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  xsd: http://www.w3.org/2001/XMLSchema#
+  xml: http://www.w3.org/XML/1998/namespace
+  rr: http://www.w3.org/ns/r2rml#
+  rml: http://semweb.mmlab.be/ns/rml#
+  ql: http://semweb.mmlab.be/ns/ql#
+  omv: http://omv.ontoware.org/2009/09/OWLChanges/
+
+mappings:
+  AddedClasses:
+    sources:
+    - [addded_classes.csv~csv]
+    s: http://epo-changes.org/$(reference_version)-$(target_version)/AddClass/$(name)
+    po:
+    - [rdf:type, omv:AddClass]
+    - [rdfs:comment, $(comment)]
+    - [omv:addedClass, $(name)~iri]
+
+  DeletedClasses:
+    sources:
+    - [deleted_classes.csv~csv]
+    s:
+      http://epo-changes.org/$(reference_version)-$(target_version)/RemoveClass/$(name)
+    po:
+    - [rdf:type, omv:RemoveClass]
+    - [rdfs:comment, $(comment)]
+    - [omv:deletedClass, $(name)~iri]
+
+  AddedSubClasses:
+    sources:
+    - [addded_subclasses.csv~csv]
+    s:
+      http://epo-changes.org/$(reference_version)-$(target_version)/AddSubClass/$(subject)-$(object)
+    po:
+    - [rdf:type, omv:AddSubClass]
+    - [rdfs:comment, $(comment)]
+    - [omv:subAddSubClass, $(name)~iri]
+    - [omv:objAddSubClass, $(object)~iri]
+
+  RemoveSubClasses:
+    sources:
+    - [deleted_subclasses.csv~csv]
+    s:
+      http://epo-changes.org/$(reference_version)-$(target_version)/RemoveSubClass/$(subject)-$(object)
+    po:
+    - [rdf:type, omv:RemoveSubClass]
+    - [rdfs:comment, $(comment)]
+    - [omv:subRemoveSubClass, $(name)~iri]
+    - [omv:objRemoveSubClass, $(object)~iri]
+
+  AddedProperties:
+    sources:
+    - [addded_triples.csv~csv]
+    s:
+      http://epo-changes.org/$(reference_version)-$(target_version)/AddProperty/$(predicate)
+    po:
+    - [rdf:type, omv:AddProperty]
+    - [rdfs:comment, $(comment)]
+    - [omv:domainAddProperty, $(subject)~iri]
+    - [omv:propertyAddProperty, $(predicate)~iri]
+    - [omv:rangeAddProperty, $(object)~iri]
+
+  DeletedProperties:
+    sources:
+    - [deleted_triples.csv~csv]
+    s:
+      http://epo-changes.org/$(reference_version)-$(target_version)/RemoveProperty/$(predicate)
+    po:
+    - [rdf:type, omv:RemoveProperty]
+    - [rdfs:comment, $(comment)]
+    - [omv:domainRemoveProperty, $(subject)~iri]
+    - [omv:propertyRemoveProperty, $(predicate)~iri]
+    - [omv:rangeRemoveProperty, $(object)~iri]
