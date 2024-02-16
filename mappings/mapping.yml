@@ -40,7 +40,7 @@ mappings:
     s: http://epo-changes.org/$(reference_version)-$(target_version)/AddClass/$(name)
     po:
     - [rdf:type, omv:AddClass]
-    - [rdfs:comment, $(comment)]
+    #- [rdfs:comment, $(comment)]
     - [omv:addedClass, $(name)~iri]
 
   DeletedClasses:
@@ -50,7 +50,7 @@ mappings:
       http://epo-changes.org/$(reference_version)-$(target_version)/RemoveClass/$(name)
     po:
     - [rdf:type, omv:RemoveClass]
-    - [rdfs:comment, $(comment)]
+    #- [rdfs:comment, $(comment)]
     - [omv:deletedClass, $(name)~iri]
 
   AddedSubClasses:
@@ -60,8 +60,8 @@ mappings:
       http://epo-changes.org/$(reference_version)-$(target_version)/AddSubClass/$(subject)-$(object)
     po:
     - [rdf:type, omv:AddSubClass]
-    - [rdfs:comment, $(comment)]
-    - [omv:subAddSubClass, $(name)~iri]
+    #- [rdfs:comment, $(comment)]
+    - [omv:subAddSubClass, $(subject)~iri]
     - [omv:objAddSubClass, $(object)~iri]
 
   RemoveSubClasses:
@@ -71,8 +71,8 @@ mappings:
       http://epo-changes.org/$(reference_version)-$(target_version)/RemoveSubClass/$(subject)-$(object)
     po:
     - [rdf:type, omv:RemoveSubClass]
-    - [rdfs:comment, $(comment)]
-    - [omv:subRemoveSubClass, $(name)~iri]
+    #- [rdfs:comment, $(comment)]
+    - [omv:subRemoveSubClass, $(subject)~iri]
     - [omv:objRemoveSubClass, $(object)~iri]
 
   AddedProperties:
@@ -82,7 +82,7 @@ mappings:
       http://epo-changes.org/$(reference_version)-$(target_version)/AddProperty/$(predicate)
     po:
     - [rdf:type, omv:AddProperty]
-    - [rdfs:comment, $(comment)]
+    #- [rdfs:comment, $(comment)]
     - [omv:domainAddProperty, $(subject)~iri]
     - [omv:propertyAddProperty, $(predicate)~iri]
     - [omv:rangeAddProperty, $(object)~iri]
@@ -94,7 +94,7 @@ mappings:
       http://epo-changes.org/$(reference_version)-$(target_version)/RemoveProperty/$(predicate)
     po:
     - [rdf:type, omv:RemoveProperty]
-    - [rdfs:comment, $(comment)]
+    #- [rdfs:comment, $(comment)]
     - [omv:domainRemoveProperty, $(subject)~iri]
     - [omv:propertyRemoveProperty, $(predicate)~iri]
     - [omv:rangeRemoveProperty, $(object)~iri]
