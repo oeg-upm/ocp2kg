@@ -105,7 +105,7 @@ def write_csv(classes, name, metadata):
 def write_csv_attributes(attributes, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
-        writer.writerow(["class","comment","added_attributes","comment","deleted_attributes","comment","reference_version", "target_version"])
+        writer.writerow(["class","comment","added_attributes","commentaddatt","deleted_attributes","commentdelatt","reference_version", "target_version"])
         for c in attributes:
             clase= parse_full_URI(c[0].split(" ")[0])
             comment = c[0][len(c[0].split(" ")[0])+2:-1]
@@ -118,7 +118,7 @@ def write_csv_attributes(attributes, name, metadata):
 def write_csv_properties(triples, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
-        writer.writerow(["subject","comment","predicate","comment","object","comment","reference_version", "target_version"])
+        writer.writerow(["subject","comment","predicate","commentpred","object","commentobj","reference_version", "target_version"])
         for c in triples:
             clase= parse_full_URI(c[0].split(" ")[0])
             comment = c[0][len(c[0].split(" ")[0])+2:-1]
