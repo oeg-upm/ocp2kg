@@ -96,29 +96,29 @@ def get_properties(html_doc):
 def write_csv(classes, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
-        writer.writerow(["name","comment","reference_version","target_version"])
+        writer.writerow(["name","name_full","comment","reference_version","target_version"])
         for c in classes:
             clase= parse_full_URI(c.split(" ")[0])
             comment = c[len(c.split(" ")[0])+2:-1]
-            writer.writerow([clase,comment,metadata["Reference ePO version"], metadata["Target ePO version"]])
+            writer.writerow([c.split(" ")[0],clase,comment,metadata["Reference ePO version"], metadata["Target ePO version"]])
 
 def write_csv_attributes(attributes, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
-        writer.writerow(["class","comment","added_attributes","deleted_attributes","reference_version", "target_version"])
+        writer.writerow(["class","full_class","comment","added_attributes","added_attributes_full","deleted_attributes","deleted_attributes_full","reference_version", "target_version"])
         for c in attributes:
             clase= parse_full_URI(c[0].split(" ")[0])
             comment = c[0][len(c[0].split(" ")[0])+2:-1]
-            writer.writerow([clase,comment,parse_full_URI(c[1]),parse_full_URI(c[2]), metadata["Reference ePO version"], metadata["Target ePO version"]])
+            writer.writerow([c[0].split(" ")[0],clase,comment,c[1],parse_full_URI(c[1]),c[2],parse_full_URI(c[2]), metadata["Reference ePO version"], metadata["Target ePO version"]])
 
 def write_csv_properties(triples, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
-        writer.writerow(["subject","comment","predicate","object","reference_version", "target_version"])
+        writer.writerow(["subject","subject_full","comment","predicate","predicate_full","object","object_full","reference_version", "target_version"])
         for c in triples:
             clase= parse_full_URI(c[0].split(" ")[0])
             comment = c[0][len(c[0].split(" ")[0])+2:-1]
-            writer.writerow([clase,comment,parse_full_URI(c[1]),parse_full_URI(c[2]), metadata["Reference ePO version"], metadata["Target ePO version"]])
+            writer.writerow([clase,c[0].split(" ")[0],comment,c[1],parse_full_URI(c[1]),c[2],parse_full_URI(c[2]), metadata["Reference ePO version"], metadata["Target ePO version"]])
 
 def get_metadata(html_doc):
     metadata = {}

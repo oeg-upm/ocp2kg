@@ -96,37 +96,44 @@ def get_properties(html_doc):
 def write_csv(classes, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
-        writer.writerow(["name","comment","reference_version","target_version"])
+        writer.writerow(["name","name_full","comment","reference_version","target_version"])
         for c in classes:
-            clase= parse_full_URI(c.split(" ")[0])
+            clase_full= parse_full_URI(c.split(" ")[0])
+            clase=c.split(" ")[0]
             comment = c[len(c.split(" ")[0])+2:-1]
-            writer.writerow([clase,comment,metadata["Reference ePO version"], metadata["Target ePO version"]])
+            writer.writerow([clase,clase_full,comment,metadata["Reference ePO version"], metadata["Target ePO version"]])
 
 def write_csv_attributes(attributes, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
-        writer.writerow(["class","comment","added_attributes","commentaddatt","deleted_attributes","commentdelatt","reference_version", "target_version"])
+        writer.writerow(["class","class_full","comment","added_attributes","added_attributes_full","commentaddatt","deleted_attributes","deleted_attributes_full","commentdelatt","reference_version", "target_version"])
         for c in attributes:
-            clase= parse_full_URI(c[0].split(" ")[0])
+            clase_full= parse_full_URI(c[0].split(" ")[0])
+            clase=c[0].split(" ")[0]
             comment = c[0][len(c[0].split(" ")[0])+2:-1]
-            added_attribute = parse_full_URI(c[1].split(" ")[0])
+            added_attribute_full = parse_full_URI(c[1].split(" ")[0])
+            added_attribute = c[1].split(" ")[0]
             commentaux1 = c[1][len(c[1].split(" ")[0])+2:-1]
-            deleted_atrribute = parse_full_URI(c[2].split(" ")[0])
+            deleted_atrribute_full = parse_full_URI(c[2].split(" ")[0])
+            deleted_attribute = c[2].split(" ")[0]
             commentaux2 = c[2][len(c[2].split(" ")[0])+2:-1]
-            writer.writerow([clase,comment,added_attribute,commentaux1,deleted_atrribute,commentaux2, metadata["Reference ePO version"], metadata["Target ePO version"]])
+            writer.writerow([clase,clase_full,comment,added_attribute,added_attribute_full,commentaux1,deleted_attribute,deleted_atrribute_full,commentaux2, metadata["Reference ePO version"], metadata["Target ePO version"]])
 
 def write_csv_properties(triples, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
-        writer.writerow(["subject","comment","predicate","commentpred","object","commentobj","reference_version", "target_version"])
+        writer.writerow(["subject","subject_full","comment","predicate","predicate_full","commentpred","object","object_full","commentobj","reference_version", "target_version"])
         for c in triples:
-            clase= parse_full_URI(c[0].split(" ")[0])
+            clase_full= parse_full_URI(c[0].split(" ")[0])
+            clase=c[0].split(" ")[0]
             comment = c[0][len(c[0].split(" ")[0])+2:-1]
-            predicate = parse_full_URI(c[1].split(" ")[0])
+            predicate_full = parse_full_URI(c[1].split(" ")[0])
+            predicate=c[1].split(" ")[0]
             commentaux1 = c[1][len(c[1].split(" ")[0])+2:-1]
-            object = parse_full_URI(c[2].split(" ")[0])
+            obj=c[2].split(" ")[0]
+            object_full = parse_full_URI(c[2].split(" ")[0])
             commentaux2 = c[2][len(c[2].split(" ")[0])+2:-1]
-            writer.writerow([clase,comment,predicate,commentaux1,object,commentaux2, metadata["Reference ePO version"], metadata["Target ePO version"]])
+            writer.writerow([clase,clase_full,comment,predicate,predicate_full,commentaux1,obj,object_full,commentaux2, metadata["Reference ePO version"], metadata["Target ePO version"]])
 
 def get_metadata(html_doc):
     metadata = {}
