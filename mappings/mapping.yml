@@ -36,65 +36,87 @@ prefixes:
 mappings:
   AddedClasses:
     sources:
-    - [added_classes.csv~csv]
+    - [All_Added_Class.csv~csv]
     s: http://epo-changes.org/$(reference_version)-$(target_version)/AddClass/$(name)
     po:
     - [rdf:type, omv:AddClass]
     #- [rdfs:comment, $(comment)]
-    - [omv:addedClass, $(name)~iri]
+    - [omv:addedClass, $(name_full)~iri]
 
   DeletedClasses:
     sources:
-    - [deleted_classes.csv~csv]
+    - [All_Deleted_Class.csv~csv]
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/RemoveClass/$(name)
     po:
     - [rdf:type, omv:RemoveClass]
     #- [rdfs:comment, $(comment)]
-    - [omv:deletedClass, $(name)~iri]
+    - [omv:deletedClass, $(name_full)~iri]
 
   AddedSubClasses:
     sources:
-    - [added_subclasses.csv~csv]
+    - [All_Added_SubClass.csv~csv]
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/AddSubClass/$(subject)-$(object)
     po:
     - [rdf:type, omv:AddSubClass]
     #- [rdfs:comment, $(comment)]
-    - [omv:subAddSubClass, $(subject)~iri]
-    - [omv:objAddSubClass, $(object)~iri]
+    - [omv:subAddSubClass, $(subject_full)~iri]
+    - [omv:objAddSubClass, $(object_full)~iri]
 
   RemoveSubClasses:
     sources:
-    - [deleted_subclasses.csv~csv]
+    - [All_Deleted_SubClass.csv~csv]
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/RemoveSubClass/$(subject)-$(object)
     po:
     - [rdf:type, omv:RemoveSubClass]
     #- [rdfs:comment, $(comment)]
-    - [omv:subRemoveSubClass, $(subject)~iri]
-    - [omv:objRemoveSubClass, $(object)~iri]
+    - [omv:subRemoveSubClass, $(subject_full)~iri]
+    - [omv:objRemoveSubClass, $(object_full)~iri]
 
   AddedProperties:
     sources:
-    - [added_triples.csv~csv]
+    - [All_Added_Triples.csv~csv]
     s:
-      http://epo-changes.org/$(reference_version)-$(target_version)/AddProperty/$(predicate)
+      http://epo-changes.org/$(reference_version)-$(target_version)/AddObjectProperty/$(predicate)
     po:
-    - [rdf:type, omv:AddProperty]
+    - [rdf:type, omv:AddObjectProperty]
     #- [rdfs:comment, $(comment)]
-    - [omv:domainAddProperty, $(subject)~iri]
-    - [omv:propertyAddProperty, $(predicate)~iri]
-    - [omv:rangeAddProperty, $(object)~iri]
+    - [omv:domainAddObjectProperty, $(subject_full)~iri]
+    - [omv:propertyAddObjectProperty, $(predicate_full)~iri]
+    - [omv:rangeAddObjectProperty, $(object_full)~iri]
 
   DeletedProperties:
     sources:
-    - [deleted_triples.csv~csv]
+    - [All_Deleted_Triples.csv~csv]
     s:
-      http://epo-changes.org/$(reference_version)-$(target_version)/RemoveProperty/$(predicate)
+      http://epo-changes.org/$(reference_version)-$(target_version)/RemoveObjectProperty/$(predicate)
     po:
-    - [rdf:type, omv:RemoveProperty]
+    - [rdf:type, omv:RemoveObjectProperty]
     #- [rdfs:comment, $(comment)]
-    - [omv:domainRemoveProperty, $(subject)~iri]
-    - [omv:propertyRemoveProperty, $(predicate)~iri]
-    - [omv:rangeRemoveProperty, $(object)~iri]
+    - [omv:domainRemoveObjectProperty, $(subject_full)~iri]
+    - [omv:propertyRemoveObjectProperty, $(predicate_full)~iri]
+    - [omv:rangeRemoveObjectProperty, $(object_full)~iri]
+
+  AddedAttributes:
+    sources:
+    - [All_Modified_Attributes.csv~csv]
+    s:
+      http://epo-changes.org/$(reference_version)-$(target_version)/AddDataProperty/$(added_attributes)
+    po:
+    - [rdf:type, omv:AddDataProperty]
+    #- [rdfs:comment, $(comment)]
+    - [omv:domainAddDataProperty, $(class_full)~iri]
+    - [omv:propertyAddDataProperty, $(added_attributes_full)~iri]
+
+  DeletedAttributes:
+    sources:
+    - [All_Modified_Attributes.csv~csv]
+    s:
+      http://epo-changes.org/$(reference_version)-$(target_version)/RemoveDataProperty/$(deleted_attributes)
+    po:
+    - [rdf:type, omv:RemoveDataProperty]
+    #- [rdfs:comment, $(comment)]
+    - [omv:domainRemoveDataProperty, $(class_full)~iri]
+    - [omv:propertyRemoveDataProperty, $(deleted_attributes_full)~iri]
