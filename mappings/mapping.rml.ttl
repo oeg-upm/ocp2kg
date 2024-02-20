@@ -44,7 +44,7 @@
 
 	rml:logicalSource [
 		a rml:LogicalSource;
-		rml:source "added_classes.csv";
+		rml:source "All_Added_Class.csv";
 		rml:referenceFormulation ql:CSV
 	];
 	rr:subjectMap [
@@ -68,7 +68,7 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "name";
+			rml:reference "name_full";
 			rr:termType rr:IRI
 		];
 	].
@@ -78,7 +78,7 @@
 
 	rml:logicalSource [
 		a rml:LogicalSource;
-		rml:source "deleted_classes.csv";
+		rml:source "All_Deleted_Class.csv";
 		rml:referenceFormulation ql:CSV
 	];
 	rr:subjectMap [
@@ -102,7 +102,7 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "name";
+			rml:reference "name_full";
 			rr:termType rr:IRI
 		];
 	].
@@ -112,7 +112,7 @@
 
 	rml:logicalSource [
 		a rml:LogicalSource;
-		rml:source "added_subclasses.csv";
+		rml:source "All_Added_SubClass.csv";
 		rml:referenceFormulation ql:CSV
 	];
 	rr:subjectMap [
@@ -136,7 +136,7 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "subject";
+			rml:reference "subject_full";
 			rr:termType rr:IRI
 		];
 	];
@@ -147,7 +147,7 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "object";
+			rml:reference "object_full";
 			rr:termType rr:IRI
 		];
 	].
@@ -157,7 +157,7 @@
 
 	rml:logicalSource [
 		a rml:LogicalSource;
-		rml:source "deleted_subclasses.csv";
+		rml:source "All_Deleted_SubClass.csv";
 		rml:referenceFormulation ql:CSV
 	];
 	rr:subjectMap [
@@ -181,7 +181,7 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "subject";
+			rml:reference "subject_full";
 			rr:termType rr:IRI
 		];
 	];
@@ -192,7 +192,7 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "object";
+			rml:reference "object_full";
 			rr:termType rr:IRI
 		];
 	].
@@ -202,12 +202,12 @@
 
 	rml:logicalSource [
 		a rml:LogicalSource;
-		rml:source "added_triples.csv";
+		rml:source "All_Added_Triples.csv";
 		rml:referenceFormulation ql:CSV
 	];
 	rr:subjectMap [
 		a rr:SubjectMap;
-		rr:template "http://epo-changes.org/{reference_version}-{target_version}/AddProperty/{predicate}";
+		rr:template "http://epo-changes.org/{reference_version}-{target_version}/AddObjectProperty/{predicate}";
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [
@@ -216,39 +216,39 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rr:constant omv:AddProperty;
+			rr:constant omv:AddObjectProperty;
 		];
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [
 			a rr:PredicateMap;
-			rr:constant omv:domainAddProperty;
+			rr:constant omv:domainAddObjectProperty;
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "subject";
+			rml:reference "subject_full";
 			rr:termType rr:IRI
 		];
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [
 			a rr:PredicateMap;
-			rr:constant omv:propertyAddProperty;
+			rr:constant omv:propertyAddObjectProperty;
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "predicate";
+			rml:reference "predicate_full";
 			rr:termType rr:IRI
 		];
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [
 			a rr:PredicateMap;
-			rr:constant omv:rangeAddProperty;
+			rr:constant omv:rangeAddObjectProperty;
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "object";
+			rml:reference "object_full";
 			rr:termType rr:IRI
 		];
 	].
@@ -258,12 +258,12 @@
 
 	rml:logicalSource [
 		a rml:LogicalSource;
-		rml:source "deleted_triples.csv";
+		rml:source "All_Deleted_Triples.csv";
 		rml:referenceFormulation ql:CSV
 	];
 	rr:subjectMap [
 		a rr:SubjectMap;
-		rr:template "http://epo-changes.org/{reference_version}-{target_version}/RemoveProperty/{predicate}";
+		rr:template "http://epo-changes.org/{reference_version}-{target_version}/RemoveObjectProperty/{predicate}";
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [
@@ -272,39 +272,129 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rr:constant omv:RemoveProperty;
+			rr:constant omv:RemoveObjectProperty;
 		];
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [
 			a rr:PredicateMap;
-			rr:constant omv:domainRemoveProperty;
+			rr:constant omv:domainRemoveObjectProperty;
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "subject";
+			rml:reference "subject_full";
 			rr:termType rr:IRI
 		];
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [
 			a rr:PredicateMap;
-			rr:constant omv:propertyRemoveProperty;
+			rr:constant omv:propertyRemoveObjectProperty;
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "predicate";
+			rml:reference "predicate_full";
 			rr:termType rr:IRI
 		];
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [
 			a rr:PredicateMap;
-			rr:constant omv:rangeRemoveProperty;
+			rr:constant omv:rangeRemoveObjectProperty;
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "object";
+			rml:reference "object_full";
+			rr:termType rr:IRI
+		];
+	].
+
+
+<AddedAttributes_0> a rr:TriplesMap;
+
+	rml:logicalSource [
+		a rml:LogicalSource;
+		rml:source "All_Modified_Attributes.csv";
+		rml:referenceFormulation ql:CSV
+	];
+	rr:subjectMap [
+		a rr:SubjectMap;
+		rr:template "http://epo-changes.org/{reference_version}-{target_version}/AddDataProperty/{added_attributes}";
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [
+			a rr:PredicateMap;
+			rr:constant rdf:type;
+		];
+		rr:objectMap [
+			a rr:ObjectMap;
+			rr:constant omv:AddDataProperty;
+		];
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [
+			a rr:PredicateMap;
+			rr:constant omv:domainAddDataProperty;
+		];
+		rr:objectMap [
+			a rr:ObjectMap;
+			rml:reference "class_full";
+			rr:termType rr:IRI
+		];
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [
+			a rr:PredicateMap;
+			rr:constant omv:propertyAddDataProperty;
+		];
+		rr:objectMap [
+			a rr:ObjectMap;
+			rml:reference "added_attributes_full";
+			rr:termType rr:IRI
+		];
+	].
+
+
+<DeletedAttributes_0> a rr:TriplesMap;
+
+	rml:logicalSource [
+		a rml:LogicalSource;
+		rml:source "All_Modified_Attributes.csv";
+		rml:referenceFormulation ql:CSV
+	];
+	rr:subjectMap [
+		a rr:SubjectMap;
+		rr:template "http://epo-changes.org/{reference_version}-{target_version}/RemoveDataProperty/{deleted_attributes}";
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [
+			a rr:PredicateMap;
+			rr:constant rdf:type;
+		];
+		rr:objectMap [
+			a rr:ObjectMap;
+			rr:constant omv:RemoveDataProperty;
+		];
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [
+			a rr:PredicateMap;
+			rr:constant omv:domainRemoveDataProperty;
+		];
+		rr:objectMap [
+			a rr:ObjectMap;
+			rml:reference "class_full";
+			rr:termType rr:IRI
+		];
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [
+			a rr:PredicateMap;
+			rr:constant omv:propertyRemoveDataProperty;
+		];
+		rr:objectMap [
+			a rr:ObjectMap;
+			rml:reference "deleted_attributes_full";
 			rr:termType rr:IRI
 		];
 	].
