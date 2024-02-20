@@ -1,0 +1,190 @@
+class,class_full,comment,added_attributes,added_attributes_full,commentaddatt,deleted_attributes,deleted_attributes_full,commentdelatt,reference_version,target_version
+epo:Lot,http://data.europa.eu/a4g/ontology#Lot,,epo:hasRecurrenceDescription,http://data.europa.eu/a4g/ontology#hasRecurrenceDescription,,,,,3.0.0 beta,3.0.0
+epo:Lot,http://data.europa.eu/a4g/ontology#Lot,,epo:isRecurrent,http://data.europa.eu/a4g/ontology#isRecurrent,,,,,3.0.0 beta,3.0.0
+epo:Procedure,http://data.europa.eu/a4g/ontology#Procedure,,epo:hasAdditionalInformation,http://data.europa.eu/a4g/ontology#hasAdditionalInformation,,,,,3.0.0 beta,3.0.0
+epo:Procedure,http://data.europa.eu/a4g/ontology#Procedure,,epo:hasRecurrenceDescription,http://data.europa.eu/a4g/ontology#hasRecurrenceDescription,,,,,3.0.0 beta,3.0.0
+epo:Procedure,http://data.europa.eu/a4g/ontology#Procedure,,epo:isCoveredByGPA,http://data.europa.eu/a4g/ontology#isCoveredByGPA,,,,,3.0.0 beta,3.0.0
+epo:Procedure,http://data.europa.eu/a4g/ontology#Procedure,,epo:isJointProcurement,http://data.europa.eu/a4g/ontology#isJointProcurement,,,,,3.0.0 beta,3.0.0
+epo:Procedure,http://data.europa.eu/a4g/ontology#Procedure,,epo:isRecurrent,http://data.europa.eu/a4g/ontology#isRecurrent,,,,,3.0.0 beta,3.0.0
+epo:Tender,http://data.europa.eu/a4g/ontology#Tender,,epo:isVariant,http://data.europa.eu/a4g/ontology#isVariant,,epo:hasVariant,http://data.europa.eu/a4g/ontology#hasVariant,,3.0.0 beta,3.0.0
+cpv:Person,http://data.europa.eu/m8g/Person,,person:birthName,http://www.w3.org/ns/person#birthName,,epo:hasBirthFamilyName,http://data.europa.eu/a4g/ontology#hasBirthFamilyName,,3.0.0 beta,3.0.0
+cpv:Person,http://data.europa.eu/m8g/Person,,cv:birthDate,http://data.europa.eu/m8g/birthDate,,epo:hasDateOfBirth,http://data.europa.eu/a4g/ontology#hasDateOfBirth,,3.0.0 beta,3.0.0
+cpv:Person,http://data.europa.eu/m8g/Person,,cv:deathDate,http://data.europa.eu/m8g/deathDate,,epo:hasDateOfDeath,http://data.europa.eu/a4g/ontology#hasDateOfDeath,,3.0.0 beta,3.0.0
+epo:Buyer,http://data.europa.eu/a4g/ontology#Buyer,,,,,epo:isResponsibleForProcedure,http://data.europa.eu/a4g/ontology#isResponsibleForProcedure,,3.0.0 beta,3.0.0
+cpov:ContactPoint,,,cpov:email,,,cpov:hasEmail,,,3.0.0 beta,3.0.0
+cpov:ContactPoint,,,cpov:telephone,,,cpov:hasTelephone,,,3.0.0 beta,3.0.0
+locn:Address,http://www.w3.org/ns/locn#Address,,locn:adminUnitL1,http://www.w3.org/ns/locn#adminUnitL1,,,,,3.0.0 beta,3.0.0
+locn:Address,http://www.w3.org/ns/locn#Address,,locn:adminUnitL2,http://www.w3.org/ns/locn#adminUnitL2,,,,,3.0.0 beta,3.0.0
+locn:Geometry:Class,http://www.w3.org/ns/locn#Geometry,,cv:coordinates,http://data.europa.eu/m8g/coordinates,,locn:coordinates,http://www.w3.org/ns/locn#coordinates,,3.0.0 beta,3.0.0
+locn:Geometry:Class,http://www.w3.org/ns/locn#Geometry,,cv:latitude,http://data.europa.eu/m8g/latitude,,locn:latitude,http://www.w3.org/ns/locn#latitude,,3.0.0 beta,3.0.0
+locn:Geometry:Class,http://www.w3.org/ns/locn#Geometry,,locn:longitude,http://www.w3.org/ns/locn#longitude,,cv:longitude,http://data.europa.eu/m8g/longitude,,3.0.0 beta,3.0.0
+epo:FrameworkAgreementTerm,http://data.europa.eu/a4g/ontology#FrameworkAgreementTerm,,,,,epo:hasBuyerCoverage,http://data.europa.eu/a4g/ontology#hasBuyerCoverage,,3.0.0 beta,3.0.0
+epo:FrameworkAgreementTerm,http://data.europa.eu/a4g/ontology#FrameworkAgreementTerm,,hasBuyerCategoryDescription,,,renamed,,rom epo:hasFrameworkBuyerCategor,3.0.0 beta,3.0.0
+epo:FrameworkAgreementTerm,http://data.europa.eu/a4g/ontology#FrameworkAgreementTerm,,,,,epo:hasMaximumNumberOfAwardedTenderers,http://data.europa.eu/a4g/ontology#hasMaximumNumberOfAwardedTenderers,,3.0.0 beta,3.0.0
+epo:FrameworkAgreementTerm,http://data.europa.eu/a4g/ontology#FrameworkAgreementTerm,,epo:hasMaximumParticipantsNumber,http://data.europa.eu/a4g/ontology#hasMaximumParticipantsNumber,,,,,3.0.0 beta,3.0.0
+epo:ProcedureTerm,http://data.europa.eu/a4g/ontology#ProcedureTerm,,epo:hasCrossBorderLaw,http://data.europa.eu/a4g/ontology#hasCrossBorderLaw,,,,,3.0.0 beta,3.0.0
+epo:ProcedureTerm,http://data.europa.eu/a4g/ontology#ProcedureTerm,,epo:isAwardedByCPB,http://data.europa.eu/a4g/ontology#isAwardedByCPB,,,,,3.0.0 beta,3.0.0
+epo:SubmissionTerm,http://data.europa.eu/a4g/ontology#SubmissionTerm,,epo:hasEAuctionURL,http://data.europa.eu/a4g/ontology#hasEAuctionURL,,,,,3.0.0 beta,3.0.0
+cccev:InformationConcept,http://creativecommons.org/ns#InformationConcept,,epo:hasDescription,http://data.europa.eu/a4g/ontology#hasDescription,,,,,3.0.0 beta,3.0.0
+cccev:InformationConcept,http://creativecommons.org/ns#InformationConcept,,epo:hasName,http://data.europa.eu/a4g/ontology#hasName,,,,,3.0.0 beta,3.0.0
+epo:DynamicPurchaseSystemTechniqueUsage,http://data.europa.eu/a4g/ontology#DynamicPurchaseSystemTechniqueUsage,renamed from epo:DynamicPurchaseSystemTechnique,,,,epo:hasDPSTermination,http://data.europa.eu/a4g/ontology#hasDPSTermination,,3.0.0 beta,3.0.0
+epo:EAuctionTechniqueUsage,http://data.europa.eu/a4g/ontology#EAuctionTechniqueUsage,renamed from epo:EAuctionTechnique,,,,epo:hasEAuctionURL,http://data.europa.eu/a4g/ontology#hasEAuctionURL,,3.0.0 beta,3.0.0
+epo:FrameworkAgreementTechniqueUsage,http://data.europa.eu/a4g/ontology#FrameworkAgreementTechniqueUsage,renamed from epo:FrameworkAgreementTechnique,,,,epo:hasFrameworkBuyerCategory,http://data.europa.eu/a4g/ontology#hasFrameworkBuyerCategory,,3.0.0 beta,3.0.0
+epo:FrameworkAgreementTechniqueUsage,http://data.europa.eu/a4g/ontology#FrameworkAgreementTechniqueUsage,renamed from epo:FrameworkAgreementTechnique,,,,epo:hasFrameworkDurationJustification,http://data.europa.eu/a4g/ontology#hasFrameworkDurationJustification,,3.0.0 beta,3.0.0
+epo:FrameworkAgreementTechniqueUsage,http://data.europa.eu/a4g/ontology#FrameworkAgreementTechniqueUsage,renamed from epo:FrameworkAgreementTechnique,,,,epo:hasMaximumParticipantsNumber,http://data.europa.eu/a4g/ontology#hasMaximumParticipantsNumber,,3.0.0 beta,3.0.0
+epo:SubmissionStatisticalInformation,http://data.europa.eu/a4g/ontology#SubmissionStatisticalInformation,,epo:hasEUReceivedTenders,http://data.europa.eu/a4g/ontology#hasEUReceivedTenders,,,,,3.0.0 beta,3.0.0
+epo:SubmissionStatisticalInformation,http://data.europa.eu/a4g/ontology#SubmissionStatisticalInformation,,epo:hasReceivedNonEUTenders,http://data.europa.eu/a4g/ontology#hasReceivedNonEUTenders,,,,,3.0.0 beta,3.0.0
+epo:ProcurementProcessInformation,http://data.europa.eu/a4g/ontology#ProcurementProcessInformation,,epo:isCompetitionTerminated,http://data.europa.eu/a4g/ontology#isCompetitionTerminated,,,,,3.0.0 beta,3.0.0
+epo:ProcurementProcessInformation,http://data.europa.eu/a4g/ontology#ProcurementProcessInformation,,epo:isDPSTerminated,http://data.europa.eu/a4g/ontology#isDPSTerminated,,,,,3.0.0 beta,3.0.0
+epo:ProcurementProcessInformation,http://data.europa.eu/a4g/ontology#ProcurementProcessInformation,,epo:isToBeRelaunched,http://data.europa.eu/a4g/ontology#isToBeRelaunched,,,,,3.0.0 beta,3.0.0
+,,,,,,,,,,
+epo:ProcurementElement,http://data.europa.eu/a4g/ontology#ProcurementElement,,epo:hasDescription,http://data.europa.eu/a4g/ontology#hasDescription,moved from epo:ProcurementObject,,,,3.0.1,3.1.0
+epo:ProcurementElement,http://data.europa.eu/a4g/ontology#ProcurementElement,,epo:hasTitle,http://data.europa.eu/a4g/ontology#hasTitle,moved from epo:ProcurementObject,,,,3.0.1,3.1.0
+epo:ProcurementObject,http://data.europa.eu/a4g/ontology#ProcurementObject,,epo:hasAdditionalInformation,http://data.europa.eu/a4g/ontology#hasAdditionalInformation,moved from epo:Lot,,,,3.0.1,3.1.0
+epo:ProcurementObject,http://data.europa.eu/a4g/ontology#ProcurementObject,,epo:hasRecurrenceDescription,http://data.europa.eu/a4g/ontology#hasRecurrenceDescription,moved from epo:Lot,,,,3.0.1,3.1.0
+epo:ProcurementObject,http://data.europa.eu/a4g/ontology#ProcurementObject,,epo:isCoveredByGPA,http://data.europa.eu/a4g/ontology#isCoveredByGPA,moved from epo:Lot,,,,3.0.1,3.1.0
+epo:ProcurementObject,http://data.europa.eu/a4g/ontology#ProcurementObject,,epo:isRecurrent,http://data.europa.eu/a4g/ontology#isRecurrent,moved from epo:Lot,,,,3.0.1,3.1.0
+epo:ProcurementObject,http://data.europa.eu/a4g/ontology#ProcurementObject,,epo:isSMESuitable,http://data.europa.eu/a4g/ontology#isSMESuitable,moved from epo:PlannedProcurementPart,,,,3.0.1,3.1.0
+epo:ProcurementObject,http://data.europa.eu/a4g/ontology#ProcurementObject,,epo:isUsingEUFunds,http://data.europa.eu/a4g/ontology#isUsingEUFunds,moved from epo:PlannedProcurementPart,,,,3.0.1,3.1.0
+cpv:Person,http://data.europa.eu/m8g/Person,,person:placeOfBirth,http://www.w3.org/ns/person#placeOfBirth,,cpv:placeOfBirth,http://data.europa.eu/m8g/placeOfBirth,,3.0.1,3.1.0
+cpv:Person,http://data.europa.eu/m8g/Person,,person:placeOfDeath,http://www.w3.org/ns/person#placeOfDeath,,cpv:placeOfDeath,http://data.europa.eu/m8g/placeOfDeath,,3.0.1,3.1.0
+epo:ElementConfidentialityDescription,http://data.europa.eu/a4g/ontology#ElementConfidentialityDescription,,epo:hasInstanceReference,http://data.europa.eu/a4g/ontology#hasInstanceReference,,epo:hasClassReference,http://data.europa.eu/a4g/ontology#hasClassReference,,3.0.1,3.1.0
+,,,,,,,,,,
+epo:Procedure,http://data.europa.eu/a4g/ontology#Procedure,,,,,epo:hasLotMinimumSubmission,http://data.europa.eu/a4g/ontology#hasLotMinimumSubmission,,3.0.0,3.0.1
+epo:Procedure,http://data.europa.eu/a4g/ontology#Procedure,,,,,epo:hasLotSubmissionLimit,http://data.europa.eu/a4g/ontology#hasLotSubmissionLimit,,3.0.0,3.0.1
+epo:Procedure,http://data.europa.eu/a4g/ontology#Procedure,,,,,epo:hasMaximumNumberOfLotsToBeAwarded,http://data.europa.eu/a4g/ontology#hasMaximumNumberOfLotsToBeAwarded,,3.0.0,3.0.1
+epo:Tender,http://data.europa.eu/a4g/ontology#Tender,,,,,epo:hasCalculationMethod,http://data.europa.eu/a4g/ontology#hasCalculationMethod,,3.0.0,3.0.1
+org:Organization,http://www.w3.org/ns/org#Organization,,epo:hasBuyerLegalTypeDescription,http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription,,epo:hasBuyerTypeDescription,http://data.europa.eu/a4g/ontology#hasBuyerTypeDescription,,3.0.0,3.0.1
+org:Organization,http://www.w3.org/ns/org#Organization,,epo:hasMainActivityDescription,http://data.europa.eu/a4g/ontology#hasMainActivityDescription,,,,,3.0.0,3.0.1
+org:Organization,http://www.w3.org/ns/org#Organization,,added,,roperty (outgoing connector,deleted,,roperty (outgoing connector,3.0.0,3.0.1
+epo:Buyer,http://data.europa.eu/a4g/ontology#Buyer,,,,,epo:hasBuyerTypeDescription,http://data.europa.eu/a4g/ontology#hasBuyerTypeDescription,,3.0.0,3.0.1
+epo:MultipleStageProcedureTerm,http://data.europa.eu/a4g/ontology#MultipleStageProcedureTerm,,epo:hasQualificationSystemRenewalDescription,http://data.europa.eu/a4g/ontology#hasQualificationSystemRenewalDescription,,,,,3.0.0,3.0.1
+epo:ProcedureTerm,http://data.europa.eu/a4g/ontology#ProcedureTerm,,epo:hasLotAwardCombination,http://data.europa.eu/a4g/ontology#hasLotAwardCombination,,,,,3.0.0,3.0.1
+epo:ProcedureTerm,http://data.europa.eu/a4g/ontology#ProcedureTerm,,epo:hasMaximumLotSubmissionAllowed,http://data.europa.eu/a4g/ontology#hasMaximumLotSubmissionAllowed,,epo:hasLotSubmissionLimit,http://data.europa.eu/a4g/ontology#hasLotSubmissionLimit,,3.0.0,3.0.1
+epo:ProcedureTerm,http://data.europa.eu/a4g/ontology#ProcedureTerm,,epo:hasMaximumNumberOfLotsToBeAwarded,http://data.europa.eu/a4g/ontology#hasMaximumNumberOfLotsToBeAwarded,,,,,3.0.0,3.0.1
+epo:ProcedureTerm,http://data.europa.eu/a4g/ontology#ProcedureTerm,,epo:hasNationalProcedureRules,http://data.europa.eu/a4g/ontology#hasNationalProcedureRules,,,,,3.0.0,3.0.1
+epo:ProcedureTerm,http://data.europa.eu/a4g/ontology#ProcedureTerm,,epo:isOneLotOnlyAllowed,http://data.europa.eu/a4g/ontology#isOneLotOnlyAllowed,,,,,3.0.0,3.0.1
+epo:ProcedureTerm,http://data.europa.eu/a4g/ontology#ProcedureTerm,,epo:isSubmissionForAllLotsAllowed,http://data.europa.eu/a4g/ontology#isSubmissionForAllLotsAllowed,,,,,3.0.0,3.0.1
+epo:SubmissionTerm,http://data.europa.eu/a4g/ontology#SubmissionTerm,,epo:hasReceiptExpressionDeadline,http://data.europa.eu/a4g/ontology#hasReceiptExpressionDeadline,from epo:ProcedureTerm,,,,3.0.0,3.0.1
+epo:LotAwardOutcome,http://data.europa.eu/a4g/ontology#LotAwardOutcome,,epo:hasNonAwardedContractNumber,http://data.europa.eu/a4g/ontology#hasNonAwardedContractNumber,,,,,3.0.0,3.0.1
+epo:LotAwardOutcome,http://data.europa.eu/a4g/ontology#LotAwardOutcome,,epo:hasNonAwardedContractTitle,http://data.europa.eu/a4g/ontology#hasNonAwardedContractTitle,,,,,3.0.0,3.0.1
+epo:ConcessionEstimate,http://data.europa.eu/a4g/ontology#ConcessionEstimate,,epo:hasCalculationMethod,http://data.europa.eu/a4g/ontology#hasCalculationMethod,from epo:Tender,,,,3.0.0,3.0.1
+epo:Duration,http://data.europa.eu/a4g/ontology#Duration,,,,,time:numericDuration,http://www.w3.org/2006/time#numericDuration,,3.0.0,3.0.1
+epo:SpecificDuration,http://data.europa.eu/a4g/ontology#SpecificDuration,,time:numericDuration,http://www.w3.org/2006/time#numericDuration,,,,,3.0.0,3.0.1
+epo-cat:ChargeInformation,http://data.europa.eu/a4g/ontology#ChargeInformation,,,,,epo-cat:hasPricePercentage,http://data.europa.eu/a4g/ontology#hasPricePercentage,,3.0.0,3.0.1
+,,,,,,,,,,
+org:Organization,http://www.w3.org/ns/org#Organization,,,,,epo:hasOrganisationUnitName,http://data.europa.eu/a4g/ontology#hasOrganisationUnitName,,3.1.0,4.0.0-rc.1
+epo:Notice,http://data.europa.eu/a4g/ontology#Notice,,,,,epo:hasLongTitle,http://data.europa.eu/a4g/ontology#hasLongTitle,,3.1.0,4.0.0-rc.1
+epo:LotGroup,http://data.europa.eu/a4g/ontology#LotGroup,,dct:description,http://purl.org/dc/terms/description,,,,,3.1.0,4.0.0-rc.1
+epo:LotGroup,http://data.europa.eu/a4g/ontology#LotGroup,,dct:title,http://purl.org/dc/terms/title,,,,,3.1.0,4.0.0-rc.1
+epo:TenderGroup,http://data.europa.eu/a4g/ontology#TenderGroup,,dct:description,http://purl.org/dc/terms/description,,,,,3.1.0,4.0.0-rc.1
+epo:TenderGroup,http://data.europa.eu/a4g/ontology#TenderGroup,,dct:title,http://purl.org/dc/terms/title,,,,,3.1.0,4.0.0-rc.1
+epo:DesignContestRegimeTerm,http://data.europa.eu/a4g/ontology#DesignContestRegimeTerm,,epo:hasDescriptionOfPrizes,http://data.europa.eu/a4g/ontology#hasDescriptionOfPrizes,,,,,3.1.0,4.0.0-rc.1
+epo:ProcedureTerm,http://data.europa.eu/a4g/ontology#ProcedureTerm,,epo:isSubmissionForAllLotsRequired,http://data.europa.eu/a4g/ontology#isSubmissionForAllLotsRequired,,epo:isSubmissionForAllLotsAllowed,http://data.europa.eu/a4g/ontology#isSubmissionForAllLotsAllowed,,3.1.0,4.0.0-rc.1
+cccev:InformationConcept,http://creativecommons.org/ns#InformationConcept,,dct:description,http://purl.org/dc/terms/description,,epo:hasDescription,http://data.europa.eu/a4g/ontology#hasDescription,,3.1.0,4.0.0-rc.1
+cccev:InformationConcept,http://creativecommons.org/ns#InformationConcept,,skos:prefLabel,http://www.w3.org/2004/02/skos/core#prefLabel,,epo:hasName,http://data.europa.eu/a4g/ontology#hasName,,3.1.0,4.0.0-rc.1
+cccev:Requirement,http://creativecommons.org/ns#Requirement,,dct:description,http://purl.org/dc/terms/description,,epo:hasDescription,http://data.europa.eu/a4g/ontology#hasDescription,,3.1.0,4.0.0-rc.1
+cccev:Requirement,http://creativecommons.org/ns#Requirement,,skos:prefLabel,http://www.w3.org/2004/02/skos/core#prefLabel,,epo:hasName,http://data.europa.eu/a4g/ontology#hasName,,3.1.0,4.0.0-rc.1
+cpov:ContactPoint,,,dct:description,http://purl.org/dc/terms/description,,epo:hasDescription,http://data.europa.eu/a4g/ontology#hasDescription,,3.1.0,4.0.0-rc.1
+cpv:Person,http://data.europa.eu/m8g/Person,,,,,cv:deathDate,http://data.europa.eu/m8g/deathDate,,3.1.0,4.0.0-rc.1
+cpv:Person,http://data.europa.eu/m8g/Person,,,,,legal:registeredAddress,,,3.1.0,4.0.0-rc.1
+cv:Channel,http://data.europa.eu/m8g/Channel,,dct:description,http://purl.org/dc/terms/description,,epo:hasDescription,http://data.europa.eu/a4g/ontology#hasDescription,,3.1.0,4.0.0-rc.1
+epo-cat:Item,http://data.europa.eu/a4g/ontology#Item,,epo:hasAddressURL,http://data.europa.eu/a4g/ontology#hasAddressURL,,epo:hasURL,http://data.europa.eu/a4g/ontology#hasURL,,3.1.0,4.0.0-rc.1
+epo-cat:Item,http://data.europa.eu/a4g/ontology#Item,,,,,epo:hasAdditionalInformation,http://data.europa.eu/a4g/ontology#hasAdditionalInformation,,3.1.0,4.0.0-rc.1
+epo-cat:Item,http://data.europa.eu/a4g/ontology#Item,,,,,epo:hasEndpoint,http://data.europa.eu/a4g/ontology#hasEndpoint,,3.1.0,4.0.0-rc.1
+epo-cat:Item,http://data.europa.eu/a4g/ontology#Item,,,,,epo:isAdhocChannel,http://data.europa.eu/a4g/ontology#isAdhocChannel,,3.1.0,4.0.0-rc.1
+epo-cat:Item,http://data.europa.eu/a4g/ontology#Item,,,,,epo:hasName,http://data.europa.eu/a4g/ontology#hasName,,3.1.0,4.0.0-rc.1
+epo:AgentInRole,http://data.europa.eu/a4g/ontology#AgentInRole,,dct:description,http://purl.org/dc/terms/description,,epo:hasDescription,http://data.europa.eu/a4g/ontology#hasDescription,,3.1.0,4.0.0-rc.1
+epo:AgentInRole,http://data.europa.eu/a4g/ontology#AgentInRole,,dct:title,http://purl.org/dc/terms/title,,epo:hasTitle,http://data.europa.eu/a4g/ontology#hasTitle,,3.1.0,4.0.0-rc.1
+epo:AwardCriterion,http://data.europa.eu/a4g/ontology#AwardCriterion,,epo:hasAwardCriteriaStatedInProcurementDocuments,http://data.europa.eu/a4g/ontology#hasAwardCriteriaStatedInProcurementDocuments,,,,,3.1.0,4.0.0-rc.1
+epo:AwardDecision,http://data.europa.eu/a4g/ontology#AwardDecision,,epo:hasAwardDecisionDate,http://data.europa.eu/a4g/ontology#hasAwardDecisionDate,,,,,3.1.0,4.0.0-rc.1
+epo:AwardDecision,http://data.europa.eu/a4g/ontology#AwardDecision,,epo:hasAdditionalNonAwardJustification,http://data.europa.eu/a4g/ontology#hasAdditionalNonAwardJustification,,,,,3.1.0,4.0.0-rc.1
+epo:ContractLotCompletionInformation,http://data.europa.eu/a4g/ontology#ContractLotCompletionInformation,,epo:hasPaymentValueDiscrepancyJustification,http://data.europa.eu/a4g/ontology#hasPaymentValueDiscrepancyJustification,,,,,3.1.0,4.0.0-rc.1
+epo:Contract,http://data.europa.eu/a4g/ontology#Contract,,,,,epo:hasAccessURL,http://data.europa.eu/a4g/ontology#hasAccessURL,,3.1.0,4.0.0-rc.1
+epo:Document,http://data.europa.eu/a4g/ontology#Document,,dct:title,http://purl.org/dc/terms/title,,,,,3.1.0,4.0.0-rc.1
+epo:Document,http://data.europa.eu/a4g/ontology#Document,,dct:issued,http://purl.org/dc/terms/issued,,,,,3.1.0,4.0.0-rc.1
+epo:Document,http://data.europa.eu/a4g/ontology#Document,,dct:description,http://purl.org/dc/terms/description,,,,,3.1.0,4.0.0-rc.1
+epo:ElectronicSignature,http://data.europa.eu/a4g/ontology#ElectronicSignature,,dct:description,http://purl.org/dc/terms/description,,,,,3.1.0,4.0.0-rc.1
+epo:Fund,http://data.europa.eu/a4g/ontology#Fund,,dct:description,http://purl.org/dc/terms/description,,epo:hasDescription,http://data.europa.eu/a4g/ontology#hasDescription,,3.1.0,4.0.0-rc.1
+epo:Fund,http://data.europa.eu/a4g/ontology#Fund,,dct:title,http://purl.org/dc/terms/title,,epo:hasTitle,http://data.europa.eu/a4g/ontology#hasTitle,,3.1.0,4.0.0-rc.1
+epo:GreenProcurement,http://data.europa.eu/a4g/ontology#GreenProcurement,,epo:usesCleanVehicleDirective,http://data.europa.eu/a4g/ontology#usesCleanVehicleDirective,,,,,3.1.0,4.0.0-rc.1
+epo:GreenProcurement,http://data.europa.eu/a4g/ontology#GreenProcurement,,,,,epo:hasTotalVehicles,http://data.europa.eu/a4g/ontology#hasTotalVehicles,,3.1.0,4.0.0-rc.1
+epo:GreenProcurement,http://data.europa.eu/a4g/ontology#GreenProcurement,,,,,epo:hasZeroEmissionVehicles,http://data.europa.eu/a4g/ontology#hasZeroEmissionVehicles,,3.1.0,4.0.0-rc.1
+epo:GreenProcurement,http://data.europa.eu/a4g/ontology#GreenProcurement,,,,,epo:hasCleanVehicles,http://data.europa.eu/a4g/ontology#hasCleanVehicles,,3.1.0,4.0.0-rc.1
+epo:LotAwardOutcome,http://data.europa.eu/a4g/ontology#LotAwardOutcome,,,,,epo:hasAwardDecisionDate,http://data.europa.eu/a4g/ontology#hasAwardDecisionDate,,3.1.0,4.0.0-rc.1
+epo:LotAwardOutcome,http://data.europa.eu/a4g/ontology#LotAwardOutcome,,,,,epo:hasAdditionalNonAwardJustification,http://data.europa.eu/a4g/ontology#hasAdditionalNonAwardJustification,,3.1.0,4.0.0-rc.1
+epo:NonDisclosureAgreementTerm,http://data.europa.eu/a4g/ontology#NonDisclosureAgreementTerm,,dct:description,http://purl.org/dc/terms/description,,,,,3.1.0,4.0.0-rc.1
+epo:NonDisclosureAgreementTerm,http://data.europa.eu/a4g/ontology#NonDisclosureAgreementTerm,,epo:isNonDisclosureAgreementRequired,http://data.europa.eu/a4g/ontology#isNonDisclosureAgreementRequired,,,,,3.1.0,4.0.0-rc.1
+epo:NonPublishedInformation,http://data.europa.eu/a4g/ontology#NonPublishedInformation,,epo:hasAccessibilityDate,http://data.europa.eu/a4g/ontology#hasAccessibilityDate,,,,,3.1.0,4.0.0-rc.1
+epo:NonPublishedInformation,http://data.europa.eu/a4g/ontology#NonPublishedInformation,,epo:hasConfidentialityJustification,http://data.europa.eu/a4g/ontology#hasConfidentialityJustification,,,,,3.1.0,4.0.0-rc.1
+epo:NoticeChangeInformation,http://data.europa.eu/a4g/ontology#NoticeChangeInformation,renamed from epo:NoticeChange,epo:hasAdditionalInformation,http://data.europa.eu/a4g/ontology#hasAdditionalInformation,,,,,3.1.0,4.0.0-rc.1
+epo:NoticeChangeInformation,http://data.europa.eu/a4g/ontology#NoticeChangeInformation,renamed from epo:NoticeChange,epo:hasProcurementDocumentChangeDate,http://data.europa.eu/a4g/ontology#hasProcurementDocumentChangeDate,,,,,3.1.0,4.0.0-rc.1
+epo:NoticeChangeInformation,http://data.europa.eu/a4g/ontology#NoticeChangeInformation,renamed from epo:NoticeChange,epo:isProcurementDocumentChanged,http://data.europa.eu/a4g/ontology#isProcurementDocumentChanged,,,,,3.1.0,4.0.0-rc.1
+epo:NoticeChangeInformation,http://data.europa.eu/a4g/ontology#NoticeChangeInformation,renamed from epo:NoticeChange,epo:hasChangeReasonDescription,http://data.europa.eu/a4g/ontology#hasChangeReasonDescription,,,,,3.1.0,4.0.0-rc.1
+epo:NoticeChangeInformation,http://data.europa.eu/a4g/ontology#NoticeChangeInformation,renamed from epo:NoticeChange,epo:hasChangeDescription,http://data.europa.eu/a4g/ontology#hasChangeDescription,,,,,3.1.0,4.0.0-rc.1
+epo:Notice,http://data.europa.eu/a4g/ontology#Notice,,epo:hasOJSIssueNumber,http://data.europa.eu/a4g/ontology#hasOJSIssueNumber,,,,,3.1.0,4.0.0-rc.1
+epo:Notice,http://data.europa.eu/a4g/ontology#Notice,,epo:hasOJSType,http://data.europa.eu/a4g/ontology#hasOJSType,,,,,3.1.0,4.0.0-rc.1
+epo:Notice,http://data.europa.eu/a4g/ontology#Notice,,epo:hasLongTitle,http://data.europa.eu/a4g/ontology#hasLongTitle,,,,,3.1.0,4.0.0-rc.1
+epo:Notice,http://data.europa.eu/a4g/ontology#Notice,,epo:hasNoticePublicationNumber,http://data.europa.eu/a4g/ontology#hasNoticePublicationNumber,,,,,3.1.0,4.0.0-rc.1
+epo:Notice,http://data.europa.eu/a4g/ontology#Notice,,epo:hasFormNumber,http://data.europa.eu/a4g/ontology#hasFormNumber,,,,,3.1.0,4.0.0-rc.1
+epo:Notice,http://data.europa.eu/a4g/ontology#Notice,,epo:hasEFormsSubtype,http://data.europa.eu/a4g/ontology#hasEFormsSubtype,,,,,3.1.0,4.0.0-rc.1
+epo:Notice,http://data.europa.eu/a4g/ontology#Notice,,epo:hasAdditionalInformation,http://data.europa.eu/a4g/ontology#hasAdditionalInformation,,,,,3.1.0,4.0.0-rc.1
+epo:Notice,http://data.europa.eu/a4g/ontology#Notice,,epo:hasESenderDispatchDate,http://data.europa.eu/a4g/ontology#hasESenderDispatchDate,,,,,3.1.0,4.0.0-rc.1
+epo:ParticipationConditionsSummary,http://data.europa.eu/a4g/ontology#ParticipationConditionsSummary,,epo:describesObjectiveParticipationRules,http://data.europa.eu/a4g/ontology#describesObjectiveParticipationRules,,,,,3.1.0,4.0.0-rc.1
+epo:ParticipationConditionsSummary,http://data.europa.eu/a4g/ontology#ParticipationConditionsSummary,,epo:describesVerificationMethod,http://data.europa.eu/a4g/ontology#describesVerificationMethod,,,,,3.1.0,4.0.0-rc.1
+epo:ProcedureTerm,http://data.europa.eu/a4g/ontology#ProcedureTerm,,,,,epo:hasLotAwardLimit,http://data.europa.eu/a4g/ontology#hasLotAwardLimit,,3.1.0,4.0.0-rc.1
+epo:ProcurementCriteriaSummary,http://data.europa.eu/a4g/ontology#ProcurementCriteriaSummary,,epo:indicatesPerformingStaffInformationRequirement,http://data.europa.eu/a4g/ontology#indicatesPerformingStaffInformationRequirement,,,,,3.1.0,4.0.0-rc.1
+epo:ProcurementElement,http://data.europa.eu/a4g/ontology#ProcurementElement,,dct:description,http://purl.org/dc/terms/description,,epo:hasDescription,http://data.europa.eu/a4g/ontology#hasDescription,,3.1.0,4.0.0-rc.1
+epo:ProcurementElement,http://data.europa.eu/a4g/ontology#ProcurementElement,,dct:title,http://purl.org/dc/terms/title,,epo:hasTitle,http://data.europa.eu/a4g/ontology#hasTitle,,3.1.0,4.0.0-rc.1
+epo:ProcurementObject,http://data.europa.eu/a4g/ontology#ProcurementObject,,epo:hasLegalBasisDescription,http://data.europa.eu/a4g/ontology#hasLegalBasisDescription,,,,,3.1.0,4.0.0-rc.1
+epo:ProfessionalSuitabilitySummary,http://data.europa.eu/a4g/ontology#ProfessionalSuitabilitySummary,,epo:describesProfessionRelevantLaw,http://data.europa.eu/a4g/ontology#describesProfessionRelevantLaw,,,,,3.1.0,4.0.0-rc.1
+epo:ProfessionalSuitabilitySummary,http://data.europa.eu/a4g/ontology#ProfessionalSuitabilitySummary,,epo:hasServiceReservedToParticularProfession,http://data.europa.eu/a4g/ontology#hasServiceReservedToParticularProfession,,,,,3.1.0,4.0.0-rc.1
+epo:ProfessionalSuitabilitySummary,http://data.europa.eu/a4g/ontology#ProfessionalSuitabilitySummary,,epo:describesProfession,http://data.europa.eu/a4g/ontology#describesProfession,,,,,3.1.0,4.0.0-rc.1
+epo:PurchaseContract,http://data.europa.eu/a4g/ontology#PurchaseContract,,,,,epo:isWithinFrameworkAgreement,http://data.europa.eu/a4g/ontology#isWithinFrameworkAgreement,,3.1.0,4.0.0-rc.1
+epo:QualificationCriteriaSummary,http://data.europa.eu/a4g/ontology#QualificationCriteriaSummary,,epo:hasQualificationCondition,http://data.europa.eu/a4g/ontology#hasQualificationCondition,,,,,3.1.0,4.0.0-rc.1
+epo:QualificationCriteriaSummary,http://data.europa.eu/a4g/ontology#QualificationCriteriaSummary,,epo:hasConditionVerificationMethod,http://data.europa.eu/a4g/ontology#hasConditionVerificationMethod,,,,,3.1.0,4.0.0-rc.1
+epo:SecurityClearanceTerm,http://data.europa.eu/a4g/ontology#SecurityClearanceTerm,,epo:isSecurityClearanceRequired,http://data.europa.eu/a4g/ontology#isSecurityClearanceRequired,,,,,3.1.0,4.0.0-rc.1
+epo:SecurityClearanceTerm,http://data.europa.eu/a4g/ontology#SecurityClearanceTerm,,dct:description,http://purl.org/dc/terms/description,,epo:hasDescription,http://data.europa.eu/a4g/ontology#hasDescription,,3.1.0,4.0.0-rc.1
+epo:SelectionCriteriaSummary,http://data.europa.eu/a4g/ontology#SelectionCriteriaSummary,,epo:hasSelectionCriteriaStatedInProcurementDocuments,http://data.europa.eu/a4g/ontology#hasSelectionCriteriaStatedInProcurementDocuments,,,,,3.1.0,4.0.0-rc.1
+epo:SelectionCriteriaSummary,http://data.europa.eu/a4g/ontology#SelectionCriteriaSummary,,epo:describesMinimumLevelOfStandards,http://data.europa.eu/a4g/ontology#describesMinimumLevelOfStandards,,,,,3.1.0,4.0.0-rc.1
+epo:SubcontractTerm,http://data.europa.eu/a4g/ontology#SubcontractTerm,,dct:description,http://purl.org/dc/terms/description,,epo:hasDescription,http://data.europa.eu/a4g/ontology#hasDescription,,3.1.0,4.0.0-rc.1
+epo:SubcontractingEstimate,http://data.europa.eu/a4g/ontology#SubcontractingEstimate,,dct:description,http://purl.org/dc/terms/description,,epo:hasDescription,http://data.europa.eu/a4g/ontology#hasDescription,,3.1.0,4.0.0-rc.1
+epo:SubmissionStatisticalInformation,http://data.europa.eu/a4g/ontology#SubmissionStatisticalInformation,,epo:hasOtherCountriesReceivedTenders,http://data.europa.eu/a4g/ontology#hasOtherCountriesReceivedTenders,,,,,3.1.0,4.0.0-rc.1
+epo:SubmissionStatisticalInformation,http://data.europa.eu/a4g/ontology#SubmissionStatisticalInformation,,epo:hasNonEEAReceivedTenders,http://data.europa.eu/a4g/ontology#hasNonEEAReceivedTenders,,epo:hasReceivedNonEEATenders,http://data.europa.eu/a4g/ontology#hasReceivedNonEEATenders,,3.1.0,4.0.0-rc.1
+epo:SubmissionStatisticalInformation,http://data.europa.eu/a4g/ontology#SubmissionStatisticalInformation,,epo:hasNonEUReceivedTenders,http://data.europa.eu/a4g/ontology#hasNonEUReceivedTenders,,epo:hasReceivedNonEUTenders,http://data.europa.eu/a4g/ontology#hasReceivedNonEUTenders,,3.1.0,4.0.0-rc.1
+epo:SubmissionStatisticalInformation,http://data.europa.eu/a4g/ontology#SubmissionStatisticalInformation,,epo:hasSMEReceivedTenders,http://data.europa.eu/a4g/ontology#hasSMEReceivedTenders,,epo:hasReceivedSMETenders,http://data.europa.eu/a4g/ontology#hasReceivedSMETenders,,3.1.0,4.0.0-rc.1
+epo:SubmissionTerm,http://data.europa.eu/a4g/ontology#SubmissionTerm,,epo:hasReceiptTenderDeadline,http://data.europa.eu/a4g/ontology#hasReceiptTenderDeadline,,,,,3.1.0,4.0.0-rc.1
+epo:SubmissionTerm,http://data.europa.eu/a4g/ontology#SubmissionTerm,,epo:hasReceiptPreliminaryMarketConsultationDeadline,http://data.europa.eu/a4g/ontology#hasReceiptPreliminaryMarketConsultationDeadline,,,,,3.1.0,4.0.0-rc.1
+epo:SubmissionTerm,http://data.europa.eu/a4g/ontology#SubmissionTerm,,epo:hasReceiptParticipationRequestDeadline,http://data.europa.eu/a4g/ontology#hasReceiptParticipationRequestDeadline,,,,,3.1.0,4.0.0-rc.1
+epo:System,http://data.europa.eu/a4g/ontology#System,,dct:description,http://purl.org/dc/terms/description,,epo:hasDescription,http://data.europa.eu/a4g/ontology#hasDescription,,3.1.0,4.0.0-rc.1
+epo:Technique,http://data.europa.eu/a4g/ontology#Technique,renamed from epo:TechniqueUsage,dct:description,http://purl.org/dc/terms/description,,epo:hasDescription,http://data.europa.eu/a4g/ontology#hasDescription,,3.1.0,4.0.0-rc.1
+epo:VehicleInformation,http://data.europa.eu/a4g/ontology#VehicleInformation,,epo:hasTotalVehicles,http://data.europa.eu/a4g/ontology#hasTotalVehicles,,,,,3.1.0,4.0.0-rc.1
+epo:VehicleInformation,http://data.europa.eu/a4g/ontology#VehicleInformation,,epo:hasZeroEmissionVehicles,http://data.europa.eu/a4g/ontology#hasZeroEmissionVehicles,,,,,3.1.0,4.0.0-rc.1
+epo:VehicleInformation,http://data.europa.eu/a4g/ontology#VehicleInformation,,epo:hasCleanVehicles,http://data.europa.eu/a4g/ontology#hasCleanVehicles,,,,,3.1.0,4.0.0-rc.1
+foaf:Agent,http://xmlns.com/foaf/0.1/Agent,,dct:title,http://purl.org/dc/terms/title,,epo:hasTitle,http://data.europa.eu/a4g/ontology#hasTitle,,3.1.0,4.0.0-rc.1
+org:Organization,http://www.w3.org/ns/org#Organization,,epo:hasInternetAddress,http://data.europa.eu/a4g/ontology#hasInternetAddress,,,,,3.1.0,4.0.0-rc.1
+org:Organization,http://www.w3.org/ns/org#Organization,,epo:hasOrganisationUnitName,http://data.europa.eu/a4g/ontology#hasOrganisationUnitName,,epo:hasOrganisationUnit,http://data.europa.eu/a4g/ontology#hasOrganisationUnit,,3.1.0,4.0.0-rc.1
+epo-cat:Batch,http://data.europa.eu/a4g/ontology#Batch,,epo-cat:hasManufactureDate,http://data.europa.eu/a4g/ontology#hasManufactureDate,,,,,3.1.0,4.0.0-rc.1
+epo-cat:Brand,http://data.europa.eu/a4g/ontology#Brand,,dct:title,http://purl.org/dc/terms/title,,epo:hasName,http://data.europa.eu/a4g/ontology#hasName,,3.1.0,4.0.0-rc.1
+epo-cat:ItemModel,http://data.europa.eu/a4g/ontology#ItemModel,,dct:title,http://purl.org/dc/terms/title,,epo:hasName,http://data.europa.eu/a4g/ontology#hasName,,3.1.0,4.0.0-rc.1
+epo-cat:Item,http://data.europa.eu/a4g/ontology#Item,,dct:title,http://purl.org/dc/terms/title,,epo:hasName,http://data.europa.eu/a4g/ontology#hasName,,3.1.0,4.0.0-rc.1
+epo-cat:Item,http://data.europa.eu/a4g/ontology#Item,,dct:description,http://purl.org/dc/terms/description,,epo:hasDescription,http://data.europa.eu/a4g/ontology#hasDescription,,3.1.0,4.0.0-rc.1
+epo-cat:Item,http://data.europa.eu/a4g/ontology#Item,,,,,epo-cat:hasExternalSpecification,http://data.europa.eu/a4g/ontology#hasExternalSpecification,,3.1.0,4.0.0-rc.1
+epo-cat:Item,http://data.europa.eu/a4g/ontology#Item,,,,,epo-cat:hasVATRate,http://data.europa.eu/a4g/ontology#hasVATRate,,3.1.0,4.0.0-rc.1
+epo-cat:Line,http://data.europa.eu/a4g/ontology#Line,,dct:description,http://purl.org/dc/terms/description,,,,,3.1.0,4.0.0-rc.1
+epo-ord:DeliveryAgreement,http://data.europa.eu/a4g/ontology#DeliveryAgreement,,dct:description,http://purl.org/dc/terms/description,,,,,3.1.0,4.0.0-rc.1
+epo-ord:DeliveryInformation,http://data.europa.eu/a4g/ontology#DeliveryInformation,,epo-ord:hasDeliveryDeadline,http://data.europa.eu/a4g/ontology#hasDeliveryDeadline,,,,,3.1.0,4.0.0-rc.1
+epo-ord:Order,http://data.europa.eu/a4g/ontology#Order,,epo-ord:hasCustomerReference,http://data.europa.eu/a4g/ontology#hasCustomerReference,,,,,3.1.0,4.0.0-rc.1
+epo-ord:Order,http://data.europa.eu/a4g/ontology#Order,,epo-ord:hasAccountingCost,http://data.europa.eu/a4g/ontology#hasAccountingCost,,,,,3.1.0,4.0.0-rc.1
+epo-ord:Order,http://data.europa.eu/a4g/ontology#Order,,epo-ord:hasPaymentTerm,http://data.europa.eu/a4g/ontology#hasPaymentTerm,,,,,3.1.0,4.0.0-rc.1
+epo-ord:AllowanceChargeInformation,http://data.europa.eu/a4g/ontology#AllowanceChargeInformation,renamed from epo-ord:PriceModifierInformation,epo-cat:hasPercentage,http://data.europa.eu/a4g/ontology#hasPercentage,,epo-cat:hasPricePercentage,http://data.europa.eu/a4g/ontology#hasPricePercentage,,3.1.0,4.0.0-rc.1
+epo-ord:AllowanceChargeInformation,http://data.europa.eu/a4g/ontology#AllowanceChargeInformation,renamed from epo-ord:PriceModifierInformation,epo-ful:hasAllowanceChargeReasonDescription,http://data.europa.eu/a4g/ontology#hasAllowanceChargeReasonDescription,,,,,3.1.0,4.0.0-rc.1
+epo-ord:TaxInformation,http://data.europa.eu/a4g/ontology#TaxInformation,,epo-cat:hasPercentage,http://data.europa.eu/a4g/ontology#hasPercentage,,,,,3.1.0,4.0.0-rc.1
+epo-ord:TaxInformation,http://data.europa.eu/a4g/ontology#TaxInformation,,dct:description,http://purl.org/dc/terms/description,,,,,3.1.0,4.0.0-rc.1
+epo-ord:OrderResponse,http://data.europa.eu/a4g/ontology#OrderResponse,,epo-ord:hasResponseDescription,http://data.europa.eu/a4g/ontology#hasResponseDescription,,,,,3.1.0,4.0.0-rc.1
+cpv:Person,http://data.europa.eu/m8g/Person,,cv:registeredAddress,http://data.europa.eu/m8g/registeredAddress,,,,,3.1.0,4.0.0-rc.1
+epo:ConcessionEstimate,http://data.europa.eu/a4g/ontology#ConcessionEstimate,,epo:hasConcessionEstimatedValue,http://data.europa.eu/a4g/ontology#hasConcessionEstimatedValue,,,,,3.1.0,4.0.0-rc.1
+epo:ContractTerm,http://data.europa.eu/a4g/ontology#ContractTerm,,,,,epo:hasContractorLegalFormRequirement,http://data.europa.eu/a4g/ontology#hasContractorLegalFormRequirement,,3.1.0,4.0.0-rc.1
+epo:ContractTerm,http://data.europa.eu/a4g/ontology#ContractTerm,,epo:hasLegalFormRequirement,http://data.europa.eu/a4g/ontology#hasLegalFormRequirement,,epo:hasContractorLegalFormRequirementDescription,http://data.europa.eu/a4g/ontology#hasContractorLegalFormRequirementDescription,,3.1.0,4.0.0-rc.1
+epo-ord:DeliveryInformation,http://data.europa.eu/a4g/ontology#DeliveryInformation,,,,,epo-ord:concernsPlaceOfStorage,http://data.europa.eu/a4g/ontology#concernsPlaceOfStorage,,3.1.0,4.0.0-rc.1
+,,,,,,,,,,

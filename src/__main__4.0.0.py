@@ -105,20 +105,20 @@ def write_csv(classes, name, metadata):
 def write_csv_attributes(attributes, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
-        writer.writerow(["class","full_class","comment","added_attributes","added_attributes_full","deleted_attributes","deleted_attributes_full","reference_version", "target_version"])
+        writer.writerow(["class","class_full","comment","added_attributes","added_attributes_full","commentdelatt","deleted_attributes","deleted_attributes_full","commentdelatt","reference_version", "target_version"])
         for c in attributes:
             clase= parse_full_URI(c[0].split(" ")[0])
             comment = c[0][len(c[0].split(" ")[0])+2:-1]
-            writer.writerow([c[0].split(" ")[0],clase,comment,c[1],parse_full_URI(c[1]),c[2],parse_full_URI(c[2]), metadata["Reference ePO version"], metadata["Target ePO version"]])
+            writer.writerow([c[0].split(" ")[0],clase,comment,c[1],parse_full_URI(c[1]),"",c[2],parse_full_URI(c[2]),"", metadata["Reference ePO version"], metadata["Target ePO version"]])
 
 def write_csv_properties(triples, name, metadata):
     with open(name, 'w', newline='', encoding="utf-8") as output_file:
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
-        writer.writerow(["subject","subject_full","comment","predicate","predicate_full","object","object_full","reference_version", "target_version"])
+        writer.writerow(["subject","subject_full","comment","predicate","predicate_full","commentpred","object","object_full","commentobj","reference_version", "target_version"])
         for c in triples:
             clase= parse_full_URI(c[0].split(" ")[0])
             comment = c[0][len(c[0].split(" ")[0])+2:-1]
-            writer.writerow([clase,c[0].split(" ")[0],comment,c[1],parse_full_URI(c[1]),c[2],parse_full_URI(c[2]), metadata["Reference ePO version"], metadata["Target ePO version"]])
+            writer.writerow([clase,c[0].split(" ")[0],comment,c[1],parse_full_URI(c[1]),"",c[2],parse_full_URI(c[2]),"", metadata["Reference ePO version"], metadata["Target ePO version"]])
 
 def get_metadata(html_doc):
     metadata = {}
@@ -195,7 +195,7 @@ def parse_full_URI(term):
         return "http://data.europa.eu/m8g/"+term.split(":")[1]
 
 if __name__ == "__main__":
-    with open("../epo-data/changes_v4.0.0.html",encoding="utf-8") as input_file:
+    with open("../epo-changes/changes_v4.0.0.html",encoding="utf-8") as input_file:
         content = input_file.read()
     html_content = BeautifulSoup(content, "html.parser")
     new_classes = get_classes(html_content, "new_classes")
@@ -203,10 +203,10 @@ if __name__ == "__main__":
     metadata_changes = get_metadata(html_content)
     attribute_changes = get_attributes(html_content)
     added_triples,deleted_triples,added_subclass,deleted_subclass = get_properties(html_content)
-    write_csv(new_classes, "added_classes4.0.csv", metadata_changes)
-    write_csv(deleted_classes, "deleted_classes4.0.csv", metadata_changes)
-    write_csv_attributes(attribute_changes,"modified_attributes4.0.csv",metadata_changes)
-    write_csv_properties(added_triples,"added_triples4.0.csv",metadata_changes)
-    write_csv_properties(deleted_triples,"deleted_triples4.0.csv",metadata_changes)
-    write_csv_properties(deleted_subclass,"deleted_subclass4.0.csv",metadata_changes)
-    write_csv_properties(added_subclass,"added_subclass4.0.csv",metadata_changes)
+    write_csv(new_classes, "added_classes_4.0.csv", metadata_changes)
+    write_csv(deleted_classes, "deleted_classes_4.0.csv", metadata_changes)
+    write_csv_attributes(attribute_changes,"modified_attributes_4.0.csv",metadata_changes)
+    write_csv_properties(added_triples,"added_triples_.0.csv",metadata_changes)
+    write_csv_properties(deleted_triples,"deleted_triples_4.0.csv",metadata_changes)
+    write_csv_properties(deleted_subclass,"deleted_subclass_4.0.csv",metadata_changes)
+    write_csv_properties(added_subclass,"added_subclass_4.0.csv",metadata_changes)

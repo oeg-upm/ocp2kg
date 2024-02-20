@@ -1,0 +1,4 @@
+"name","name_full","comment","reference_version","target_version"
+"epo:ProcurementProcessInformation","http://data.europa.eu/a4g/ontology#ProcurementProcessInformation","","3.0.0 beta","3.0.0"
+"cccev:Evidence","http://creativecommons.org/ns#Evidence","","3.0.0 beta","3.0.0"
+"cccev:InformationConcept","http://creativecommons.org/ns#InformationConcept","","3.0.0 beta","3.0.0"

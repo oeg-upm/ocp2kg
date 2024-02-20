@@ -1,0 +1,5 @@
+"subject","subject_full","comment","predicate","predicate_full","commentpred","object","object_full","commentobj","reference_version","target_version"
+"epo:SubmissionTerm","http://data.europa.eu/a4g/ontology#SubmissionTerm","","rdfs:subClassOf","http://www.w3.org/1999/02/22-rdf-syntax-ns#subClassOf","","epo:ProcedureSpecificTerm","http://data.europa.eu/a4g/ontology#ProcedureSpecificTerm","","3.0.0","3.0.1"
+"epo:Document","http://data.europa.eu/a4g/ontology#Document","","rdfs:subClassOf","http://www.w3.org/1999/02/22-rdf-syntax-ns#subClassOf","","epo:Estimate","http://data.europa.eu/a4g/ontology#Estimate","","3.0.0","3.0.1"
+"epo:SpecificDuration","http://data.europa.eu/a4g/ontology#SpecificDuration","","rdfs:subClassOf","http://www.w3.org/1999/02/22-rdf-syntax-ns#subClassOf","","epo:Duration","http://data.europa.eu/a4g/ontology#Duration","","3.0.0","3.0.1"
+"epo:SpecificDuration","http://data.europa.eu/a4g/ontology#SpecificDuration","","rdfs:subClassOf","http://www.w3.org/1999/02/22-rdf-syntax-ns#subClassOf","","epo:Duration","http://data.europa.eu/a4g/ontology#Duration","","3.0.0","3.0.1"

@@ -1,0 +1,6 @@
+"subject","subject_full","comment","predicate","predicate_full","commentpred","object","object_full","commentobj","reference_version","target_version"
+"epo:Contract","http://data.europa.eu/a4g/ontology#Contract","","epo:signedBySignatory","http://data.europa.eu/a4g/ontology#signedBySignatory","","epo:ContractSignatory","http://data.europa.eu/a4g/ontology#ContractSignatory","","3.0.1","3.1.0"
+"epo:ReviewDecision","http://data.europa.eu/a4g/ontology#ReviewDecision","","epo:appliesRemedyType","http://data.europa.eu/a4g/ontology#appliesRemedyType","","at-voc:review-remedy-type","http://publications.europa.eu/resource/authority/review-remedy-type","","3.0.1","3.1.0"
+"org:Organization","http://www.w3.org/ns/org#Organization","","legal:registeredAddress","","","locn:Address","http://www.w3.org/ns/locn#Address","","3.0.1","3.1.0"
+"epo:SubmissionStatisticalInformation","http://data.europa.eu/a4g/ontology#SubmissionStatisticalInformation","","epo:concernsSubmissionsForLot","http://data.europa.eu/a4g/ontology#concernsSubmissionsForLot","","epo:Lot","http://data.europa.eu/a4g/ontology#Lot","","3.0.1","3.1.0"
+"epo:TenderAwardOutcome","http://data.europa.eu/a4g/ontology#TenderAwardOutcome","","epo:awardsLotToWinner","http://data.europa.eu/a4g/ontology#awardsLotToWinner","","epo:Winner","http://data.europa.eu/a4g/ontology#Winner","","3.0.1","3.1.0"

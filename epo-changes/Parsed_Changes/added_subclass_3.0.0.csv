@@ -1,0 +1,4 @@
+"subject","subject_full","comment","predicate","predicate_full","commentpred","object","object_full","commentobj","reference_version","target_version"
+"org:OrganisationGroup","http://www.w3.org/ns/org#OrganisationGroup","","rdfs:subClassOf","http://www.w3.org/1999/02/22-rdf-syntax-ns#subClassOf","","org:Organization","http://www.w3.org/ns/org#Organization","","3.0.0 beta","3.0.0"
+"epo:ReviewTerm","http://data.europa.eu/a4g/ontology#ReviewTerm","","rdfs:subClassOf","http://www.w3.org/1999/02/22-rdf-syntax-ns#subClassOf","","epo:ProcedureSpecificTerm","http://data.europa.eu/a4g/ontology#ProcedureSpecificTerm","","3.0.0 beta","3.0.0"
+"epo:ProcurementProcessInformation","http://data.europa.eu/a4g/ontology#ProcurementProcessInformation","","rdfs:subClassOf","http://www.w3.org/1999/02/22-rdf-syntax-ns#subClassOf","","epo:ProcurementProcessInformation","http://data.europa.eu/a4g/ontology#ProcurementProcessInformation","","3.0.0 beta","3.0.0"
