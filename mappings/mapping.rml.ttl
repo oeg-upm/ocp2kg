@@ -398,5 +398,3 @@
 			rr:termType rr:IRI
 		];
 	].
-
-
