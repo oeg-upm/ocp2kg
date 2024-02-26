@@ -40,8 +40,9 @@ mappings:
     s: http://epo-changes.org/$(reference_version)-$(target_version)/AddClass/$(name)
     po:
     - [rdf:type, omv:AddClass]
+    - [omv:addedClass, $(name)~iri]
     #- [rdfs:comment, $(comment)]
-    - [omv:addedClass, $(name_full)~iri]
+    - [omv:addedClass_full, $(name_full)~iri]
 
   DeletedClasses:
     sources:
