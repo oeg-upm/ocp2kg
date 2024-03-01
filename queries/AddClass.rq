@@ -1,0 +1,13 @@
+PREFIX rr: <http://www.w3.org/ns/r2rml#>
+PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+PREFIX epo: <http://data.europa.eu/a4g/ontology#>
+INSERT DATA { 
+    
+    <epo:exampleclass> a rr:TriplesMap;
+                                        rml:logicalSource 
+    [  rml:source "XXXX";
+            rml:referenceFormulation "XXXX"];	   
+      rr:subjectMap [
+      rr:template "XXXX";
+        rr:class <http://data.europa.eu/a4g/ontology#exampleclass>].
+  }

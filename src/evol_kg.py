@@ -1,7 +1,10 @@
 from rdflib import Graph
 #Here we have the list of the different change operations that are called from the main method
+# When adding something to the mappings the tool adds suggestions following the notation XXXX, when deleting ontological terms we will
+# follow certain assumptions that are indicated in their methos and in the documentation. 
 #---------------------------------------------------------------------------------------------------------------------------
 def AddClass(change):
+    #The query obtains from the change data the name of the class to be added, both the short version for the triplesmap, and the full IRI. 
     q = """
     SELECT ?fullname, ?class
     WHERE {
@@ -11,24 +14,24 @@ def AddClass(change):
     """
     name = change_data.query(q)["class"]
     full_name = name["?fullname"]
+    #Second query adds the triples map with a template version of the logical source and the subject maps as it requires user input.
+    # ASSUMPTION: 
     q1 = """
-    INSERT DATA { 
-    
-    <"""+name+"""> a rr:TriplesMap;
-    	rml:logicalSource [
-		rml:source "XXXX";
-		rml:referenceFormulation "XXXX"
-	    ];
-        
-        rr:subjectMap [
-        rr:template "XXXX";
-        rr:class """+full_name+"""
-        ];
-    }
-    """
+      INSERT DATA { 
+      
+      <"""+full_name+"""> a rr:TriplesMap;
+                                          rml:logicalSource 
+      [  rml:source "XXXX";
+               rml:referenceFormulation "XXXX"];	   
+         rr:subjectMap [
+         rr:template "XXXX";
+         rr:class """+full_name+"""].
+      }
+      """
     output_mappings.update(q1)
 #---------------------------------------------------------------------------------------------------------------------------    
 def RemoveClass(change):
+ #First we query the change data to obtain the class to be deleted. 
  q = """
     SELECT  ?fullname
     WHERE {
@@ -36,31 +39,64 @@ def RemoveClass(change):
     }
     """
  full_name = change_data.query(q)["?fullname"]
- ##TODO: Revisa esta query.
- q1 = """
-    DELETE DATA { 
-    
-    ?triplesmap a rr:TriplesMap;
-    	rml:logicalSource [
-		rml:source ?source;
-		rml:referenceFormulation ?formulation
-	    ];
-      rr:subjectMap [
-      rr:template ?templete;
-      rr:class """+full_name+"""
-      ];
-      rr:predicateObjectMap [
-         ?y ?z
-      ];
+ ##CHECK wether this class is a subclass from another one for different treatments.
+ q = """
+   ASK { """+full_name+""" rdfs:subClassOf ?x}
+ """
+ answer=ontology.query(q)
+ #CASE 1:  If C is not subclass remove all TriplesMap that instanciate entities of the class C and the POM where the parentTriplesMap in the RefObjectMap is the 4
+ #identifier of those TriplesMaps.
+ #The following query Removes the TriplesMap from that class, POMs that contain it as a rr:template, and those that contain it as a join condition.
+ #TODO: Consultar a David como optimizar esta query.
+ if (answer==False):
+   q2 = """
+      DELETE { 
+         ?triplesmap a rr:TriplesMap.
+         ?triplesmap ?prop ?bnodesubject.
+         ?triplesmap ?prop1 ?obj.
+         ?obj ?prop2 ?obj1.
+         ?bnodesubject rr:class <"""+full_name+""">. 
+         #PART OF THE QUERY To DELETE POM WHEN ITS CONTAINED IN TEMPLATE
+         ?triplesmap rr:SubjectMap ?bnodesub.
+         ?bnodesub rr:template ?urisub.
+         ?anothertriplesmap rr:predicateObjectMap ?pombnode.
+         ?pombnode rr:objectMap ?omnode.
+         ?omnode rr:template ?urisub.
+         ?pombnode ?pomprop ?pomobj.
+         #DELETION OF JOINS
+         ?yetanothertriplesmap rr:predicateObjectMap ?pomnode1.
+         ?pomnode1 rr:objectMap ?obnode1.
+         ?obnode1 rr:parentTriplesMap ?triplesmap.
+         ?pomnode1 ?a ?b.         
+      }
+      WHERE{
+         ?triplesmap ?prop ?bnodesubject.
+         ?triplesmap ?prop1 ?obj.
+         ?obj ?prop2 ?obj1.
+         ?bnodesubject rr:class <"""+full_name+""">. 
+         #PART OF THE QUERY To DELETE POM WHEN ITS CONTAINED IN TEMPLATE
+         ?triplesmap rr:SubjectMap ?bnodesub.
+         ?bnodesub rr:template ?urisub.
+         ?anothertriplesmap rr:predicateObjectMap ?pombnode.
+         ?pombnode rr:objectMap ?omnode.
+         ?omnode rr:template ?urisub.
+         ?pombnode ?pomprop ?pomobj.
+         #DELETION OF JOINS
+         ?yetanothertriplesmap rr:predicateObjectMap ?pomnode1.
+         ?pomnode1 rr:objectMap ?obnode1.
+         ?obnode1 rr:parentTriplesMap ?triplesmap.
+         ?pomnode1 ?a ?b.
+      }
+      """
+   output_mappings.update(q2)
 
-      ....
-      rr:predicateObjectMap [
-         ?w ?o
-      ];
+#CASE 2: If C is subclass suggest to change by the named superclasses all TriplesMap that instanciate entities of the class C and the 
+# POM where the parentTriplesMap in the RefObjectMap is the identifier of those TriplesMaps.
+# If C is domain/range of a property, those POMs or RefObjectMaps that containt that property are removed
+# The main assumption for this change is that those instances of the child class are replaced by those of the parent class.
 
-    }
-   """
- output_mappings.update(q1)
+
+  
 #---------------------------------------------------------------------------------------------------------------------------------
 def AddSubClass(change):
  q = """
@@ -252,6 +288,8 @@ if __name__ == "__main__":
     file_mapping = "../mappings/mappings.rml"
     #We create a graph which is to be the updated mappings.
     output_mappings = Graph.parse(file_mapping)
+    #We have the current ontology to check for info
+    ontology = Graph.parse("../mappings/input_onto.owl")
     # We query the data to find all the changes
     q = """
     SELECT ?change, ?type
