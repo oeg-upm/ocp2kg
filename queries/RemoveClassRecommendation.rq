@@ -1,9 +1,6 @@
 PREFIX rr: <http://www.w3.org/ns/r2rml#>
-PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
 PREFIX epo: <http://data.europa.eu/a4g/ontology#>
-#TIENE QUE SER LA MISMA QUERY.
-#Añadir condiciones que busquen y borren aquellos pom que contengan el template,o joins de la property.
-DELETE { 
+construct { 
     ?triplesmap a rr:TriplesMap.
 	?triplesmap ?prop ?bnodesubject.
     ?triplesmap ?prop1 ?obj.

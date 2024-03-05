@@ -47,55 +47,105 @@ def RemoveClass(change):
  #CASE 1:  If C is not subclass remove all TriplesMap that instanciate entities of the class C and the POM where the parentTriplesMap in the RefObjectMap is the 4
  #identifier of those TriplesMaps.
  #The following query Removes the TriplesMap from that class, POMs that contain it as a rr:template, and those that contain it as a join condition.
- #TODO: Consultar a David como optimizar esta query.
- if (answer==False):
-   q2 = """
-      DELETE { 
-         ?triplesmap a rr:TriplesMap.
-         ?triplesmap ?prop ?bnodesubject.
-         ?triplesmap ?prop1 ?obj.
-         ?obj ?prop2 ?obj1.
-         ?bnodesubject rr:class <"""+full_name+""">. 
-         #PART OF THE QUERY To DELETE POM WHEN ITS CONTAINED IN TEMPLATE
-         ?triplesmap rr:SubjectMap ?bnodesub.
-         ?bnodesub rr:template ?urisub.
-         ?anothertriplesmap rr:predicateObjectMap ?pombnode.
-         ?pombnode rr:objectMap ?omnode.
-         ?omnode rr:template ?urisub.
-         ?pombnode ?pomprop ?pomobj.
-         #DELETION OF JOINS
-         ?yetanothertriplesmap rr:predicateObjectMap ?pomnode1.
-         ?pomnode1 rr:objectMap ?obnode1.
-         ?obnode1 rr:parentTriplesMap ?triplesmap.
-         ?pomnode1 ?a ?b.         
+ #TODO: Si es sublcase, que introduzca los TriplesMap y POM en otro documento para que revise.
+ if (answer==True): 
+   qaux = """
+   CONSTRUCT { 
+      ?triplesmap a rr:TriplesMap.
+      ?triplesmap ?prop ?bnodesubject.
+      ?triplesmap ?prop1 ?obj.
+      ?obj ?prop2 ?obj1.
+      ?bnodesubject rr:class <"""+full_name+""">.
+      #PART OF THE QUERY To DELETE POM WHEN ITS CONTAINED IN TEMPLATE
+      ?triplesmap rr:subjectMap ?bnodesub.
+      ?bnodesub rr:template ?urisub.
+      ?anothertriplesmap rr:predicateObjectMap ?pombnode.
+      ?pombnode rr:objectMap ?omnode.
+      ?omnode rr:template ?urisub.
+      ?pombnode ?pomprop ?pomobj.
+      #DELETION OF JOINS
+      ?yetanothertriplesmap rr:predicateObjectMap ?pomnode1.
+      ?pomnode1 rr:objectMap ?obnode1.
+      ?obnode1 rr:parentTriplesMap ?triplesmap.
+      ?pomnode1 ?a ?b.
+      
+   }
+      
+   WHERE{ 
+      ?triplesmap ?prop ?bnodesubject.
+      ?triplesmap ?prop1 ?obj.
+      ?obj ?prop2 ?obj1.
+      ?bnodesubject rr:class <"""+full_name+""">. 
+      #PART OF THE QUERY To DELETE POM WHEN ITS CONTAINED IN TEMPLATE
+      OPTIONAL{
+      ?triplesmap rr:subjectMap ?bnodesub.
+      ?bnodesub rr:template ?urisub.
+      ?anothertriplesmap rr:predicateObjectMap ?pombnode.
+      ?pombnode rr:objectMap ?omnode.
+      ?omnode rr:template ?urisub.
+      ?pombnode ?pomprop ?pomobj.
       }
-      WHERE{
-         ?triplesmap ?prop ?bnodesubject.
-         ?triplesmap ?prop1 ?obj.
-         ?obj ?prop2 ?obj1.
-         ?bnodesubject rr:class <"""+full_name+""">. 
-         #PART OF THE QUERY To DELETE POM WHEN ITS CONTAINED IN TEMPLATE
-         ?triplesmap rr:SubjectMap ?bnodesub.
-         ?bnodesub rr:template ?urisub.
-         ?anothertriplesmap rr:predicateObjectMap ?pombnode.
-         ?pombnode rr:objectMap ?omnode.
-         ?omnode rr:template ?urisub.
-         ?pombnode ?pomprop ?pomobj.
-         #DELETION OF JOINS
-         ?yetanothertriplesmap rr:predicateObjectMap ?pomnode1.
-         ?pomnode1 rr:objectMap ?obnode1.
-         ?obnode1 rr:parentTriplesMap ?triplesmap.
-         ?pomnode1 ?a ?b.
+      #DELETION OF JOINS
+      OPTIONAL{
+      ?yetanothertriplesmap rr:predicateObjectMap ?pomnode1.
+      ?pomnode1 rr:objectMap ?obnode1.
+      ?obnode1 rr:parentTriplesMap ?triplesmap.
+      ?pomnode1 ?a ?b.
       }
+   }
+         """
+   triples_to_be_checked = output_mappings.query(qaux)
+   for trip in triples_to_be_checked:
+      review_mappings.add(trip)
+ #The DELETE query is split in three for clarity sake.   
+ q1 = """
+#Añadir condiciones que busquen y borren aquellos pom que contengan el template,o joins de la property.
+DELETE { 
+    ?triplesmap a rr:TriplesMap.
+	?triplesmap ?prop ?bnodesubject.
+    ?triplesmap ?prop1 ?obj.
+    ?obj ?prop2 ?obj1.
+    ?bnodesubject rr:class <"""+full_name+""">.
+    #PART OF THE QUERY To DELETE POM WHEN ITS CONTAINED IN TEMPLATE
+    ?triplesmap rr:subjectMap ?bnodesub.
+    ?bnodesub rr:template ?urisub.
+    ?anothertriplesmap rr:predicateObjectMap ?pombnode.
+    ?pombnode rr:objectMap ?omnode.
+    ?omnode rr:template ?urisub.
+    ?pombnode ?pomprop ?pomobj.
+    #DELETION OF JOINS
+    ?yetanothertriplesmap rr:predicateObjectMap ?pomnode1.
+    ?pomnode1 rr:objectMap ?obnode1.
+    ?obnode1 rr:parentTriplesMap ?triplesmap.
+    ?pomnode1 ?a ?b.
+	
+}
+    
+ WHERE{ 
+    ?triplesmap ?prop ?bnodesubject.
+    ?triplesmap ?prop1 ?obj.
+    ?obj ?prop2 ?obj1.
+    ?bnodesubject rr:class <"""+full_name+""">. 
+    #PART OF THE QUERY To DELETE POM WHEN ITS CONTAINED IN TEMPLATE
+    OPTIONAL{
+    ?triplesmap rr:subjectMap ?bnodesub.
+    ?bnodesub rr:template ?urisub.
+    ?anothertriplesmap rr:predicateObjectMap ?pombnode.
+    ?pombnode rr:objectMap ?omnode.
+    ?omnode rr:template ?urisub.
+    ?pombnode ?pomprop ?pomobj.
+    }
+    #DELETION OF JOINS
+    OPTIONAL{
+    ?yetanothertriplesmap rr:predicateObjectMap ?pomnode1.
+    ?pomnode1 rr:objectMap ?obnode1.
+    ?obnode1 rr:parentTriplesMap ?triplesmap.
+    ?pomnode1 ?a ?b.
+    }
+}
       """
-   output_mappings.update(q2)
-
-#CASE 2: If C is subclass suggest to change by the named superclasses all TriplesMap that instanciate entities of the class C and the 
-# POM where the parentTriplesMap in the RefObjectMap is the identifier of those TriplesMaps.
-# If C is domain/range of a property, those POMs or RefObjectMaps that containt that property are removed
-# The main assumption for this change is that those instances of the child class are replaced by those of the parent class.
-
-
+ output_mappings.update(q1)
+ 
   
 #---------------------------------------------------------------------------------------------------------------------------------
 def AddSubClass(change):
@@ -290,6 +340,8 @@ if __name__ == "__main__":
     output_mappings = Graph.parse(file_mapping)
     #We have the current ontology to check for info
     ontology = Graph.parse("../mappings/input_onto.owl")
+    #We create an additional rdf file for introducing those elements from the mappings that require reviewing. 
+    review_mappings = Graph()
     # We query the data to find all the changes
     q = """
     SELECT ?change, ?type

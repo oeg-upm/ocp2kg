@@ -1,0 +1,4 @@
+SELECT ?change, ?type
+    WHERE {
+        ?change rdf:type ?type .
+    }
