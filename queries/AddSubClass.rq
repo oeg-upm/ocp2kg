@@ -1,0 +1,10 @@
+PREFIX rr: <http://www.w3.org/ns/r2rml#>
+INSERT {  
+    ?bnode rr:class <http://data.europa.eu/a4g/ontology#exampleclass0>.
+      }
+      WHERE {
+         ?triplesmap a rr:TriplesMap; 
+         rr:subjectMap ?bnode.
+        ?bnode rr:template ?template.
+        ?bnode rr:class <http://data.europa.eu/a4g/ontology#exampleclass1>.
+      }

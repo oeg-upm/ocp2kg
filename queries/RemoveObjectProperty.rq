@@ -1,0 +1,15 @@
+PREFIX rr: <http://www.w3.org/ns/r2rml#>
+DELETE { 
+    ?triplesmap rr:predicateObjectMap ?pomnode.
+    ?pomnode rr:predicate <http://data.europa.eu/a4g/ontology#exampleprop>;
+        	 rr:objectMap ?onode.
+    ?onode rr:template ?template.
+}
+   WHERE {
+        ?triplesmap rr:predicateObjectMap ?pomnode.
+   		?pomnode rr:predicate <http://data.europa.eu/a4g/ontology#exampleprop>;
+        	 	rr:objectMap ?onode.
+   		?onode rr:template ?template.
+  		?triplesmap  rr:subjectMap ?subnode.
+    	?subnode rr:class <http://data.europa.eu/a4g/ontology#exampleclass1>.
+   }

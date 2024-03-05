@@ -1,0 +1,11 @@
+PREFIX rr: <http://www.w3.org/ns/r2rml#>
+INSERT { 
+    ?triplesmap rr:predicateObjectMap [
+        rr:predicate <http://data.europa.eu/a4g/ontology#exampledataprop>;
+        rr:objectMap [
+        rr:reference "XXXX"]].
+}
+   WHERE {
+  		?triplesmap  rr:subjectMap ?subnode.
+    	?subnode rr:class <http://data.europa.eu/a4g/ontology#exampleclass1>.
+   }

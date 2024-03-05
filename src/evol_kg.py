@@ -47,7 +47,8 @@ def RemoveClass(change):
  #CASE 1:  If C is not subclass remove all TriplesMap that instanciate entities of the class C and the POM where the parentTriplesMap in the RefObjectMap is the 4
  #identifier of those TriplesMaps.
  #The following query Removes the TriplesMap from that class, POMs that contain it as a rr:template, and those that contain it as a join condition.
- #TODO: Si es sublcase, que introduzca los TriplesMap y POM en otro documento para que revise.
+ #The deleted triples are added to a file so that the user can correct any incorrect asumptions
+ #The assumption is that the appearances of the term are deleted in all classes, they could be replaced by superclass and that's why is added to review file.
  if (answer==True): 
    qaux = """
    CONSTRUCT { 
@@ -97,7 +98,6 @@ def RemoveClass(change):
    triples_to_be_checked = output_mappings.query(qaux)
    for trip in triples_to_be_checked:
       review_mappings.add(trip)
- #The DELETE query is split in three for clarity sake.   
  q1 = """
 #Añadir condiciones que busquen y borren aquellos pom que contengan el template,o joins de la property.
 DELETE { 
@@ -148,7 +148,9 @@ DELETE {
  
   
 #---------------------------------------------------------------------------------------------------------------------------------
+ 
 def AddSubClass(change):
+# When a subclass relationship is added (besides having the class added as an AddClass operation) what changes is that it has to be added as the rr:class of the child class SubjectMap
  q = """
     SELECT ?parent, ?child
     WHERE {
@@ -159,23 +161,22 @@ def AddSubClass(change):
  queryres = change_data.query(q)
  parent = queryres["?parent"]   
  child = queryres["?child"]
- ##TODO: Revisar query, como ponemos en negrita este término a modo de sugerencia????????? Está esto bien????
  q1 = """"
-    INSERT { 
-      rr:class """+parent+"""
+INSERT {  
+    ?bnode rr:class <"""+parent+""">.
       }
       WHERE {
          ?triplesmap a rr:TriplesMap; 
-         rr:subjectMap [
-         rr:template ?template
-         rr:class """+child+"""
-         ];
+         rr:subjectMap ?bnode.
+        ?bnode rr:template ?template.
+        ?bnode rr:class <"""+child+""">.
       }
 """
  output_mappings.update(q1)
    
 #--------------------------------------------------------------------------------------------------------------
 def RemoveSubClass(change):
+ # When removing the subclass relationship between two classes the child one loses the parent in the rr:class part. 
  q = """
     SELECT ?parent, ?child
     WHERE {
@@ -187,21 +188,23 @@ def RemoveSubClass(change):
  parent = queryres["?parent"]   
  child = queryres["?child"]
  q1 = """"
-    DELETE { 
-      rr:class """+parent+"""
-      }
-      WHERE {
-         ?triplesmap a rr:TriplesMap; 
-         rr:subjectMap [
-         rr:template "XXXX";
-         rr:class """+child+""","""+parent+"""
-         ];
-      }
- """
+   PREFIX rr: <http://www.w3.org/ns/r2rml#>
+   DELETE {  
+      ?bnode rr:class <"""+parent+""">.
+         }
+         WHERE {
+            ?triplesmap a rr:TriplesMap; 
+            rr:subjectMap ?bnode.
+         ?bnode rr:template ?template.
+         ?bnode rr:class <"""+child+""">.
+         }
+   """
  output_mappings.update(q1)
 
 #---------------------------------------------------------------------------------------------------------------
 def AddObjectProperty(change):
+ #When adding a new Object Property with the domain, property and range a new PredicateObjectMap is added to a subject map that has the domain 
+ # The property is added as rr:predicate and the template of the POM is left as XXX values so that it can be changed by user. 
  q = """
     SELECT ?domain, ?property, ?range
     WHERE {
@@ -213,28 +216,22 @@ def AddObjectProperty(change):
  queryres = change_data.query(q)
  domain = queryres["?domain"]   
  predicate = queryres["?predicate"]
- #TODO: Respecto al object hay forma de indicar cual es el tipo del predicado en RML sin crear un subject map nuevo.
- object = queryres["?range"]
+ #object = queryres["?range"]
  q1 = """"
-    INSERT { 
-   rr:predicateObjectMap [
-      rr:predicate """+predicate+""";
-      rr:objectMap [
-         rr:template "XXXX"
-      ]
-   ]
+INSERT { 
+    ?triplesmap rr:predicateObjectMap [
+        rr:predicate <"""+predicate+""">;
+        rr:objectMap [
+        rr:template "XXXX"]].
+}
+   WHERE {
+  		?triplesmap  rr:subjectMap ?subnode.
+    	?subnode rr:class <"""+domain+""">.
    }
-      WHERE {
-         ?triplesmap a rr:TriplesMap; 
-         rr:subjectMap [
-         rr:template ?template
-         rr:class """+domain+"""
-         ];
-      }
 """
  output_mappings.update(q1)
-#-------------------------------------------------------------------------------------------------------------
-#TODO Mismo problema que en el add.
+#--------------------------------------------------------------------------------------------------------------------------------------------------
+#When Removing a new Object Property with the domain, property and range the PredicateObjectMap is removed from the subject map that has the domain. 
 def RemoveObjectProperty(change):
  q = """
     SELECT ?domain, ?property, ?range
@@ -247,26 +244,26 @@ def RemoveObjectProperty(change):
  queryres = change_data.query(q)
  domain = queryres["?domain"]   
  predicate = queryres["?predicate"]
- object = queryres["?range"]
+# object = queryres["?range"]
  q1 = """"
    DELETE { 
-   rr:predicateObjectMap [
-      rr:predicate """+predicate+""";
-      rr:objectMap [
-         rr:template ?template
-      ]
-   ]
+      ?triplesmap rr:predicateObjectMap ?pomnode.
+      ?pomnode rr:predicate <"""+predicate+""">;
+            rr:objectMap ?onode.
+      ?onode rr:template ?template.
    }
       WHERE {
-         ?triplesmap a rr:TriplesMap; 
-         rr:subjectMap [
-         rr:template ?template
-         rr:class """+domain+"""
-         ];
+         ?triplesmap rr:predicateObjectMap ?pomnode.
+            ?pomnode rr:predicate <"""+predicate+""">;
+               rr:objectMap ?onode.
+            ?onode rr:template ?template.
+         ?triplesmap  rr:subjectMap ?subnode.
+         ?subnode rr:class <"""+domain+""">.
       }
-"""
+   """
  output_mappings.update(q1)
-#----------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------
+ #The same changes as ObjectProperty but with the main difference being the use of rr:reference instead of rr:template on the POM
 def AddDataProperty(change):
  q = """
     SELECT ?domain, ?property, ?range
@@ -279,25 +276,21 @@ def AddDataProperty(change):
  domain = queryres["?domain"]   
  predicate = queryres["?predicate"]
  q1 = """"
-    INSERT { 
-   rr:predicateObjectMap [
-      rr:predicate """+predicate+""";
-      rr:objectMap [
-         rr:reference "XXXX"
-      ]
-   ]
+   INSERT { 
+      ?triplesmap rr:predicateObjectMap [
+         rr:predicate <"""+predicate+""">;
+         rr:objectMap [
+         rr:reference "XXXX"]].
    }
       WHERE {
-         ?triplesmap a rr:TriplesMap; 
-         rr:subjectMap [
-         rr:template ?template
-         rr:class """+domain+"""
-         ];
+         ?triplesmap  rr:subjectMap ?subnode.
+         ?subnode rr:class <"""+domain+""">.
       }
-"""
+   """
  output_mappings.update(q1)
-#-------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------------------
 def RemoveDataProperty(change):
+  #The same changes as ObjectProperty but with the main difference being the use of rr:reference instead of rr:template on the POM
  q = """
     SELECT ?domain, ?property, ?range
     WHERE {
@@ -310,21 +303,20 @@ def RemoveDataProperty(change):
  predicate = queryres["?predicate"]
  q1 = """"
    DELETE { 
-   rr:predicateObjectMap [
-      rr:predicate """+predicate+""";
-      rr:objectMap [
-         rr:reference ?reference
-      ]
-   ]
+      ?triplesmap rr:predicateObjectMap ?pomnode.
+      ?pomnode rr:predicate <"""+predicate+""">;
+            rr:objectMap ?onode.
+      ?onode rr:reference ?reference.
    }
       WHERE {
-         ?triplesmap a rr:TriplesMap; 
-         rr:subjectMap [
-         rr:template ?template
-         rr:class """+domain+"""
-         ];
+         ?triplesmap rr:predicateObjectMap ?pomnode.
+            ?pomnode rr:predicate <"""+predicate+""">;
+               rr:objectMap ?onode.
+            ?onode rr:reference ?reference.
+         ?triplesmap  rr:subjectMap ?subnode.
+         ?subnode rr:class <"""+domain+""">.
       }
-"""
+   """
  output_mappings.update(q1)
 #-------------------------------------------------------------------------------------------------------------
 
