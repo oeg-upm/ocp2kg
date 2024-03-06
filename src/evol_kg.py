@@ -291,16 +291,16 @@ def AddDataProperty(change):
 def RemoveDataProperty(change):
   #The same changes as ObjectProperty but with the main difference being the use of rr:reference instead of rr:template on the POM
  q = """
-    SELECT ?domain, ?property, ?range
+    SELECT ?domain ?property ?range
     WHERE {
-        ?"""+change+""" omv:domainRemoveDataProperty ?domain.
-        ?"""+change+""" omv:propertyRemoveDataProperty ?property.
+        <"""+change+"""> omv:domainRemoveDataProperty ?domain.
+        <"""+change+"""> omv:propertyRemoveDataProperty ?property.
     }
     """
- queryres = change_data.query(q)
- domain = queryres["?domain"]   
- predicate = queryres["?predicate"]
- q1 = """"
+ for r in change_data.query(q):
+   domain = r["domain"]   
+   predicate = r["property"]
+ q1 = """
    DELETE { 
       ?triplesmap rr:predicateObjectMap ?pomnode.
       ?pomnode rr:predicate <"""+predicate+""">;
