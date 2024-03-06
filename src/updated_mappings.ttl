@@ -19,9 +19,3 @@
     rr:subjectMap [ rr:class ex:exampleclass0 ;
             rr:template "http://epo-changes.org/{id}" ] .
 
-<http://data.europa.eu/a4g/ontology#exampleclass1> a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class <http://data.europa.eu/a4g/ontology#exampleclass1> ;
-            rr:template "XXXX" ] .
-

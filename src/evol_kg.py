@@ -36,13 +36,14 @@ def RemoveClass(change):
  q = """
     SELECT  ?fullname
     WHERE {
-        ?"""+change+""" omv:deletedClass ?fullname .
+        <"""+change+"""> omv:deletedClass ?fullname .
     }
     """
- full_name = change_data.query(q)["?fullname"]
+ for r in change_data.query(q):
+  full_name = r["fullname"]
  ##CHECK wether this class is a subclass from another one for different treatments.
  q = """
-   ASK { """+full_name+""" rdfs:subClassOf ?x}
+   ASK { <"""+full_name+"""> rdfs:subClassOf ?x}
  """
  answer=ontology.query(q)
  #CASE 1:  If C is not subclass remove all TriplesMap that instanciate entities of the class C and the POM where the parentTriplesMap in the RefObjectMap is the 4
@@ -332,7 +333,7 @@ if __name__ == "__main__":
     #We create a graph which is to be the updated mappings.
     output_mappings = Graph().parse(file_mapping,format="turtle")
     #We have the current ontology to check for info
-    #ontology = Graph().parse("../test_data/test_ontology.owl")
+    ontology = Graph().parse("../test_data/foaf_2014-01-14.n3")
     #We create an additional rdf file for introducing those elements from the mappings that require reviewing. 
     review_mappings = Graph()
     # We query the data to find all the changes
