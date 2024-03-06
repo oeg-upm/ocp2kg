@@ -180,16 +180,16 @@ def AddSubClass(change):
 def RemoveSubClass(change):
  # When removing the subclass relationship between two classes the child one loses the parent in the rr:class part. 
  q = """
-    SELECT ?parent, ?child
+    SELECT ?parent ?child
     WHERE {
-        ?"""+change+""" omv:subRemoveSubClass ?child.
-        ?"""+change+""" omv:objRemoveSubClass ?parent.
+        <"""+change+"""> omv:subRemoveSubClass ?child.
+        <"""+change+"""> omv:objRemoveSubClass ?parent.
     }
     """
- queryres = change_data.query(q)
- parent = queryres["?parent"]   
- child = queryres["?child"]
- q1 = """"
+ for r in  change_data.query(q):
+   parent = r["parent"]   
+   child = r["child"]
+ q1 = """
    PREFIX rr: <http://www.w3.org/ns/r2rml#>
    DELETE {  
       ?bnode rr:class <"""+parent+""">.

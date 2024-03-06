@@ -1,6 +1,6 @@
 PREFIX epo: <http://data.europa.eu/a4g/ontology#>
 PREFIX omv: <http://omv.ontoware.org/2009/09/OWLChanges#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-<http://exmapleurl.com/0.1-1.0/AddClass/epo:exampleclass1> rdf:type omv:AddSubClass.
-<http://exmapleurl.com/0.1-1.0/AddClass/epo:exampleclass1> omv:subAddSubClass  epo:exampleclass1.
-<http://exmapleurl.com/0.1-1.0/AddClass/epo:exampleclass1> omv:objAddSubClass  epo:exampleclass0.
+<http://exmapleurl.com/0.1-1.0/AddClass/epo:exampleclass1> rdf:type omv:RemoveSubClass.
+<http://exmapleurl.com/0.1-1.0/AddClass/epo:exampleclass1> omv:subRemoveSubClass  epo:exampleclass1.
+<http://exmapleurl.com/0.1-1.0/AddClass/epo:exampleclass1> omv:objRemoveSubClass  epo:exampleclass0.
