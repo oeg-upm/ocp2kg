@@ -234,18 +234,17 @@ def AddObjectProperty(change):
 #When Removing a new Object Property with the domain, property and range the PredicateObjectMap is removed from the subject map that has the domain. 
 def RemoveObjectProperty(change):
  q = """
-    SELECT ?domain, ?property, ?range
+    SELECT ?domain ?property ?range
     WHERE {
-        ?"""+change+""" omv:domainRemoveObjectProperty ?domain.
-        ?"""+change+""" omv:propertyRemoveObjectProperty ?property.
-        ?"""+change+""" omv:rangeRemoveObjectProperty ?range.
+        <"""+change+"""> omv:domainRemoveObjectProperty ?domain.
+        <"""+change+"""> omv:propertyRemoveObjectProperty ?property.
     }
     """
- queryres = change_data.query(q)
- domain = queryres["?domain"]   
- predicate = queryres["?predicate"]
+ for r in change_data.query(q):
+   domain = r["domain"]   
+   predicate = r["property"]
 # object = queryres["?range"]
- q1 = """"
+ q1 = """
    DELETE { 
       ?triplesmap rr:predicateObjectMap ?pomnode.
       ?pomnode rr:predicate <"""+predicate+""">;
