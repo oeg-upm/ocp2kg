@@ -154,26 +154,26 @@ DELETE {
 def AddSubClass(change):
 # When a subclass relationship is added (besides having the class added as an AddClass operation) what changes is that it has to be added as the rr:class of the child class SubjectMap
  q = """
-    SELECT ?parent, ?child
+    SELECT ?parent ?child
     WHERE {
-        ?"""+change+""" omv:subAddSubClass ?child.
-        ?"""+change+""" omv:objAddSubClass ?parent.
+        <"""+change+"""> omv:subAddSubClass ?child.
+        <"""+change+"""> omv:objAddSubClass ?parent.
     }
     """
- queryres = change_data.query(q)
- parent = queryres["?parent"]   
- child = queryres["?child"]
- q1 = """"
-INSERT {  
-    ?bnode rr:class <"""+parent+""">.
-      }
-      WHERE {
-         ?triplesmap a rr:TriplesMap; 
-         rr:subjectMap ?bnode.
-        ?bnode rr:template ?template.
-        ?bnode rr:class <"""+child+""">.
-      }
-"""
+ for r in change_data.query(q):
+   child = r["child"]
+   parent = r["parent"]   
+ q1 = """
+   INSERT {  
+      ?bnode rr:class <"""+parent+""">.
+         }
+         WHERE {
+            ?triplesmap a rr:TriplesMap; 
+            rr:subjectMap ?bnode.
+         ?bnode rr:template ?template.
+         ?bnode rr:class <"""+child+""">.
+         }
+   """
  output_mappings.update(q1)
    
 #--------------------------------------------------------------------------------------------------------------
