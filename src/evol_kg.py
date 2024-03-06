@@ -208,28 +208,26 @@ def AddObjectProperty(change):
  #When adding a new Object Property with the domain, property and range a new PredicateObjectMap is added to a subject map that has the domain 
  # The property is added as rr:predicate and the template of the POM is left as XXX values so that it can be changed by user. 
  q = """
-    SELECT ?domain, ?property, ?range
+    SELECT ?domain ?property ?range
     WHERE {
-        ?"""+change+""" omv:domainAddObjectProperty ?domain.
-        ?"""+change+""" omv:propertyAddObjectProperty ?property.
-        ?"""+change+""" omv:rangeAddObjectProperty ?range.
+        <"""+change+"""> omv:domainAddObjectProperty ?domain.
+        <"""+change+"""> omv:propertyAddObjectProperty ?property.
     }
     """
- queryres = change_data.query(q)
- domain = queryres["?domain"]   
- predicate = queryres["?predicate"]
- #object = queryres["?range"]
- q1 = """"
-INSERT { 
-    ?triplesmap rr:predicateObjectMap [
-        rr:predicate <"""+predicate+""">;
-        rr:objectMap [
-        rr:template "XXXX"]].
-}
-   WHERE {
-  		?triplesmap  rr:subjectMap ?subnode.
-    	?subnode rr:class <"""+domain+""">.
+ for r in change_data.query(q):
+   domain = r["domain"]   
+   predicate = r["property"]
+ q1 = """
+   INSERT { 
+      ?triplesmap rr:predicateObjectMap [
+         rr:predicate <"""+predicate+""">;
+         rr:objectMap [
+         rr:template "XXXX"]].
    }
+      WHERE {
+         ?triplesmap  rr:subjectMap ?subnode.
+         ?subnode rr:class <"""+domain+""">.
+      }
 """
  output_mappings.update(q1)
 #--------------------------------------------------------------------------------------------------------------------------------------------------

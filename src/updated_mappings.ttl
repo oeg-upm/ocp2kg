@@ -22,6 +22,8 @@
 <http://data.europa.eu/a4g/ontology#exampleclass1> a rr:TriplesMap ;
     rml:logicalSource [ rml:referenceFormulation "XXXX" ;
             rml:source "XXXX" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:template "XXXX" ] ;
+            rr:predicate <http://data.europa.eu/a4g/ontology#exampleprop> ] ;
     rr:subjectMap [ rr:class <http://data.europa.eu/a4g/ontology#exampleclass1> ;
             rr:template "XXXX" ] .
 
