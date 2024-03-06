@@ -1,0 +1,2 @@
+#This is an example ontology for the changes, we asume that this is the latest (or updated) version of the ontology.
+#Only aspect that is checked within the ontology are the rdfs:subClassOf properties and that's why it is reduced.

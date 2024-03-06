@@ -1,4 +1,4 @@
-from rdflib import Graph
+from rdflib import Graph, Literal, RDF, URIRef
 #Here we have the list of the different change operations that are called from the main method
 # When adding something to the mappings the tool adds suggestions following the notation XXXX, when deleting ontological terms we will
 # follow certain assumptions that are indicated in their methos and in the documentation. 
@@ -6,26 +6,27 @@ from rdflib import Graph
 def AddClass(change):
     #The query obtains from the change data the name of the class to be added, both the short version for the triplesmap, and the full IRI. 
     q = """
-    SELECT ?fullname, ?class
+    SELECT ?fullname ?class
     WHERE {
-        ?"""+change+""" omv:addedClass ?class .
-        ?"""+change+""" omv:addedClass_full ?fullname .
+        <"""+change+"""> omv:addedClass ?class .
+        <"""+change+"""> omv:addedClass_full ?fullname .
     }
     """
-    name = change_data.query(q)["class"]
-    full_name = name["?fullname"]
+    for r in change_data.query(q):
+      name = r["class"]
+      full_name = r["fullname"]
     #Second query adds the triples map with a template version of the logical source and the subject maps as it requires user input.
     # ASSUMPTION: 
     q1 = """
       INSERT DATA { 
       
-      <"""+full_name+"""> a rr:TriplesMap;
+      <"""+name+"""> a rr:TriplesMap;
                                           rml:logicalSource 
       [  rml:source "XXXX";
                rml:referenceFormulation "XXXX"];	   
          rr:subjectMap [
          rr:template "XXXX";
-         rr:class """+full_name+"""].
+         rr:class <"""+full_name+""">].
       }
       """
     output_mappings.update(q1)
@@ -324,39 +325,39 @@ def RemoveDataProperty(change):
 #Here we have the main method in the code
 if __name__ == "__main__":
     #Fist we Open the data from the change data
-    file_data = "../mappings/change_data.nt"
-    change_data = Graph().parse(file_data)
+    file_data = "../test_data/test_change_data.ttl"
+    change_data = Graph().parse(file_data, format="turtle")
     #Then we have the route of the mappings to update. 
-    file_mapping = "../mappings/mappings.rml"
+    file_mapping = "../test_data/test_mappings.rml.ttl"
     #We create a graph which is to be the updated mappings.
-    output_mappings = Graph.parse(file_mapping)
+    output_mappings = Graph().parse(file_mapping,format="turtle")
     #We have the current ontology to check for info
-    ontology = Graph.parse("../mappings/input_onto.owl")
+    #ontology = Graph().parse("../test_data/test_ontology.owl")
     #We create an additional rdf file for introducing those elements from the mappings that require reviewing. 
     review_mappings = Graph()
     # We query the data to find all the changes
     q = """
-    SELECT ?change, ?type
+    SELECT ?change ?type
     WHERE {
         ?change rdf:type ?type .
     }
     """
     #Execute query and iterate through the changes to modify accordingly to the change.
     for r in change_data.query(q):
-     if r["type"] == "omv:AddClass":
+     if r.type == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddClass"):
         AddClass(r["change"]) 
-     elif r["type"] == "omv:RemoveClass":
+     elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveClass"):
         RemoveClass(r["change"])
-     elif r["type"] == "omv:AddSubClass":
+     elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddSubClass"):
         AddSubClass(r["change"])
-     elif r["type"] == "omv:RemoveSubClass":
+     elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveSubClass"):
         RemoveSubClass(r["change"])
-     elif r["type"] == "omv:AddObjectProperty":
+     elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddObjectProperty"):
         AddObjectProperty(r["change"])
-     elif r["type"] == "omv:RemoveObjectProperty":
+     elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveObjectProperty"):
         RemoveObjectProperty(r["change"])
-     elif r["type"] == "omv:AddDataProperty":
+     elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddDataProperty"):
         AddDataProperty(r["change"])
-     elif r["type"] == "omv:RemoveDataProperty":
+     elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveDataProperty"):
         RemoveDataProperty(r["change"])
     output_mappings.serialize(destination="updated_mappings.ttl")
