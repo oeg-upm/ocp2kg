@@ -1,0 +1,58 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix tedm: <http://data.europa.eu/a4g/mapping/sf-rml/> .
+@prefix epo: <http://data.europa.eu/a4g/ontology#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#>.
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix cccev: <http://data.europa.eu/m8g/> .
+
+
+
+tedm:SubmissionTerm a rr:TriplesMap ;
+    rml:logicalSource [
+        rml:source "%1$s" ;
+        rml:referenceFormulation ql:XPath ;
+        rml:iterator "/%2$s/PROCEDURE"
+    ];
+
+    rr:subjectMap [
+        rml:reference "if(exists(DATETIME_RECEIPT_TENDERS) or exists(../CONTRACTING_BODY/URL_PARTICIPATION)) then 'http://data.europa.eu/a4g/resource/id_' || replace(../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-') || '-' || replace(../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-') || '_SubmissionTerm_' || generate-id(../OBJECT_CONTRACT/REFERENCE_NUMBER) else null" ;
+        rr:class epo:SubmissionTerm
+    ].
+
+
+tedm:Organisation a rr:TriplesMap ;
+    rml:logicalSource [
+        rml:source "%1$s" ;
+        rml:referenceFormulation ql:XPath ;
+        rml:iterator "/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY"
+    ];
+
+    rr:subjectMap [
+        rr:template "http://data.europa.eu/a4g/resource/id_{replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(NATIONALID, '[^a-zA-Z0-9]', '-')}_Organisation_{generate-id(NATIONALID)}" ;
+        rr:class org:Organization
+    ];
+    rr:predicateObjectMap [
+        rr:predicate epo:hasLegalName ;
+        rr:objectMap [ rml:reference "OFFICIALNAME" ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate epo:hasID;
+        rr:objectMap [
+            rr:parentTriplesMap tedm:OrganisationIdentifier ;
+            rr:joinCondition [
+                rr:child "NATIONALID" ;
+                rr:parent "." ;
+            ]
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate cccev:registeredAddress ;
+        rr:objectMap [
+            rr:parentTriplesMap tedm:OrganisationAddress
+        ]
+    ].

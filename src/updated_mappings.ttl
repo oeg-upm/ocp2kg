@@ -1,28 +1,40 @@
-@prefix ex: <http://example.com/ns#> .
+@prefix cccev: <http://data.europa.eu/m8g/> .
+@prefix epo: <http://data.europa.eu/a4g/ontology#> .
+@prefix org: <http://www.w3.org/ns/org#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix tedm: <http://data.europa.eu/a4g/mapping/sf-rml/> .
 
-<http://example.com/ns##TransportMapping> a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation ql:CSV ;
-            rml:source "Transport.csv" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:template "http://epo-changes.org/vehicle/{type}" ] ;
-            rr:predicate ex:type ] ;
-    rr:subjectMap [ rr:class ex:Transport ;
-            rr:template "http://epo-changes.org/bus/{id}" ] .
+tedm:Organisation a rr:TriplesMap ;
+    rml:logicalSource [ rml:iterator "/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY" ;
+            rml:referenceFormulation ql:XPath ;
+            rml:source "%1$s" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:reference "XXXX" ] ;
+            rr:predicate epo:hasBuyerLegalTypeDescription ],
+        [ rr:objectMap [ rr:template "XXXX" ] ;
+            rr:predicate epo:hasMainActivity ],
+        [ rr:objectMap [ rr:parentTriplesMap tedm:OrganisationAddress ] ;
+            rr:predicate cccev:registeredAddress ],
+        [ rr:objectMap [ rml:reference "OFFICIALNAME" ] ;
+            rr:predicate epo:hasLegalName ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "NATIONALID" ;
+                            rr:parent "." ] ;
+                    rr:parentTriplesMap tedm:OrganisationIdentifier ] ;
+            rr:predicate epo:hasID ] ;
+    rr:subjectMap [ rr:class org:Organization ;
+            rr:template "http://data.europa.eu/a4g/resource/id_{replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(NATIONALID, '[^a-zA-Z0-9]', '-')}_Organisation_{generate-id(NATIONALID)}" ] .
 
-<http://example.com/ns##exampleclass0> a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation ql:CSV ;
-            rml:source "exampleinputsource.csv" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:template "http://epo-changes.org/{column}" ] ;
-            rr:predicate ex:exampleprop ] ;
-    rr:subjectMap [ rr:class ex:exampleclass0 ;
-            rr:template "http://epo-changes.org/{id}" ] .
+tedm:SubmissionTerm a rr:TriplesMap ;
+    rml:logicalSource [ rml:iterator "/%2$s/PROCEDURE" ;
+            rml:referenceFormulation ql:XPath ;
+            rml:source "%1$s" ] ;
+    rr:subjectMap [ rml:reference "if(exists(DATETIME_RECEIPT_TENDERS) or exists(../CONTRACTING_BODY/URL_PARTICIPATION)) then 'http://data.europa.eu/a4g/resource/id_' || replace(../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-') || '-' || replace(../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-') || '_SubmissionTerm_' || generate-id(../OBJECT_CONTRACT/REFERENCE_NUMBER) else null" ;
+            rr:class epo:ProcedureSpecificTerm,
+                epo:SubmissionTerm ] .
 
-<http://data.europa.eu/a4g/ontology#exampleclass1> a rr:TriplesMap ;
+epo:ConcessionEstimate a rr:TriplesMap ;
     rml:logicalSource [ rml:referenceFormulation "XXXX" ;
             rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class <http://data.europa.eu/a4g/ontology#exampleclass1>,
-                <http://data.europa.eu/a4g/ontology#examplepropdata0> ;
-            rr:template "XXXX" ] .
-
+    rr:subjectMap [ rr:class epo:ConcessionEstimate ;
+            rr:template "XXXX" ] .40

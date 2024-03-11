@@ -11,14 +11,14 @@
     rml:referenceFormulation ql:CSV ;
   ];
   rr:subjectMap [
-    rr:template "http://epo-changes.org/bus/{id}";
+    rr:template "http://epo-changes.org/{id}";
     rr:class ex:Transport ;
   ];
 
   rr:predicateObjectMap [
     rr:predicate ex:type ;
     rr:objectMap [
-      rr:template "http://epo-changes.org/vehicle/{type}";
+      rr:template "http://epo-changes.org/{type}";
     ]
   ].
 

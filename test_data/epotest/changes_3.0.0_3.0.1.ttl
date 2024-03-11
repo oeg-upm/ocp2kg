@@ -1,0 +1,29 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX epo: <http://data.europa.eu/a4g/ontology#>
+PREFIX omv: <http://omv.ontoware.org/2009/09/OWLChanges#>
+#AddClass Example
+<http://epo-changes.org/3.0.0-3.0.1/AddClass/epo%3AConcessionEstimate> rdf:type omv:AddClass .
+<http://epo-changes.org/3.0.0-3.0.1/AddClass/epo%3AConcessionEstimate> omv:addedClass epo:ConcessionEstimate .
+<http://epo-changes.org/3.0.0-3.0.1/AddClass/epo%3AConcessionEstimate> omv:addedClass_full  <http://data.europa.eu/a4g/ontology#ConcessionEstimate>.
+#AddSubClass Example
+<http://epo-changes.org/3.0.0-3.0.1/AddSubClass/%3Chttp%3A%2F%2Fepo-changes.org%2F3.0.0-3.0.1-epo%3AProcedureSpecificTerm> omv:subAddSubClass <http://data.europa.eu/a4g/ontology#SubmissionTerm> .
+<http://epo-changes.org/3.0.0-3.0.1/AddSubClass/%3Chttp%3A%2F%2Fepo-changes.org%2F3.0.0-3.0.1-epo%3AProcedureSpecificTerm> rdf:type omv:AddSubClass .
+<http://epo-changes.org/3.0.0-3.0.1/AddSubClass/%3Chttp%3A%2F%2Fepo-changes.org%2F3.0.0-3.0.1-epo%3AProcedureSpecificTerm> omv:objAddSubClass <http://data.europa.eu/a4g/ontology#ProcedureSpecificTerm> .
+#AddObjectProperty
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AhasMainActivity> rdf:type omv:AddObjectProperty .
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AhasMainActivity> omv:propertyAddObjectProperty <http://data.europa.eu/a4g/ontology#hasMainActivity> .
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AhasMainActivity> omv:rangeAddObjectProperty <http://publications.europa.eu/resource/authority/main-activity> .
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AhasMainActivity> omv:domainAddObjectProperty <http://www.w3.org/ns/org#Organization> .
+#RemoveObjectProperty
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AhasMainActivityType> omv:propertyRemoveObjectProperty <http://data.europa.eu/a4g/ontology#hasMainActivityType> .
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AhasMainActivityType> omv:rangeRemoveObjectProperty <http://publications.europa.eu/resource/authority/main-activity> .
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AhasMainActivityType> rdf:type omv:RemoveObjectProperty .
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AhasMainActivityType> omv:domainRemoveObjectProperty <http://www.w3.org/ns/org#Organization> .
+#AddDataProperty
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AhasBuyerLegalTypeDescription> rdf:type omv:AddDataProperty .
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AhasBuyerLegalTypeDescription> omv:propertyAddDataProperty <http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription> .
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AhasBuyerLegalTypeDescription> omv:domainAddDataProperty <http://www.w3.org/ns/org#Organization> .
+#RemoveDataProperty
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDataProperty/epo%3AhasBuyerTypeDescription> rdf:type omv:RemoveDataProperty .
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDataProperty/epo%3AhasBuyerTypeDescription> omv:domainRemoveDataProperty <http://www.w3.org/ns/org#Organization> .
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDataProperty/epo%3AhasBuyerTypeDescription> omv:propertyRemoveDataProperty <http://data.europa.eu/a4g/ontology#hasBuyerTypeDescription> .

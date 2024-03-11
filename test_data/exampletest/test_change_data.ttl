@@ -1,0 +1,5 @@
+PREFIX epo: <http://data.europa.eu/a4g/ontology#>
+PREFIX omv: <http://omv.ontoware.org/2009/09/OWLChanges#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+<http://exmapleurl.com/0.1-1.0/RemoveClasslass/epo:exampleclass1> rdf:type omv:RemoveClass.
+<http://exmapleurl.com/0.1-1.0/RemoveClassClass/epo:exampleclass1> omv:deletedClass  epo:exampleclass1.
