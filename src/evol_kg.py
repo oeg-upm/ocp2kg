@@ -59,13 +59,6 @@ def RemoveClass(change):
       ?triplesmap ?prop1 ?obj.
       ?obj ?prop2 ?obj1.
       ?bnodesubject rr:class <"""+full_name+""">.
-      #PART OF THE QUERY To DELETE POM WHEN ITS CONTAINED IN TEMPLATE
-      ?triplesmap rr:subjectMap ?bnodesub.
-      ?bnodesub rr:template ?urisub.
-      ?anothertriplesmap rr:predicateObjectMap ?pombnode.
-      ?pombnode rr:objectMap ?omnode.
-      ?omnode rr:template ?urisub.
-      ?pombnode ?pomprop ?pomobj.
       #DELETION OF JOINS
       ?yetanothertriplesmap rr:predicateObjectMap ?pomnode1.
       ?pomnode1 rr:objectMap ?obnode1.
@@ -79,15 +72,6 @@ def RemoveClass(change):
       ?triplesmap ?prop1 ?obj.
       ?obj ?prop2 ?obj1.
       ?bnodesubject rr:class <"""+full_name+""">. 
-      #PART OF THE QUERY To DELETE POM WHEN ITS CONTAINED IN TEMPLATE
-      OPTIONAL{
-      ?triplesmap rr:subjectMap ?bnodesub.
-      ?bnodesub rr:template ?urisub.
-      ?anothertriplesmap rr:predicateObjectMap ?pombnode.
-      ?pombnode rr:objectMap ?omnode.
-      ?omnode rr:template ?urisub.
-      ?pombnode ?pomprop ?pomobj.
-      }
       #DELETION OF JOINS
       OPTIONAL{
       ?yetanothertriplesmap rr:predicateObjectMap ?pomnode1.
@@ -104,17 +88,10 @@ def RemoveClass(change):
 #Añadir condiciones que busquen y borren aquellos pom que contengan el template,o joins de la property.
 DELETE { 
     ?triplesmap a rr:TriplesMap.
-	?triplesmap ?prop ?bnodesubject.
+	 ?triplesmap ?prop ?bnodesubject.
     ?triplesmap ?prop1 ?obj.
     ?obj ?prop2 ?obj1.
     ?bnodesubject rr:class <"""+full_name+""">.
-    #PART OF THE QUERY To DELETE POM WHEN ITS CONTAINED IN TEMPLATE
-    ?triplesmap rr:subjectMap ?bnodesub.
-    ?bnodesub rr:template ?urisub.
-    ?anothertriplesmap rr:predicateObjectMap ?pombnode.
-    ?pombnode rr:objectMap ?omnode.
-    ?omnode rr:template ?urisub.
-    ?pombnode ?pomprop ?pomobj.
     #DELETION OF JOINS
     ?yetanothertriplesmap rr:predicateObjectMap ?pomnode1.
     ?pomnode1 rr:objectMap ?obnode1.
@@ -128,15 +105,6 @@ DELETE {
     ?triplesmap ?prop1 ?obj.
     ?obj ?prop2 ?obj1.
     ?bnodesubject rr:class <"""+full_name+""">. 
-    #PART OF THE QUERY To DELETE POM WHEN ITS CONTAINED IN TEMPLATE
-    OPTIONAL{
-    ?triplesmap rr:subjectMap ?bnodesub.
-    ?bnodesub rr:template ?urisub.
-    ?anothertriplesmap rr:predicateObjectMap ?pombnode.
-    ?pombnode rr:objectMap ?omnode.
-    ?omnode rr:template ?urisub.
-    ?pombnode ?pomprop ?pomobj.
-    }
     #DELETION OF JOINS
     OPTIONAL{
     ?yetanothertriplesmap rr:predicateObjectMap ?pomnode1.
@@ -163,16 +131,22 @@ def AddSubClass(change):
  for r in change_data.query(q):
    child = r["child"]
    parent = r["parent"]   
- q1 = """
+ q1 = """ 
    INSERT {  
-      ?bnode rr:class <"""+parent+""">.
-         }
-         WHERE {
-         ?triplesmap a rr:TriplesMap; 
-         rr:subjectMap ?bnode.
-         ?bnode rml:reference ?template.
-         ?bnode rr:class <"""+child+""">.
-         }
+    ?bnode rr:class <"""+parent+""">.
+    ?triplesmap rr:predicateObjectMap [?s ?p].
+	}
+      WHERE {
+        ?triplesmap a rr:TriplesMap; 
+        rr:subjectMap ?bnode.
+        ?bnode rr:class <"""+child+""">.
+    	#POM 
+      ?triplesmapparent a rr:TriplesMap;
+    	rr:subjectMap ?bnodesub;
+    	rr:predicateObjectMap ?bnodepom.
+    	?bnodesub rr:class <"""+parent+""">.
+    	?bnodepom ?s ?p. 
+      }
    """
  output_mappings.update(q1)
    
@@ -190,16 +164,22 @@ def RemoveSubClass(change):
    parent = r["parent"]   
    child = r["child"]
  q1 = """
-   PREFIX rr: <http://www.w3.org/ns/r2rml#>
    DELETE {  
-      ?bnode rr:class <"""+parent+""">.
-         }
-         WHERE {
-            ?triplesmap a rr:TriplesMap; 
-            rr:subjectMap ?bnode.
-         ?bnode rr:template ?template.
-         ?bnode rr:class <"""+child+""">.
-         }
+    ?bnode rr:class <"""+parent+""">.
+    ?triplesmap rr:predicateObjectMap ?bnodenuevo.
+    ?bnodenuevo ?s ?p.
+	}
+      WHERE {
+        ?triplesmap a rr:TriplesMap; 
+        rr:subjectMap ?bnode.
+        ?bnode rr:class <"""+child+""">.
+    	#POM 
+      ?triplesmapparent a rr:TriplesMap;
+    	rr:subjectMap ?bnodesub;
+    	rr:predicateObjectMap ?bnodepom.
+    	?bnodesub rr:class <"""+parent+""">.
+    	?bnodepom ?s ?p. 
+      }
    """
  output_mappings.update(q1)
 
@@ -212,22 +192,30 @@ def AddObjectProperty(change):
     WHERE {
         <"""+change+"""> omv:domainAddObjectProperty ?domain.
         <"""+change+"""> omv:propertyAddObjectProperty ?property.
+         <"""+change+"""> omv:rangeAddObjectProperty ?range.
+
     }
     """
  for r in change_data.query(q):
    domain = r["domain"]   
    predicate = r["property"]
+   range = r["range"]
  q1 = """
-   INSERT { 
-      ?triplesmap rr:predicateObjectMap [
-         rr:predicate <"""+predicate+""">;
-         rr:objectMap [
-         rr:template "XXXX"]].
+INSERT { 
+    ?triplesmap rr:predicateObjectMap [
+        rr:predicate <"""+predicate+""">;
+        rr:objectMap [
+        rr:parentTriplesMap ?othertriplesmap;
+        rr:joinCondition [
+        	rr:child "XXXX";
+         rr:parent "XXXX"]]].
+}
+   WHERE {
+  		?triplesmap  rr:subjectMap ?subnode.
+    	?subnode rr:class <"""+domain+""">.
+    ?othertriplesmap rr:subjectMap ?bnode.
+    ?bnode rr:class <"""+range+""">.     
    }
-      WHERE {
-         ?triplesmap  rr:subjectMap ?subnode.
-         ?subnode rr:class <"""+domain+""">.
-      }
 """
  output_mappings.update(q1)
 #--------------------------------------------------------------------------------------------------------------------------------------------------
@@ -249,13 +237,11 @@ def RemoveObjectProperty(change):
       ?triplesmap rr:predicateObjectMap ?pomnode.
       ?pomnode rr:predicate <"""+predicate+""">;
             rr:objectMap ?onode.
-      ?onode rr:template ?template.
    }
       WHERE {
          ?triplesmap rr:predicateObjectMap ?pomnode.
             ?pomnode rr:predicate <"""+predicate+""">;
                rr:objectMap ?onode.
-            ?onode rr:template ?template.
          ?triplesmap  rr:subjectMap ?subnode.
          ?subnode rr:class <"""+domain+""">.
       }
@@ -305,13 +291,11 @@ def RemoveDataProperty(change):
       ?triplesmap rr:predicateObjectMap ?pomnode.
       ?pomnode rr:predicate <"""+predicate+""">;
             rr:objectMap ?onode.
-      ?onode rr:reference ?reference.
    }
       WHERE {
          ?triplesmap rr:predicateObjectMap ?pomnode.
             ?pomnode rr:predicate <"""+predicate+""">;
                rr:objectMap ?onode.
-            ?onode rr:reference ?reference.
          ?triplesmap  rr:subjectMap ?subnode.
          ?subnode rr:class <"""+domain+""">.
       }
