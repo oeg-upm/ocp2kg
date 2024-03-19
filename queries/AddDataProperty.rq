@@ -1,11 +1,18 @@
+# Adds %DATA_PROPERTY% to %CLASS% with datatype %RANGE_DATA_PROPERTY% extracted from the range of %DATA_PROPERTY%. By defaylt, reference is used for the data.
+
 PREFIX rr: <http://www.w3.org/ns/r2rml#>
+PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+
 INSERT { 
     ?triplesmap rr:predicateObjectMap [
-        rr:predicate <http://data.europa.eu/a4g/ontology#exampledataprop>;
+        rr:predicate <%DATA_PROPERTY%>;
         rr:objectMap [
-        rr:reference "XXXX"]].
+            rml:reference "XXXX";
+            rr:datatype <%RANGE_DATA_PROPERTY%>
+        ]
+    ].
 }
-   WHERE {
-  		?triplesmap  rr:subjectMap ?subnode.
-    	?subnode rr:class <http://data.europa.eu/a4g/ontology#exampleclass1>.
-   }
+WHERE {
+  	?triplesmap rr:subjectMap ?subjectMap .
+    ?subjectMap rr:class <%CLASS%> .
+}
