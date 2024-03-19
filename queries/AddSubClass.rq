@@ -1,21 +1,20 @@
 # Adds %SUBCLASS% to the %SUPERCLASS%. This change triggers the second and third query, which add DATAPROPERTY and OBJECTPROPERTY where the domain is SUBCLASS.
-# ToDo: The URI of the TriplesMap is %SUPER_CLASS%_TM, and it would be good to change it to %SUBCLASS%_TM
 
 PREFIX rr: <http://www.w3.org/ns/r2rml#>
 
 INSERT {  
-    ?subjectMap rr:class <%SUBCLASS%>.
+    ?subjectMap rr:class <%SUPERCLASS%>.
 }
 WHERE {
     ?triplesmap rr:subjectMap ?subjectMap.
     ?subjectMap ?predicate_term ?object_term. #predicate_term can be either rr:constant, rml:reference or rr:template
-    ?object_term rr:class <%SUPERCLASS%>.
+    ?object_term rr:class <%SUBCLASS%>.
 }
 
 
 
-# Adds %DATAPROPERTIES% where their domain are %SUBCLASS%. This runs after the first query.
-# Needs to be run for each DATAPROPERTY of %SUBCLASS%
+# Adds %DATAPROPERTIES% where their domain are %SUPERCLASS%. This runs after the first query.
+# Needs to be run for each DATAPROPERTY of %SUPERCLASS%
 INSERT {  
     ?triplesmap rr:predicateObjectMap ?pom .
     ?triplesmap rr:predicateObjectMap [
@@ -33,8 +32,8 @@ WHERE {
 }
 
 
-# Adds %OBJECTPROPERTY% where their domain are %SUBCLASS% and the RANGE is %RANGECLASS%. This runs after the first query.
-# Needs to be run for each OBJECTPROPERTY of %SUBCLASS%
+# Adds %OBJECTPROPERTY% where their domain are %SUPERCLASS% and the RANGE is %RANGECLASS%. This runs after the first query.
+# Needs to be run for each OBJECTPROPERTY of %SUPERCLASS%
 INSERT {  
     ?triplesmap rr:predicateObjectMap [
         rr:predicate <%OBJECTPROPERTY%>;
@@ -50,9 +49,7 @@ INSERT {
 WHERE {
     ?triplesmap rr:subjectMap ?subjectMap .
     ?subjectMap ?predicate_term ?object_term . #predicate_term can be either rr:constant, rml:reference or rr:template
-    ?object_term rr:class <%SUBCLASS%> .
-    ?object_term rr:class <%SUPERCLASS%> .
-
+    ?object_term rr:class <%SUBCLASS%>, <%SUPERCLASS%> .
 
     ?parent_tm rr:subjectMap ?parent_subjectMap .
     ?parent_subjectMap rr:class <%RANGECLASS%> .
