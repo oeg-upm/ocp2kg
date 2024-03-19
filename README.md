@@ -5,8 +5,5 @@ Mappings in Construction of Knowledge Graphs".
 # Architecture
 ![OCP2KG Architecture](figures/arqui.jpg?raw=true "OCP2KG Architecture")
 
-# USAGE
-
-
 # SUPPORT
 For any doubts regarding usage of the tool please contact us via email to diego.conde.herreros@upm.es
