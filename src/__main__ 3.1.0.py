@@ -210,18 +210,18 @@ def parse_full_URI(term):
         return "http://data.europa.eu/m8g/"+term.split(":")[1]
 
 if __name__ == "__main__":
-    with open("../epo-changes/changes_v4.0.0.html",encoding="utf-8") as input_file:
+    with open("../data/epo-changes_data/HTML_Changes/changes_v3.0.0.html",encoding="utf-8") as input_file:
         content = input_file.read()
     html_content = BeautifulSoup(content, "html.parser")
     new_classes = get_classes(html_content, "new_classes")
     deleted_classes = get_classes(html_content, "deleted_classes")
     metadata_changes = get_metadata(html_content)
-    write_csv(new_classes, "added_classes_4.0.0.csv", metadata_changes)
-    write_csv(deleted_classes, "deleted_classes_4.0.0.csv", metadata_changes)
+    write_csv(new_classes, "added_classes_3.0.0.csv", metadata_changes)
+    write_csv(deleted_classes, "deleted_classes_3.0.0.csv", metadata_changes)
     attribute_changes = get_attributes(html_content)
-    write_csv_attributes(attribute_changes,"modified_attributes_4.0.0.csv",metadata_changes)
+    write_csv_attributes(attribute_changes,"modified_attributes_3.0.0.csv",metadata_changes)
     added_triples,deleted_triples,added_subclass,deleted_subclass = get_properties(html_content)
-    write_csv_properties(added_triples,"added_triples_4.0.0.csv",metadata_changes)
-    write_csv_properties(deleted_triples,"deleted_triples_4.0.0.csv",metadata_changes)
-    write_csv_properties(deleted_subclass,"deleted_subclass_4.0.0.csv",metadata_changes)
-    write_csv_properties(added_subclass,"added_subclass_4.0.0.csv",metadata_changes)
+    write_csv_properties(added_triples,"added_triples_3.0.0.csv",metadata_changes)
+    write_csv_properties(deleted_triples,"deleted_triples_3.0.0.csv",metadata_changes)
+    write_csv_properties(deleted_subclass,"deleted_subclass_3.0.0.csv",metadata_changes)
+    write_csv_properties(added_subclass,"added_subclass_3.0.0.csv",metadata_changes)

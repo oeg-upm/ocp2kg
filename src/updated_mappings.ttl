@@ -10,11 +10,7 @@ tedm:Organisation a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:reference "XXXX" ] ;
-            rr:predicate epo:hasBuyerLegalTypeDescription ],
-        [ rr:objectMap [ rr:template "XXXX" ] ;
-            rr:predicate epo:hasMainActivity ],
-        [ rr:objectMap [ rr:parentTriplesMap tedm:OrganisationAddress ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:parentTriplesMap tedm:OrganisationAddress ] ;
             rr:predicate cccev:registeredAddress ],
         [ rr:objectMap [ rml:reference "OFFICIALNAME" ] ;
             rr:predicate epo:hasLegalName ],
@@ -30,11 +26,5 @@ tedm:SubmissionTerm a rr:TriplesMap ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
     rr:subjectMap [ rml:reference "if(exists(DATETIME_RECEIPT_TENDERS) or exists(../CONTRACTING_BODY/URL_PARTICIPATION)) then 'http://data.europa.eu/a4g/resource/id_' || replace(../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-') || '-' || replace(../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-') || '_SubmissionTerm_' || generate-id(../OBJECT_CONTRACT/REFERENCE_NUMBER) else null" ;
-            rr:class epo:ProcedureSpecificTerm,
-                epo:SubmissionTerm ] .
+            rr:class epo:SubmissionTerm ] .
 
-epo:ConcessionEstimate a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:ConcessionEstimate ;
-            rr:template "XXXX" ] .40

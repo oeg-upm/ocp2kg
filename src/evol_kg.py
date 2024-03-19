@@ -1,4 +1,5 @@
 from rdflib import Graph, Literal, RDF, URIRef
+import sys
 #Here we have the list of the different change operations that are called from the main method
 # When adding something to the mappings the tool adds suggestions following the notation XXXX, when deleting ontological terms we will
 # follow certain assumptions that are indicated in their methos and in the documentation. 
@@ -167,12 +168,13 @@ def RemoveSubClass(change):
    DELETE {  
     ?bnode rr:class <"""+parent+""">.
     ?triplesmap rr:predicateObjectMap ?bnodenuevo.
-    ?bnodenuevo ?s ?p.
+    ?bnodepomchild ?s ?p.
 	}
       WHERE {
         ?triplesmap a rr:TriplesMap; 
         rr:subjectMap ?bnode.
         ?bnode rr:class <"""+child+""">.
+        ?bnodepomchild ?s ?p.
     	#POM 
       ?triplesmapparent a rr:TriplesMap;
     	rr:subjectMap ?bnodesub;
@@ -307,13 +309,11 @@ def RemoveDataProperty(change):
 
 if __name__ == "__main__":
     #Change data that follows the OWL change ontology specification.
-    file_data = "../test_data/epotest/changes_3.0.0_3.0.1.ttl"
-    change_data = Graph().parse(file_data, format="turtle")
+    change_data = Graph().parse(sys.argv[1], format="turtle")
     #Outdated mappings to be updated. 
-    file_mapping = "../test_data/epotest/test_mappings_epo.rml.ttl"
-    output_mappings = Graph().parse(file_mapping,format="turtle")
+    output_mappings = Graph().parse(sys.argv[2],format="turtle")
     #The current ontology to check for info
-    ontology = Graph().parse("../test_data/epotest/ePO_owl_core.rdf")
+    ontology = Graph().parse(sys.argv[3])
     #We create an additional graph for introducing those elements from the mappings that require reviewing. 
     review_mappings = Graph()
     # We query the data to find all the changes
