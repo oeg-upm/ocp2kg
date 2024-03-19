@@ -1,15 +1,54 @@
+# Removes %OBJECTPROPERTY% from %CLASS%. Extended version is also provided
+
 PREFIX rr: <http://www.w3.org/ns/r2rml#>
+
 DELETE { 
-    ?triplesmap rr:predicateObjectMap ?pomnode.
-    ?pomnode rr:predicate <http://data.europa.eu/a4g/ontology#exampleprop>;
-        	 rr:objectMap ?onode.
-    ?onode rr:template ?template.
+    ?triplesmap rr:predicateObjectMap ?pom.
+    ?pom rr:predicate <%OBJECTPROPERTY%> . #if comes from the ontology, it's going to be always constant
+
+    ?pom rr:objectMap ?objectMap.
+    ?objectMap rr:parentTriplesMap ?parent_tm .
+    ?objectMap rr:joinCondition ?join_condition .
+    ?join_condition ?conditions ?condition_values .
 }
-   WHERE {
-        ?triplesmap rr:predicateObjectMap ?pomnode.
-   		?pomnode rr:predicate <http://data.europa.eu/a4g/ontology#exampleprop>;
-        	 	rr:objectMap ?onode.
-   		?onode rr:template ?template.
-  		?triplesmap  rr:subjectMap ?subnode.
-    	?subnode rr:class <http://data.europa.eu/a4g/ontology#exampleclass1>.
-   }
+WHERE {
+    ?triplesmap  rr:subjectMap ?subjectMap.
+    ?subjectMap rr:class <%CLASS%>.
+
+    ?triplesmap rr:predicateObjectMap ?pom.
+    ?pom rr:predicate <%OBJECTPROPERTY%> . #if comes from the ontology, it's going to be always constant
+
+    ?pom rr:objectMap ?objectMap.
+    ?objectMap rr:parentTriplesMap ?parent_tm .
+    ?objectMap rr:joinCondition ?join_condition .
+    ?join_condition ?conditions ?condition_values .
+        
+}
+
+
+
+# Extended version
+DELETE { 
+    ?triplesmap rr:predicateObjectMap ?pom.
+    ?pom rr:predicateMap ?predicate . #if comes from the ontology, it's going to be always constant
+    ?predicate rr:constant <%OBJECTPROPERTY%> .
+
+    ?pom rr:objectMap ?objectMap.
+    ?objectMap rr:parentTriplesMap ?parent_tm .
+    ?objectMap rr:joinCondition ?join_condition .
+    ?join_condition ?conditions ?condition_values .
+}
+WHERE {
+    ?triplesmap  rr:subjectMap ?subjectMap.
+    ?subjectMap rr:class <%CLASS%>.
+
+    ?triplesmap rr:predicateObjectMap ?pom.
+    ?pom rr:predicateMap ?predicate . #if comes from the ontology, it's going to be always constant
+    ?predicate rr:constant <%OBJECTPROPERTY%> .
+
+    ?pom rr:objectMap ?objectMap.
+    ?objectMap rr:parentTriplesMap ?parent_tm .
+    ?objectMap rr:joinCondition ?join_condition .
+    ?join_condition ?conditions ?condition_values .
+        
+}

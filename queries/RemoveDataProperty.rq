@@ -1,4 +1,4 @@
-# Removes %DATAPROPERTY% from %CLASS. Extended version is also provided
+# Removes %DATAPROPERTY% from %CLASS%. Extended version is also provided
 PREFIX rr: <http://www.w3.org/ns/r2rml#>
 
 DELETE { 
