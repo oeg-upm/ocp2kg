@@ -13,13 +13,15 @@ DELETE {
 
     #POM
     ?triplesmap rr:predicateObjectMap ?pom.
-    ?pom ?predicate_term ?predicate_value .
-    ?pom ?object_term ?object.
+    ?pom ?predicate_property ?predicate .
+    ?predicate ?predicate_term ?predicate_value .
+    ?pom ?object_property ?object.
     ?object ?oject_term ?object_value.
  
     #JOINS
     ?triplesmap rr:predicateObjectMap ?pom2.
-    ?pom2 ?predicate_term2 ?predicate_value2 .
+    ?pom2 ?predicate_property2 ?predicate2 .
+    ?predicate2 ?predicate_term2 ?predicate_value2 .
     ?pom2 rr:objectMap ?object2.
     ?object2 rr:parentTriplesMap ?parent_tm .
     ?object2 rr:joinCondition ?join_condition .
@@ -44,25 +46,31 @@ WHERE{
     #POM
     OPTIONAL{
        ?triplesmap rr:predicateObjectMap ?pom.
-       ?pom ?predicate_term ?predicate_value .
+       ?pom rr:predicate|rr:predicateMap ?predicate .
+       OPTIONAL {?predicate ?predicate_term ?predicate_value .}
        ?pom rr:objectMap|rr:object ?object.
-       ?object ?oject_term ?object_value.
+       OPTIONAL {?object ?oject_term ?object_value.}
     }
     #REFOBJECTMAP
     OPTIONAL{
        ?triplesmap rr:predicateObjectMap ?pom2.
-       ?pom2 ?predicate_term2 ?predicate_value2 .
+       ?pom2 rr:predicate|rr:predicateMap ?predicate2 .
+       OPTIONAL { ?predicate2 ?predicate_term2 ?predicate_value2 .}
        ?pom2 rr:objectMap ?object2.
        ?object2 rr:parentTriplesMap ?parent_tm .
-       ?object2 rr:joinCondition ?join_condition .
-       ?join_condition ?conditions ?condition_values .
+       OPTIONAL {
+         ?object2 rr:joinCondition ?join_condition .
+         ?join_condition ?conditions ?condition_values .
+      }
     }
     #DELETION OF JOINS
     OPTIONAL{
-       ?parent_triplesMap rr:predicateObjectMap ?parent_pom.
-       ?parent_pom rr:objectMap ?parent_object.
-       ?parent_object rr:parentTriplesMap ?triplesmap.
-       ?parent_object rr:joinConditions ?parent_joinConditions .
-       ?parent_joinConditions ?parent_conditions ?parent_conditions_values .
+      ?parent_triplesMap rr:predicateObjectMap ?parent_pom.
+      ?parent_pom rr:objectMap ?parent_object.
+      ?parent_object rr:parentTriplesMap ?triplesmap.
+      OPTIONAL {
+         ?parent_object rr:joinConditions ?parent_joinConditions .
+         ?parent_joinConditions ?parent_conditions ?parent_conditions_values .
+      }
     }
 }

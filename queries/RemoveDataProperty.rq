@@ -6,7 +6,7 @@ DELETE {
     ?pom rr:predicate <%DATAPROPERTY%> . #if comes from the ontology, it's going to be always constant
 
     ?pom ?object_property ?objectMap. #either rr:objectMap or rr:object
-    ?objectMap ?predicate_term ?objectValue . #removes everything under objectMap (including language, datatype or termType)
+    ?objectMap ?object_term ?objectValue . #removes everything under objectMap (including language, datatype or termType)
 }
 WHERE {
     ?triplesmap  rr:subjectMap ?subjectMap.
@@ -16,7 +16,7 @@ WHERE {
    	?pom rr:predicate <%DATAPROPERTY%> . #if comes from the ontology, it's going to be always constant
 
     ?pom rr:objectMap|rr:object ?objectMap.
-    ?objectMap ?predicate_term ?objectValue .
+    OPTIONAL { ?objectMap ?object_term ?objectValue }.
         
 }
 
@@ -27,7 +27,7 @@ DELETE {
     ?predicate rr:constant <%DATAPROPERTY%> .
 
     ?pom ?object_property ?objectMap. #either rr:objectMap or rr:object
-    ?objectMap ?predicate_term ?objectValue . #removes everything under objectMap (including language, datatype or termType)
+    ?objectMap ?object_term ?objectValue . #removes everything under objectMap (including language, datatype or termType)
 }
 WHERE {
     ?triplesmap  rr:subjectMap ?subjectMap.
@@ -38,6 +38,5 @@ WHERE {
     ?predicate rr:constant <%DATAPROPERTY%> .
 
     ?pom rr:objectMap|rr:object ?objectMap.
-    ?objectMap ?predicate_term ?objectValue .
-        
+    OPTIONAL { ?objectMap ?object_term ?objectValue }.    
 }

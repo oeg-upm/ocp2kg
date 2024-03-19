@@ -5,7 +5,6 @@ DELETE {
     ?subjectMap rr:class <%SUBCLASS%>.
 }
 WHERE {
-    ?triplesmap a rr:TriplesMap .
     ?triplesmap rr:subjectMap ?subjectMap.
     ?subjectMap rr:class <%SUPERCLASS%>.
 }
@@ -23,10 +22,19 @@ WHERE {
 # Remove ObjectProperties where %OBJECTPROPERTY% has as range %SUBCLASS%.
 # For each OBJECTPROPERTY:
 
-DELETE WHERE {   
+DELETE {
     ?parent_triplesMap rr:predicateObjectMap <%OBJECTPROPERTY%>.
     ?parent_pom rr:objectMap ?parent_object.
     ?parent_object rr:parentTriplesMap ?triplesmap.
     ?parent_object rr:joinConditions ?parent_joinConditions .
     ?parent_joinConditions ?parent_conditions ?parent_conditions_values . 
+}
+WHERE {   
+    ?parent_triplesMap rr:predicateObjectMap <%OBJECTPROPERTY%>.
+    ?parent_pom rr:objectMap ?parent_object.
+    ?parent_object rr:parentTriplesMap ?triplesmap.
+    OPTIONAL {
+        ?parent_object rr:joinConditions ?parent_joinConditions .
+        ?parent_joinConditions ?parent_conditions ?parent_conditions_values .
+    } 
 }

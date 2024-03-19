@@ -1,4 +1,4 @@
-# Adds %SUBCLASS% to the %SUPERCLASS%. This change triggers the second and third query, which add DATAPROPERTY and OBJECTPROPERTY where the domain is SUBCLASS.
+# Adds %SUPERCLASS% to the %SUBCLASS%. This change triggers the second and third query, which add DATAPROPERTY and OBJECTPROPERTY where the domain is SUPERCLASS.
 
 PREFIX rr: <http://www.w3.org/ns/r2rml#>
 
@@ -7,8 +7,7 @@ INSERT {
 }
 WHERE {
     ?triplesmap rr:subjectMap ?subjectMap.
-    ?subjectMap ?predicate_term ?object_term. #predicate_term can be either rr:constant, rml:reference or rr:template
-    ?object_term rr:class <%SUBCLASS%>.
+    ?subjectMap rr:class <%SUBCLASS%>.
 }
 
 
@@ -16,7 +15,6 @@ WHERE {
 # Adds %DATAPROPERTIES% where their domain are %SUPERCLASS%. This runs after the first query.
 # Needs to be run for each DATAPROPERTY of %SUPERCLASS%
 INSERT {  
-    ?triplesmap rr:predicateObjectMap ?pom .
     ?triplesmap rr:predicateObjectMap [
         rr:predicate <%DATAPROPERTY%>;
         rr:objectMap [
@@ -27,8 +25,7 @@ INSERT {
 }
 WHERE {
     ?triplesmap rr:subjectMap ?subjectMap .
-    ?subjectMap ?predicate_term ?object_term . #predicate_term can be either rr:constant, rml:reference or rr:template
-    ?object_term rr:class <%SUBCLASS%>, <%SUPERCLASS%> .
+    ?subjectMap rr:class <%SUBCLASS%>, <%SUPERCLASS%> .
 }
 
 
@@ -48,8 +45,7 @@ INSERT {
 }
 WHERE {
     ?triplesmap rr:subjectMap ?subjectMap .
-    ?subjectMap ?predicate_term ?object_term . #predicate_term can be either rr:constant, rml:reference or rr:template
-    ?object_term rr:class <%SUBCLASS%>, <%SUPERCLASS%> .
+    ?subjectMap rr:class <%SUBCLASS%>, <%SUPERCLASS%> .
 
     ?parent_tm rr:subjectMap ?parent_subjectMap .
     ?parent_subjectMap rr:class <%RANGECLASS%> .
