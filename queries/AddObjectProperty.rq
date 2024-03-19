@@ -1,11 +1,26 @@
+# Adds %OBJECT_PROPERTY% to %CLASS%. The ?parent_tm are the TriplesMap(s) which create instances of the class %RANGE_CLASS% which is the range of %OBJECT_PROPERTY%. 
+
 PREFIX rr: <http://www.w3.org/ns/r2rml#>
+PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+
 INSERT { 
     ?triplesmap rr:predicateObjectMap [
-        rr:predicate <http://data.europa.eu/a4g/ontology#exampleprop>;
+        rr:predicate <%OBJECT_PROPERTY%>;
         rr:objectMap [
-        rr:template "XXXX"]].
+            rr:parentTriplesMap ?parent_tm;
+            rr:joinCondition [
+                rr:child "XXXX";
+                rr:parent "XXXX"
+            ]
+        ]
+    ].
 }
-   WHERE {
-  		?triplesmap  rr:subjectMap ?subnode.
-    	?subnode rr:class <http://data.europa.eu/a4g/ontology#exampleclass1>.
-   }
+WHERE {
+    ?triplesmap rr:subjectMap ?subjectMap .
+    ?subjectMap rr:class <%CLASS%> .
+
+    ?parent_tm rr:subjectMap ?parent_subjectMap .
+    ?parent_subjectMap rr:class <%RANGE_CLASS%> .
+
+
+}
