@@ -1,10 +1,32 @@
+
 PREFIX rr: <http://www.w3.org/ns/r2rml#>
-DELETE {  
-    ?bnode rr:class <http://data.europa.eu/a4g/ontology#exampleclass0>.
-      }
-      WHERE {
-         ?triplesmap a rr:TriplesMap; 
-         rr:subjectMap ?bnode.
-        ?bnode rr:template ?template.
-        ?bnode rr:class <http://data.europa.eu/a4g/ontology#exampleclass1>.
-      }
+
+DELETE {   
+    ?subjectMap rr:class <%SUBCLASS%>.
+}
+WHERE {
+    ?triplesmap a rr:TriplesMap .
+    ?triplesmap rr:subjectMap ?subjectMap.
+    ?subjectMap rr:class <%SUPERCLASS%>.
+}
+
+# This triggers:
+# Remove DataProperties where %DATAPROPERTY% has as domain %SUBCLASS%
+# For each DATAPROPERTY of %SUBCLASS%:
+# Run RemoveDataProperty.rq with %CLASS% = %SUPERCLASS% .
+
+
+# Remove ObjectProperties where %OBJECTPROPERTY% has as domain %SUBCLASS%
+# For each OBJECTPROPERTY of %SUBCLASS%:
+# Run RemoveObjectProperty.rq with %CLASS% = %SUPERCLASS% .
+
+# Remove ObjectProperties where %OBJECTPROPERTY% has as range %SUBCLASS%.
+# For each OBJECTPROPERTY:
+
+DELETE WHERE {   
+    ?parent_triplesMap rr:predicateObjectMap <%OBJECTPROPERTY%>.
+    ?parent_pom rr:objectMap ?parent_object.
+    ?parent_object rr:parentTriplesMap ?triplesmap.
+    ?parent_object rr:joinConditions ?parent_joinConditions .
+    ?parent_joinConditions ?parent_conditions ?parent_conditions_values . 
+}
