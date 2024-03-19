@@ -3,7 +3,7 @@ OCP2KG is a tool for propagating ontology changes to declarative mappings. The t
 Mappings in Construction of Knowledge Graphs". 
 
 # Architecture
-![OCP2KG Architecture](figures/architecture.png?raw=true "OCP2KG Architecture")
+![OCP2KG Architecture](figures/arqui.png?raw=true "OCP2KG Architecture")
 
 # USAGE
 
