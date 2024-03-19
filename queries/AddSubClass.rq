@@ -1,10 +1,59 @@
+# Adds %SUBCLASS% to the %SUPERCLASS%. This change triggers the second and third query, which add DATAPROPERTY and OBJECTPROPERTY where the domain is SUBCLASS.
+# ToDo: The URI of the TriplesMap is %SUPER_CLASS%_TM, and it would be good to change it to %SUBCLASS%_TM
+
 PREFIX rr: <http://www.w3.org/ns/r2rml#>
+
 INSERT {  
-    ?bnode rr:class <http://data.europa.eu/a4g/ontology#exampleclass0>.
-      }
-      WHERE {
-         ?triplesmap a rr:TriplesMap; 
-         rr:subjectMap ?bnode.
-        ?bnode rr:template ?template.
-        ?bnode rr:class <http://data.europa.eu/a4g/ontology#exampleclass1>.
-      }
+    ?subjectMap rr:class <%SUBCLASS%>.
+}
+WHERE {
+    ?triplesmap rr:subjectMap ?subjectMap.
+    ?subjectMap ?predicate_term ?object_term. #predicate_term can be either rr:constant, rml:reference or rr:template
+    ?object_term rr:class <%SUPERCLASS%>.
+}
+
+
+
+# Adds %DATAPROPERTIES% where their domain are %SUBCLASS%. This runs after the first query.
+# Needs to be run for each DATAPROPERTY of %SUBCLASS%
+INSERT {  
+    ?triplesmap rr:predicateObjectMap ?pom .
+    ?triplesmap rr:predicateObjectMap [
+        rr:predicate <%DATAPROPERTY%>;
+        rr:objectMap [
+            rml:reference "XXXX";
+            rr:datatype <%RANGE_DATAPROPERTY%>
+        ]
+    ].
+}
+WHERE {
+    ?triplesmap rr:subjectMap ?subjectMap .
+    ?subjectMap ?predicate_term ?object_term . #predicate_term can be either rr:constant, rml:reference or rr:template
+    ?object_term rr:class <%SUBCLASS%>, <%SUPERCLASS%> .
+}
+
+
+# Adds %OBJECTPROPERTY% where their domain are %SUBCLASS% and the RANGE is %RANGECLASS%. This runs after the first query.
+# Needs to be run for each OBJECTPROPERTY of %SUBCLASS%
+INSERT {  
+    ?triplesmap rr:predicateObjectMap [
+        rr:predicate <%OBJECTPROPERTY%>;
+        rr:objectMap [
+            rr:parentTriplesMap ?parent_tm;
+            rr:joinCondition [
+                rr:child "XXXX";
+                rr:parent "XXXX"
+            ]
+        ]
+    ].
+}
+WHERE {
+    ?triplesmap rr:subjectMap ?subjectMap .
+    ?subjectMap ?predicate_term ?object_term . #predicate_term can be either rr:constant, rml:reference or rr:template
+    ?object_term rr:class <%SUBCLASS%> .
+    ?object_term rr:class <%SUPERCLASS%> .
+
+
+    ?parent_tm rr:subjectMap ?parent_subjectMap .
+    ?parent_subjectMap rr:class <%RANGECLASS%> .
+}
