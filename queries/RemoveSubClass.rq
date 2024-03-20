@@ -6,33 +6,34 @@ DELETE {
 }
 WHERE {
     ?triplesmap rr:subjectMap ?subjectMap.
-    ?subjectMap rr:class <%SUBCLASS%>,<%SUPER_CLASS%>.
+    ?subjectMap rr:class <%SUBCLASS%>,<%SUPERCLASS%>.
 }
 
 # This triggers:
-# Remove DataProperties where %DATAPROPERTY% has as domain %SUBCLASS%
-# For each DATAPROPERTY of %SUBCLASS%:
-# Run RemoveDataProperty.rq with %CLASS% = %SUPERCLASS% .
+# Remove DataProperties where %DATAPROPERTY% has as domain %SUPERCLASS% in the triples
+# For each DATAPROPERTY of %SUPERCLASS%:
+# Run RemoveDataProperty.rq with %CLASS% = %SUBCLASS% .
 
 
-# Remove ObjectProperties where %OBJECTPROPERTY% has as domain %SUBCLASS%
-# For each OBJECTPROPERTY of %SUBCLASS%:
-# Run RemoveObjectProperty.rq with %CLASS% = %SUPERCLASS% .
+# Remove ObjectProperties where %OBJECTPROPERTY% has as domain %SUPERCLASS%
+# For each OBJECTPROPERTY of %SUPERCLASS%:
+# Run RemoveObjectProperty.rq with %CLASS% = %SUBCLASS% .
 
-# Remove ObjectProperties where %OBJECTPROPERTY% has as range %SUBCLASS%.
+# Remove ObjectProperties where %OBJECTPROPERTY% has as range %SUPERCLASS%.
+# where %TRIPLESMAP% is the ?triplesmap value from the first query
 # For each OBJECTPROPERTY:
 
 DELETE {
     ?parent_triplesMap rr:predicateObjectMap <%OBJECTPROPERTY%>.
     ?parent_pom rr:objectMap ?parent_object.
-    ?parent_object rr:parentTriplesMap ?triplesmap.
+    ?parent_object rr:parentTriplesMap <%TRIPLESMAP%>.
     ?parent_object rr:joinConditions ?parent_joinConditions .
     ?parent_joinConditions ?parent_conditions ?parent_conditions_values . 
 }
 WHERE {   
     ?parent_triplesMap rr:predicateObjectMap <%OBJECTPROPERTY%>.
     ?parent_pom rr:objectMap ?parent_object.
-    ?parent_object rr:parentTriplesMap ?triplesmap.
+    ?parent_object rr:parentTriplesMap <%TRIPLESMAP%>.
     OPTIONAL {
         ?parent_object rr:joinConditions ?parent_joinConditions .
         ?parent_joinConditions ?parent_conditions ?parent_conditions_values .
