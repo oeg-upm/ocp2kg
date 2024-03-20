@@ -55,7 +55,7 @@ def RemoveClass(change):
  #The assumption is that the appearances of the term are deleted in all classes, they could be replaced by superclass and that's why is added to review file.
  if (answer==True): 
    qaux = """
-   PREFIX rr: <http://www.w3.org/ns/r2rml#>
+    PREFIX rr: <http://www.w3.org/ns/r2rml#>
    PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
 
    CONSTRUCT { 
@@ -68,13 +68,15 @@ def RemoveClass(change):
 
       #POM
       ?triplesmap rr:predicateObjectMap ?pom.
-      ?pom ?predicate_term ?predicate_value .
-      ?pom ?object_term ?object.
+      ?pom ?predicate_property ?predicate .
+      ?predicate ?predicate_term ?predicate_value .
+      ?pom ?object_property ?object.
       ?object ?oject_term ?object_value.
    
       #JOINS
       ?triplesmap rr:predicateObjectMap ?pom2.
-      ?pom2 ?predicate_term2 ?predicate_value2 .
+      ?pom2 ?predicate_property2 ?predicate2 .
+      ?predicate2 ?predicate_term2 ?predicate_value2 .
       ?pom2 rr:objectMap ?object2.
       ?object2 rr:parentTriplesMap ?parent_tm .
       ?object2 rr:joinCondition ?join_condition .
@@ -99,26 +101,32 @@ def RemoveClass(change):
       #POM
       OPTIONAL{
          ?triplesmap rr:predicateObjectMap ?pom.
-         ?pom ?predicate_term ?predicate_value .
+         ?pom rr:predicate|rr:predicateMap ?predicate .
+         OPTIONAL {?predicate ?predicate_term ?predicate_value .}
          ?pom rr:objectMap|rr:object ?object.
-         ?object ?oject_term ?object_value.
+         OPTIONAL {?object ?oject_term ?object_value.}
       }
       #REFOBJECTMAP
       OPTIONAL{
          ?triplesmap rr:predicateObjectMap ?pom2.
-         ?pom2 ?predicate_term2 ?predicate_value2 .
+         ?pom2 rr:predicate|rr:predicateMap ?predicate2 .
+         OPTIONAL { ?predicate2 ?predicate_term2 ?predicate_value2 .}
          ?pom2 rr:objectMap ?object2.
          ?object2 rr:parentTriplesMap ?parent_tm .
-         ?object2 rr:joinCondition ?join_condition .
-         ?join_condition ?conditions ?condition_values .
+         OPTIONAL {
+            ?object2 rr:joinCondition ?join_condition .
+            ?join_condition ?conditions ?condition_values .
+         }
       }
       #DELETION OF JOINS
       OPTIONAL{
          ?parent_triplesMap rr:predicateObjectMap ?parent_pom.
          ?parent_pom rr:objectMap ?parent_object.
          ?parent_object rr:parentTriplesMap ?triplesmap.
-         ?parent_object rr:joinConditions ?parent_joinConditions .
-         ?parent_joinConditions ?parent_conditions ?parent_conditions_values .
+         OPTIONAL {
+            ?parent_object rr:joinConditions ?parent_joinConditions .
+            ?parent_joinConditions ?parent_conditions ?parent_conditions_values .
+         }
       }
    }     """
    triples_to_be_checked = output_mappings.query(qaux)
@@ -139,13 +147,15 @@ def RemoveClass(change):
 
       #POM
       ?triplesmap rr:predicateObjectMap ?pom.
-      ?pom ?predicate_term ?predicate_value .
-      ?pom ?object_term ?object.
+      ?pom ?predicate_property ?predicate .
+      ?predicate ?predicate_term ?predicate_value .
+      ?pom ?object_property ?object.
       ?object ?oject_term ?object_value.
    
       #JOINS
       ?triplesmap rr:predicateObjectMap ?pom2.
-      ?pom2 ?predicate_term2 ?predicate_value2 .
+      ?pom2 ?predicate_property2 ?predicate2 .
+      ?predicate2 ?predicate_term2 ?predicate_value2 .
       ?pom2 rr:objectMap ?object2.
       ?object2 rr:parentTriplesMap ?parent_tm .
       ?object2 rr:joinCondition ?join_condition .
@@ -170,29 +180,35 @@ def RemoveClass(change):
       #POM
       OPTIONAL{
          ?triplesmap rr:predicateObjectMap ?pom.
-         ?pom ?predicate_term ?predicate_value .
+         ?pom rr:predicate|rr:predicateMap ?predicate .
+         OPTIONAL {?predicate ?predicate_term ?predicate_value .}
          ?pom rr:objectMap|rr:object ?object.
-         ?object ?oject_term ?object_value.
+         OPTIONAL {?object ?oject_term ?object_value.}
       }
       #REFOBJECTMAP
       OPTIONAL{
          ?triplesmap rr:predicateObjectMap ?pom2.
-         ?pom2 ?predicate_term2 ?predicate_value2 .
+         ?pom2 rr:predicate|rr:predicateMap ?predicate2 .
+         OPTIONAL { ?predicate2 ?predicate_term2 ?predicate_value2 .}
          ?pom2 rr:objectMap ?object2.
          ?object2 rr:parentTriplesMap ?parent_tm .
-         ?object2 rr:joinCondition ?join_condition .
-         ?join_condition ?conditions ?condition_values .
+         OPTIONAL {
+            ?object2 rr:joinCondition ?join_condition .
+            ?join_condition ?conditions ?condition_values .
+         }
       }
       #DELETION OF JOINS
       OPTIONAL{
          ?parent_triplesMap rr:predicateObjectMap ?parent_pom.
          ?parent_pom rr:objectMap ?parent_object.
          ?parent_object rr:parentTriplesMap ?triplesmap.
-         ?parent_object rr:joinConditions ?parent_joinConditions .
-         ?parent_joinConditions ?parent_conditions ?parent_conditions_values .
+         OPTIONAL {
+            ?parent_object rr:joinConditions ?parent_joinConditions .
+            ?parent_joinConditions ?parent_conditions ?parent_conditions_values .
+         }
       }
    }
-      """
+         """
  output_mappings.update(q1)
  
   
@@ -209,8 +225,7 @@ def AddSubClass(change):
  for r in change_data.query(q):
    child = r["child"]
    parent = r["parent"]   
-# Adds %SUBCLASS% to the %SUPERCLASS%. This change triggers the second and third query, which add DATAPROPERTY and OBJECTPROPERTY where the domain is SUBCLASS.
-# ToDo: The URI of the TriplesMap is %SUPER_CLASS%_TM, and it would be good to change it to %SUBCLASS%_TM
+# Adds %SUPERCLASS% to the %SUBCLASS%. This change triggers the second and third query, which add DATAPROPERTY and OBJECTPROPERTY where the domain is SUPERCLASS.
    q1 = """
    PREFIX rr: <http://www.w3.org/ns/r2rml#>
 
@@ -219,8 +234,7 @@ def AddSubClass(change):
    }
    WHERE {
       ?triplesmap rr:subjectMap ?subjectMap.
-      ?subjectMap """+{R2RML_TEMPLATE}|{R2RML_CONSTANT}|{RML_REFERENCE}+""" ?object_term. #predicate_term can be either rr:constant, rml:reference or rr:template
-      ?object_term rr:class <"""+child+""">.
+      ?subjectMap rr:class <"""+child+""">.
    }
    """
    output_mappings.update(q1)
@@ -235,24 +249,23 @@ def AddSubClass(change):
  for r in ontology.query(q2):
    dataprop = r["dataproperty"]
    range = r["range"]   
-   # Adds %DATAPROPERTIES% where their domain are %SUBCLASS%. This runs after the first query.
+   # Adds %DATAPROPERTIES% where their domain are %SUPERCLASS%. This runs after the first query.
    # Needs to be run for each DATAPROPERTY of %SUBCLASS%
    q3 = """
-         INSERT {  
-            ?triplesmap rr:predicateObjectMap ?pom .
-            ?triplesmap rr:predicateObjectMap [
-               rr:predicate <"""+dataprop+""">;
-               rr:objectMap [
-                     rml:reference "XXXX";
-                     rr:datatype <"""+range+""">
-               ]
-            ].
-         }
-         WHERE {
-            ?triplesmap rr:subjectMap ?subjectMap .
-            ?subjectMap """+{R2RML_TEMPLATE}|{R2RML_CONSTANT}|{RML_REFERENCE}+""" ?object_term . #predicate_term can be either rr:constant, rml:reference or rr:template
-            ?object_term rr:class <"""+parent+""">, <"""+child+"""> .
-         }"""
+   INSERT {  
+    ?triplesmap rr:predicateObjectMap [
+        rr:predicate <"""+dataprop+""">;
+        rr:objectMap [
+            rml:reference "XXXX";
+            rr:datatype <"""+range+""">
+        ]
+    ].
+   }
+   WHERE {
+      ?triplesmap rr:subjectMap ?subjectMap .
+      ?subjectMap rr:class <"""+child+""">, <"""+parent+"""> .
+   }
+   """
    output_mappings.update(q3)
  q4 = """
       SELECT ?objectproperty ?range
@@ -263,29 +276,26 @@ def AddSubClass(change):
       }    
       """
  for r in ontology.query(q4):
-   dataprop = r["objectproperty"]
+   objprop = r["objectproperty"]
    range = r["range"]  
-   # Adds %OBJECTPROPERTY% where their domain are %SUBCLASS% and the RANGE is %RANGECLASS%. This runs after the first query.
-   # Needs to be run for each OBJECTPROPERTY of %SUBCLASS%   
+   # Adds %OBJECTPROPERTY% where their domain are %SUPERCLASS% and the RANGE is %RANGECLASS%. This runs after the first query.
+   # Needs to be run for each OBJECTPROPERTY of %SUPERCLASS%   
    q5 = """
       INSERT {  
-      ?triplesmap rr:predicateObjectMap [
-         rr:predicate <"""+dataprop+""">;
-         rr:objectMap [
-               rr:parentTriplesMap ?parent_tm;
-               rr:joinCondition [
-                  rr:child "XXXX";
-                  rr:parent "XXXX"
-               ]
-         ]
-      ].
+         ?triplesmap rr:predicateObjectMap [
+            rr:predicate <"""+objprop+""">;
+            rr:objectMap [
+                  rr:parentTriplesMap ?parent_tm;
+                  rr:joinCondition [
+                     rr:child "XXXX";
+                     rr:parent "XXXX"
+                  ]
+            ]
+         ].
       }
       WHERE {
          ?triplesmap rr:subjectMap ?subjectMap .
-         ?subjectMap """+{R2RML_TEMPLATE}|{R2RML_CONSTANT}|{RML_REFERENCE}+""" ?object_term . #predicate_term can be either rr:constant, rml:reference or rr:template
-         ?object_term rr:class <"""+parent+"""> .
-         ?object_term rr:class <"""+child+"""> .
-
+         ?subjectMap rr:class <"""+child+""">, <"""+parent+"""> .
 
          ?parent_tm rr:subjectMap ?parent_subjectMap .
          ?parent_subjectMap rr:class <"""+range+"""> .
@@ -308,22 +318,44 @@ def RemoveSubClass(change):
    parent = r["parent"]   
    child = r["child"]
  q1 = """
-   DELETE {  
-    ?bnode rr:class <"""+parent+""">.
-    ?triplesmap rr:predicateObjectMap ?bnodenuevo.
-    ?bnodepomchild ?s ?p.
-	}
+      PREFIX rr: <http://www.w3.org/ns/r2rml#>
+
+      DELETE {   
+         ?subjectMap rr:class <"""+parent+""">.
+      }
       WHERE {
-        ?triplesmap a rr:TriplesMap; 
-        rr:subjectMap ?bnode.
-        ?bnode rr:class <"""+child+""">.
-        ?bnodepomchild ?s ?p.
-    	#POM 
-      ?triplesmapparent a rr:TriplesMap;
-    	rr:subjectMap ?bnodesub;
-    	rr:predicateObjectMap ?bnodepom.
-    	?bnodesub rr:class <"""+parent+""">.
-    	?bnodepom ?s ?p. 
+         ?triplesmap rr:subjectMap ?subjectMap.
+         ?subjectMap rr:class <"""+parent+""">, <"""+child+""">.
+      }
+
+      # This triggers:
+      # Remove DataProperties where %DATAPROPERTY% has as domain %SUBCLASS%
+      # For each DATAPROPERTY of %SUBCLASS%:
+      # Run RemoveDataProperty.rq with %CLASS% = %SUPERCLASS% .
+
+
+      # Remove ObjectProperties where %OBJECTPROPERTY% has as domain %SUBCLASS%
+      # For each OBJECTPROPERTY of %SUBCLASS%:
+      # Run RemoveObjectProperty.rq with %CLASS% = %SUPERCLASS% .
+
+      # Remove ObjectProperties where %OBJECTPROPERTY% has as range %SUBCLASS%.
+      # For each OBJECTPROPERTY:
+
+      DELETE {
+         ?parent_triplesMap rr:predicateObjectMap <%OBJECTPROPERTY%>.
+         ?parent_pom rr:objectMap ?parent_object.
+         ?parent_object rr:parentTriplesMap ?triplesmap.
+         ?parent_object rr:joinConditions ?parent_joinConditions .
+         ?parent_joinConditions ?parent_conditions ?parent_conditions_values . 
+      }
+      WHERE {   
+         ?parent_triplesMap rr:predicateObjectMap <%OBJECTPROPERTY%>.
+         ?parent_pom rr:objectMap ?parent_object.
+         ?parent_object rr:parentTriplesMap ?triplesmap.
+         OPTIONAL {
+            ?parent_object rr:joinConditions ?parent_joinConditions .
+            ?parent_joinConditions ?parent_conditions ?parent_conditions_values .
+         } 
       }
    """
  output_mappings.update(q1)
@@ -462,7 +494,7 @@ def RemoveDataProperty(change):
       ?pom rr:predicate <"""+predicate+"""> . #if comes from the ontology, it's going to be always constant
 
       ?pom """+{R2RML_OBJECT}|{R2RML_SHORTCUT_OBJECT}+""" ?objectMap. #either rr:objectMap or rr:object
-      ?objectMap ?predicate_term ?objectValue . #removes everything under objectMap (including language, datatype or termType)
+      ?objectMap ?object_term ?objectValue . #removes everything under objectMap (including language, datatype or termType)
    }
    WHERE {
       ?triplesmap  rr:subjectMap ?subjectMap.
@@ -472,7 +504,7 @@ def RemoveDataProperty(change):
          ?pom rr:predicate <"""+predicate+"""> . #if comes from the ontology, it's going to be always constant
 
       ?pom rr:objectMap|rr:object ?objectMap.
-      ?objectMap ?predicate_term ?objectValue .
+      OPTIONAL { ?objectMap ?object_term ?objectValue }.
          
    }
    """

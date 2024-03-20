@@ -2,11 +2,11 @@
 PREFIX rr: <http://www.w3.org/ns/r2rml#>
 
 DELETE {   
-    ?subjectMap rr:class <%SUBCLASS%>.
+    ?subjectMap rr:class <%SUPERCLASS%>.
 }
 WHERE {
     ?triplesmap rr:subjectMap ?subjectMap.
-    ?subjectMap rr:class <%SUPERCLASS%>.
+    ?subjectMap rr:class <%SUBCLASS%>,<%SUPER_CLASS%>.
 }
 
 # This triggers:
