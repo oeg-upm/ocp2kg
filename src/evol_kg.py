@@ -327,38 +327,101 @@ def RemoveSubClass(change):
          ?triplesmap rr:subjectMap ?subjectMap.
          ?subjectMap rr:class <"""+parent+""">, <"""+child+""">.
       }
-
-      # This triggers:
-      # Remove DataProperties where %DATAPROPERTY% has as domain %SUBCLASS%
-      # For each DATAPROPERTY of %SUBCLASS%:
-      # Run RemoveDataProperty.rq with %CLASS% = %SUPERCLASS% .
-
-
-      # Remove ObjectProperties where %OBJECTPROPERTY% has as domain %SUBCLASS%
-      # For each OBJECTPROPERTY of %SUBCLASS%:
-      # Run RemoveObjectProperty.rq with %CLASS% = %SUPERCLASS% .
-
-      # Remove ObjectProperties where %OBJECTPROPERTY% has as range %SUBCLASS%.
-      # For each OBJECTPROPERTY:
-
-      DELETE {
-         ?parent_triplesMap rr:predicateObjectMap <%OBJECTPROPERTY%>.
-         ?parent_pom rr:objectMap ?parent_object.
-         ?parent_object rr:parentTriplesMap ?triplesmap.
-         ?parent_object rr:joinConditions ?parent_joinConditions .
-         ?parent_joinConditions ?parent_conditions ?parent_conditions_values . 
-      }
-      WHERE {   
-         ?parent_triplesMap rr:predicateObjectMap <%OBJECTPROPERTY%>.
-         ?parent_pom rr:objectMap ?parent_object.
-         ?parent_object rr:parentTriplesMap ?triplesmap.
-         OPTIONAL {
-            ?parent_object rr:joinConditions ?parent_joinConditions .
-            ?parent_joinConditions ?parent_conditions ?parent_conditions_values .
-         } 
-      }
-   """
+   """""
  output_mappings.update(q1)
+ # Query to obtain those Data Properties from the father that the child class has inherited.
+ q2 = """
+   SELECT ?dataproperty 
+   WHERE {
+      ?dataproperty  a owl:DatatypeProperty;
+                     rdfs:domain <"""+parent+""">, <"""+child+""">.
+   } 
+   """  
+ for r in ontology.query(q2):
+   dataprop = r["dataproperty"]
+   # This triggers:
+   # Remove DataProperties where %DATAPROPERTY% has as domain %SUBCLASS%
+   # For each DATAPROPERTY of %SUBCLASS%:
+   # Run RemoveDataProperty.rq with %CLASS% = %SUPERCLASS% .
+   q3 = """
+   DELETE { 
+      ?triplesmap rr:predicateObjectMap ?pom.
+      ?pom rr:predicate <"""+dataprop+"""> . #if comes from the ontology, it's going to be always constant
+
+      ?pom rr:objectMap|rr:object ?objectMap. #either rr:objectMap or rr:object
+      ?objectMap ?object_term ?objectValue . #removes everything under objectMap (including language, datatype or termType)
+   }
+   WHERE {
+      ?triplesmap  rr:subjectMap ?subjectMap.
+      ?subjectMap rr:class <"""+child+""">.
+
+      ?triplesmap rr:predicateObjectMap ?pom.
+         ?pom rr:predicate <"""+dataprop+"""> . #if comes from the ontology, it's going to be always constant
+
+      ?pom rr:objectMap|rr:object ?objectMap.
+      OPTIONAL { ?objectMap ?object_term ?objectValue }.
+         
+   }
+   """
+   output_mappings.update(q3)
+# Remove ObjectProperties where %OBJECTPROPERTY% has as domain %SUBCLASS%
+# For each OBJECTPROPERTY of %SUBCLASS%:
+# Run RemoveObjectProperty.rq with %CLASS% = %SUPERCLASS% .
+ q4= """
+   SELECT ?objectproperty 
+   WHERE {
+      ?objectproperty  a owl:ObjectProperty;
+                     rdfs:domain <"""+parent+""">, <"""+child+""">.
+   } 
+   """  
+ for r in ontology.query(q4):
+   objprop = r["objectproperty"]
+   q5 = """
+   DELETE { 
+      ?triplesmap rr:predicateObjectMap ?pom.
+      ?pom rr:predicate <"""+objprop+"""> . #if comes from the ontology, it's going to be always constant
+
+      ?pom rr:objectMap ?objectMap.
+      ?objectMap rr:parentTriplesMap ?parent_tm .
+      ?objectMap rr:joinCondition ?join_condition .
+      ?join_condition ?conditions ?condition_values .
+   }
+   WHERE {
+      ?triplesmap  rr:subjectMap ?subjectMap.
+      ?subjectMap rr:class <"""+child+""">.
+
+      ?triplesmap rr:predicateObjectMap ?pom.
+      ?pom rr:predicate <"""+objprop+"""> . #if comes from the ontology, it's going to be always constant
+
+      ?pom rr:objectMap ?objectMap.
+      ?objectMap rr:parentTriplesMap ?parent_tm .
+      ?objectMap rr:joinCondition ?join_condition .
+      ?join_condition ?conditions ?condition_values .
+   }
+   """
+   output_mappings.update(q5)
+
+   # Remove ObjectProperties where %OBJECTPROPERTY% has as range %SUBCLASS%.
+   # For each OBJECTPROPERTY:
+   q6= """
+            DELETE {
+               ?parent_triplesMap rr:predicateObjectMap <%OBJECTPROPERTY%>.
+               ?parent_pom rr:objectMap ?parent_object.
+               ?parent_object rr:parentTriplesMap ?triplesmap.
+               ?parent_object rr:joinConditions ?parent_joinConditions .
+               ?parent_joinConditions ?parent_conditions ?parent_conditions_values . 
+            }
+            WHERE {   
+               ?parent_triplesMap rr:predicateObjectMap <%OBJECTPROPERTY%>.
+               ?parent_pom rr:objectMap ?parent_object.
+               ?parent_object rr:parentTriplesMap ?triplesmap.
+               OPTIONAL {
+                  ?parent_object rr:joinConditions ?parent_joinConditions .
+                  ?parent_joinConditions ?parent_conditions ?parent_conditions_values .
+               } 
+            }
+         """
+   output_mappings.update(q6)
 
 #---------------------------------------------------------------------------------------------------------------
 def AddObjectProperty(change):
