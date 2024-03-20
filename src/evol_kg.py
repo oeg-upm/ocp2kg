@@ -528,7 +528,7 @@ def AddDataProperty(change):
       ?triplesmap rr:predicateObjectMap [
          rr:predicate <"""+predicate+""">;
          rr:objectMap [
-            rr:reference "XXXX";
+            rml:reference "XXXX";
             rr:datatype <"""+range+""">
          ]
       ].
