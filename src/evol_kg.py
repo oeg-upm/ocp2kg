@@ -20,7 +20,7 @@ def AddClass(change):
     q1 = """
    INSERT DATA { 
       
-      <"""+name+"""> a rr:TriplesMap;
+      <"""+name+"""> a "rr:TriplesMap";
       rml:logicalSource [
          rml:source "XXXX";
          rml:referenceFormulation "XXXX"
