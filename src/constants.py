@@ -93,7 +93,6 @@ R2RML_LOGICAL_TABLE = 'rr:logicalTable'
 R2RML_TABLE_NAME = 'rr:tableName'
 R2RML_COLUMN = 'rr:column'
 
-
 ##############################################################################
 #############################   D2RQ CONSTANTS  ###########################
 ##############################################################################
@@ -103,127 +102,6 @@ D2RQ_DRIVER = 'd2rq:jdbcDriver'
 D2RQ_USER = 'd2rq:username'
 D2RQ_PASS = 'd2rq:password'
 
-
-##############################################################################
-#############################   YARRRML CONSTANTS  ###########################
-##############################################################################
-
-YARRRML_PREFIXES = 'prefixes'
-YARRRML_SOURCES = 'sources'
-YARRRML_SOURCE = 'source'
-YARRRML_TABLE = 'table'
-YARRRML_ACCESS = 'access'
-YARRRML_QUERY = 'query'
-YARRRML_REFERENCE_FORMULATION = 'referenceFormulation'
-YARRRML_QUERY_FORMULATION = 'queryFormulation'
-YARRRML_ITERATOR = 'iterator'
-YARRRML_CREDENTIALS = 'credentials'
-YARRRML_TYPE = 'type'
-YARRRML_USERNAME = 'username'
-YARRRML_PASSWORD = 'password'
-
-YARRRML_MAPPINGS = 'mappings' # used for mappings in conditions and mappings main key
-YARRRML_MAPPING = 'mapping'
-YARRRRL_MAPPINGS_SHORTCUT = 'm'
-
-YARRRML_SUBJECTS_SHORTCUT = 's'
-YARRRML_SUBJECT = 'subject'
-YARRRML_SUBJECTS = 'subjects'
-
-YARRRML_GRAPHS = 'graphs'
-YARRRML_GRAPH = 'graph'
-YARRRML_GRAPH_SHORTCUT = 'g'
-
-YARRRML_PREDICATEOBJECT = 'predicateobjects'
-YARRRML_PREDICATEOBJECT_SHORTCUT = 'po'
-
-YARRRML_PREDICATES = 'predicates'
-YARRRML_PREDICATE = 'predicate'
-YARRRML_PREDICATES_SHORTCUT = 'p'
-YARRRML_OBJECTS = 'objects'
-YARRRML_OBJECT = 'objects'
-YARRRML_OBJECT_SHORTCUT = 'o'
-YARRRML_VALUE = 'value'
-YARRRML_VALUE_SHORTCUT = 'v'
-YARRRML_DATATYPE = 'datatype'
-YARRRML_LANGUAGE = 'language'
-
-YARRRML_CONDITION = 'condition'
-YARRRML_EQUAL = 'equal'
-YARRRML_JOIN = 'join'
-YARRRML_PARAMETERS = 'parameters' #used for conditions and functions
-YARRRML_PARAMETERS_SHORTCUT = 'pms'
-
-YARRRML_IRI = '~iri'
-YARRRML_LANG = '~lang'
-YARRRML_BLANK = 'blank'
-
-YARRRML_QUOTED = 'quoted'
-YARRRML_NON_ASSERTED = 'quotedNonAsserted'
-
-YARRRML_TARGETS = 'targets'
-YARRRML_SERIALIZATION = 'serialization'
-YARRRML_COMPRESSION = 'compression'
-
-YARRRML_FUNCTION = 'function'
-YARRRML_FUNCTION_SHORTCUT_A = 'fn'
-YARRRML_FUNCTION_SHORTCUT_B = 'f'
-
-YARRRML_PARAMETER = 'parameter'
-YARRRML_PARAMETER_SHORTCUT = 'p'
-
-YARRRML_MAPPING_KEYS = [YARRRML_MAPPINGS, YARRRML_MAPPING, YARRRRL_MAPPINGS_SHORTCUT]
-YARRRML_SUBJECT_KEYS = [YARRRML_SUBJECTS, YARRRML_SUBJECT, YARRRML_SUBJECTS_SHORTCUT]
-YARRRML_POM_KEYS = [YARRRML_PREDICATEOBJECT, YARRRML_PREDICATEOBJECT_SHORTCUT]
-YARRRML_GRAPH_KEYS = [YARRRML_GRAPHS, YARRRML_GRAPH, YARRRML_GRAPH_SHORTCUT]
-YARRRML_PREDICATE_KEYS = [YARRRML_PREDICATES, YARRRML_PREDICATE, YARRRML_PREDICATES_SHORTCUT]
-YARRRML_OBJECT_KEYS = [YARRRML_OBJECTS, YARRRML_OBJECT, YARRRML_OBJECT_SHORTCUT]
-YARRRML_FUNCTION_KEYS = [YARRRML_FUNCTION, YARRRML_FUNCTION_SHORTCUT_A, YARRRML_FUNCTION_SHORTCUT_B]
-YARRRML_PARAMETERS_KEYS = [YARRRML_PARAMETERS, YARRRML_PARAMETERS_SHORTCUT]
-YARRRML_PARAMETER_KEYS = [YARRRML_PARAMETER, YARRRML_PARAMETER_SHORTCUT]
-YARRRML_VALUE_KEYS = [YARRRML_VALUE, YARRRML_VALUE_SHORTCUT]
-
-
-YARRRML_OUTPUT_FORMAT = {
-    'jsonld':'JSON-LD',
-    'n3':'N3',
-    'ntriples':'N-Triples',
-    'nquads':'N-Quads',
-    'ldpatch':'LD_Patch',
-    'microdata':'microdata',
-    'owlxml':'OWL_XML',
-    'owlfunctional':'OWL_Functional',
-    'oxmlmanchester':'OWL_Manchester',
-    'powder':'POWDER',
-    'powder-s':'POWDER-S',
-    'prov-n':'PROV-N',
-    'prov-xml':'PROV-XML',
-    'rdfa':'RDFa',
-    'rdfjson':'RDF_JSON',
-    'rdfxml':'RDF_XML',
-    'rifxml':'RIF_XML',
-    'sparqlxml':'SPARQL_Results_XML',
-    'sparqljson':'SPARQL_Results_JSON',
-    'sparqlcsv':'SPARQL_Results_CSV',
-    'sparqltsv':'SPARQL_Results_TSV',
-    'turtle':'Turtle',
-    'trig':'TriG',
-}
-
-YARRRML_REFERENCE_FORMULATIONS = {
-    'csv': 'CSV',
-    'json': 'JSONPath',
-    'xpath': 'XPath',
-    'jsonpath': 'JSONPath',
-    "shp": "SHP",
-    "xlsx": "CSV"
-}
-
-YARRRML_DATABASES_DRIVER = {
-    'mysql': 'com.mysql.jdbc.Driver',
-    'postgresql': 'org.postgresql.Driver',
-    'sqlserver': 'com.microsoft.sqlserver.jdbc.SQLServerDriver'
-}
 
 logger = logging.getLogger(__name__)
 coloredlogs.install(level='DEBUG', fmt='%(asctime)s,%(msecs)03d | %(levelname)s: %(message)s')

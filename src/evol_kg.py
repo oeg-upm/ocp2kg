@@ -1,5 +1,8 @@
 from rdflib import Graph, Literal, RDF, URIRef
 import sys
+import yatter
+from ruamel.yaml import YAML
+
 #from constants import *
 #Here we have the list of the different change operations that are called from the main method
 # When adding something to the mappings the tool adds suggestions following the notation XXXX, when deleting ontological terms we will
@@ -431,7 +434,7 @@ def AddObjectProperty(change):
     WHERE {
         <"""+change+"""> omv:domainAddObjectProperty ?domain.
         <"""+change+"""> omv:propertyAddObjectProperty ?property.
-         <"""+change+"""> omv:rangeAddObjectProperty ?range.
+        <"""+change+"""> omv:rangeAddObjectProperty ?range.
 
     }
     """
@@ -619,3 +622,10 @@ if __name__ == "__main__":
         print("RemoveDataProperty")
         RemoveDataProperty(r["change"])
     output_mappings.serialize(destination="updated_mappings.ttl")
+    yarrrml_content = yatter.inverse_translation(output_mappings)
+    with open("updated_mappings.yaml", "wb") as f:
+        yaml = YAML()
+        yaml.default_flow_style = False
+        yaml.dump(yarrrml_content, f)
+
+

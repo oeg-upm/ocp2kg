@@ -1,0 +1,2254 @@
+prefixes:
+  brick: https://brickschema.org/schema/Brick#
+  csvw: http://www.w3.org/ns/csvw#
+  dc: http://purl.org/dc/elements/1.1/
+  dcat: http://www.w3.org/ns/dcat#
+  dcmitype: http://purl.org/dc/dcmitype/
+  dcam: http://purl.org/dc/dcam/
+  doap: http://usefulinc.com/ns/doap#
+  foaf: http://xmlns.com/foaf/0.1/
+  geo: http://www.opengis.net/ont/geosparql#
+  odrl: http://www.w3.org/ns/odrl/2/
+  org: http://www.w3.org/ns/org#
+  prof: http://www.w3.org/ns/dx/prof/
+  prov: http://www.w3.org/ns/prov#
+  qb: http://purl.org/linked-data/cube#
+  schema: https://schema.org/
+  sh: http://www.w3.org/ns/shacl#
+  skos: http://www.w3.org/2004/02/skos/core#
+  sosa: http://www.w3.org/ns/sosa/
+  ssn: http://www.w3.org/ns/ssn/
+  time: http://www.w3.org/2006/time#
+  vann: http://purl.org/vocab/vann/
+  void: http://rdfs.org/ns/void#
+  wgs: https://www.w3.org/2003/01/geo/wgs84_pos#
+  owl: http://www.w3.org/2002/07/owl#
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  xsd: http://www.w3.org/2001/XMLSchema#
+  xml: http://www.w3.org/XML/1998/namespace
+  rr: http://www.w3.org/ns/r2rml#
+  rml: http://semweb.mmlab.be/ns/rml#
+  ql: http://semweb.mmlab.be/ns/ql#
+  locn: http://www.w3.org/ns/locn#
+  dct: http://purl.org/dc/terms/
+  tedm: http://data.europa.eu/a4g/mapping/sf-rml/
+  epo: http://data.europa.eu/a4g/ontology#
+  epd: http://data.europa.eu/a4g/resource/
+  cccev: http://data.europa.eu/m8g/
+  cc: http://creativecommons.org/ns#
+mappings:
+  Notice:
+    sources:
+    - ['%1$s~xpath', /%2$s]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-'))_Notice
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Notice]
+    - [http://purl.org/dc/terms/publisher, $(%3$s)]
+    - [http://www.w3.org/1999/02/22-rdf-syntax-ns#type, $(if(exists(AWARD_CONTRACT)
+        or exists(RESULTS)) then 'http://data.europa.eu/a4g/ontology#ResultNotice'
+        else if(exists(PROCEDURE/DATETIME_RECEIPT_TENDERS) or exists(CONTRACTING_BODY/URL_PARTICIPATION))
+        then 'http://data.europa.eu/a4g/ontology#CompetitionNotice' else if(@TIME_LIMITS='PRI_REDUCING_TIME_LIMITS')
+        then 'http://data.europa.eu/a4g/ontology#PlanningNotice' else if(exists(MODIFICATIONS_CONTRACT))
+        then 'http://data.europa.eu/a4g/ontology#ContractModificationNotice' else
+        null )]
+    - [http://data.europa.eu/a4g/ontology#hasPublicationDate, $(ADDITIONAL_CORE_DATA/DATE_FIRST_PUBLICATION),
+      http://www.w3.org/2001/XMLSchema#date]
+    - [http://data.europa.eu/a4g/ontology#hasDispatchDate, $(COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE),
+      http://www.w3.org/2001/XMLSchema#date]
+    - p: http://data.europa.eu/a4g/ontology#announcesRole
+      o:
+        mapping: Buyer
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(if(name()='KD_7_2_Z2' or name()='KD_8_2_Z3') then 'false' else
+              'true')]
+          - [str2, $('true')]
+    - p: http://data.europa.eu/a4g/ontology#announcesRole
+      o:
+        mapping: AdditionalBuyer
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(if(name()='KD_7_2_Z2' or name()='KD_8_2_Z3') then 'false' else
+              'true')]
+          - [str2, $('true')]
+    - p: http://data.europa.eu/a4g/ontology#announcesRole
+      o:
+        mapping: Winner
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(if(name()='KD_7_2_Z2' or name()='KD_8_2_Z3') then 'false' else
+              'true')]
+          - [str2, $('true')]
+    - p: http://data.europa.eu/a4g/ontology#refersToProcedure
+      o:
+        mapping: Procedure
+    - p: http://data.europa.eu/a4g/ontology#refersToLot
+      o:
+        mapping: Lot
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(if(name()='KD_7_2_Z2' or name()='KD_8_2_Z3') then 'false' else
+              'true')]
+          - [str2, $('true')]
+    - p: http://data.europa.eu/a4g/ontology#announcesContract
+      o:
+        mapping: Contract
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(if(name()='KD_7_2_Z2' or name()='KD_8_2_Z3') then 'false' else
+              'true')]
+          - [str2, $('true')]
+    - p: http://data.europa.eu/a4g/ontology#refersToContractToBeModified
+      o:
+        mapping: Contract
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(if(name()='KD_7_2_Z2' or name()='KD_8_2_Z3') then 'true' else
+              'false')]
+          - [str2, $('true')]
+    - p: http://data.europa.eu/a4g/ontology#announcesNoticeAwardInformation
+      o:
+        mapping: NoticeAwardInformation
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  Procedure:
+    sources:
+    - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT]
+    s: http://data.europa.eu/a4g/resource/id_$(replace(REFERENCE_NUMBER, '[^a-zA-Z0-9]',
+      '-'))-$(replace(../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]',
+      '-'))_Procedure_$(generate-id(REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Procedure]
+    - p: http://data.europa.eu/a4g/ontology#isSubjectToProcedureSpecificTerm
+      o:
+        mapping: DirectAwardTerm
+    - [http://data.europa.eu/a4g/ontology#hasTitle, $(TITLE/P)]
+    - [http://data.europa.eu/a4g/ontology#hasDescription, $(SHORT_DESCR/P)]
+    - [http://data.europa.eu/a4g/ontology#hasDescription, $(if(name(..)='KD_8_1_Z3'
+        or name(..)='KD_8_2_Z2') then OBJECT_DESCR/SHORT_DESCR/P else null)]
+    - [http://data.europa.eu/a4g/ontology#hasAdditionalInformation, $(../ADDITIONAL_CORE_DATA/PROCEDURE_SHORT_DESCRIPTION/P)]
+    - p: http://data.europa.eu/a4g/ontology#hasProcurementScopeDividedIntoLot
+      o:
+        mapping: Lot
+    - p: http://data.europa.eu/a4g/ontology#hasPurpose
+      o:
+        mapping: ProcedurePurpose
+    - p: http://data.europa.eu/a4g/ontology#hasID
+      o:
+        mapping: ProcedureIdentifier
+    - p: http://data.europa.eu/a4g/ontology#foreseesContractSpecificTerm
+      o:
+        mapping: ContractTermProcedure
+    - [http://data.europa.eu/a4g/ontology#hasProcedureType, "http://publications.europa.eu/resource/authority/procurement-procedure-type/{if(exists(../PROCEDURE/PT_OPEN))
+        then 'open' else if(exists(../PROCEDURE/PT_RESTRICTED)) then 'restricted'
+        else if(exists(../PROCEDURE/PT_COMPETITIVE_NEGOTIATION)) then 'neg-w-call'
+        else if(exists(../PROCEDURE/PT_COMPETITIVE_DIALOGUE)) then 'comp-dial' else
+        if(exists(../PROCEDURE/PT_INNOVATION_PARTNERSHIP)) then 'innovation' else
+        null}"]
+    - p: http://data.europa.eu/a4g/ontology#usesTechnique
+      o:
+        mapping: DynamicPurchaseSystemTechniqueUsage
+    - p: http://data.europa.eu/a4g/ontology#usesTechnique
+      o:
+        mapping: FrameworkAgreementTechniqueUsage
+    - p: http://data.europa.eu/a4g/ontology#isSubjectToProcedureSpecificTerm
+      o:
+        mapping: AccessTerm
+    - p: http://data.europa.eu/a4g/ontology#isSubjectToProcedureSpecificTerm
+      o:
+        mapping: SubmissionTerm
+    - p: http://data.europa.eu/a4g/ontology#isSubjectToProcedureSpecificTerm
+      o:
+        mapping: FrameworkAgreementTermProcedure
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  ProcedureIdentifier:
+    sources:
+    - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER]
+    s: http://data.europa.eu/a4g/resource/id_$(replace(., '[^a-zA-Z0-9]', '-'))-$(replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-'))_ProcedureIdentifier_$(generate-id(.))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Identifier]
+    - [http://data.europa.eu/a4g/ontology#hasIdentifierValue, $(.)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  AccessTerm:
+    sources:
+    - ['%1$s~xpath', /%2$s/CONTRACTING_BODY/DOCUMENT_FULL | /%2$s/CONTRACTING_BODY/DOCUMENT_RESTRICTED]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]',
+      '-'))_AccessTerm_$(generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#AccessTerm]
+    - [http://data.europa.eu/a4g/ontology#isProcurementDocumentRestricted, "$(if(contains(name(),
+        'RESTRICTED')) then 'true' else 'false')", http://www.w3.org/2001/XMLSchema#boolean]
+    - [http://data.europa.eu/a4g/ontology#hasPublicAccessURL, $(../URL_DOCUMENT),
+      http://www.w3.org/2001/XMLSchema#anyURI]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  SubmissionTerm:
+    sources:
+    - ['%1$s~xpath', /%2$s/PROCEDURE]
+    s: $(if(exists(DATETIME_RECEIPT_TENDERS) or exists(../CONTRACTING_BODY/URL_PARTICIPATION))
+      then 'http://data.europa.eu/a4g/resource/id_' || replace(../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-') || '-' || replace(../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-') || '_SubmissionTerm_' || generate-id(../OBJECT_CONTRACT/REFERENCE_NUMBER)
+      else null)
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#SubmissionTerm]
+    - [rdf:type, http://data.europa.eu/a4g/ontology#ProcedureSpecificTerm]
+    - [http://data.europa.eu/a4g/ontology#hasReceiptDeadline, $(DATETIME_RECEIPT_TENDERS),
+      http://www.w3.org/2001/XMLSchema#dateTime]
+    - [http://data.europa.eu/a4g/ontology#hasReceiptExpressionDeadline, $(if(../@TIME_LIMITS='PRI_REDUCING_TIME_LIMITS'
+        and exists(DATETIME_RECEIPT_TENDERS)) then DATETIME_RECEIPT_TENDERS else null),
+      http://www.w3.org/2001/XMLSchema#dateTime]
+    - [http://data.europa.eu/a4g/ontology#hasSubmissionURL, $(../CONTRACTING_BODY/URL_PARTICIPATION),
+      http://www.w3.org/2001/XMLSchema#anyURI]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - [http://data.europa.eu/a4g/ontology#hasReceiptExpressionDeadline, $(N2d2f9cad4ff14e808590c304d73667ec)]
+  ContractTermProcedure:
+    sources:
+    - ['%1$s~xpath', /%2$s//TYPE_CONTRACT/@CTYPE]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(/%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-'))_ContractTermProcedure_$(generate-id(.))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#ContractTerm]
+    - [http://data.europa.eu/a4g/ontology#hasContractNatureType, 'http://publications.europa.eu/resource/authority/contract-nature/{lower-case(.)}']
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  Lot:
+    sources:
+    - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER]
+    s: http://data.europa.eu/a4g/resource/id_$(replace(., '[^a-zA-Z0-9]', '-'))-$(replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-'))_Lot_$(generate-id(.))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Lot]
+    - [http://data.europa.eu/a4g/ontology#hasTitle, $(../OBJECT_DESCR/TITLE/P)]
+    - [http://data.europa.eu/a4g/ontology#hasDescription, $(if(name(../..)='KD_7_2_Z2'
+        or name(../..)='KD_8_2_Z3') then ../OBJECT_DESCR/SHORT_DESCR/P else null)]
+    - p: http://data.europa.eu/a4g/ontology#hasPurpose
+      o:
+        mapping: LotPurpose
+    - p: http://data.europa.eu/a4g/ontology#foreseesContractSpecificTerm
+      o:
+        mapping: ContractTermLot
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(path())]
+          - [str2, $(path())]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  ContractTermLot:
+    sources:
+    - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER]
+    s: $(if(exists(../OBJECT_DESCR/NUTS/@CODE) or exists(../OBJECT_DESCR/MAIN_SITE/P)
+      or exists(../OBJECT_DESCR/DATE_START) or exists(../OBJECT_DESCR/DATE_END) or
+      exists(../OBJECT_DESCR/DURATION)) then 'http://data.europa.eu/a4g/resource/id_'
+      || replace(., '[^a-zA-Z0-9]', '-') || '-' || replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-') || '_ContractTermLot_' || generate-id(.) else null)
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#ContractTerm]
+    - p: http://data.europa.eu/a4g/ontology#definesSpecificPlaceOfPerformance
+      o:
+        mapping: ContractTermLotLocation
+    - p: http://data.europa.eu/a4g/ontology#definesContractPeriod
+      o:
+        mapping: Period
+    - p: http://data.europa.eu/a4g/ontology#definesContractDuration
+      o:
+        mapping: Duration
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  ContractTermLotLocation:
+    sources:
+    - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT/OBJECT_DESCR]
+    s: $(if(exists(NUTS) or exists(MAIN_SITE)) then 'http://data.europa.eu/a4g/resource/id_'
+      || replace(../REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-') || '-' || replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-')||  '_ContractTermLotLocation_' || generate-id(.) else null)
+    po:
+    - [rdf:type, http://purl.org/dc/terms/Location]
+    - [http://data.europa.eu/a4g/ontology#hasNutsCode, 'http://data.europa.eu/nuts/code/{NUTS/@CODE}']
+    - p: http://www.w3.org/ns/locn#address
+      o:
+        mapping: ContractTermLotLocationAddress
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  ContractTermLotLocationAddress:
+    sources:
+    - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT/OBJECT_DESCR]
+    s: $(if(exists(MAIN_SITE)) then 'http://data.europa.eu/a4g/resource/id_' || replace(../REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-') || '-' || replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-') || '_ContractTermLotLocationAddress_' || generate-id(.)
+      else null)
+    po:
+    - [rdf:type, http://www.w3.org/ns/locn#Address]
+    - [http://www.w3.org/ns/locn#fullAddress, $(MAIN_SITE/P)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  ProcedurePurpose:
+    sources:
+    - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT | /%2$s/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT]
+    s: $(if(exists(CPV_MAIN/CPV_CODE)) then 'http://data.europa.eu/a4g/resource/id_'
+      || replace(/%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-') || '-'
+      || replace(/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]',
+      '-') || '_ProcedurePurpose_' || generate-id(.) else null)
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Purpose]
+    - [http://data.europa.eu/a4g/ontology#hasMainClassification, 'http://data.europa.eu/cpv/cpv/{CPV_MAIN/CPV_CODE/@CODE}']
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  LotPurpose:
+    sources:
+    - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT/OBJECT_DESCR]
+    s: $(if(exists(CPV_ADDITIONAL/CPV_CODE)) then 'http://data.europa.eu/a4g/resource/id_'
+      || replace(../REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-') || '-' || replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-') || '_LotPurpose_' || generate-id(.) else null)
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Purpose]
+    - [http://data.europa.eu/a4g/ontology#hasAdditionalClassification, 'http://data.europa.eu/cpv/cpv/{CPV_ADDITIONAL/CPV_CODE/@CODE}']
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  Buyer:
+    sources:
+    - ['%1$s~xpath', /%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(NATIONALID, '[^a-zA-Z0-9]', '-'))_Buyer_$(generate-id(NATIONALID))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Buyer]
+    - p: http://data.europa.eu/a4g/ontology#playedBy
+      o:
+        mapping: Organisation
+    - p: http://data.europa.eu/a4g/ontology#hasContactPointInRole
+      o:
+        mapping: ContactPoint
+    - p: http://data.europa.eu/a4g/ontology#contextualisedBy
+      o:
+        mapping: Procedure
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(if(name(../..)='KD_7_2_Z2' or name(../..)='KD_8_2_Z3') then 'true'
+              else 'false')]
+          - [str2, $('true')]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  AdditionalBuyer:
+    sources:
+    - ['%1$s~xpath', /%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]',
+      '-'))_AdditionalBuyer_$(generate-id(NATIONALID))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Buyer]
+    - p: http://data.europa.eu/a4g/ontology#playedBy
+      o:
+        mapping: AdditionalOrganisation
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(NATIONALID)]
+          - [str2, $(NATIONALID)]
+    - p: http://data.europa.eu/a4g/ontology#hasContactPointInRole
+      o:
+        mapping: AdditionalContactPoint
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(NATIONALID)]
+          - [str2, $(NATIONALID)]
+    - p: http://data.europa.eu/a4g/ontology#contextualisedBy
+      o:
+        mapping: Procedure
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(if(name()='KD_7_2_Z2' or name()='KD_8_2_Z3') then 'true' else
+              'false')]
+          - [str2, $('true')]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  Organisation:
+    sources:
+    - ['%1$s~xpath', /%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(NATIONALID, '[^a-zA-Z0-9]', '-'))_Organisation_$(generate-id(NATIONALID))
+    po:
+    - [rdf:type, http://www.w3.org/ns/org#Organization]
+    - [http://data.europa.eu/a4g/ontology#hasLegalName, $(OFFICIALNAME)]
+    - p: http://data.europa.eu/a4g/ontology#hasID
+      o:
+        mapping: OrganisationIdentifier
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(NATIONALID)]
+          - [str2, $(.)]
+    - p: http://data.europa.eu/m8g/registeredAddress
+      o:
+        mapping: OrganisationAddress
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - [http://data.europa.eu/a4g/ontology#hasMainActivityDescription, $(Nddb6cef97d5749f3b4eb055d966c4389)]
+    - [http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription, $(Nafc528cbc2c3446eaaf623924077fa0d)]
+  AdditionalOrganisation:
+    sources:
+    - ['%1$s~xpath', /%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]',
+      '-'))_Organisation_$(generate-id(NATIONALID))
+    po:
+    - [rdf:type, http://www.w3.org/ns/org#Organization]
+    - [http://data.europa.eu/a4g/ontology#hasLegalName, $(OFFICIALNAME)]
+    - p: http://data.europa.eu/a4g/ontology#hasID
+      o:
+        mapping: OrganisationIdentifier
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(NATIONALID)]
+          - [str2, $(.)]
+    - p: http://data.europa.eu/m8g/registeredAddress
+      o:
+        mapping: AdditionalOrganisationAddress
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(NATIONALID)]
+          - [str2, $(NATIONALID)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - [http://data.europa.eu/a4g/ontology#hasMainActivityDescription, $(Na247ecfc18144e44a7ad2c899507146f)]
+    - [http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription, $(N7e411a3d02434684b1c701a709dda11c)]
+  OrganisationIdentifier:
+    sources:
+    - ['%1$s~xpath', /%2$s//NATIONALID]
+    s: $(if(not(.='')) then 'http://data.europa.eu/a4g/resource/id_' || replace(/%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-') || '-' || replace(/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-') || '_OrganisationIdentifier_' || generate-id(.) else null)
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Identifier]
+    - [http://data.europa.eu/a4g/ontology#hasIdentifierValue, $(.)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  BuyerOrganisationGroup:
+    sources:
+    - ['%1$s~xpath', '/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL[1]']
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]',
+      '-'))_BuyerOrganisationGroup_$(generate-id(NATIONALID))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#OrganisationGroup]
+    - p: http://data.europa.eu/a4g/ontology#hasMember
+      o:
+        mapping: Organisation
+    - p: http://data.europa.eu/a4g/ontology#hasMember
+      o:
+        mapping: AdditionalOrganisation
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  ContactPoint:
+    sources:
+    - ['%1$s~xpath', /%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY]
+    s: $(if(exists(E_MAIL) or exists(PHONE) or exists(CONTACT)) then 'http://data.europa.eu/a4g/resource/id_'
+      || replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-') || '-'
+      || replace(NATIONALID, '[^a-zA-Z0-9]', '-')||  '_ContactPoint_' || generate-id(.)
+      else null)
+    po:
+    - [rdf:type, http://data.europa.eu/m8g/ContactPoint]
+    - [http://data.europa.eu/m8g/email, $(E_MAIL)]
+    - [http://data.europa.eu/m8g/telephone, $(PHONE)]
+    - [http://data.europa.eu/a4g/ontology#hasContactName, $(CONTACT)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  AdditionalContactPoint:
+    sources:
+    - ['%1$s~xpath', /%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL]
+    s: $(if(exists(E_MAIL) or exists(PHONE) or exists(CONTACT)) then 'http://data.europa.eu/a4g/resource/id_'
+      || replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-') || '-'
+      || replace(../ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')||  '_ContactPoint_'
+      || generate-id(.) else null)
+    po:
+    - [rdf:type, http://data.europa.eu/m8g/ContactPoint]
+    - [http://data.europa.eu/m8g/email, $(E_MAIL)]
+    - [http://data.europa.eu/m8g/telephone, $(PHONE)]
+    - [http://data.europa.eu/a4g/ontology#hasContactName, $(CONTACT)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  OrganisationAddress:
+    sources:
+    - ['%1$s~xpath', /%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(NATIONALID, '[^a-zA-Z0-9]', '-'))_OrganisationAddress_$(generate-id(.))
+    po:
+    - [rdf:type, http://www.w3.org/ns/locn#Address]
+    - [http://data.europa.eu/a4g/ontology#adminUnitL2, $(if(not(exists(DOMAIN))) then
+        null else if(DOMAIN='Vorarlberg') then'http://publications.europa.eu/resource/authority/atu/AUT_BLD_VORALB'
+        else if(DOMAIN='Vienna') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_VIE'
+        else if(DOMAIN='UpperAustria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_OO'
+        else if(DOMAIN='Tyrol') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_TIROL'
+        else if(DOMAIN='Styria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_STEIER'
+        else if(DOMAIN='Salzburg') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_SZG'
+        else if(DOMAIN='LowerAustria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_NO'
+        else if(DOMAIN='Carinthia') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_KAER'
+        else if(DOMAIN='Burgenland') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_BURG'
+        else 'http://publications.europa.eu/resource/authority/atu/AT')]
+    - [http://data.europa.eu/a4g/ontology#hasCountryCode, http://publications.europa.eu/resource/authority/country/AUT]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  AdditionalOrganisationAddress:
+    sources:
+    - ['%1$s~xpath', /%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]',
+      '-'))_OrganisationAddress_$(generate-id(.))
+    po:
+    - [rdf:type, http://www.w3.org/ns/locn#Address]
+    - [http://data.europa.eu/a4g/ontology#adminUnitL2, $(if(not(exists(DOMAIN))) then
+        null else if(DOMAIN='Vorarlberg') then'http://publications.europa.eu/resource/authority/atu/AUT_BLD_VORALB'
+        else if(DOMAIN='Vienna') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_VIE'
+        else if(DOMAIN='UpperAustria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_OO'
+        else if(DOMAIN='Tyrol') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_TIROL'
+        else if(DOMAIN='Styria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_STEIER'
+        else if(DOMAIN='Salzburg') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_SZG'
+        else if(DOMAIN='LowerAustria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_NO'
+        else if(DOMAIN='Carinthia') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_KAER'
+        else if(DOMAIN='Burgenland') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_BURG'
+        else 'http://publications.europa.eu/resource/authority/atu/AT')]
+    - [http://data.europa.eu/a4g/ontology#hasCountryCode, http://publications.europa.eu/resource/authority/country/AUT]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  Duration:
+    sources:
+    - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT/OBJECT_DESCR/DURATION]
+    s: http://data.europa.eu/a4g/resource/id_$(replace(../../REFERENCE_NUMBER, '[^a-zA-Z0-9]',
+      '-'))-$(replace(../../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-'))_Duration_$(generate-id(../../REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#SpecificDuration]
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Duration]
+    - [http://www.w3.org/2006/time#numericDuration, $(.), http://www.w3.org/2001/XMLSchema#decimal]
+    - [http://www.w3.org/2006/time#unitType, $(if(./@TYPE='MONTH') then 'http://www.w3.org/2006/time#unitMonth'
+        else if(./@TYPE='DAY') then 'http://www.w3.org/2006/time#unitDay' else null
+        )]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - [http://www.w3.org/2006/time#numericDuration, $(Nf465ac23022748a39e24aa68a99fa769)]
+  Period:
+    sources:
+    - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT/OBJECT_DESCR/DATE_START | /%2$s/OBJECT_CONTRACT/OBJECT_DESCR/DATE_END]
+    s: http://data.europa.eu/a4g/resource/id_$(replace(../../REFERENCE_NUMBER, '[^a-zA-Z0-9]',
+      '-'))-$(replace(../../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-'))_Period_$(generate-id(../../REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Period]
+    - [http://data.europa.eu/a4g/ontology#hasBeginning, $(if(exists(../DATE_START))
+        then ../DATE_START else null), http://www.w3.org/2001/XMLSchema#date]
+    - [http://data.europa.eu/a4g/ontology#hasEnd, $(if(exists(../DATE_END)) then ../DATE_END
+        else null), http://www.w3.org/2001/XMLSchema#date]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  FrameworkAgreementTechniqueUsage:
+    sources:
+    - ['%1$s~xpath', /%2$s/PROCEDURE/FRAMEWORK]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', 
+      '-'))_FrameworkAgreementTechniqueUsage_$(generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#FrameworkAgreementTechniqueUsage]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  FrameworkAgreementTermProcedure:
+    sources:
+    - ['%1$s~xpath', /%2$s/PROCEDURE/FRAMEWORK]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', 
+      '-'))_FrameworkAgreementTermProcedure_$(generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#FrameworkAgreementTerm]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  DynamicPurchaseSystemTechniqueUsage:
+    sources:
+    - ['%1$s~xpath', /%2$s/PROCEDURE/DPS]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', 
+      '-'))_DynamicPurchaseSystemTechniqueUsage_$(generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#DynamicPurchaseSystemTechniqueUsage]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  DirectAwardTerm:
+    sources:
+    - ['%1$s~xpath', /%2$s/ADDITIONAL_CORE_DATA/D_JUSTIFICATION | /%2$s/PROCEDURE/PT_DIRECT]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-'))_DirectAwardTerm_$(generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#DirectAwardTerm]
+    - [http://data.europa.eu/a4g/ontology#hasJustification, $(P)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  Contract:
+    sources:
+    - ['%1$s~xpath', /%2$s/AWARD_CONTRACT/AWARDED_CONTRACT | /%2$s/RESULTS/AWARDED_PRIZE
+        | /%2$s/ADDITIONAL_CORE_DATA/OBJECT_CONTRACT_MODIFICATIONS]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-'))_Contract_$(generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Contract]
+    - [http://data.europa.eu/a4g/ontology#hasContractConclusionDate, $(DATE_CONCLUSION_CONTRACT),
+      http://www.w3.org/2001/XMLSchema#date]
+    - [http://data.europa.eu/a4g/ontology#hasTitle, $(TITLE/P)]
+    - p: http://data.europa.eu/a4g/ontology#includesLot
+      o:
+        mapping: Lot
+    - p: http://data.europa.eu/a4g/ontology#resultsFromLotAwardOutcome
+      o:
+        mapping: LotAwardOutcome
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  Winner:
+    sources:
+    - ['%1$s~xpath', /%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME
+        | /%2$s/RESULTS/AWARDED_PRIZE/WINNER/ADDRESS_WINNER/OFFICIALNAME | 
+        /%2$s/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(/%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-'))_Winner_$(generate-id(.))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Winner]
+    - p: http://data.europa.eu/a4g/ontology#contextualisedBy
+      o:
+        mapping: Procedure
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(if(name(../../../../..)='KD_7_2_Z2' or name(../../../../..)='KD_8_2_Z3')
+              then 'true' else 'false')]
+          - [str2, $('true')]
+    - p: http://data.europa.eu/a4g/ontology#playedBy
+      o:
+        mapping: ContractorOrganisation
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(.)]
+          - [str2, $(.)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  ContractorOrganisation:
+    sources:
+    - ['%1$s~xpath', /%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME
+        | /%2$s/RESULTS/AWARDED_PRIZE/WINNER/ADDRESS_WINNER/OFFICIALNAME | 
+        /%2$s/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(/%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-'))_Organisation_$(generate-id(.))
+    po:
+    - [rdf:type, http://www.w3.org/ns/org#Organization]
+    - [http://data.europa.eu/a4g/ontology#hasLegalName, $(.)]
+    - p: http://data.europa.eu/a4g/ontology#hasID
+      o:
+        mapping: OrganisationIdentifier
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(../NATIONALID)]
+          - [str2, $(.)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - [http://data.europa.eu/a4g/ontology#hasMainActivityDescription, $(N1c479b82a02941a1990adffdfd7993c9)]
+    - [http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription, $(N0ae58d2bd3164eabb614be81e504681a)]
+  LotAwardOutcome:
+    sources:
+    - ['%1$s~xpath', /%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_TOTAL | /%2$s/RESULTS/AWARDED_PRIZE/VAL_PRIZE
+        | /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VAL_TOTAL_BEFORE]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-'))_LotAwardOutcome_$(generate-id(../../../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#LotAwardOutcome]
+    - p: http://data.europa.eu/a4g/ontology#hasAwardedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+    - p: http://data.europa.eu/a4g/ontology#describesLot
+      o:
+        mapping: Lot
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractTitle, $(Ne56182e300a24a2283c90b632af00f3e)]
+    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractNumber, $(Nfad0c06bc8d54f0b93a771e52ed9f9a9)]
+  LotAwardOutcomeAwardedMonetaryValue:
+    sources:
+    - ['%1$s~xpath', /%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_TOTAL | /%2$s/RESULTS/AWARDED_PRIZE/VAL_PRIZE
+        | /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VAL_TOTAL_BEFORE]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', 
+      '-'))_LotAwardOutcomeAwardedMonetaryValue_$(generate-id(../../../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#MonetaryValue]
+    - [http://data.europa.eu/a4g/ontology#hasAmountValue, $(.), http://www.w3.org/2001/XMLSchema#decimal]
+    - [http://data.europa.eu/a4g/ontology#hasCurrency, 'http://publications.europa.eu/resource/authority/currency/{@CURRENCY}']
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  SubmissionStatisticalInformation:
+    sources:
+    - ['%1$s~xpath', /%2$s/AWARD_CONTRACT/AWARDED_CONTRACT | /%2$s/RESULTS/AWARDED_PRIZE
+        | /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS]
+    s: $(if(exists(NB_TENDERS_RECEIVED) or exists(NB_SME_TENDER) or exists(NB_PARTICIPANTS)
+      or exists(NB_PARTICIPANTS_SME) or exists(VAL_TOTAL) or exists(VAL_PRIZE) or
+      exists(VAL_TOTAL_BEFORE)) then 'http://data.europa.eu/a4g/resource/id_' || replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-') || '-' || replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-')||  '_SubmissionStatisticalInformation_' || generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER)
+      else null)
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#SubmissionStatisticalInformation]
+    - [http://data.europa.eu/a4g/ontology#hasReceivedTenders, $(NB_TENDERS_RECEIVED),
+      http://www.w3.org/2001/XMLSchema#integer]
+    - [http://data.europa.eu/a4g/ontology#hasReceivedSMETenders, $(NB_SME_TENDER),
+      http://www.w3.org/2001/XMLSchema#integer]
+    - [http://data.europa.eu/a4g/ontology#hasReceivedTenders, $(NB_PARTICIPANTS),
+      http://www.w3.org/2001/XMLSchema#integer]
+    - [http://data.europa.eu/a4g/ontology#hasReceivedSMETenders, $(NB_PARTICIPANTS_SME),
+      http://www.w3.org/2001/XMLSchema#integer]
+    - p: http://data.europa.eu/a4g/ontology#summarisesInformationForLotAwardOutcome
+      o:
+        mapping: LotAwardOutcome
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  NoticeChange:
+    sources:
+    - ['%1$s~xpath', /%2$s/ADDITIONAL_CORE_DATA/DATETIME_LAST_CHANGE]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-'))_NoticeChange_$(generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#NoticeChange]
+    - p: http://data.europa.eu/a4g/ontology#refersToPrevious
+      o:
+        mapping: Notice
+    - p: http://data.europa.eu/a4g/ontology#hasElementChange
+      o:
+        mapping: ElementChangeDescription
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  ElementChangeDescription:
+    sources:
+    - ['%1$s~xpath', /%2$s/ADDITIONAL_CORE_DATA/DATETIME_LAST_CHANGE]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', 
+      '-'))_ElementChangeDescription_$(generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#ElementChangeDescription]
+    - [http://data.europa.eu/a4g/ontology#hasProcurementDocumentChangeDate, $(.),
+      http://www.w3.org/2001/XMLSchema#dateTime]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  ProcedureModification:
+    sources:
+    - ['%1$s~xpath', /%2$s/MODIFICATIONS_CONTRACT]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-'))_ProcedureModification_$(generate-id(../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Procedure]
+    - p: http://data.europa.eu/a4g/ontology#containsModificationsOf
+      o:
+        mapping: Procedure
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  LotModification:
+    sources:
+    - ['%1$s~xpath', /%2$s/MODIFICATIONS_CONTRACT]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', '-'))_LotModification_$(generate-id(../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Lot]
+    - [http://data.europa.eu/a4g/ontology#hasDescription, $(DESCRIPTION_PROCUREMENT/SHORT_DESCR/P)]
+    - p: http://data.europa.eu/a4g/ontology#containsModificationsOf
+      o:
+        mapping: Lot
+    - p: http://data.europa.eu/a4g/ontology#hasPurpose
+      o:
+        mapping: LotPurposeModification
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  LotPurposeModification:
+    sources:
+    - ['%1$s~xpath', /%2$s/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT]
+    s: $(if(exists(CPV_ADDITIONAL/CPV_CODE)) then 'http://data.europa.eu/a4g/resource/id_'
+      || replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-') || '-'
+      || replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]',
+      '-') || '_LotPurposeModification_' || generate-id(.) else null)
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Purpose]
+    - [http://data.europa.eu/a4g/ontology#hasAdditionalClassification, 'http://data.europa.eu/cpv/cpv/{CPV_ADDITIONAL/CPV_CODE/@CODE}']
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  LotAwardOutcomeModification:
+    sources:
+    - ['%1$s~xpath', /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VAL_TOTAL_AFTER]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', 
+      '-'))_LotAwardOutcomeModification_$(generate-id(../../../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#LotAwardOutcome]
+    - p: http://data.europa.eu/a4g/ontology#hasAwardedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+    - p: http://data.europa.eu/a4g/ontology#describesLot
+      o:
+        mapping: LotModification
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractTitle, $(N358fc705a6fd489ba1658130a0f94a4d)]
+    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractNumber, $(N27224491506c42f8a53ede3afa14de28)]
+  LotAwardOutcomeAwardedMonetaryValueModification:
+    sources:
+    - ['%1$s~xpath', /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VAL_TOTAL_AFTER]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', 
+      '-'))_LotAwardOutcomeAwardedMonetaryValueModification_$(generate-id(../../../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#MonetaryValue]
+    - [http://data.europa.eu/a4g/ontology#hasAmountValue, $(.), http://www.w3.org/2001/XMLSchema#decimal]
+    - [http://data.europa.eu/a4g/ontology#hasCurrency, 'http://publications.europa.eu/resource/authority/currency/{@CURRENCY}']
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  NoticeAwardInformation:
+    sources:
+    - ['%1$s~xpath', /%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_TOTAL | /%2$s/RESULTS/AWARDED_PRIZE/VAL_PRIZE
+        | /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VAL_TOTAL_AFTER]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', 
+      '-'))_NoticeAwardInformation_$(generate-id(../../../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#NoticeAwardInformation]
+    - [http://data.europa.eu/a4g/ontology#hasTotalAwardedValue, $(.), http://www.w3.org/2001/XMLSchema#decimal]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  ContractModification:
+    sources:
+    - ['%1$s~xpath', /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', 
+      '-'))_ContractModification_$(generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#ContractModification]
+    - p: http://data.europa.eu/a4g/ontology#describesNotice
+      o:
+        mapping: Notice
+    - p: http://data.europa.eu/a4g/ontology#hasElementModification
+      o:
+        mapping: ElementModificationDescription
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  ElementModificationDescription:
+    sources:
+    - ['%1$s~xpath', /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/ADDITIONAL_NEED
+        | /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/UNFORESEEN_CIRCUMSTANCE]
+    s: 
+      http://data.europa.eu/a4g/resource/id_$(replace(../../../OBJECT_CONTRACT/REFERENCE_NUMBER,
+      '[^a-zA-Z0-9]', '-'))-$(replace(../../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+      '[^a-zA-Z0-9]', 
+      '-'))_ElementModificationDescription_$(generate-id(../../../OBJECT_CONTRACT/REFERENCE_NUMBER))
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#ElementModificationDescription]
+    - [http://data.europa.eu/a4g/ontology#hasModificationJustification, $(if(name()='ADDITIONAL_NEED')
+        then 
+        'http://publications.europa.eu/resource/authority/modification-justification/add-wss'
+        else if(name()='UNFORESEEN_CIRCUMSTANCE') then 
+        'http://publications.europa.eu/resource/authority/modification-justification/mod-cir'
+        else null)]
+    - [http://data.europa.eu/a4g/ontology#hasModificationReasonDescription, $(P)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+  epo:ConcessionEstimate:
+    sources:
+    - [XXXX~xxxx]
+    s: $(XXXX)
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#ConcessionEstimate]
+  epo:IndefiniteDuration:
+    sources:
+    - [XXXX~xxxx]
+    s: $(XXXX)
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#IndefiniteDuration]
+  epo:SpecificDuration:
+    sources:
+    - [XXXX~xxxx]
+    s: $(XXXX)
+    po:
+    - [rdf:type, http://data.europa.eu/a4g/ontology#SpecificDuration]
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Duration]
