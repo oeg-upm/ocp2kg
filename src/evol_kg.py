@@ -1,6 +1,6 @@
 from rdflib import Graph, Literal, RDF, URIRef
 import sys
-from .constants import *
+#from constants import *
 #Here we have the list of the different change operations that are called from the main method
 # When adding something to the mappings the tool adds suggestions following the notation XXXX, when deleting ontological terms we will
 # follow certain assumptions that are indicated in their methos and in the documentation. 
@@ -20,7 +20,7 @@ def AddClass(change):
     q1 = """
    INSERT DATA { 
       
-      <"""+name+"""> a "rr:TriplesMap";
+      <"""+name+"""> a rr:TriplesMap;
       rml:logicalSource [
          rml:source "XXXX";
          rml:referenceFormulation "XXXX"
@@ -493,7 +493,7 @@ def RemoveDataProperty(change):
       ?triplesmap rr:predicateObjectMap ?pom.
       ?pom rr:predicate <"""+predicate+"""> . #if comes from the ontology, it's going to be always constant
 
-      ?pom """+{R2RML_OBJECT}|{R2RML_SHORTCUT_OBJECT}+""" ?objectMap. #either rr:objectMap or rr:object
+      ?pom rr:objectMap|rr:object ?objectMap. #either rr:objectMap or rr:object
       ?objectMap ?object_term ?objectValue . #removes everything under objectMap (including language, datatype or termType)
    }
    WHERE {
