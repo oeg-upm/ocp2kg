@@ -129,23 +129,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -210,23 +210,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -250,23 +250,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -295,23 +295,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -345,29 +345,29 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
           - [str1, $(XXXX)]
           - [str2, $(XXXX)]
-    - [http://data.europa.eu/a4g/ontology#hasReceiptExpressionDeadline, $(N2d2f9cad4ff14e808590c304d73667ec)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - [http://data.europa.eu/a4g/ontology#hasReceiptExpressionDeadline, $(N2b11b033714743d49b7b66733aa9e536)]
   ContractTermProcedure:
     sources:
     - ['%1$s~xpath', /%2$s//TYPE_CONTRACT/@CTYPE]
@@ -380,23 +380,23 @@ mappings:
     - [http://data.europa.eu/a4g/ontology#hasContractNatureType, 'http://publications.europa.eu/resource/authority/contract-nature/{lower-case(.)}']
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -433,23 +433,23 @@ mappings:
           - [str2, $(path())]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -492,23 +492,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -528,23 +528,23 @@ mappings:
         mapping: ContractTermLotLocationAddress
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -570,23 +570,23 @@ mappings:
     - [http://www.w3.org/ns/locn#fullAddress, $(MAIN_SITE/P)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -612,23 +612,23 @@ mappings:
     - [http://data.europa.eu/a4g/ontology#hasMainClassification, 'http://data.europa.eu/cpv/cpv/{CPV_MAIN/CPV_CODE/@CODE}']
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -653,23 +653,23 @@ mappings:
     - [http://data.europa.eu/a4g/ontology#hasAdditionalClassification, 'http://data.europa.eu/cpv/cpv/{CPV_ADDITIONAL/CPV_CODE/@CODE}']
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -716,23 +716,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -774,23 +774,23 @@ mappings:
           - [str2, $('true')]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -834,30 +834,30 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
           - [str1, $(XXXX)]
           - [str2, $(XXXX)]
-    - [http://data.europa.eu/a4g/ontology#hasMainActivityDescription, $(Nddb6cef97d5749f3b4eb055d966c4389)]
-    - [http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription, $(Nafc528cbc2c3446eaaf623924077fa0d)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - [http://data.europa.eu/a4g/ontology#hasMainActivityDescription, $(N9ec2dc4e29b54d98b06fe120b7790956)]
+    - [http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription, $(N2ff6f475df5f431887aac842e5e33da4)]
   AdditionalOrganisation:
     sources:
     - ['%1$s~xpath', /%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL]
@@ -886,14 +886,6 @@ mappings:
           - [str2, $(NATIONALID)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
@@ -916,8 +908,16 @@ mappings:
           parameters:
           - [str1, $(XXXX)]
           - [str2, $(XXXX)]
-    - [http://data.europa.eu/a4g/ontology#hasMainActivityDescription, $(Na247ecfc18144e44a7ad2c899507146f)]
-    - [http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription, $(N7e411a3d02434684b1c701a709dda11c)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - [http://data.europa.eu/a4g/ontology#hasMainActivityDescription, $(N3c40c323a07b4b14a53425a403ee6352)]
+    - [http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription, $(Ne7642b164f8e4e40ab59609bbed2be7d)]
   OrganisationIdentifier:
     sources:
     - ['%1$s~xpath', /%2$s//NATIONALID]
@@ -937,23 +937,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -984,23 +984,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -1028,23 +1028,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -1072,23 +1072,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -1116,23 +1116,23 @@ mappings:
     - [http://data.europa.eu/a4g/ontology#hasCountryCode, http://publications.europa.eu/resource/authority/country/AUT]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -1169,23 +1169,23 @@ mappings:
     - [http://data.europa.eu/a4g/ontology#hasCountryCode, http://publications.europa.eu/resource/authority/country/AUT]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -1222,29 +1222,29 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
           - [str1, $(XXXX)]
           - [str2, $(XXXX)]
-    - [http://www.w3.org/2006/time#numericDuration, $(Nf465ac23022748a39e24aa68a99fa769)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - [http://www.w3.org/2006/time#numericDuration, $(N59ff692b8631423792e1697b52462e17)]
   Period:
     sources:
     - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT/OBJECT_DESCR/DATE_START | /%2$s/OBJECT_CONTRACT/OBJECT_DESCR/DATE_END]
@@ -1259,23 +1259,23 @@ mappings:
         else null), http://www.w3.org/2001/XMLSchema#date]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -1309,23 +1309,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -1351,23 +1351,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -1385,23 +1385,23 @@ mappings:
     - [rdf:type, http://data.europa.eu/a4g/ontology#DynamicPurchaseSystemTechniqueUsage]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -1427,23 +1427,23 @@ mappings:
     - [http://data.europa.eu/a4g/ontology#hasJustification, $(P)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -1478,23 +1478,23 @@ mappings:
         mapping: LotAwardOutcome
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -1546,23 +1546,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -1590,14 +1590,6 @@ mappings:
           - [str2, $(.)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
@@ -1620,8 +1612,16 @@ mappings:
           parameters:
           - [str1, $(XXXX)]
           - [str2, $(XXXX)]
-    - [http://data.europa.eu/a4g/ontology#hasMainActivityDescription, $(N1c479b82a02941a1990adffdfd7993c9)]
-    - [http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription, $(N0ae58d2bd3164eabb614be81e504681a)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - [http://data.europa.eu/a4g/ontology#hasMainActivityDescription, $(Ncad256e505b84600a400c57dce7dcc76)]
+    - [http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription, $(N50a80dacecc1458cbc113b397261551a)]
   LotAwardOutcome:
     sources:
     - ['%1$s~xpath', /%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_TOTAL | /%2$s/RESULTS/AWARDED_PRIZE/VAL_PRIZE
@@ -1640,14 +1640,6 @@ mappings:
         mapping: Lot
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
@@ -1670,8 +1662,16 @@ mappings:
           parameters:
           - [str1, $(XXXX)]
           - [str2, $(XXXX)]
-    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractTitle, $(Ne56182e300a24a2283c90b632af00f3e)]
-    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractNumber, $(Nfad0c06bc8d54f0b93a771e52ed9f9a9)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractTitle, $(N2c857f8d83214aa3af9842ff0c19b54a)]
+    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractNumber, $(N8ae0c21acdec4f289f1fab67ff06393d)]
   LotAwardOutcomeAwardedMonetaryValue:
     sources:
     - ['%1$s~xpath', /%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_TOTAL | /%2$s/RESULTS/AWARDED_PRIZE/VAL_PRIZE
@@ -1687,23 +1687,23 @@ mappings:
     - [http://data.europa.eu/a4g/ontology#hasCurrency, 'http://publications.europa.eu/resource/authority/currency/{@CURRENCY}']
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -1750,23 +1750,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -1797,23 +1797,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -1841,23 +1841,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -1885,23 +1885,23 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -1925,23 +1925,23 @@ mappings:
         mapping: LotPurposeModification
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -1967,23 +1967,23 @@ mappings:
     - [http://data.europa.eu/a4g/ontology#hasAdditionalClassification, 'http://data.europa.eu/cpv/cpv/{CPV_ADDITIONAL/CPV_CODE/@CODE}']
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -2023,30 +2023,30 @@ mappings:
           - [str2, $(XXXX)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
           - [str1, $(XXXX)]
           - [str2, $(XXXX)]
-    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractTitle, $(N358fc705a6fd489ba1658130a0f94a4d)]
-    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractNumber, $(N27224491506c42f8a53ede3afa14de28)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractTitle, $(N97c94f870a164981828edb0036da9fc0)]
+    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractNumber, $(N64f9e762d70a40098784ad8396ef0322)]
   LotAwardOutcomeAwardedMonetaryValueModification:
     sources:
     - ['%1$s~xpath', /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VAL_TOTAL_AFTER]
@@ -2061,23 +2061,23 @@ mappings:
     - [http://data.europa.eu/a4g/ontology#hasCurrency, 'http://publications.europa.eu/resource/authority/currency/{@CURRENCY}']
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -2105,23 +2105,23 @@ mappings:
     - [http://data.europa.eu/a4g/ontology#hasTotalAwardedValue, $(.), http://www.w3.org/2001/XMLSchema#decimal]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -2153,23 +2153,23 @@ mappings:
         mapping: ElementModificationDescription
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -2203,23 +2203,23 @@ mappings:
     - [http://data.europa.eu/a4g/ontology#hasModificationReasonDescription, $(P)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
+      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
-      o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
