@@ -515,12 +515,12 @@ def AddDataProperty(change):
    q2 ="""
    SELECT ?range
     WHERE {
-        <"""+predicate+"""> rdfs:range ?domain.
+        <"""+predicate+"""> rdfs:range ?range.
     }
    """
    for r in ontology.query(q2):
       range = r["range"]
- q1 = """
+   q1 = """
    INSERT { 
       ?triplesmap rr:predicateObjectMap [
          rr:predicate <"""+predicate+""">;
@@ -535,7 +535,7 @@ def AddDataProperty(change):
       ?subjectMap rr:class <"""+domain+"""> .
    }
    """
- output_mappings.update(q1)
+   output_mappings.update(q1)
 #-----------------------------------------------------------------------------------------------------------------------------------
 def RemoveDataProperty(change):
  q = """
@@ -555,8 +555,8 @@ def RemoveDataProperty(change):
    DELETE { 
       ?triplesmap rr:predicateObjectMap ?pom.
       ?pom rr:predicate <"""+predicate+"""> . #if comes from the ontology, it's going to be always constant
-
-      ?pom rr:objectMap|rr:object ?objectMap. #either rr:objectMap or rr:object
+      
+      ?pom ?object_property ?objectMap. #either rr:objectMap or rr:object
       ?objectMap ?object_term ?objectValue . #removes everything under objectMap (including language, datatype or termType)
    }
    WHERE {
