@@ -86,7 +86,7 @@ mappings:
           - [str1, $(if(name()='KD_7_2_Z2' or name()='KD_8_2_Z3') then 'false' else
               'true')]
           - [str2, $('true')]
-    - [http://data.europa.eu/a4g/ontology#refersToProcedure, $(nc7ec03be8a5a4f159befbb7d76c978abb111)]
+    - [http://data.europa.eu/a4g/ontology#refersToProcedure, $(nefcecdf3002a4bfeb169b9c36820f847b111)]
     - p: http://data.europa.eu/a4g/ontology#refersToLot
       o:
         mapping: Lot
@@ -114,7 +114,7 @@ mappings:
           - [str1, $(if(name()='KD_7_2_Z2' or name()='KD_8_2_Z3') then 'true' else
               'false')]
           - [str2, $('true')]
-    - [http://data.europa.eu/a4g/ontology#announcesNoticeAwardInformation, $(nc7ec03be8a5a4f159befbb7d76c978abb122)]
+    - [http://data.europa.eu/a4g/ontology#announcesNoticeAwardInformation, $(nefcecdf3002a4bfeb169b9c36820f847b122)]
   Procedure:
     sources:
     - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT]
@@ -123,27 +123,27 @@ mappings:
       '-'))_Procedure_$(generate-id(REFERENCE_NUMBER))
     po:
     - [rdf:type, http://data.europa.eu/a4g/ontology#Procedure]
-    - [http://data.europa.eu/a4g/ontology#isSubjectToProcedureSpecificTerm, $(nc7ec03be8a5a4f159befbb7d76c978abb92)]
+    - [http://data.europa.eu/a4g/ontology#isSubjectToProcedureSpecificTerm, $(nefcecdf3002a4bfeb169b9c36820f847b92)]
     - [http://data.europa.eu/a4g/ontology#hasTitle, $(TITLE/P)]
     - [http://data.europa.eu/a4g/ontology#hasDescription, $(SHORT_DESCR/P)]
     - [http://data.europa.eu/a4g/ontology#hasDescription, $(if(name(..)='KD_8_1_Z3'
         or name(..)='KD_8_2_Z2') then OBJECT_DESCR/SHORT_DESCR/P else null)]
     - [http://data.europa.eu/a4g/ontology#hasAdditionalInformation, $(../ADDITIONAL_CORE_DATA/PROCEDURE_SHORT_DESCRIPTION/P)]
-    - [http://data.europa.eu/a4g/ontology#hasProcurementScopeDividedIntoLot, $(nc7ec03be8a5a4f159befbb7d76c978abb199)]
-    - [http://data.europa.eu/a4g/ontology#hasPurpose, $(nc7ec03be8a5a4f159befbb7d76c978abb201)]
-    - [http://data.europa.eu/a4g/ontology#hasID, $(nc7ec03be8a5a4f159befbb7d76c978abb203)]
-    - [http://data.europa.eu/a4g/ontology#foreseesContractSpecificTerm, $(nc7ec03be8a5a4f159befbb7d76c978abb205)]
+    - [http://data.europa.eu/a4g/ontology#hasProcurementScopeDividedIntoLot, $(nefcecdf3002a4bfeb169b9c36820f847b199)]
+    - [http://data.europa.eu/a4g/ontology#hasPurpose, $(nefcecdf3002a4bfeb169b9c36820f847b201)]
+    - [http://data.europa.eu/a4g/ontology#hasID, $(nefcecdf3002a4bfeb169b9c36820f847b203)]
+    - [http://data.europa.eu/a4g/ontology#foreseesContractSpecificTerm, $(nefcecdf3002a4bfeb169b9c36820f847b205)]
     - [http://data.europa.eu/a4g/ontology#hasProcedureType, "http://publications.europa.eu/resource/authority/procurement-procedure-type/{if(exists(../PROCEDURE/PT_OPEN))
         then 'open' else if(exists(../PROCEDURE/PT_RESTRICTED)) then 'restricted'
         else if(exists(../PROCEDURE/PT_COMPETITIVE_NEGOTIATION)) then 'neg-w-call'
         else if(exists(../PROCEDURE/PT_COMPETITIVE_DIALOGUE)) then 'comp-dial' else
         if(exists(../PROCEDURE/PT_INNOVATION_PARTNERSHIP)) then 'innovation' else
         null}"]
-    - [http://data.europa.eu/a4g/ontology#usesTechnique, $(nc7ec03be8a5a4f159befbb7d76c978abb246)]
-    - [http://data.europa.eu/a4g/ontology#usesTechnique, $(nc7ec03be8a5a4f159befbb7d76c978abb248)]
-    - [http://data.europa.eu/a4g/ontology#isSubjectToProcedureSpecificTerm, $(nc7ec03be8a5a4f159befbb7d76c978abb250)]
-    - [http://data.europa.eu/a4g/ontology#isSubjectToProcedureSpecificTerm, $(nc7ec03be8a5a4f159befbb7d76c978abb252)]
-    - [http://data.europa.eu/a4g/ontology#isSubjectToProcedureSpecificTerm, $(nc7ec03be8a5a4f159befbb7d76c978abb254)]
+    - [http://data.europa.eu/a4g/ontology#usesTechnique, $(nefcecdf3002a4bfeb169b9c36820f847b246)]
+    - [http://data.europa.eu/a4g/ontology#usesTechnique, $(nefcecdf3002a4bfeb169b9c36820f847b248)]
+    - [http://data.europa.eu/a4g/ontology#isSubjectToProcedureSpecificTerm, $(nefcecdf3002a4bfeb169b9c36820f847b250)]
+    - [http://data.europa.eu/a4g/ontology#isSubjectToProcedureSpecificTerm, $(nefcecdf3002a4bfeb169b9c36820f847b252)]
+    - [http://data.europa.eu/a4g/ontology#isSubjectToProcedureSpecificTerm, $(nefcecdf3002a4bfeb169b9c36820f847b254)]
   ProcedureIdentifier:
     sources:
     - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER]
@@ -183,6 +183,7 @@ mappings:
       http://www.w3.org/2001/XMLSchema#dateTime]
     - [http://data.europa.eu/a4g/ontology#hasSubmissionURL, $(../CONTRACTING_BODY/URL_PARTICIPATION),
       http://www.w3.org/2001/XMLSchema#anyURI]
+    - [http://data.europa.eu/a4g/ontology#hasReceiptExpressionDeadline, $(XXXX), http://www.w3.org/2001/XMLSchema#dateTime]
   ContractTermProcedure:
     sources:
     - ['%1$s~xpath', /%2$s//TYPE_CONTRACT/@CTYPE]
@@ -203,7 +204,7 @@ mappings:
     - [http://data.europa.eu/a4g/ontology#hasTitle, $(../OBJECT_DESCR/TITLE/P)]
     - [http://data.europa.eu/a4g/ontology#hasDescription, $(if(name(../..)='KD_7_2_Z2'
         or name(../..)='KD_8_2_Z3') then ../OBJECT_DESCR/SHORT_DESCR/P else null)]
-    - [http://data.europa.eu/a4g/ontology#hasPurpose, $(nc7ec03be8a5a4f159befbb7d76c978abb213)]
+    - [http://data.europa.eu/a4g/ontology#hasPurpose, $(nefcecdf3002a4bfeb169b9c36820f847b213)]
     - p: http://data.europa.eu/a4g/ontology#foreseesContractSpecificTerm
       o:
         mapping: ContractTermLot
@@ -238,9 +239,9 @@ mappings:
       '[^a-zA-Z0-9]', '-') || '_ContractTermLot_' || generate-id(.) else null)
     po:
     - [rdf:type, http://data.europa.eu/a4g/ontology#ContractTerm]
-    - [http://data.europa.eu/a4g/ontology#definesSpecificPlaceOfPerformance, $(nc7ec03be8a5a4f159befbb7d76c978abb218)]
-    - [http://data.europa.eu/a4g/ontology#definesContractPeriod, $(nc7ec03be8a5a4f159befbb7d76c978abb220)]
-    - [http://data.europa.eu/a4g/ontology#definesContractDuration, $(nc7ec03be8a5a4f159befbb7d76c978abb222)]
+    - [http://data.europa.eu/a4g/ontology#definesSpecificPlaceOfPerformance, $(nefcecdf3002a4bfeb169b9c36820f847b218)]
+    - [http://data.europa.eu/a4g/ontology#definesContractPeriod, $(nefcecdf3002a4bfeb169b9c36820f847b220)]
+    - [http://data.europa.eu/a4g/ontology#definesContractDuration, $(nefcecdf3002a4bfeb169b9c36820f847b222)]
   ContractTermLotLocation:
     sources:
     - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT/OBJECT_DESCR]
@@ -250,7 +251,7 @@ mappings:
     po:
     - [rdf:type, http://purl.org/dc/terms/Location]
     - [http://data.europa.eu/a4g/ontology#hasNutsCode, 'http://data.europa.eu/nuts/code/{NUTS/@CODE}']
-    - [http://www.w3.org/ns/locn#address, $(nc7ec03be8a5a4f159befbb7d76c978abb226)]
+    - [http://www.w3.org/ns/locn#address, $(nefcecdf3002a4bfeb169b9c36820f847b226)]
   ContractTermLotLocationAddress:
     sources:
     - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT/OBJECT_DESCR]
@@ -288,8 +289,8 @@ mappings:
       '[^a-zA-Z0-9]', '-'))-$(replace(NATIONALID, '[^a-zA-Z0-9]', '-'))_Buyer_$(generate-id(NATIONALID))
     po:
     - [rdf:type, http://data.europa.eu/a4g/ontology#Buyer]
-    - [http://data.europa.eu/a4g/ontology#playedBy, $(nc7ec03be8a5a4f159befbb7d76c978abb134)]
-    - [http://data.europa.eu/a4g/ontology#hasContactPointInRole, $(nc7ec03be8a5a4f159befbb7d76c978abb136)]
+    - [http://data.europa.eu/a4g/ontology#playedBy, $(nefcecdf3002a4bfeb169b9c36820f847b134)]
+    - [http://data.europa.eu/a4g/ontology#hasContactPointInRole, $(nefcecdf3002a4bfeb169b9c36820f847b136)]
     - p: http://data.europa.eu/a4g/ontology#contextualisedBy
       o:
         mapping: Procedure
@@ -350,7 +351,9 @@ mappings:
           parameters:
           - [str1, $(NATIONALID)]
           - [str2, $(.)]
-    - [http://data.europa.eu/m8g/registeredAddress, $(nc7ec03be8a5a4f159befbb7d76c978abb155)]
+    - [http://data.europa.eu/m8g/registeredAddress, $(nefcecdf3002a4bfeb169b9c36820f847b155)]
+    - [http://data.europa.eu/a4g/ontology#hasMainActivityDescription, $(XXXX), http://www.w3.org/2000/01/rdf-schema#Literal]
+    - [http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription, $(XXXX), http://www.w3.org/2000/01/rdf-schema#Literal]
   AdditionalOrganisation:
     sources:
     - ['%1$s~xpath', /%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL]
@@ -377,6 +380,8 @@ mappings:
           parameters:
           - [str1, $(NATIONALID)]
           - [str2, $(NATIONALID)]
+    - [http://data.europa.eu/a4g/ontology#hasMainActivityDescription, $(XXXX), http://www.w3.org/2000/01/rdf-schema#Literal]
+    - [http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription, $(XXXX), http://www.w3.org/2000/01/rdf-schema#Literal]
   OrganisationIdentifier:
     sources:
     - ['%1$s~xpath', /%2$s//NATIONALID]
@@ -395,8 +400,8 @@ mappings:
       '-'))_BuyerOrganisationGroup_$(generate-id(NATIONALID))
     po:
     - [rdf:type, http://data.europa.eu/a4g/ontology#OrganisationGroup]
-    - [http://data.europa.eu/a4g/ontology#hasMember, $(nc7ec03be8a5a4f159befbb7d76c978abb130)]
-    - [http://data.europa.eu/a4g/ontology#hasMember, $(nc7ec03be8a5a4f159befbb7d76c978abb132)]
+    - [http://data.europa.eu/a4g/ontology#hasMember, $(nefcecdf3002a4bfeb169b9c36820f847b130)]
+    - [http://data.europa.eu/a4g/ontology#hasMember, $(nefcecdf3002a4bfeb169b9c36820f847b132)]
   ContactPoint:
     sources:
     - ['%1$s~xpath', /%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY]
@@ -470,10 +475,12 @@ mappings:
       '[^a-zA-Z0-9]', '-'))_Duration_$(generate-id(../../REFERENCE_NUMBER))
     po:
     - [rdf:type, http://data.europa.eu/a4g/ontology#SpecificDuration]
+    - [rdf:type, http://data.europa.eu/a4g/ontology#Duration]
     - [http://www.w3.org/2006/time#numericDuration, $(.), http://www.w3.org/2001/XMLSchema#decimal]
     - [http://www.w3.org/2006/time#unitType, $(if(./@TYPE='MONTH') then 'http://www.w3.org/2006/time#unitMonth'
         else if(./@TYPE='DAY') then 'http://www.w3.org/2006/time#unitDay' else null
         )]
+    - [http://www.w3.org/2006/time#numericDuration, $(XXXX), http://www.w3.org/2001/XMLSchema#decimal]
   Period:
     sources:
     - ['%1$s~xpath', /%2$s/OBJECT_CONTRACT/OBJECT_DESCR/DATE_START | /%2$s/OBJECT_CONTRACT/OBJECT_DESCR/DATE_END]
@@ -539,8 +546,8 @@ mappings:
     - [http://data.europa.eu/a4g/ontology#hasContractConclusionDate, $(DATE_CONCLUSION_CONTRACT),
       http://www.w3.org/2001/XMLSchema#date]
     - [http://data.europa.eu/a4g/ontology#hasTitle, $(TITLE/P)]
-    - [http://data.europa.eu/a4g/ontology#includesLot, $(nc7ec03be8a5a4f159befbb7d76c978abb266)]
-    - [http://data.europa.eu/a4g/ontology#resultsFromLotAwardOutcome, $(nc7ec03be8a5a4f159befbb7d76c978abb268)]
+    - [http://data.europa.eu/a4g/ontology#includesLot, $(nefcecdf3002a4bfeb169b9c36820f847b266)]
+    - [http://data.europa.eu/a4g/ontology#resultsFromLotAwardOutcome, $(nefcecdf3002a4bfeb169b9c36820f847b268)]
   Winner:
     sources:
     - ['%1$s~xpath', /%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME
@@ -589,6 +596,8 @@ mappings:
           parameters:
           - [str1, $(../NATIONALID)]
           - [str2, $(.)]
+    - [http://data.europa.eu/a4g/ontology#hasMainActivityDescription, $(XXXX), http://www.w3.org/2000/01/rdf-schema#Literal]
+    - [http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription, $(XXXX), http://www.w3.org/2000/01/rdf-schema#Literal]
   LotAwardOutcome:
     sources:
     - ['%1$s~xpath', /%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_TOTAL | /%2$s/RESULTS/AWARDED_PRIZE/VAL_PRIZE
@@ -599,8 +608,10 @@ mappings:
       '[^a-zA-Z0-9]', '-'))_LotAwardOutcome_$(generate-id(../../../OBJECT_CONTRACT/REFERENCE_NUMBER))
     po:
     - [rdf:type, http://data.europa.eu/a4g/ontology#LotAwardOutcome]
-    - [http://data.europa.eu/a4g/ontology#hasAwardedValue, $(nc7ec03be8a5a4f159befbb7d76c978abb270)]
-    - [http://data.europa.eu/a4g/ontology#describesLot, $(nc7ec03be8a5a4f159befbb7d76c978abb272)]
+    - [http://data.europa.eu/a4g/ontology#hasAwardedValue, $(nefcecdf3002a4bfeb169b9c36820f847b270)]
+    - [http://data.europa.eu/a4g/ontology#describesLot, $(nefcecdf3002a4bfeb169b9c36820f847b272)]
+    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractTitle, $(XXXX), http://www.w3.org/2000/01/rdf-schema#Literal]
+    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractNumber, $(XXXX), http://www.w3.org/2000/01/rdf-schema#Literal]
   LotAwardOutcomeAwardedMonetaryValue:
     sources:
     - ['%1$s~xpath', /%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_TOTAL | /%2$s/RESULTS/AWARDED_PRIZE/VAL_PRIZE
@@ -635,7 +646,7 @@ mappings:
     - [http://data.europa.eu/a4g/ontology#hasReceivedSMETenders, $(NB_PARTICIPANTS_SME),
       http://www.w3.org/2001/XMLSchema#integer]
     - [http://data.europa.eu/a4g/ontology#summarisesInformationForLotAwardOutcome,
-      $(nc7ec03be8a5a4f159befbb7d76c978abb299)]
+      $(nefcecdf3002a4bfeb169b9c36820f847b299)]
   NoticeChange:
     sources:
     - ['%1$s~xpath', /%2$s/ADDITIONAL_CORE_DATA/DATETIME_LAST_CHANGE]
@@ -645,8 +656,8 @@ mappings:
       '[^a-zA-Z0-9]', '-'))_NoticeChange_$(generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER))
     po:
     - [rdf:type, http://data.europa.eu/a4g/ontology#NoticeChange]
-    - [http://data.europa.eu/a4g/ontology#refersToPrevious, $(nc7ec03be8a5a4f159befbb7d76c978abb124)]
-    - [http://data.europa.eu/a4g/ontology#hasElementChange, $(nc7ec03be8a5a4f159befbb7d76c978abb126)]
+    - [http://data.europa.eu/a4g/ontology#refersToPrevious, $(nefcecdf3002a4bfeb169b9c36820f847b124)]
+    - [http://data.europa.eu/a4g/ontology#hasElementChange, $(nefcecdf3002a4bfeb169b9c36820f847b126)]
   ElementChangeDescription:
     sources:
     - ['%1$s~xpath', /%2$s/ADDITIONAL_CORE_DATA/DATETIME_LAST_CHANGE]
@@ -668,7 +679,7 @@ mappings:
       '[^a-zA-Z0-9]', '-'))_ProcedureModification_$(generate-id(../OBJECT_CONTRACT/REFERENCE_NUMBER))
     po:
     - [rdf:type, http://data.europa.eu/a4g/ontology#Procedure]
-    - [http://data.europa.eu/a4g/ontology#containsModificationsOf, $(nc7ec03be8a5a4f159befbb7d76c978abb301)]
+    - [http://data.europa.eu/a4g/ontology#containsModificationsOf, $(nefcecdf3002a4bfeb169b9c36820f847b301)]
   LotModification:
     sources:
     - ['%1$s~xpath', /%2$s/MODIFICATIONS_CONTRACT]
@@ -679,8 +690,8 @@ mappings:
     po:
     - [rdf:type, http://data.europa.eu/a4g/ontology#Lot]
     - [http://data.europa.eu/a4g/ontology#hasDescription, $(DESCRIPTION_PROCUREMENT/SHORT_DESCR/P)]
-    - [http://data.europa.eu/a4g/ontology#containsModificationsOf, $(nc7ec03be8a5a4f159befbb7d76c978abb305)]
-    - [http://data.europa.eu/a4g/ontology#hasPurpose, $(nc7ec03be8a5a4f159befbb7d76c978abb307)]
+    - [http://data.europa.eu/a4g/ontology#containsModificationsOf, $(nefcecdf3002a4bfeb169b9c36820f847b305)]
+    - [http://data.europa.eu/a4g/ontology#hasPurpose, $(nefcecdf3002a4bfeb169b9c36820f847b307)]
     - p: http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue
       o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
@@ -717,8 +728,10 @@ mappings:
       '-'))_LotAwardOutcomeModification_$(generate-id(../../../OBJECT_CONTRACT/REFERENCE_NUMBER))
     po:
     - [rdf:type, http://data.europa.eu/a4g/ontology#LotAwardOutcome]
-    - [http://data.europa.eu/a4g/ontology#hasAwardedValue, $(nc7ec03be8a5a4f159befbb7d76c978abb311)]
-    - [http://data.europa.eu/a4g/ontology#describesLot, $(nc7ec03be8a5a4f159befbb7d76c978abb313)]
+    - [http://data.europa.eu/a4g/ontology#hasAwardedValue, $(nefcecdf3002a4bfeb169b9c36820f847b311)]
+    - [http://data.europa.eu/a4g/ontology#describesLot, $(nefcecdf3002a4bfeb169b9c36820f847b313)]
+    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractTitle, $(XXXX), http://www.w3.org/2000/01/rdf-schema#Literal]
+    - [http://data.europa.eu/a4g/ontology#hasNonAwardedContractNumber, $(XXXX), http://www.w3.org/2000/01/rdf-schema#Literal]
   LotAwardOutcomeAwardedMonetaryValueModification:
     sources:
     - ['%1$s~xpath', /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VAL_TOTAL_AFTER]
@@ -753,8 +766,8 @@ mappings:
       '-'))_ContractModification_$(generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER))
     po:
     - [rdf:type, http://data.europa.eu/a4g/ontology#ContractModification]
-    - [http://data.europa.eu/a4g/ontology#describesNotice, $(nc7ec03be8a5a4f159befbb7d76c978abb319)]
-    - [http://data.europa.eu/a4g/ontology#hasElementModification, $(nc7ec03be8a5a4f159befbb7d76c978abb321)]
+    - [http://data.europa.eu/a4g/ontology#describesNotice, $(nefcecdf3002a4bfeb169b9c36820f847b319)]
+    - [http://data.europa.eu/a4g/ontology#hasElementModification, $(nefcecdf3002a4bfeb169b9c36820f847b321)]
   ElementModificationDescription:
     sources:
     - ['%1$s~xpath', /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/ADDITIONAL_NEED
@@ -773,3 +786,21 @@ mappings:
         'http://publications.europa.eu/resource/authority/modification-justification/mod-cir'
         else null)]
     - [http://data.europa.eu/a4g/ontology#hasModificationReasonDescription, $(P)]
+  ontology#ConcessionEstimate:
+    sources:
+    - [XXXX~xxxx]
+    s: $(XXXX)
+    po:
+    - [rdf:type, epo:ConcessionEstimate]
+  ontology#IndefiniteDuration:
+    sources:
+    - [XXXX~xxxx]
+    s: $(XXXX)
+    po:
+    - [rdf:type, epo:IndefiniteDuration]
+  ontology#SpecificDuration:
+    sources:
+    - [XXXX~xxxx]
+    s: $(XXXX)
+    po:
+    - [rdf:type, epo:SpecificDuration]
