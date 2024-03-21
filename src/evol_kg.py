@@ -3,6 +3,7 @@ import sys
 import yatter
 from constants import *
 from ruamel.yaml import YAML
+import argparse
 
 # ---------------------------------------------------------------------------------------------------------------------------
 
@@ -585,13 +586,23 @@ def RemoveDataProperty(change):
 # -------------------------------------------------------------------------------------------------------------
 
 
+def define_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", "--changes_kg_path", required=False, help="Change KG following the Change Ontology")
+    parser.add_argument("-m", "--old_mapping_path", required=False, help="Old version of the mappings in RML")
+    parser.add_argument("-o", "--ontology_path", required=False, help="New version of the ontology")
+    parser.add_argument("-n", "--new_mappings_path", required=False, help="Output path for the generated mapping")
+    return parser
+
+
 if __name__ == "__main__":
+    args = define_args().parse_args()
     # Change data that follows the OWL change ontology specification.
-    change_data = Graph().parse(sys.argv[1], format="turtle")
+    change_data = Graph().parse(args.changes_kg_path, format="turtle")
     # Outdated mappings to be updated.
-    output_mappings = Graph().parse(sys.argv[2], format="turtle")
+    output_mappings = Graph().parse(args.old_mapping_path, format="turtle")
     # The current ontology to check for info
-    ontology = Graph().parse(sys.argv[3])
+    ontology = Graph().parse(args.ontology_path)
     # We create an additional graph for introducing those elements from the mappings that require reviewing.
     review_mappings = Graph()
     # We query the data to find all the changes
@@ -627,7 +638,7 @@ if __name__ == "__main__":
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveDataProperty"):
             print("RemoveDataProperty")
             RemoveDataProperty(r["change"])
-    output_mappings.serialize(destination="updated_mappings.ttl")
+    output_mappings.serialize(destination=args.new_mappings_path)
     yarrrml_content = yatter.inverse_translation(output_mappings)
     with open("updated_mappings.yaml", "wb") as f:
         yaml = YAML()
