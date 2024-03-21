@@ -5,53 +5,17 @@
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix rr: <http://www.w3.org/ns/r2rml#> .
 @prefix tedm: <http://data.europa.eu/a4g/mapping/sf-rml/> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<epo:ConcessionEstimate> a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:ConcessionEstimate ;
-            rr:template "XXXX" ] .
-
-<epo:IndefiniteDuration> a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:IndefiniteDuration ;
-            rr:template "XXXX" ] .
-
-<epo:SpecificDuration> a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:Duration,
-                epo:SpecificDuration ;
-            rr:template "XXXX" ] .
-
 tedm:BuyerOrganisationGroup a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL[1]" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:parentTriplesMap tedm:Organisation ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:parentTriplesMap tedm:Organisation ] ;
             rr:predicate epo:hasMember ],
         [ rr:objectMap [ rr:parentTriplesMap tedm:AdditionalOrganisation ] ;
             rr:predicate epo:hasMember ] ;
@@ -62,23 +26,7 @@ tedm:ContractModification a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:parentTriplesMap tedm:Notice ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:parentTriplesMap tedm:Notice ] ;
             rr:predicate epo:describesNotice ],
         [ rr:objectMap [ rr:parentTriplesMap tedm:ElementModificationDescription ] ;
             rr:predicate epo:hasElementModification ] ;
@@ -89,29 +37,7 @@ tedm:LotAwardOutcomeModification a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VAL_TOTAL_AFTER" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:datatype rdfs:Literal ;
-                    rr:reference "XXXX" ] ;
-            rr:predicate epo:hasNonAwardedContractNumber ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:datatype rdfs:Literal ;
-                    rr:reference "XXXX" ] ;
-            rr:predicate epo:hasNonAwardedContractTitle ],
-        [ rr:objectMap [ rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
             rr:predicate epo:hasAwardedValue ],
         [ rr:objectMap [ rr:parentTriplesMap tedm:LotModification ] ;
             rr:predicate epo:describesLot ] ;
@@ -122,23 +48,7 @@ tedm:NoticeChange a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/ADDITIONAL_CORE_DATA/DATETIME_LAST_CHANGE" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:parentTriplesMap tedm:Notice ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:parentTriplesMap tedm:Notice ] ;
             rr:predicate epo:refersToPrevious ],
         [ rr:objectMap [ rr:parentTriplesMap tedm:ElementChangeDescription ] ;
             rr:predicate epo:hasElementChange ] ;
@@ -149,23 +59,7 @@ tedm:ProcedureModification a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/MODIFICATIONS_CONTRACT" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:parentTriplesMap tedm:Procedure ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:parentTriplesMap tedm:Procedure ] ;
             rr:predicate epo:containsModificationsOf ] ;
     rr:subjectMap [ rr:class epo:Procedure ;
             rr:template "http://data.europa.eu/a4g/resource/id_{replace(../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_ProcedureModification_{generate-id(../OBJECT_CONTRACT/REFERENCE_NUMBER)}" ] .
@@ -174,23 +68,7 @@ tedm:SubmissionStatisticalInformation a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/AWARD_CONTRACT/AWARDED_CONTRACT | /%2$s/RESULTS/AWARDED_PRIZE | /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "NB_TENDERS_RECEIVED" ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "NB_TENDERS_RECEIVED" ;
                     rr:datatype xsd:integer ] ;
             rr:predicate epo:hasReceivedTenders ],
         [ rr:objectMap [ rml:reference "NB_SME_TENDER" ;
@@ -211,23 +89,7 @@ tedm:AccessTerm a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/CONTRACTING_BODY/DOCUMENT_FULL | /%2$s/CONTRACTING_BODY/DOCUMENT_RESTRICTED" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "if(contains(name(), 'RESTRICTED')) then 'true' else 'false'" ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "if(contains(name(), 'RESTRICTED')) then 'true' else 'false'" ;
                     rr:datatype xsd:boolean ] ;
             rr:predicate epo:isProcurementDocumentRestricted ],
         [ rr:objectMap [ rml:reference "../URL_DOCUMENT" ;
@@ -240,23 +102,7 @@ tedm:AdditionalBuyer a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "NATIONALID" ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "NATIONALID" ;
                             rr:parent "NATIONALID" ] ;
                     rr:parentTriplesMap tedm:AdditionalOrganisation ] ;
             rr:predicate epo:playedBy ],
@@ -275,23 +121,7 @@ tedm:AdditionalContactPoint a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "E_MAIL" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "E_MAIL" ] ;
             rr:predicate cccev:email ],
         [ rr:objectMap [ rml:reference "PHONE" ] ;
             rr:predicate cccev:telephone ],
@@ -304,23 +134,7 @@ tedm:AdditionalOrganisationAddress a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "if(not(exists(DOMAIN))) then null else if(DOMAIN='Vorarlberg') then'http://publications.europa.eu/resource/authority/atu/AUT_BLD_VORALB' else if(DOMAIN='Vienna') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_VIE' else if(DOMAIN='UpperAustria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_OO' else if(DOMAIN='Tyrol') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_TIROL' else if(DOMAIN='Styria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_STEIER' else if(DOMAIN='Salzburg') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_SZG' else if(DOMAIN='LowerAustria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_NO' else if(DOMAIN='Carinthia') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_KAER' else if(DOMAIN='Burgenland') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_BURG' else 'http://publications.europa.eu/resource/authority/atu/AT'" ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "if(not(exists(DOMAIN))) then null else if(DOMAIN='Vorarlberg') then'http://publications.europa.eu/resource/authority/atu/AUT_BLD_VORALB' else if(DOMAIN='Vienna') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_VIE' else if(DOMAIN='UpperAustria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_OO' else if(DOMAIN='Tyrol') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_TIROL' else if(DOMAIN='Styria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_STEIER' else if(DOMAIN='Salzburg') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_SZG' else if(DOMAIN='LowerAustria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_NO' else if(DOMAIN='Carinthia') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_KAER' else if(DOMAIN='Burgenland') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_BURG' else 'http://publications.europa.eu/resource/authority/atu/AT'" ;
                     rr:termType rr:IRI ] ;
             rr:predicate epo:adminUnitL2 ],
         [ rr:objectMap [ rr:template "http://publications.europa.eu/resource/authority/country/AUT" ] ;
@@ -332,23 +146,7 @@ tedm:Buyer a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:parentTriplesMap tedm:Organisation ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:parentTriplesMap tedm:Organisation ] ;
             rr:predicate epo:playedBy ],
         [ rr:objectMap [ rr:parentTriplesMap tedm:ContactPoint ] ;
             rr:predicate epo:hasContactPointInRole ],
@@ -363,23 +161,7 @@ tedm:ContactPoint a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "E_MAIL" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "E_MAIL" ] ;
             rr:predicate cccev:email ],
         [ rr:objectMap [ rml:reference "PHONE" ] ;
             rr:predicate cccev:telephone ],
@@ -392,23 +174,7 @@ tedm:ContractTermLot a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:parentTriplesMap tedm:ContractTermLotLocation ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:parentTriplesMap tedm:ContractTermLotLocation ] ;
             rr:predicate epo:definesSpecificPlaceOfPerformance ],
         [ rr:objectMap [ rr:parentTriplesMap tedm:Period ] ;
             rr:predicate epo:definesContractPeriod ],
@@ -421,23 +187,7 @@ tedm:ContractTermLotLocation a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/OBJECT_CONTRACT/OBJECT_DESCR" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:template "http://data.europa.eu/nuts/code/{NUTS/@CODE}" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:template "http://data.europa.eu/nuts/code/{NUTS/@CODE}" ] ;
             rr:predicate epo:hasNutsCode ],
         [ rr:objectMap [ rr:parentTriplesMap tedm:ContractTermLotLocationAddress ] ;
             rr:predicate locn:address ] ;
@@ -448,23 +198,7 @@ tedm:ContractTermLotLocationAddress a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/OBJECT_CONTRACT/OBJECT_DESCR" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "MAIN_SITE/P" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "MAIN_SITE/P" ] ;
             rr:predicate locn:fullAddress ] ;
     rr:subjectMap [ rml:reference "if(exists(MAIN_SITE)) then 'http://data.europa.eu/a4g/resource/id_' || replace(../REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-') || '-' || replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-') || '_ContractTermLotLocationAddress_' || generate-id(.) else null" ;
             rr:class locn:Address ] .
@@ -473,23 +207,7 @@ tedm:ContractTermProcedure a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s//TYPE_CONTRACT/@CTYPE" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:template "http://publications.europa.eu/resource/authority/contract-nature/{lower-case(.)}" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:template "http://publications.europa.eu/resource/authority/contract-nature/{lower-case(.)}" ] ;
             rr:predicate epo:hasContractNatureType ] ;
     rr:subjectMap [ rr:class epo:ContractTerm ;
             rr:template "http://data.europa.eu/a4g/resource/id_{replace(/%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_ContractTermProcedure_{generate-id(.)}" ] .
@@ -498,29 +216,7 @@ tedm:ContractorOrganisation a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME | /%2$s/RESULTS/AWARDED_PRIZE/WINNER/ADDRESS_WINNER/OFFICIALNAME | /%2$s/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:datatype rdfs:Literal ;
-                    rr:reference "XXXX" ] ;
-            rr:predicate epo:hasMainActivityDescription ],
-        [ rr:objectMap [ rr:datatype rdfs:Literal ;
-                    rr:reference "XXXX" ] ;
-            rr:predicate epo:hasBuyerLegalTypeDescription ],
-        [ rr:objectMap [ rml:reference "." ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "." ] ;
             rr:predicate epo:hasLegalName ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "../NATIONALID" ;
                             rr:parent "." ] ;
@@ -533,23 +229,7 @@ tedm:DirectAwardTerm a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/ADDITIONAL_CORE_DATA/D_JUSTIFICATION | /%2$s/PROCEDURE/PT_DIRECT" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "P" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "P" ] ;
             rr:predicate epo:hasJustification ] ;
     rr:subjectMap [ rr:class epo:DirectAwardTerm ;
             rr:template "http://data.europa.eu/a4g/resource/id_{replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_DirectAwardTerm_{generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER)}" ] .
@@ -558,55 +238,19 @@ tedm:Duration a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/OBJECT_CONTRACT/OBJECT_DESCR/DURATION" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:datatype xsd:decimal ;
-                    rr:reference "XXXX" ] ;
-            rr:predicate time:numericDuration ],
-        [ rr:objectMap [ rml:reference "." ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "." ;
                     rr:datatype xsd:decimal ] ;
             rr:predicate time:numericDuration ],
         [ rr:objectMap [ rml:reference "if(./@TYPE='MONTH') then 'http://www.w3.org/2006/time#unitMonth' else if(./@TYPE='DAY') then 'http://www.w3.org/2006/time#unitDay' else null " ;
                     rr:termType rr:IRI ] ;
             rr:predicate time:unitType ] ;
-    rr:subjectMap [ rr:class epo:Duration,
-                epo:SpecificDuration ;
+    rr:subjectMap [ rr:class epo:SpecificDuration ;
             rr:template "http://data.europa.eu/a4g/resource/id_{replace(../../REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(../../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_Duration_{generate-id(../../REFERENCE_NUMBER)}" ] .
 
 tedm:DynamicPurchaseSystemTechniqueUsage a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/PROCEDURE/DPS" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ] ;
     rr:subjectMap [ rr:class epo:DynamicPurchaseSystemTechniqueUsage ;
             rr:template "http://data.europa.eu/a4g/resource/id_{replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_DynamicPurchaseSystemTechniqueUsage_{generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER)}" ] .
 
@@ -614,23 +258,7 @@ tedm:ElementChangeDescription a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/ADDITIONAL_CORE_DATA/DATETIME_LAST_CHANGE" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "." ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "." ;
                     rr:datatype xsd:dateTime ] ;
             rr:predicate epo:hasProcurementDocumentChangeDate ] ;
     rr:subjectMap [ rr:class epo:ElementChangeDescription ;
@@ -640,23 +268,7 @@ tedm:ElementModificationDescription a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/ADDITIONAL_NEED | /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/UNFORESEEN_CIRCUMSTANCE" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "if(name()='ADDITIONAL_NEED') then 'http://publications.europa.eu/resource/authority/modification-justification/add-wss' else if(name()='UNFORESEEN_CIRCUMSTANCE') then 'http://publications.europa.eu/resource/authority/modification-justification/mod-cir' else null" ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "if(name()='ADDITIONAL_NEED') then 'http://publications.europa.eu/resource/authority/modification-justification/add-wss' else if(name()='UNFORESEEN_CIRCUMSTANCE') then 'http://publications.europa.eu/resource/authority/modification-justification/mod-cir' else null" ;
                     rr:termType rr:IRI ] ;
             rr:predicate epo:hasModificationJustification ],
         [ rr:objectMap [ rml:reference "P" ] ;
@@ -668,22 +280,6 @@ tedm:FrameworkAgreementTechniqueUsage a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/PROCEDURE/FRAMEWORK" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ] ;
     rr:subjectMap [ rr:class epo:FrameworkAgreementTechniqueUsage ;
             rr:template "http://data.europa.eu/a4g/resource/id_{replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_FrameworkAgreementTechniqueUsage_{generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER)}" ] .
 
@@ -691,22 +287,6 @@ tedm:FrameworkAgreementTermProcedure a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/PROCEDURE/FRAMEWORK" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ] ;
     rr:subjectMap [ rr:class epo:FrameworkAgreementTerm ;
             rr:template "http://data.europa.eu/a4g/resource/id_{replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_FrameworkAgreementTermProcedure_{generate-id(../../OBJECT_CONTRACT/REFERENCE_NUMBER)}" ] .
 
@@ -717,14 +297,6 @@ tedm:LotModification a rr:TriplesMap ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
             rr:predicate epo:hasRestatedEstimatedValue ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
@@ -743,23 +315,7 @@ tedm:LotPurpose a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/OBJECT_CONTRACT/OBJECT_DESCR" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:template "http://data.europa.eu/cpv/cpv/{CPV_ADDITIONAL/CPV_CODE/@CODE}" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:template "http://data.europa.eu/cpv/cpv/{CPV_ADDITIONAL/CPV_CODE/@CODE}" ] ;
             rr:predicate epo:hasAdditionalClassification ] ;
     rr:subjectMap [ rml:reference "if(exists(CPV_ADDITIONAL/CPV_CODE)) then 'http://data.europa.eu/a4g/resource/id_' || replace(../REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-') || '-' || replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-') || '_LotPurpose_' || generate-id(.) else null" ;
             rr:class epo:Purpose ] .
@@ -768,23 +324,7 @@ tedm:LotPurposeModification a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:template "http://data.europa.eu/cpv/cpv/{CPV_ADDITIONAL/CPV_CODE/@CODE}" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:template "http://data.europa.eu/cpv/cpv/{CPV_ADDITIONAL/CPV_CODE/@CODE}" ] ;
             rr:predicate epo:hasAdditionalClassification ] ;
     rr:subjectMap [ rml:reference "if(exists(CPV_ADDITIONAL/CPV_CODE)) then 'http://data.europa.eu/a4g/resource/id_' || replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-') || '-' || replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-') || '_LotPurposeModification_' || generate-id(.) else null" ;
             rr:class epo:Purpose ] .
@@ -793,23 +333,7 @@ tedm:NoticeAwardInformation a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_TOTAL | /%2$s/RESULTS/AWARDED_PRIZE/VAL_PRIZE | /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VAL_TOTAL_AFTER" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "." ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "." ;
                     rr:datatype xsd:decimal ] ;
             rr:predicate epo:hasTotalAwardedValue ] ;
     rr:subjectMap [ rr:class epo:NoticeAwardInformation ;
@@ -819,23 +343,7 @@ tedm:OrganisationAddress a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "if(not(exists(DOMAIN))) then null else if(DOMAIN='Vorarlberg') then'http://publications.europa.eu/resource/authority/atu/AUT_BLD_VORALB' else if(DOMAIN='Vienna') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_VIE' else if(DOMAIN='UpperAustria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_OO' else if(DOMAIN='Tyrol') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_TIROL' else if(DOMAIN='Styria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_STEIER' else if(DOMAIN='Salzburg') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_SZG' else if(DOMAIN='LowerAustria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_NO' else if(DOMAIN='Carinthia') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_KAER' else if(DOMAIN='Burgenland') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_BURG' else 'http://publications.europa.eu/resource/authority/atu/AT'" ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "if(not(exists(DOMAIN))) then null else if(DOMAIN='Vorarlberg') then'http://publications.europa.eu/resource/authority/atu/AUT_BLD_VORALB' else if(DOMAIN='Vienna') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_VIE' else if(DOMAIN='UpperAustria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_OO' else if(DOMAIN='Tyrol') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_TIROL' else if(DOMAIN='Styria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_STEIER' else if(DOMAIN='Salzburg') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_SZG' else if(DOMAIN='LowerAustria') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_NO' else if(DOMAIN='Carinthia') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_KAER' else if(DOMAIN='Burgenland') then 'http://publications.europa.eu/resource/authority/atu/AUT_BLD_BURG' else 'http://publications.europa.eu/resource/authority/atu/AT'" ;
                     rr:termType rr:IRI ] ;
             rr:predicate epo:adminUnitL2 ],
         [ rr:objectMap [ rr:template "http://publications.europa.eu/resource/authority/country/AUT" ] ;
@@ -847,23 +355,7 @@ tedm:Period a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/OBJECT_CONTRACT/OBJECT_DESCR/DATE_START | /%2$s/OBJECT_CONTRACT/OBJECT_DESCR/DATE_END" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "if(exists(../DATE_START)) then ../DATE_START else null" ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "if(exists(../DATE_START)) then ../DATE_START else null" ;
                     rr:datatype xsd:date ] ;
             rr:predicate epo:hasBeginning ],
         [ rr:objectMap [ rml:reference "if(exists(../DATE_END)) then ../DATE_END else null" ;
@@ -876,23 +368,7 @@ tedm:ProcedureIdentifier a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "." ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "." ] ;
             rr:predicate epo:hasIdentifierValue ] ;
     rr:subjectMap [ rr:class epo:Identifier ;
             rr:template "http://data.europa.eu/a4g/resource/id_{replace(., '[^a-zA-Z0-9]', '-')}-{replace(../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_ProcedureIdentifier_{generate-id(.)}" ] .
@@ -901,23 +377,7 @@ tedm:ProcedurePurpose a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/OBJECT_CONTRACT | /%2$s/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:template "http://data.europa.eu/cpv/cpv/{CPV_MAIN/CPV_CODE/@CODE}" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:template "http://data.europa.eu/cpv/cpv/{CPV_MAIN/CPV_CODE/@CODE}" ] ;
             rr:predicate epo:hasMainClassification ] ;
     rr:subjectMap [ rml:reference "if(exists(CPV_MAIN/CPV_CODE)) then 'http://data.europa.eu/a4g/resource/id_' || replace(/%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-') || '-' || replace(/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-') || '_ProcedurePurpose_' || generate-id(.) else null" ;
             rr:class epo:Purpose ] .
@@ -926,26 +386,7 @@ tedm:SubmissionTerm a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/PROCEDURE" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:datatype xsd:dateTime ;
-                    rr:reference "XXXX" ] ;
-            rr:predicate epo:hasReceiptExpressionDeadline ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "DATETIME_RECEIPT_TENDERS" ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "DATETIME_RECEIPT_TENDERS" ;
                     rr:datatype xsd:dateTime ] ;
             rr:predicate epo:hasReceiptDeadline ],
         [ rr:objectMap [ rml:reference "if(../@TIME_LIMITS='PRI_REDUCING_TIME_LIMITS' and exists(DATETIME_RECEIPT_TENDERS)) then DATETIME_RECEIPT_TENDERS else null" ;
@@ -962,23 +403,7 @@ tedm:Winner a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME | /%2$s/RESULTS/AWARDED_PRIZE/WINNER/ADDRESS_WINNER/OFFICIALNAME | /%2$s/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "if(name(../../../../..)='KD_7_2_Z2' or name(../../../../..)='KD_8_2_Z3') then 'true' else 'false'" ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "if(name(../../../../..)='KD_7_2_Z2' or name(../../../../..)='KD_8_2_Z3') then 'true' else 'false'" ;
                             rr:parent "'true'" ] ;
                     rr:parentTriplesMap tedm:Procedure ] ;
             rr:predicate epo:contextualisedBy ],
@@ -993,29 +418,7 @@ tedm:AdditionalOrganisation a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:datatype rdfs:Literal ;
-                    rr:reference "XXXX" ] ;
-            rr:predicate epo:hasBuyerLegalTypeDescription ],
-        [ rr:objectMap [ rr:datatype rdfs:Literal ;
-                    rr:reference "XXXX" ] ;
-            rr:predicate epo:hasMainActivityDescription ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "OFFICIALNAME" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "OFFICIALNAME" ] ;
             rr:predicate epo:hasLegalName ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "NATIONALID" ;
                             rr:parent "." ] ;
@@ -1032,23 +435,7 @@ tedm:Contract a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/AWARD_CONTRACT/AWARDED_CONTRACT | /%2$s/RESULTS/AWARDED_PRIZE | /%2$s/ADDITIONAL_CORE_DATA/OBJECT_CONTRACT_MODIFICATIONS" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "DATE_CONCLUSION_CONTRACT" ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "DATE_CONCLUSION_CONTRACT" ;
                     rr:datatype xsd:date ] ;
             rr:predicate epo:hasContractConclusionDate ],
         [ rr:objectMap [ rml:reference "TITLE/P" ] ;
@@ -1064,29 +451,7 @@ tedm:LotAwardOutcome a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_TOTAL | /%2$s/RESULTS/AWARDED_PRIZE/VAL_PRIZE | /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VAL_TOTAL_BEFORE" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:datatype rdfs:Literal ;
-                    rr:reference "XXXX" ] ;
-            rr:predicate epo:hasNonAwardedContractTitle ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:datatype rdfs:Literal ;
-                    rr:reference "XXXX" ] ;
-            rr:predicate epo:hasNonAwardedContractNumber ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
             rr:predicate epo:hasAwardedValue ],
         [ rr:objectMap [ rr:parentTriplesMap tedm:Lot ] ;
             rr:predicate epo:describesLot ] ;
@@ -1097,23 +462,7 @@ tedm:Notice a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "if(name()='KD_7_2_Z2' or name()='KD_8_2_Z3') then 'false' else 'true'" ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "if(name()='KD_7_2_Z2' or name()='KD_8_2_Z3') then 'false' else 'true'" ;
                             rr:parent "'true'" ] ;
                     rr:parentTriplesMap tedm:Buyer ] ;
             rr:predicate epo:announcesRole ],
@@ -1159,29 +508,7 @@ tedm:Organisation a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:datatype rdfs:Literal ;
-                    rr:reference "XXXX" ] ;
-            rr:predicate epo:hasMainActivityDescription ],
-        [ rr:objectMap [ rr:datatype rdfs:Literal ;
-                    rr:reference "XXXX" ] ;
-            rr:predicate epo:hasBuyerLegalTypeDescription ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "OFFICIALNAME" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "OFFICIALNAME" ] ;
             rr:predicate epo:hasLegalName ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "NATIONALID" ;
                             rr:parent "." ] ;
@@ -1192,27 +519,35 @@ tedm:Organisation a rr:TriplesMap ;
     rr:subjectMap [ rr:class org:Organization ;
             rr:template "http://data.europa.eu/a4g/resource/id_{replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(NATIONALID, '[^a-zA-Z0-9]', '-')}_Organisation_{generate-id(NATIONALID)}" ] .
 
+tedm:LotAwardOutcomeAwardedMonetaryValue a rr:TriplesMap ;
+    rml:logicalSource [ rml:iterator "/%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_TOTAL | /%2$s/RESULTS/AWARDED_PRIZE/VAL_PRIZE | /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VAL_TOTAL_BEFORE" ;
+            rml:referenceFormulation ql:XPath ;
+            rml:source "%1$s" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "." ;
+                    rr:datatype xsd:decimal ] ;
+            rr:predicate epo:hasAmountValue ],
+        [ rr:objectMap [ rr:template "http://publications.europa.eu/resource/authority/currency/{@CURRENCY}" ] ;
+            rr:predicate epo:hasCurrency ] ;
+    rr:subjectMap [ rr:class epo:MonetaryValue ;
+            rr:template "http://data.europa.eu/a4g/resource/id_{replace(../../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(../../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_LotAwardOutcomeAwardedMonetaryValue_{generate-id(../../../OBJECT_CONTRACT/REFERENCE_NUMBER)}" ] .
+
+tedm:LotAwardOutcomeAwardedMonetaryValueModification a rr:TriplesMap ;
+    rml:logicalSource [ rml:iterator "/%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VAL_TOTAL_AFTER" ;
+            rml:referenceFormulation ql:XPath ;
+            rml:source "%1$s" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "." ;
+                    rr:datatype xsd:decimal ] ;
+            rr:predicate epo:hasAmountValue ],
+        [ rr:objectMap [ rr:template "http://publications.europa.eu/resource/authority/currency/{@CURRENCY}" ] ;
+            rr:predicate epo:hasCurrency ] ;
+    rr:subjectMap [ rr:class epo:MonetaryValue ;
+            rr:template "http://data.europa.eu/a4g/resource/id_{replace(../../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(../../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_LotAwardOutcomeAwardedMonetaryValueModification_{generate-id(../../../OBJECT_CONTRACT/REFERENCE_NUMBER)}" ] .
+
 tedm:OrganisationIdentifier a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s//NATIONALID" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "." ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "." ] ;
             rr:predicate epo:hasIdentifierValue ] ;
     rr:subjectMap [ rml:reference "if(not(.='')) then 'http://data.europa.eu/a4g/resource/id_' || replace(/%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-') || '-' || replace(/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-') || '_OrganisationIdentifier_' || generate-id(.) else null" ;
             rr:class epo:Identifier ] .
@@ -1223,19 +558,11 @@ tedm:Lot a rr:TriplesMap ;
             rml:source "%1$s" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
             rr:predicate epo:hasRestatedEstimatedValue ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
             rr:predicate epo:hasRestatedEstimatedValue ],
         [ rr:objectMap [ rml:reference "../OBJECT_DESCR/TITLE/P" ] ;
             rr:predicate epo:hasTitle ],
@@ -1254,23 +581,7 @@ tedm:Procedure a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/OBJECT_CONTRACT" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "TITLE/P" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "TITLE/P" ] ;
             rr:predicate epo:hasTitle ],
         [ rr:objectMap [ rml:reference "SHORT_DESCR/P" ] ;
             rr:predicate epo:hasDescription ],
@@ -1303,60 +614,4 @@ tedm:Procedure a rr:TriplesMap ;
             rr:predicate epo:isSubjectToProcedureSpecificTerm ] ;
     rr:subjectMap [ rr:class epo:Procedure ;
             rr:template "http://data.europa.eu/a4g/resource/id_{replace(REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_Procedure_{generate-id(REFERENCE_NUMBER)}" ] .
-
-tedm:LotAwardOutcomeAwardedMonetaryValue a rr:TriplesMap ;
-    rml:logicalSource [ rml:iterator "/%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_TOTAL | /%2$s/RESULTS/AWARDED_PRIZE/VAL_PRIZE | /%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VAL_TOTAL_BEFORE" ;
-            rml:referenceFormulation ql:XPath ;
-            rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "." ;
-                    rr:datatype xsd:decimal ] ;
-            rr:predicate epo:hasAmountValue ],
-        [ rr:objectMap [ rr:template "http://publications.europa.eu/resource/authority/currency/{@CURRENCY}" ] ;
-            rr:predicate epo:hasCurrency ] ;
-    rr:subjectMap [ rr:class epo:MonetaryValue ;
-            rr:template "http://data.europa.eu/a4g/resource/id_{replace(../../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(../../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_LotAwardOutcomeAwardedMonetaryValue_{generate-id(../../../OBJECT_CONTRACT/REFERENCE_NUMBER)}" ] .
-
-tedm:LotAwardOutcomeAwardedMonetaryValueModification a rr:TriplesMap ;
-    rml:logicalSource [ rml:iterator "/%2$s/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VAL_TOTAL_AFTER" ;
-            rml:referenceFormulation ql:XPath ;
-            rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedEstimatedValue ],
-        [ rr:objectMap [ rml:reference "." ;
-                    rr:datatype xsd:decimal ] ;
-            rr:predicate epo:hasAmountValue ],
-        [ rr:objectMap [ rr:template "http://publications.europa.eu/resource/authority/currency/{@CURRENCY}" ] ;
-            rr:predicate epo:hasCurrency ] ;
-    rr:subjectMap [ rr:class epo:MonetaryValue ;
-            rr:template "http://data.europa.eu/a4g/resource/id_{replace(../../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(../../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_LotAwardOutcomeAwardedMonetaryValueModification_{generate-id(../../../OBJECT_CONTRACT/REFERENCE_NUMBER)}" ] .
 
