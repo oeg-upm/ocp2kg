@@ -1,10 +1,9 @@
 # OCP2KG: Ontology Change Propagation to Knowledge Graphs
+![GitHub](https://img.shields.io/github/license/oeg-dataintegration/ocp2kg?style=flat)
+
 OCP2KG is a tool for propagating ontology changes to declarative mappings. The tool requires as input the updated 
-version of the ontology in OWL, the outdated mappings in RML, and the change data. The change data has to be in 
+version of the ontology in OWL, the outdated mappings in RML, and the change data, that has to be in 
 RDF following the [OWL Change Ontology Extension](https://github.com/DiegoCondeHerreros/OWLChangeExtension) model.  
-The "updated_mappings.ttl" output is generated in the src folder with the updated mappings for the newer version 
-of the ontology. More details regarding the implementation and evaluation of the tool ca be seen in
-"Propagating Ontology Changes to Declarative Mappings in Construction of Knowledge Graphs". 
 
 # How to run it?
 
@@ -16,12 +15,20 @@ python3 -c evol_kg.py path_to_change_kg.nt -m path_to_old_mapping.rml.ttl -o pat
 # Architecture
 ![OCP2KG Architecture](figures/arqui.jpg?raw=true "OCP2KG Architecture")
 
-# Issues
+## Cite this work:
+If you used OCP2KG in your work, please cite it as:
 
-# Contact
-For any doubts regarding usage of the tool please contact us via email to diego.conde.herreros@upm.es
-
+```bib
+@inproceedings{herreros2024propagating,
+    title={Propagating Ontology Changes for the Construction of Knowledge Graphs},
+    author={Diego Conde Herreros and Lise Stork and Romana Pernisch and Mar{\'\i}a Poveda-Villal{\'o}n and Oscar Corcho and David Chaves-Fraga},
+    booktitle={Submitted to Fifth International Workshop on Knowledge Graph Construction@ESWC2024},
+    year={2024},
+    url={https://openreview.net/forum?id=ONL4LGlHNu},
+    note={under review}
+}
+```
 
 # Authors
-- Diego Conde Herreros (OEG-UPM)
+- Diego Conde Herreros (OEG-UPM) - main contact  diego.conde.herreros at upm.es
 - David Chaves-Fraga (CiTIUS-USC)
