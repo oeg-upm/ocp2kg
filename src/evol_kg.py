@@ -457,7 +457,7 @@ def AddObjectProperty(change):
    }
    WHERE {
       ?triplesmap rr:subjectMap ?subjectMap .
-      ?sujectMap rr:class <"""+domain+"""> .
+      ?subjectMap rr:class <"""+domain+"""> .
 
       ?parent_tm rr:subjectMap ?parent_subjectMap .
       ?parent_subjectMap rr:class <"""+range+"""> .     
