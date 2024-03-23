@@ -9,7 +9,7 @@ RDF following the [OWL Change Ontology Extension](https://github.com/DiegoCondeH
 
 ```bash
 python3 -m pip install -r requirements
-python3 -c evol_kg.py path_to_change_kg.nt -m path_to_old_mapping.rml.ttl -o path_to_new_ontology.ttl -n path_output_mappings.rml.ttl
+python3 evol_kg.py -c path_to_change_kg.nt -m path_to_old_mapping.rml.ttl -o path_to_new_ontology.ttl -n path_output_mappings.rml.ttl
 ```
 
 # Architecture
@@ -20,12 +20,12 @@ If you used OCP2KG in your work, please cite it as:
 
 ```bib
 @inproceedings{herreros2024propagating,
-    title={Propagating Ontology Changes for the Construction of Knowledge Graphs},
+    title={{Propagating Ontology Changes to Declarative Mappings in Construction of Knowledge Graphs}},
     author={Diego Conde Herreros and Lise Stork and Romana Pernisch and Mar{\'\i}a Poveda-Villal{\'o}n and Oscar Corcho and David Chaves-Fraga},
-    booktitle={Submitted to Fifth International Workshop on Knowledge Graph Construction@ESWC2024},
+    booktitle={Submitted to Fifth International Workshop on Knowledge Graph Construction\@ESWC2024},
     year={2024},
     url={https://openreview.net/forum?id=ONL4LGlHNu},
-    note={under review}
+    note={Under Review}
 }
 ```
 

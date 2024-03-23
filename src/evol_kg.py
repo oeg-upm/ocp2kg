@@ -16,13 +16,13 @@ def AddClass(change):
         the output_mappings updated with a new class
     """
     select_change = f' SELECT DISTINCT ?class WHERE {{' \
-                    f'<{change}> omv:addedClass ?class .}} '
+                    f' <{change}> {OMV_ADDEDCLASS} ?class .}} '
 
     results = change_data.query(select_change)
     added_class = results.bindings[0][Variable('class')]
 
     insert_class_query = f' INSERT DATA {{' \
-                         f'{added_class} a {R2RML_TRIPLES_MAP}; ' \
+                         f'{added_class} {RDF_TYPE} {R2RML_TRIPLES_MAP}; ' \
                          f'{RML_LOGICAL_SOURCE} [ ' \
                          f'   {RML_SOURCE} "XXXX"; ' \
                          f'   {RML_REFERENCE_FORMULATION} "XXXX" ' \
@@ -640,7 +640,8 @@ if __name__ == "__main__":
             RemoveDataProperty(r["change"])
     output_mappings.serialize(destination=args.new_mappings_path)
     yarrrml_content = yatter.inverse_translation(output_mappings)
-    with open("updated_mappings.yaml", "wb") as f:
+    with open(args.new_mappings_path.replace(".ttl",".yml"), "wb") as f:
         yaml = YAML()
         yaml.default_flow_style = False
+        yaml.width = 3000
         yaml.dump(yarrrml_content, f)

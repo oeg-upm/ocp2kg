@@ -82,7 +82,7 @@ R2RML_TABLE_NAME = f'{R2RML_PREFIX}:tableName'
 R2RML_COLUMN = f'{R2RML_PREFIX}:column'
 
 ##############################################################################
-#############################   D2RQ CONSTANTS  ###########################
+#############################   D2RQ CONSTANTS  ##############################
 ##############################################################################
 D2RQ_DATABASE_CLASS = 'd2rq:Database'
 D2RQ_DSN = 'd2rq:jdbcDSN'
@@ -90,6 +90,12 @@ D2RQ_DRIVER = 'd2rq:jdbcDriver'
 D2RQ_USER = 'd2rq:username'
 D2RQ_PASS = 'd2rq:password'
 
+
+##############################################################################
+#############################  OWV CONSTANTS  ###############################
+##############################################################################
+
+OMV_ADDEDCLASS = 'omv:addedClass'
 
 logger = logging.getLogger(__name__)
 coloredlogs.install(level='DEBUG', fmt='%(asctime)s,%(msecs)03d | %(levelname)s: %(message)s')
