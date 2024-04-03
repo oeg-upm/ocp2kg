@@ -29,7 +29,7 @@ def AddClass(change):
                          f'];	    ' \
                          f'{R2RML_SUBJECT} [ ' \
                          f'   {R2RML_TEMPLATE} "XXXX"; ' \
-                         f'   {R2RML_CLASS} <{added_class}> ' \
+                         f'   {R2RML_CLASS} {added_class} ' \
                          f']. }} '
     output_mappings.update(insert_class_query)
 
@@ -469,7 +469,7 @@ def AddObjectProperty(change):
 # --------------------------------------------------------------------------------------------------------------------------------------------------
 def RemoveObjectProperty(change):
     q = """
-    SELECT DISTINCT ?domain ?property ?range
+    SELECT DISTINCT ?domain ?property 
     WHERE {
         <""" + change + """> omv:domainRemoveObjectProperty ?domain.
         <""" + change + """> omv:propertyRemoveObjectProperty ?property.
@@ -510,7 +510,7 @@ def RemoveObjectProperty(change):
 def AddDataProperty(change):
     # Adds %DATA_PROPERTY% to %CLASS% with datatype %RANGE_DATA_PROPERTY% extracted from the range of %DATA_PROPERTY%. By defaylt, reference is used for the data.
     q = """
-    SELECT DISTINCT ?domain ?property ?range
+    SELECT DISTINCT ?domain ?property 
     WHERE {
         <""" + change + """> omv:domainAddDataProperty ?domain.
         <""" + change + """> omv:propertyAddDataProperty ?property.
@@ -525,30 +525,47 @@ def AddDataProperty(change):
         <""" + predicate + """> rdfs:range ?range.
     }
    """
+        range = ""
         for r in ontology.query(q2):
             range = r["range"]
-        q1 = """
-   INSERT { 
-      ?triplesmap rr:predicateObjectMap [
-         rr:predicate <""" + predicate + """>;
-         rr:objectMap [
-            rml:reference "XXXX";
-            rr:datatype <""" + range + """>
-         ]
-      ].
-   }
-   WHERE {
-      ?triplesmap rr:subjectMap ?subjectMap .
-      ?subjectMap rr:class <""" + domain + """> .
-   }
-   """
+        if range is not "":    
+         q1 = """
+            INSERT { 
+               ?triplesmap rr:predicateObjectMap [
+                  rr:predicate <""" + predicate + """>;
+                  rr:objectMap [
+                     rml:reference "XXXX";
+                     rr:datatype <""" + range + """>
+                  ]
+               ].
+            }
+            WHERE {
+               ?triplesmap rr:subjectMap ?subjectMap .
+               ?subjectMap rr:class <""" + domain + """> .
+            }
+            """
+        if range is "":
+         q1 = """
+            INSERT { 
+               ?triplesmap rr:predicateObjectMap [
+                  rr:predicate <""" + predicate + """>;
+                  rr:objectMap [
+                     rml:reference "XXXX";
+                  ]
+               ].
+            }
+            WHERE {
+               ?triplesmap rr:subjectMap ?subjectMap .
+               ?subjectMap rr:class <""" + domain + """> .
+            }
+            """            
         output_mappings.update(q1)
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
 def RemoveDataProperty(change):
     q = """
-    SELECT DISTINCT ?domain ?property ?range
+    SELECT DISTINCT ?domain ?property
     WHERE {
         <""" + change + """> omv:domainRemoveDataProperty ?domain.
         <""" + change + """> omv:propertyRemoveDataProperty ?property.
