@@ -230,6 +230,7 @@ def AddSubClass(change):
         # Adds %SUPERCLASS% to the %SUBCLASS%. This change triggers the second and third query, which add DATAPROPERTY and OBJECTPROPERTY where the domain is SUPERCLASS.
         q1 = """
    PREFIX rr: <http://www.w3.org/ns/r2rml#>
+   PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
 
    INSERT {  
       ?subjectMap rr:class <""" + parent + """>.
@@ -254,6 +255,9 @@ def AddSubClass(change):
         # Adds %DATAPROPERTIES% where their domain are %SUPERCLASS%. This runs after the first query.
         # Needs to be run for each DATAPROPERTY of %SUBCLASS%
         q3 = """
+           PREFIX rr: <http://www.w3.org/ns/r2rml#>
+           PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+
    INSERT {  
     ?triplesmap rr:predicateObjectMap [
         rr:predicate <""" + dataprop + """>;
@@ -283,6 +287,9 @@ def AddSubClass(change):
         # Adds %OBJECTPROPERTY% where their domain are %SUPERCLASS% and the RANGE is %RANGECLASS%. This runs after the first query.
         # Needs to be run for each OBJECTPROPERTY of %SUPERCLASS%
         q5 = """
+           PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+            PREFIX rr: <http://www.w3.org/ns/r2rml#>
+
       INSERT {  
          ?triplesmap rr:predicateObjectMap [
             rr:predicate <""" + objprop + """>;
@@ -321,6 +328,7 @@ def RemoveSubClass(change):
         child = r["child"]
     q1 = """
       PREFIX rr: <http://www.w3.org/ns/r2rml#>
+      PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
 
       DELETE {   
          ?subjectMap rr:class <""" + parent + """>.
@@ -346,6 +354,10 @@ def RemoveSubClass(change):
         # For each DATAPROPERTY of %SUBCLASS%:
         # Run RemoveDataProperty.rq with %CLASS% = %SUPERCLASS% .
         q3 = """
+           PREFIX rr: <http://www.w3.org/ns/r2rml#>
+            PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+
+
    DELETE { 
       ?triplesmap rr:predicateObjectMap ?pom.
       ?pom rr:predicate <""" + dataprop + """> . #if comes from the ontology, it's going to be always constant
@@ -379,6 +391,9 @@ def RemoveSubClass(change):
     for r in ontology.query(q4):
         objprop = r["objectproperty"]
         q5 = """
+           PREFIX rr: <http://www.w3.org/ns/r2rml#>
+            PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+
    DELETE { 
       ?triplesmap rr:predicateObjectMap ?pom.
       ?pom rr:predicate <""" + objprop + """> . #if comes from the ontology, it's going to be always constant
@@ -406,6 +421,9 @@ def RemoveSubClass(change):
         # Remove ObjectProperties where %OBJECTPROPERTY% has as range %SUBCLASS%.
         # For each OBJECTPROPERTY:
         q6 = """
+           PREFIX rr: <http://www.w3.org/ns/r2rml#>
+           PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+
             DELETE {
                ?parent_triplesMap rr:predicateObjectMap <%OBJECTPROPERTY%>.
                ?parent_pom rr:objectMap ?parent_object.
@@ -443,26 +461,29 @@ def AddObjectProperty(change):
         predicate = r["property"]
         range = r["range"]
     q1 = """
-   INSERT { 
-      ?triplesmap rr:predicateObjectMap [
-         rr:predicate <""" + predicate + """>;
-         rr:objectMap [
-            rr:parentTriplesMap ?parent_tm;
-            rr:joinCondition [
-               rr:child "XXXX";
-               rr:parent "XXXX"
-            ]
-         ]
-      ].
-   }
-   WHERE {
-      ?triplesmap rr:subjectMap ?subjectMap .
-      ?subjectMap rr:class <""" + domain + """> .
+       PREFIX rr: <http://www.w3.org/ns/r2rml#>
+      PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
 
-      ?parent_tm rr:subjectMap ?parent_subjectMap .
-      ?parent_subjectMap rr:class <""" + range + """> .     
-   }
-   """
+      INSERT { 
+         ?triplesmap rr:predicateObjectMap [
+            rr:predicate <""" + predicate + """>;
+            rr:objectMap [
+               rr:parentTriplesMap ?parent_tm;
+               rr:joinCondition [
+                  rr:child "XXXX";
+                  rr:parent "XXXX"
+               ]
+            ]
+         ].
+      }
+      WHERE {
+         ?triplesmap rr:subjectMap ?subjectMap .
+         ?subjectMap rr:class <""" + domain + """> .
+
+         ?parent_tm rr:subjectMap ?parent_subjectMap .
+         ?parent_subjectMap rr:class <""" + range + """> .     
+      }
+      """
     output_mappings.update(q1)
 
 
@@ -480,6 +501,9 @@ def RemoveObjectProperty(change):
         predicate = r["property"]
     # Removes %OBJECTPROPERTY% from %CLASS%. Extended version is also provided
     q1 = """
+       PREFIX rr: <http://www.w3.org/ns/r2rml#>
+      PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+
    DELETE { 
       ?triplesmap rr:predicateObjectMap ?pom.
       ?pom rr:predicate <""" + predicate + """> . #if comes from the ontology, it's going to be always constant
@@ -528,8 +552,11 @@ def AddDataProperty(change):
         range = ""
         for r in ontology.query(q2):
             range = r["range"]
-        if range is not "":    
+        if range !=  "":    
          q1 = """
+            PREFIX rr: <http://www.w3.org/ns/r2rml#>
+            PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+
             INSERT { 
                ?triplesmap rr:predicateObjectMap [
                   rr:predicate <""" + predicate + """>;
@@ -544,8 +571,11 @@ def AddDataProperty(change):
                ?subjectMap rr:class <""" + domain + """> .
             }
             """
-        if range is "":
+        if range == "":
          q1 = """
+            PREFIX rr: <http://www.w3.org/ns/r2rml#>
+            PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+
             INSERT { 
                ?triplesmap rr:predicateObjectMap [
                   rr:predicate <""" + predicate + """>;
@@ -577,7 +607,8 @@ def RemoveDataProperty(change):
     # Removes %DATAPROPERTY% from %CLASS%. Extended version is also provided
     q1 = """
    PREFIX rr: <http://www.w3.org/ns/r2rml#>
-
+   PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+   
    DELETE { 
       ?triplesmap rr:predicateObjectMap ?pom.
       ?pom rr:predicate <""" + predicate + """> . #if comes from the ontology, it's going to be always constant

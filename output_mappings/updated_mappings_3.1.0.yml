@@ -181,8 +181,8 @@ mappings:
           parameters:
           - [str1, $(XXXX)]
           - [str2, $(XXXX)]
-    - [epo:hasNonAwardedContractTitle, $(n6b2f3e5de5e54df3a4c2229bcb4440adb57)]
-    - [epo:hasNonAwardedContractNumber, $(n6b2f3e5de5e54df3a4c2229bcb4440adb59)]
+    - [epo:hasNonAwardedContractTitle, $(n875629705dac497e918030a27c2ba1aab57)]
+    - [epo:hasNonAwardedContractNumber, $(n875629705dac497e918030a27c2ba1aab59)]
     - p: epo:hasAwardedValue
       o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
@@ -191,7 +191,7 @@ mappings:
         mapping: LotModification
     - p: epo:hasRestatedAwardedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -199,14 +199,6 @@ mappings:
           - [str2, $(XXXX)]
     - p: epo:hasRestatedAwardedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: epo:hasBargainPrice
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
@@ -216,6 +208,14 @@ mappings:
     - p: epo:hasBargainPrice
       o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: epo:hasBargainPrice
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -353,7 +353,7 @@ mappings:
         mapping: LotAwardOutcome
     - p: epo:summarisesInformationForLotAwardOutcome
       o:
-        mapping: LotAwardOutcome
+        mapping: LotAwardOutcomeModification
         condition:
           function: equal
           parameters:
@@ -361,7 +361,7 @@ mappings:
           - [str2, $(XXXX)]
     - p: epo:summarisesInformationForLotAwardOutcome
       o:
-        mapping: LotAwardOutcomeModification
+        mapping: LotAwardOutcome
         condition:
           function: equal
           parameters:
@@ -869,7 +869,7 @@ mappings:
           parameters:
           - [str1, $(XXXX)]
           - [str2, $(XXXX)]
-    - [epo:hasBuyerLegalTypeDescription, $(n6b2f3e5de5e54df3a4c2229bcb4440adb321)]
+    - [epo:hasBuyerLegalTypeDescription, $(n875629705dac497e918030a27c2ba1aab321)]
     - p: epo:hasRestatedEstimatedValue
       o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
@@ -886,7 +886,7 @@ mappings:
           parameters:
           - [str1, $(XXXX)]
           - [str2, $(XXXX)]
-    - [epo:hasMainActivityDescription, $(n6b2f3e5de5e54df3a4c2229bcb4440adb329)]
+    - [epo:hasMainActivityDescription, $(n875629705dac497e918030a27c2ba1aab329)]
     - [epo:hasLegalName, $(.)]
     - p: epo:hasID
       o:
@@ -898,14 +898,6 @@ mappings:
           - [str2, $(.)]
     - p: cccev:registeredAddress
       o:
-        mapping: ContractTermLotLocationAddress
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: cccev:registeredAddress
-      o:
         mapping: AdditionalOrganisationAddress
         condition:
           function: equal
@@ -915,6 +907,14 @@ mappings:
     - p: cccev:registeredAddress
       o:
         mapping: OrganisationAddress
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: cccev:registeredAddress
+      o:
+        mapping: ContractTermLotLocationAddress
         condition:
           function: equal
           parameters:
@@ -998,7 +998,7 @@ mappings:
           parameters:
           - [str1, $(XXXX)]
           - [str2, $(XXXX)]
-    - [time:numericDuration, $(n6b2f3e5de5e54df3a4c2229bcb4440adb366)]
+    - [time:numericDuration, $(n875629705dac497e918030a27c2ba1aab366)]
     - [time:numericDuration, $(.), xsd:decimal]
     - [time:unitType, $(if(./@TYPE='MONTH') then 'http://www.w3.org/2006/time#unitMonth' else if(./@TYPE='DAY') then 'http://www.w3.org/2006/time#unitDay' else null )]
   DynamicPurchaseSystemTechniqueUsage:
@@ -1521,7 +1521,7 @@ mappings:
     po:
     - [rdf:type, epo:ProcedureSpecificTerm]
     - [rdf:type, epo:SubmissionTerm]
-    - [epo:hasReceiptExpressionDeadline, $(n6b2f3e5de5e54df3a4c2229bcb4440adb586)]
+    - [epo:hasReceiptExpressionDeadline, $(n875629705dac497e918030a27c2ba1aab586)]
     - p: epo:hasRestatedEstimatedValue
       o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
@@ -1617,7 +1617,7 @@ mappings:
     s: http://data.europa.eu/a4g/resource/id_$(replace(../../OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-'))-$(replace(../ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-'))_Organisation_$(generate-id(NATIONALID))
     po:
     - [rdf:type, org:Organization]
-    - [epo:hasMainActivityDescription, $(n6b2f3e5de5e54df3a4c2229bcb4440adb628)]
+    - [epo:hasMainActivityDescription, $(n875629705dac497e918030a27c2ba1aab628)]
     - p: epo:hasRestatedEstimatedValue
       o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
@@ -1634,7 +1634,7 @@ mappings:
           parameters:
           - [str1, $(XXXX)]
           - [str2, $(XXXX)]
-    - [epo:hasBuyerLegalTypeDescription, $(n6b2f3e5de5e54df3a4c2229bcb4440adb636)]
+    - [epo:hasBuyerLegalTypeDescription, $(n875629705dac497e918030a27c2ba1aab636)]
     - p: epo:hasRestatedEstimatedValue
       o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
@@ -1670,14 +1670,6 @@ mappings:
           - [str2, $(NATIONALID)]
     - p: cccev:registeredAddress
       o:
-        mapping: ContractTermLotLocationAddress
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: cccev:registeredAddress
-      o:
         mapping: AdditionalOrganisationAddress
         condition:
           function: equal
@@ -1687,6 +1679,14 @@ mappings:
     - p: cccev:registeredAddress
       o:
         mapping: OrganisationAddress
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: cccev:registeredAddress
+      o:
+        mapping: ContractTermLotLocationAddress
         condition:
           function: equal
           parameters:
@@ -1741,7 +1741,7 @@ mappings:
         mapping: LotAwardOutcome
     - p: epo:signedByBuyer
       o:
-        mapping: AdditionalBuyer
+        mapping: Buyer
         condition:
           function: equal
           parameters:
@@ -1749,7 +1749,7 @@ mappings:
           - [str2, $(XXXX)]
     - p: epo:signedByBuyer
       o:
-        mapping: Buyer
+        mapping: AdditionalBuyer
         condition:
           function: equal
           parameters:
@@ -1769,7 +1769,7 @@ mappings:
           parameters:
           - [str1, $(XXXX)]
           - [str2, $(XXXX)]
-    - [epo:hasNonAwardedContractTitle, $(n6b2f3e5de5e54df3a4c2229bcb4440adb679)]
+    - [epo:hasNonAwardedContractTitle, $(n875629705dac497e918030a27c2ba1aab679)]
     - p: epo:hasRestatedEstimatedValue
       o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
@@ -1786,7 +1786,7 @@ mappings:
           parameters:
           - [str1, $(XXXX)]
           - [str2, $(XXXX)]
-    - [epo:hasNonAwardedContractNumber, $(n6b2f3e5de5e54df3a4c2229bcb4440adb687)]
+    - [epo:hasNonAwardedContractNumber, $(n875629705dac497e918030a27c2ba1aab687)]
     - p: epo:hasRestatedEstimatedValue
       o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
@@ -1803,7 +1803,7 @@ mappings:
         mapping: Lot
     - p: epo:hasRestatedAwardedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValueModification
+        mapping: LotAwardOutcomeAwardedMonetaryValue
         condition:
           function: equal
           parameters:
@@ -1811,14 +1811,6 @@ mappings:
           - [str2, $(XXXX)]
     - p: epo:hasRestatedAwardedValue
       o:
-        mapping: LotAwardOutcomeAwardedMonetaryValue
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: epo:hasBargainPrice
-      o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
@@ -1828,6 +1820,14 @@ mappings:
     - p: epo:hasBargainPrice
       o:
         mapping: LotAwardOutcomeAwardedMonetaryValue
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: epo:hasBargainPrice
+      o:
+        mapping: LotAwardOutcomeAwardedMonetaryValueModification
         condition:
           function: equal
           parameters:
@@ -1959,8 +1959,8 @@ mappings:
           parameters:
           - [str1, $(XXXX)]
           - [str2, $(XXXX)]
-    - [epo:hasBuyerLegalTypeDescription, $(n6b2f3e5de5e54df3a4c2229bcb4440adb751)]
-    - [epo:hasMainActivityDescription, $(n6b2f3e5de5e54df3a4c2229bcb4440adb753)]
+    - [epo:hasBuyerLegalTypeDescription, $(n875629705dac497e918030a27c2ba1aab751)]
+    - [epo:hasMainActivityDescription, $(n875629705dac497e918030a27c2ba1aab753)]
     - p: epo:hasRestatedEstimatedValue
       o:
         mapping: LotAwardOutcomeAwardedMonetaryValueModification
@@ -1983,6 +1983,14 @@ mappings:
         mapping: OrganisationAddress
     - p: cccev:registeredAddress
       o:
+        mapping: OrganisationAddress
+        condition:
+          function: equal
+          parameters:
+          - [str1, $(XXXX)]
+          - [str2, $(XXXX)]
+    - p: cccev:registeredAddress
+      o:
         mapping: AdditionalOrganisationAddress
         condition:
           function: equal
@@ -1992,14 +2000,6 @@ mappings:
     - p: cccev:registeredAddress
       o:
         mapping: ContractTermLotLocationAddress
-        condition:
-          function: equal
-          parameters:
-          - [str1, $(XXXX)]
-          - [str2, $(XXXX)]
-    - p: cccev:registeredAddress
-      o:
-        mapping: OrganisationAddress
         condition:
           function: equal
           parameters:
@@ -2298,7 +2298,7 @@ mappings:
     - [epo:isContractingEntity, $(XXXX), xsd:boolean]
     - p: epo:hasContactPointInRole
       o:
-        mapping: AdditionalContactPoint
+        mapping: ContactPoint
         condition:
           function: equal
           parameters:
@@ -2306,7 +2306,7 @@ mappings:
           - [str2, $(XXXX)]
     - p: epo:hasContactPointInRole
       o:
-        mapping: ContactPoint
+        mapping: AdditionalContactPoint
         condition:
           function: equal
           parameters:

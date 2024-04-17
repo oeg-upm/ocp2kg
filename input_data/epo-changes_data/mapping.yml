@@ -36,7 +36,7 @@ prefixes:
 mappings:
   AddedClasses:
     sources:
-    - [Parsed_Changes/added_classes_3.1.0.csv~csv]
+    - [Parsed_Changes/added_classes_4.0.csv~csv]
     s: http://epo-changes.org/$(reference_version)-$(target_version)/AddClass/$(name)
     po:
     - [rdf:type, omv:AddClass]
@@ -46,7 +46,7 @@ mappings:
 
   DeletedClasses:
     sources:
-    - [Parsed_Changes/deleted_classes_3.1.0.csv~csv]
+    - [Parsed_Changes/deleted_classes_4.0.csv~csv]
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/RemoveClass/$(name)
     po:
@@ -56,7 +56,7 @@ mappings:
 
   AddedSubClasses:
     sources:
-    - [Parsed_Changes/added_subclass_3.1.0.csv~csv]
+    - [Parsed_Changes/added_subclass_4.0.csv~csv]
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/AddSubClass/$(subject)-$(object)
     po:
@@ -67,7 +67,7 @@ mappings:
 
   RemoveSubClasses:
     sources:
-    - [Parsed_Changes/deleted_subclass_3.1.0.csv~csv]
+    - [Parsed_Changes/deleted_subclass_4.0.csv~csv]
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/RemoveSubClass/$(subject)-$(object)
     po:
@@ -78,7 +78,7 @@ mappings:
 
   AddedProperties:
     sources:
-    - [Parsed_Changes/added_triples_3.1.0.csv~csv]
+    - [Parsed_Changes/added_triples_4.0.csv~csv]
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/AddObjectProperty/$(predicate)
     po:
@@ -90,7 +90,7 @@ mappings:
 
   DeletedProperties:
     sources:
-    - [Parsed_Changes/deleted_triples_3.1.0.csv~csv]
+    - [Parsed_Changes/deleted_triples_4.0.csv~csv]
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/RemoveObjectProperty/$(predicate)
     po:
@@ -102,7 +102,7 @@ mappings:
 
   AddedAttributes:
     sources:
-    - [Parsed_Changes/modified_attributes_3.1.0.csv~csv]
+    - [Parsed_Changes/modified_attributes_4.0.csv~csv]
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/AddDataProperty/$(added_attributes)
     po:
@@ -113,7 +113,7 @@ mappings:
 
   DeletedAttributes:
     sources:
-    - [Parsed_Changes/modified_attributes_3.1.0.csv~csv]
+    - [Parsed_Changes/modified_attributes_4.0.csv~csv]
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/RemoveDataProperty/$(deleted_attributes)
     po:

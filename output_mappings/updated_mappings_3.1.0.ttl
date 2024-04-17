@@ -144,11 +144,11 @@ tedm:SubmissionStatisticalInformation a rr:TriplesMap ;
             rml:source "%1$s" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcome ] ;
+                    rr:parentTriplesMap tedm:LotAwardOutcomeModification ] ;
             rr:predicate epo:summarisesInformationForLotAwardOutcome ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeModification ] ;
+                    rr:parentTriplesMap tedm:LotAwardOutcome ] ;
             rr:predicate epo:summarisesInformationForLotAwardOutcome ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
@@ -300,15 +300,15 @@ tedm:ContractorOrganisation a rr:TriplesMap ;
             rml:source "%1$s" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
+                    rr:parentTriplesMap tedm:OrganisationAddress ] ;
+            rr:predicate cccev:registeredAddress ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
+                            rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:AdditionalOrganisationAddress ] ;
             rr:predicate cccev:registeredAddress ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:ContractTermLotLocationAddress ] ;
-            rr:predicate cccev:registeredAddress ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:OrganisationAddress ] ;
             rr:predicate cccev:registeredAddress ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
@@ -528,19 +528,19 @@ tedm:LotAwardOutcomeModification a rr:TriplesMap ;
             rml:source "%1$s" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasRestatedAwardedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedAwardedValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
             rr:predicate epo:hasBargainPrice ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
+            rr:predicate epo:hasRestatedAwardedValue ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
+                            rr:parent "XXXX" ] ;
+                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
+            rr:predicate epo:hasRestatedAwardedValue ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
+                            rr:parent "XXXX" ] ;
+                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
             rr:predicate epo:hasBargainPrice ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
@@ -833,14 +833,14 @@ epo:LeadBuyer a rr:TriplesMap ;
     rml:logicalSource [ rml:referenceFormulation "XXXX" ;
             rml:source "XXXX" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rml:reference "XXXX" ;
-                    rr:datatype xsd:anyURI ] ;
-            rr:predicate epo:hasBuyerProfile ],
-        [ rr:objectMap [ rml:reference "XXXX" ;
                     rr:datatype xsd:boolean ] ;
             rr:predicate epo:isContractingEntity ],
         [ rr:objectMap [ rml:reference "XXXX" ;
                     rr:datatype rdfs:Literal ] ;
             rr:predicate epo:hasActivityDescription ],
+        [ rr:objectMap [ rml:reference "XXXX" ;
+                    rr:datatype xsd:anyURI ] ;
+            rr:predicate epo:hasBuyerProfile ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:AdditionalContactPoint ] ;
@@ -914,15 +914,15 @@ tedm:AdditionalOrganisation a rr:TriplesMap ;
             rml:source "%1$s" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
+                    rr:parentTriplesMap tedm:OrganisationAddress ] ;
+            rr:predicate cccev:registeredAddress ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
+                            rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:ContractTermLotLocationAddress ] ;
             rr:predicate cccev:registeredAddress ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:AdditionalOrganisationAddress ] ;
-            rr:predicate cccev:registeredAddress ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:OrganisationAddress ] ;
             rr:predicate cccev:registeredAddress ],
         [ rr:objectMap [ rr:datatype rdfs:Literal ;
                     rr:reference "XXXX" ] ;
@@ -965,11 +965,11 @@ tedm:Buyer a rr:TriplesMap ;
             rml:source "%1$s" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:ContactPoint ] ;
+                    rr:parentTriplesMap tedm:AdditionalContactPoint ] ;
             rr:predicate epo:hasContactPointInRole ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:AdditionalContactPoint ] ;
+                    rr:parentTriplesMap tedm:ContactPoint ] ;
             rr:predicate epo:hasContactPointInRole ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
@@ -1006,11 +1006,11 @@ tedm:Contract a rr:TriplesMap ;
             rml:source "%1$s" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:AdditionalBuyer ] ;
+                    rr:parentTriplesMap tedm:Buyer ] ;
             rr:predicate epo:signedByBuyer ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:Buyer ] ;
+                    rr:parentTriplesMap tedm:AdditionalBuyer ] ;
             rr:predicate epo:signedByBuyer ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
@@ -1109,11 +1109,11 @@ tedm:Organisation a rr:TriplesMap ;
             rml:source "%1$s" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:AdditionalOrganisationAddress ] ;
+                    rr:parentTriplesMap tedm:ContractTermLotLocationAddress ] ;
             rr:predicate cccev:registeredAddress ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:ContractTermLotLocationAddress ] ;
+                    rr:parentTriplesMap tedm:AdditionalOrganisationAddress ] ;
             rr:predicate cccev:registeredAddress ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
@@ -1179,11 +1179,11 @@ tedm:LotAwardOutcome a rr:TriplesMap ;
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasBargainPrice ],
+            rr:predicate epo:hasRestatedAwardedValue ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasRestatedAwardedValue ],
+            rr:predicate epo:hasBargainPrice ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
@@ -1328,11 +1328,11 @@ epo:AcquiringParty a rr:TriplesMap ;
             rml:source "XXXX" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:ContactPoint ] ;
+                    rr:parentTriplesMap tedm:AdditionalContactPoint ] ;
             rr:predicate epo:hasContactPointInRole ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:AdditionalContactPoint ] ;
+                    rr:parentTriplesMap tedm:ContactPoint ] ;
             rr:predicate epo:hasContactPointInRole ] ;
     rr:subjectMap [ rr:class epo:AcquiringParty,
                 epo:AgentInRole ;
