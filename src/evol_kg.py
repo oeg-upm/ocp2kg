@@ -20,20 +20,23 @@ def AddClass(change):
 
     results = change_data.query(select_change)
     added_class = results.bindings[0][Variable('class')]
-
-    insert_class_query = f'    PREFIX rr: <http://www.w3.org/ns/r2rml#>' \
-                         f'     PREFIX rml: <http://semweb.mmlab.be/ns/rml#>' \
-                         f' INSERT DATA {{' \
-                         f'<{added_class}> {RDF_TYPE} {R2RML_TRIPLES_MAP}; ' \
-                         f'{RML_LOGICAL_SOURCE} [ ' \
-                         f'   {RML_SOURCE} "XXXX"; ' \
-                         f'   {RML_REFERENCE_FORMULATION} "XXXX" ' \
-                         f'];	    ' \
-                         f'{R2RML_SUBJECT} [ ' \
-                         f'   {R2RML_TEMPLATE} "XXXX"; ' \
-                         f'   {R2RML_CLASS} <{added_class}> ' \
-                         f']. }} '
-    output_mappings.update(insert_class_query)
+    check_query = "ASK { <"+added_class+"> rdf:type rr:TriplesMap }"
+    print(check_query)
+    check_res = output_mappings.query(check_query)
+    if (check_res=="No"):
+      insert_class_query = f'    PREFIX rr: <http://www.w3.org/ns/r2rml#>' \
+                           f'     PREFIX rml: <http://semweb.mmlab.be/ns/rml#>' \
+                           f' INSERT DATA {{' \
+                           f'<{added_class}> {RDF_TYPE} {R2RML_TRIPLES_MAP}; ' \
+                           f'{RML_LOGICAL_SOURCE} [ ' \
+                           f'   {RML_SOURCE} "XXXX"; ' \
+                           f'   {RML_REFERENCE_FORMULATION} "XXXX" ' \
+                           f'];	    ' \
+                           f'{R2RML_SUBJECT} [ ' \
+                           f'   {R2RML_TEMPLATE} "XXXX"; ' \
+                           f'   {R2RML_CLASS} <{added_class}> ' \
+                           f']. }} '
+      output_mappings.update(insert_class_query)
 
 
 # ---------------------------------------------------------------------------------------------------------------------------

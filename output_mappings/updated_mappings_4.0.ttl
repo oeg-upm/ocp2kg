@@ -419,16 +419,16 @@ tedm:LotAwardOutcomeModification a rr:TriplesMap ;
             rml:source "%1$s" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasFrameworkAgreementMaximumValue ],
+                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
+            rr:predicate epo:hasAwardedValue ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
             rr:predicate epo:hasAwardedValue ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasBargainPrice ],
+                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
+            rr:predicate epo:hasFrameworkAgreementMaximumValue ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
@@ -436,11 +436,11 @@ tedm:LotAwardOutcomeModification a rr:TriplesMap ;
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasFrameworkAgreementMaximumValue ],
+            rr:predicate epo:hasBargainPrice ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasAwardedValue ],
+            rr:predicate epo:hasFrameworkAgreementMaximumValue ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
@@ -619,22 +619,22 @@ tedm:SubmissionTerm a rr:TriplesMap ;
             rml:source "%1$s" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
+                    rr:parentTriplesMap tedm:Duration ] ;
+            rr:predicate epo:hasTenderValidityDuration ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
+                            rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:Period ] ;
             rr:predicate epo:hasTenderValidityPeriod ],
         [ rr:objectMap [ rml:reference "XXXX" ;
                     rr:datatype xsd:dateTime ] ;
-            rr:predicate epo:hasReceiptParticipationRequestDeadline ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:Duration ] ;
-            rr:predicate epo:hasTenderValidityDuration ],
+            rr:predicate epo:hasReceiptTenderDeadline ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap <epo:SpecificDuration> ] ;
             rr:predicate epo:hasTenderValidityDuration ],
         [ rr:objectMap [ rml:reference "XXXX" ;
                     rr:datatype xsd:dateTime ] ;
-            rr:predicate epo:hasReceiptTenderDeadline ],
+            rr:predicate epo:hasReceiptParticipationRequestDeadline ],
         [ rr:objectMap [ rr:datatype xsd:dateTime ;
                     rr:reference "XXXX" ] ;
             rr:predicate epo:hasReceiptExpressionDeadline ],
@@ -698,24 +698,6 @@ tedm:Winner a rr:TriplesMap ;
     rr:subjectMap [ rr:class epo:Winner ;
             rr:template "http://data.europa.eu/a4g/resource/id_{replace(/%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_Winner_{generate-id(.)}" ] .
 
-epo:AdHocChannel a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:AdHocChannel ;
-            rr:template "XXXX" ] .
-
-epo:AllowanceChargeInformation a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:AllowanceChargeInformation ;
-            rr:template "XXXX" ] .
-
-epo:AllowanceInformation a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:AllowanceInformation ;
-            rr:template "XXXX" ] .
-
 epo:AuxiliaryParty a rr:TriplesMap ;
     rml:logicalSource [ rml:referenceFormulation "XXXX" ;
             rml:source "XXXX" ] ;
@@ -724,108 +706,6 @@ epo:AuxiliaryParty a rr:TriplesMap ;
             rr:predicate dct:title ] ;
     rr:subjectMap [ rr:class epo:AgentInRole,
                 epo:AuxiliaryParty ;
-            rr:template "XXXX" ] .
-
-epo:AwardCriteriaSummary a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:AwardCriteriaSummary ;
-            rr:template "XXXX" ] .
-
-epo:Candidate a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:Candidate ;
-            rr:template "XXXX" ] .
-
-epo:CertificationLabel a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:CertificationLabel ;
-            rr:template "XXXX" ] .
-
-epo:Certifier a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:Certifier ;
-            rr:template "XXXX" ] .
-
-epo:ChangeInformation a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:ChangeInformation ;
-            rr:template "XXXX" ] .
-
-epo:ContextDescription a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:ContextDescription ;
-            rr:template "XXXX" ] .
-
-epo:DeliveryAgreement a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:DeliveryAgreement ;
-            rr:template "XXXX" ] .
-
-epo:DirectContract a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:DirectContract ;
-            rr:template "XXXX" ] .
-
-epo:DynamicPurchaseSystemTechnique a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:DynamicPurchaseSystemTechnique ;
-            rr:template "XXXX" ] .
-
-epo:EAuctionTechnique a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:EAuctionTechnique ;
-            rr:template "XXXX" ] .
-
-epo:EconomicStandingSummary a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:EconomicStandingSummary ;
-            rr:template "XXXX" ] .
-
-epo:ElectronicSignature a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:ElectronicSignature ;
-            rr:template "XXXX" ] .
-
-epo:ExclusionGroundsSummary a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:ExclusionGroundsSummary ;
-            rr:template "XXXX" ] .
-
-epo:FrameworkAgreementTechnique a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:FrameworkAgreementTechnique ;
-            rr:template "XXXX" ] .
-
-epo:InformationHub a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:InformationHub ;
-            rr:template "XXXX" ] .
-
-epo:ItemProperty a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:ItemProperty ;
-            rr:template "XXXX" ] .
-
-epo:JuryMember a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:JuryMember ;
             rr:template "XXXX" ] .
 
 epo:LeadBuyer a rr:TriplesMap ;
@@ -857,72 +737,6 @@ epo:LeadBuyer a rr:TriplesMap ;
                 epo:LeadBuyer ;
             rr:template "XXXX" ] .
 
-epo:Line a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:Line ;
-            rr:template "XXXX" ] .
-
-epo:MiniCompetitionAwardOutcome a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:MiniCompetitionAwardOutcome ;
-            rr:template "XXXX" ] .
-
-epo:NonDisclosureAgreementTerm a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:NonDisclosureAgreementTerm ;
-            rr:template "XXXX" ] .
-
-epo:NonPublishedInformation a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:NonPublishedInformation ;
-            rr:template "XXXX" ] .
-
-epo:NoticeChangeInformation a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:NoticeChangeInformation ;
-            rr:template "XXXX" ] .
-
-epo:Offer a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:Offer ;
-            rr:template "XXXX" ] .
-
-epo:OfferIssuer a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:OfferIssuer ;
-            rr:template "XXXX" ] .
-
-epo:OrderResponse a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:OrderResponse ;
-            rr:template "XXXX" ] .
-
-epo:OrderResponseInformation a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:OrderResponseInformation ;
-            rr:template "XXXX" ] .
-
-epo:OrderResponseLine a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:OrderResponseLine ;
-            rr:template "XXXX" ] .
-
-epo:OriginatorRequest a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:OriginatorRequest ;
-            rr:template "XXXX" ] .
-
 epo:OtherEntity a rr:TriplesMap ;
     rml:logicalSource [ rml:referenceFormulation "XXXX" ;
             rml:source "XXXX" ] ;
@@ -932,90 +746,6 @@ epo:OtherEntity a rr:TriplesMap ;
     rr:subjectMap [ rr:class epo:AgentInRole,
                 epo:OfferingParty,
                 epo:OtherEntity ;
-            rr:template "XXXX" ] .
-
-epo:ParticipationCondition a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:ParticipationCondition ;
-            rr:template "XXXX" ] .
-
-epo:ParticipationConditionsSummary a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:ParticipationConditionsSummary ;
-            rr:template "XXXX" ] .
-
-epo:PostAwardDocument a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:PostAwardDocument ;
-            rr:template "XXXX" ] .
-
-epo:PreMarketConsultationNotice a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:PreMarketConsultationNotice ;
-            rr:template "XXXX" ] .
-
-epo:ProcurementCriteriaSummary a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:ProcurementCriteriaSummary ;
-            rr:template "XXXX" ] .
-
-epo:ProfessionalSuitabilitySummary a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:ProfessionalSuitabilitySummary ;
-            rr:template "XXXX" ] .
-
-epo:QualificationCriteriaSummary a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:QualificationCriteriaSummary ;
-            rr:template "XXXX" ] .
-
-epo:QualificationCriterion a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:QualificationCriterion ;
-            rr:template "XXXX" ] .
-
-epo:SelectedCandidateList a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:SelectedCandidateList ;
-            rr:template "XXXX" ] .
-
-epo:SelectionCriteriaSummary a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:SelectionCriteriaSummary ;
-            rr:template "XXXX" ] .
-
-epo:TechnicalAbilitySummary a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:TechnicalAbilitySummary ;
-            rr:template "XXXX" ] .
-
-epo:Technique a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:Technique ;
-            rr:template "XXXX" ] .
-
-epo:VehicleInformation a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:VehicleInformation ;
-            rr:template "XXXX" ] .
-
-<http://www.w3.org/ns/adms#Identifier> a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class <http://www.w3.org/ns/adms#Identifier> ;
             rr:template "XXXX" ] .
 
 tedm:AdditionalBuyer a rr:TriplesMap ;
@@ -1149,11 +879,11 @@ tedm:FrameworkAgreementTermProcedure a rr:TriplesMap ;
             rml:source "%1$s" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
+                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
             rr:predicate epo:hasLaunchGroupFrameworkAgreementMaximumValue ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
+                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
             rr:predicate epo:hasLaunchGroupFrameworkAgreementMaximumValue ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
@@ -1195,16 +925,6 @@ tedm:Notice a rr:TriplesMap ;
     rr:predicateObjectMap [ rr:objectMap [ rml:reference "XXXX" ;
                     rr:datatype xsd:integer ] ;
             rr:predicate epo:hasOJSIssueNumber ],
-        [ rr:objectMap [ rml:reference "XXXX" ;
-                    rr:datatype rdf:PlainLiteral ] ;
-            rr:predicate epo:hasNoticePublicationNumber ],
-        [ rr:objectMap [ rml:reference "XXXX" ;
-                    rr:datatype xsd:dateTime ] ;
-            rr:predicate epo:hasESenderDispatchDate ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotModification ] ;
-            rr:predicate epo:refersToLot ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:Lot ] ;
@@ -1212,6 +932,16 @@ tedm:Notice a rr:TriplesMap ;
         [ rr:objectMap [ rml:reference "XXXX" ;
                     rr:datatype rdf:PlainLiteral ] ;
             rr:predicate epo:hasFormNumber ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
+                            rr:parent "XXXX" ] ;
+                    rr:parentTriplesMap tedm:LotModification ] ;
+            rr:predicate epo:refersToLot ],
+        [ rr:objectMap [ rml:reference "XXXX" ;
+                    rr:datatype xsd:dateTime ] ;
+            rr:predicate epo:hasESenderDispatchDate ],
+        [ rr:objectMap [ rml:reference "XXXX" ;
+                    rr:datatype rdf:PlainLiteral ] ;
+            rr:predicate epo:hasNoticePublicationNumber ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
@@ -1299,16 +1029,6 @@ tedm:Period a rr:TriplesMap ;
     rr:subjectMap [ rr:class epo:Period ;
             rr:template "http://data.europa.eu/a4g/resource/id_{replace(../../REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(../../../CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_Period_{generate-id(../../REFERENCE_NUMBER)}" ] .
 
-epo:Certificate a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ],
-        [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:Certificate ;
-            rr:template "XXXX" ],
-        [ rr:class epo:Certificate ;
-            rr:template "XXXX" ] .
-
 epo:ProcurementElement a rr:TriplesMap ;
     rml:logicalSource [ rml:referenceFormulation "XXXX" ;
             rml:source "XXXX" ] ;
@@ -1317,11 +1037,11 @@ epo:ProcurementElement a rr:TriplesMap ;
             rr:predicate dct:title ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
+                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
             rr:predicate epo:hasEstimatedValue ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
+                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
             rr:predicate epo:hasEstimatedValue ] ;
     rr:subjectMap [ rr:class epo:ProcurementElement ;
             rr:template "XXXX" ] .
@@ -1340,13 +1060,25 @@ tedm:Contract a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/AWARD_CONTRACT/AWARDED_CONTRACT | /%2$s/RESULTS/AWARDED_PRIZE | /%2$s/ADDITIONAL_CORE_DATA/OBJECT_CONTRACT_MODIFICATIONS" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "XXXX" ;
+                    rr:datatype rdf:PlainLiteral ] ;
+            rr:predicate dct:title ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
+                            rr:parent "XXXX" ] ;
+                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
+            rr:predicate epo:hasEstimatedValue ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
+                            rr:parent "XXXX" ] ;
+                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
+            rr:predicate epo:hasContractValue ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
+                            rr:parent "XXXX" ] ;
+                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
+            rr:predicate epo:hasContractValue ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:Contract ] ;
             rr:predicate epo:hasElectronicDigest ],
-        [ rr:objectMap [ rml:reference "XXXX" ;
-                    rr:datatype rdf:PlainLiteral ] ;
-            rr:predicate dct:title ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
@@ -1355,18 +1087,6 @@ tedm:Contract a rr:TriplesMap ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:FrameworkAgreementTermProcedure ] ;
             rr:predicate epo:isSubjectToContractSpecificTerm ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasContractValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasContractValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasEstimatedValue ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:Buyer ] ;
@@ -1412,6 +1132,14 @@ tedm:LotAwardOutcome a rr:TriplesMap ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
+            rr:predicate epo:hasFrameworkAgreementMaximumValue ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
+                            rr:parent "XXXX" ] ;
+                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
+            rr:predicate epo:hasFrameworkAgreementMaximumValue ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
+                            rr:parent "XXXX" ] ;
+                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
             rr:predicate epo:hasAwardedValue ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
@@ -1420,19 +1148,11 @@ tedm:LotAwardOutcome a rr:TriplesMap ;
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
-            rr:predicate epo:hasFrameworkAgreementMaximumValue ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
             rr:predicate epo:hasAwardedValue ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
             rr:predicate epo:hasBargainPrice ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
-            rr:predicate epo:hasFrameworkAgreementMaximumValue ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
@@ -1496,12 +1216,6 @@ tedm:OrganisationIdentifier a rr:TriplesMap ;
     rr:subjectMap [ rml:reference "if(not(.='')) then 'http://data.europa.eu/a4g/resource/id_' || replace(/%2$s/OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-') || '-' || replace(/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-') || '_OrganisationIdentifier_' || generate-id(.) else null" ;
             rr:class epo:Identifier ] .
 
-epo:AwardOutcome a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
-    rr:subjectMap [ rr:class epo:AwardOutcome ;
-            rr:template "XXXX" ] .
-
 tedm:AdditionalOrganisationAddress a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL" ;
             rml:referenceFormulation ql:XPath ;
@@ -1559,20 +1273,20 @@ tedm:ContractorOrganisation a rr:TriplesMap ;
     rml:logicalSource [ rml:iterator "/%2$s/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME | /%2$s/RESULTS/AWARDED_PRIZE/WINNER/ADDRESS_WINNER/OFFICIALNAME | /%2$s/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME" ;
             rml:referenceFormulation ql:XPath ;
             rml:source "%1$s" ] ;
-    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "XXXX" ;
+                    rr:datatype xsd:anyURI ] ;
+            rr:predicate epo:hasInternetAddress ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:ContractorOrganisation ] ;
             rr:predicate org:subOrganizationOf ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:Organisation ] ;
+                    rr:parentTriplesMap tedm:AdditionalOrganisation ] ;
             rr:predicate org:subOrganizationOf ],
-        [ rr:objectMap [ rml:reference "XXXX" ;
-                    rr:datatype xsd:anyURI ] ;
-            rr:predicate epo:hasInternetAddress ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:AdditionalOrganisation ] ;
+                    rr:parentTriplesMap tedm:Organisation ] ;
             rr:predicate org:subOrganizationOf ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
@@ -1701,15 +1415,15 @@ tedm:AdditionalOrganisation a rr:TriplesMap ;
             rr:predicate epo:hasInternetAddress ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
+                    rr:parentTriplesMap tedm:AdditionalOrganisation ] ;
+            rr:predicate org:subOrganizationOf ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
+                            rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:ContractorOrganisation ] ;
             rr:predicate org:subOrganizationOf ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:Organisation ] ;
-            rr:predicate org:subOrganizationOf ],
-        [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
-                            rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:AdditionalOrganisation ] ;
             rr:predicate org:subOrganizationOf ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
@@ -1793,19 +1507,19 @@ tedm:Organisation a rr:TriplesMap ;
             rml:source "%1$s" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:Organisation ] ;
+                    rr:parentTriplesMap tedm:AdditionalOrganisation ] ;
             rr:predicate org:subOrganizationOf ],
+        [ rr:objectMap [ rml:reference "XXXX" ;
+                    rr:datatype xsd:anyURI ] ;
+            rr:predicate epo:hasInternetAddress ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:ContractorOrganisation ] ;
             rr:predicate org:subOrganizationOf ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
-                    rr:parentTriplesMap tedm:AdditionalOrganisation ] ;
+                    rr:parentTriplesMap tedm:Organisation ] ;
             rr:predicate org:subOrganizationOf ],
-        [ rr:objectMap [ rml:reference "XXXX" ;
-                    rr:datatype xsd:anyURI ] ;
-            rr:predicate epo:hasInternetAddress ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXXX" ;
                             rr:parent "XXXX" ] ;
                     rr:parentTriplesMap tedm:ContractTermLotLocationAddress ] ;
