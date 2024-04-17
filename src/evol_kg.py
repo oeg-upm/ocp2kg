@@ -29,7 +29,7 @@ def AddClass(change):
                          f'];	    ' \
                          f'{R2RML_SUBJECT} [ ' \
                          f'   {R2RML_TEMPLATE} "XXXX"; ' \
-                         f'   {R2RML_CLASS} {added_class} ' \
+                         f'   {R2RML_CLASS} <{added_class}> ' \
                          f']. }} '
     output_mappings.update(insert_class_query)
 
