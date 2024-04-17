@@ -21,8 +21,10 @@ def AddClass(change):
     results = change_data.query(select_change)
     added_class = results.bindings[0][Variable('class')]
 
-    insert_class_query = f' INSERT DATA {{' \
-                         f'{added_class} {RDF_TYPE} {R2RML_TRIPLES_MAP}; ' \
+    insert_class_query = f'    PREFIX rr: <http://www.w3.org/ns/r2rml#>' \
+                         f'     PREFIX rml: <http://semweb.mmlab.be/ns/rml#>' \
+                         f' INSERT DATA {{' \
+                         f'<{added_class}> {RDF_TYPE} {R2RML_TRIPLES_MAP}; ' \
                          f'{RML_LOGICAL_SOURCE} [ ' \
                          f'   {RML_SOURCE} "XXXX"; ' \
                          f'   {RML_REFERENCE_FORMULATION} "XXXX" ' \
@@ -663,28 +665,20 @@ if __name__ == "__main__":
     # Execute query and iterate through the changes to modify accordingly to the change.
     for r in change_data.query(q):
         if r.type == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddClass"):
-            print("AddClass")
             AddClass(r["change"])
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveClass"):
-            print("RemoveClass")
             RemoveClass(r["change"])
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddSubClass"):
-            print("AddSubClass")
             AddSubClass(r["change"])
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveSubClass"):
-            print("RemoveSubClass")
             RemoveSubClass(r["change"])
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddObjectProperty"):
-            print("AddObjectProperty")
             AddObjectProperty(r["change"])
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveObjectProperty"):
-            print("RemoveObjectProperty")
             RemoveObjectProperty(r["change"])
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddDataProperty"):
-            print("AddDataProperty")
             AddDataProperty(r["change"])
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveDataProperty"):
-            print("RemoveDataProperty")
             RemoveDataProperty(r["change"])
     output_mappings.serialize(destination=args.new_mappings_path)
     yarrrml_content = yatter.inverse_translation(output_mappings)

@@ -1422,6 +1422,7 @@ PREFIX omv: <http://omv.ontoware.org/2009/09/OWLChanges#>
 <http://epo-changes.org/3.1.0-4.0.0-rc.1/RemoveDataProperty/epo%3AhasName> omv:domainRemoveDataProperty <http://creativecommons.org/ns#Requirement> .
 <http://epo-changes.org/3.1.0-4.0.0-rc.1/RemoveDataProperty/epo%3AhasReceivedSMETenders> omv:domainRemoveDataProperty <http://data.europa.eu/a4g/ontology#SubmissionStatisticalInformation> .
 <http://epo-changes.org/3.1.0-4.0.0-rc.1/RemoveDataProperty/legal%3AregisteredAddress> omv:domainRemoveDataProperty <http://data.europa.eu/m8g/Person> .
+<http://epo-changes.org/3.1.0-4.0.0-rc.1/RemoveDataProperty/legal%3AregisteredAddress> omv:propertyRemoveDataProperty <http://data.europa.eu/a4g/ontology#registeredAddress>. 
 <http://epo-changes.org/3.1.0-4.0.0-rc.1/RemoveDataProperty/epo%3AisWithinFrameworkAgreement> omv:domainRemoveDataProperty <http://data.europa.eu/a4g/ontology#PurchaseContract> .
 <http://epo-changes.org/3.1.0-4.0.0-rc.1/RemoveDataProperty/epo%3AhasEndpoint> omv:domainRemoveDataProperty <http://data.europa.eu/a4g/ontology#Item> .
 <http://epo-changes.org/3.1.0-4.0.0-rc.1/RemoveDataProperty/epo%3AhasAdditionalInformation> omv:domainRemoveDataProperty <http://data.europa.eu/a4g/ontology#Item> .
