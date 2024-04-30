@@ -12,7 +12,7 @@ QL_URI = 'http://semweb.mmlab.be/ns/ql#'
 EXAMPLE_URI = 'http://example.com/ns#'
 RDFS_URI = 'http://www.w3.org/2000/01/rdf-schema#'
 XSD_URI = 'http://www.w3.org/2001/XMLSchema#'
-FOAF_URI ='http://xmlns.com/foaf/0.1/'
+FOAF_URI = 'http://xmlns.com/foaf/0.1/'
 RDF_TYPE = 'rdf:type'
 SCHEMA_URI = 'http://schema.org/'
 STAR_URI = 'https://w3id.org/kg-construct/rml-star'
@@ -44,7 +44,6 @@ RML_LOGICAL_TARGET_CLASS = f'{RML_PREFIX}:LogicalTarget'
 RML_TARGET = f'{RML_PREFIX}:target'
 RML_SERIALIZATION = f'{RML_PREFIX}:serialization'
 RML_COMPRESSION = f'{RML_PREFIX}:compression'
-
 
 R2RML_TEMPLATE = f'{R2RML_PREFIX}:template'
 R2RML_TRIPLES_MAP = f'{R2RML_PREFIX}:TriplesMap'
@@ -90,12 +89,23 @@ D2RQ_DRIVER = 'd2rq:jdbcDriver'
 D2RQ_USER = 'd2rq:username'
 D2RQ_PASS = 'd2rq:password'
 
-
 ##############################################################################
-#############################  OWV CONSTANTS  ###############################
+#############################  OCH CONSTANTS  ###############################
 ##############################################################################
-
+# THIS NEEDS TO CHANGE TO OCH once we recreate all change KGs
 OMV_ADDEDCLASS = 'omv:addedClass'
+
+OMV_ADD_SUBCLASS_SUBJECT = 'omv:subAddSubClass'
+OMV_ADD_SUBCLASS_OBJECT = 'omv:objAddSubClass'
+
+##############################################################################
+#############################  RDFS&OWL CONSTANTS  ###############################
+##############################################################################
+
+OWL_DATA_PROPERTY = 'owl:DatatypeProperty'
+OWL_OBJECT_PROPERTY = 'owl:ObjectProperty'
+RDFS_DOMAIN = 'rdfs:domain'
+RDFS_RANGE = 'rdfs:range'
 
 logger = logging.getLogger(__name__)
 coloredlogs.install(level='DEBUG', fmt='%(asctime)s,%(msecs)03d | %(levelname)s: %(message)s')

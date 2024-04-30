@@ -1,15 +1,17 @@
 from rdflib import Graph, URIRef, Variable
-import sys
+
 import yatter
 from constants import *
 from ruamel.yaml import YAML
 import argparse
 
+
 # ---------------------------------------------------------------------------------------------------------------------------
 
-def AddClass(change):
+def add_class(change):
     """
-    Adds a class defined in the change to the output_mappings
+    Adds a class defined in the change KG into the output_mappings.
+    If there is a TriplesMap that creates instances of that class, the TriplesMap is not created
     Args:
         change: the URI of the change which needs to be of the type AddClass
     Returns:
@@ -20,27 +22,31 @@ def AddClass(change):
 
     results = change_data.query(select_change)
     added_class = results.bindings[0][Variable('class')]
-    check_query = "ASK { <"+added_class+"> rdf:type rr:TriplesMap }"
-    print(check_query)
+    check_query = f'ASK {{  ?class {RDF_TYPE} {R2RML_TRIPLES_MAP} .' \
+                  f'        ?class {R2RML_SUBJECT} ?subject . ' \
+                  f'        ?subject {R2RML_CLASS} <{added_class}> }}'
+
     check_res = output_mappings.query(check_query)
-    if (check_res=="No"):
-      insert_class_query = f'    PREFIX rr: <http://www.w3.org/ns/r2rml#>' \
-                           f'     PREFIX rml: <http://semweb.mmlab.be/ns/rml#>' \
-                           f' INSERT DATA {{' \
-                           f'<{added_class}> {RDF_TYPE} {R2RML_TRIPLES_MAP}; ' \
-                           f'{RML_LOGICAL_SOURCE} [ ' \
-                           f'   {RML_SOURCE} "XXXX"; ' \
-                           f'   {RML_REFERENCE_FORMULATION} "XXXX" ' \
-                           f'];	    ' \
-                           f'{R2RML_SUBJECT} [ ' \
-                           f'   {R2RML_TEMPLATE} "XXXX"; ' \
-                           f'   {R2RML_CLASS} <{added_class}> ' \
-                           f']. }} '
-      output_mappings.update(insert_class_query)
+    if not check_res.askAnswer:
+        insert_class_query = f' PREFIX {R2RML_PREFIX}: {R2RML_URI}' \
+                             f' PREFIX {RML_PREFIX}: {RML_URI}' \
+                             f' INSERT DATA {{' \
+                             f'     <{added_class}> {RDF_TYPE} {R2RML_TRIPLES_MAP}; ' \
+                             f'        {RML_LOGICAL_SOURCE} [ ' \
+                             f'             {RML_SOURCE} "XXXX"; ' \
+                             f'             {RML_REFERENCE_FORMULATION} "XXXX" ' \
+                             f'         ]; ' \
+                             f'         {R2RML_SUBJECT} [ ' \
+                             f'             {R2RML_TEMPLATE} "XXXX"; ' \
+                             f'             {R2RML_CLASS} <{added_class}> ' \
+                             f'         ]. }} '
+        output_mappings.update(insert_class_query)
+    else:
+        print(f'The input mappings already has rules to create instances of {added_class}.')
 
 
 # ---------------------------------------------------------------------------------------------------------------------------
-def RemoveClass(change):
+def remove_class(change):
     # First we query the change data to obtain the class to be deleted.
     q = """
     SELECT DISTINCT ?fullname
@@ -53,7 +59,7 @@ def RemoveClass(change):
     ##CHECK wether this class is a subclass from another one for different treatments.
     q = """
    ASK { <""" + full_name + """> rdfs:subClassOf ?x}
- """
+    """
     answer = ontology.query(q)
     # CASE 1:  If C is not subclass remove all TriplesMap that instanciate entities of the class C and the POM where the parentTriplesMap in the RefObjectMap is the 4
     # identifier of those TriplesMaps.
@@ -221,101 +227,82 @@ def RemoveClass(change):
 
 # ---------------------------------------------------------------------------------------------------------------------------------
 
-def AddSubClass(change):
-    q = """
-    SELECT DISTINCT ?parent ?child
-    WHERE {
-        <""" + change + """> omv:subAddSubClass ?child.
-        <""" + change + """> omv:objAddSubClass ?parent.
-    }
+def add_super_class(change):
     """
-    for r in change_data.query(q):
-        child = r["child"]
-        parent = r["parent"]
-        # Adds %SUPERCLASS% to the %SUBCLASS%. This change triggers the second and third query, which add DATAPROPERTY and OBJECTPROPERTY where the domain is SUPERCLASS.
-        q1 = """
-   PREFIX rr: <http://www.w3.org/ns/r2rml#>
-   PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+       Adds a superclass and its properties into the TriplesMap that instantiate the subclass .
+       Args:
+           change: the URI of the change which needs to be of the type add_sub_class
+       Returns:
+           the output_mappings updated with the TriplesMap of child adding the parent class and its properties
+    """
+    super_class = None
+    sub_class = None
+    query = f' SELECT DISTINCT ?super_class ?sub_class WHERE {{ ' \
+            f'      <{change}> {OMV_ADD_SUBCLASS_SUBJECT} ?sub_class. ' \
+            f'      <{change}> {OMV_ADD_SUBCLASS_OBJECT} ?super_class. }}'
 
-   INSERT {  
-      ?subjectMap rr:class <""" + parent + """>.
-   }
-   WHERE {
-      ?triplesmap rr:subjectMap ?subjectMap.
-      ?subjectMap rr:class <""" + child + """>.
-   }
-   """
-        output_mappings.update(q1)
-        q2 = """
-   SELECT DISTINCT ?dataproperty ?range
-   WHERE {
-      ?dataproperty  a owl:DatatypeProperty;
-                     rdfs:domain <""" + parent + """>;
-                     rdfs:range ?range.
-   } 
-   """
-    for r in ontology.query(q2):
-        dataprop = r["dataproperty"]
-        range = r["range"]
-        # Adds %DATAPROPERTIES% where their domain are %SUPERCLASS%. This runs after the first query.
-        # Needs to be run for each DATAPROPERTY of %SUBCLASS%
-        q3 = """
-           PREFIX rr: <http://www.w3.org/ns/r2rml#>
-           PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+    for result in change_data.query(query):
+        sub_class = result["sub_class"]
+        super_class = result["super_class"]
+        insert_super_class_query = f' PREFIX {R2RML_PREFIX}: {R2RML_URI}' \
+                                   f' PREFIX {RML_PREFIX}: {RML_URI}' \
+                                   f' INSERT {{ ?subjectMap {R2RML_CLASS} <{super_class}>. }}' \
+                                   f' WHERE {{' \
+                                   f'     ?triplesMap {R2RML_SUBJECT} ?subjectMap. ' \
+                                   f'     ?subjectMap {R2RML_CLASS} <{sub_class}>. }}'
 
-   INSERT {  
-    ?triplesmap rr:predicateObjectMap [
-        rr:predicate <""" + dataprop + """>;
-        rr:objectMap [
-            rml:reference "XXXX";
-            rr:datatype <""" + range + """>
-        ]
-    ].
-   }
-   WHERE {
-      ?triplesmap rr:subjectMap ?subjectMap .
-      ?subjectMap rr:class <""" + child + """>, <""" + parent + """> .
-   }
-   """
-        output_mappings.update(q3)
-    q4 = """
-      SELECT DISTINCT ?objectproperty ?range
-      WHERE {
-         ?objectproperty  a owl:ObjectProperty;
-                        rdfs:domain <""" + parent + """>;
-                        rdfs:range ?range.
-      }    
-      """
-    for r in ontology.query(q4):
-        objprop = r["objectproperty"]
-        range = r["range"]
-        # Adds %OBJECTPROPERTY% where their domain are %SUPERCLASS% and the RANGE is %RANGECLASS%. This runs after the first query.
-        # Needs to be run for each OBJECTPROPERTY of %SUPERCLASS%
-        q5 = """
-           PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
-            PREFIX rr: <http://www.w3.org/ns/r2rml#>
+        output_mappings.update(insert_super_class_query)
 
-      INSERT {  
-         ?triplesmap rr:predicateObjectMap [
-            rr:predicate <""" + objprop + """>;
-            rr:objectMap [
-                  rr:parentTriplesMap ?parent_tm;
-                  rr:joinCondition [
-                     rr:child "XXXX";
-                     rr:parent "XXXX"
-                  ]
-            ]
-         ].
-      }
-      WHERE {
-         ?triplesmap rr:subjectMap ?subjectMap .
-         ?subjectMap rr:class <""" + child + """>, <""" + parent + """> .
+    if super_class and sub_class:
+        query_data_properties = f' SELECT DISTINCT ?dataproperty ?range WHERE {{' \
+                                f'     ?dataproperty {RDF_TYPE} {OWL_DATA_PROPERTY}.' \
+                                f'     ?dataproperty {RDFS_DOMAIN} <{super_class}> .' \
+                                f'     ?dataproperty {RDFS_RANGE} ?range.}}'
 
-         ?parent_tm rr:subjectMap ?parent_subjectMap .
-         ?parent_subjectMap rr:class <""" + range + """> .
-      }
-      """
-        output_mappings.update(q5)
+        for result in ontology.query(query_data_properties):
+            dataproperty = result["dataproperty"]
+            property_range = result["range"]
+
+            insert_data_property_query = f' PREFIX {R2RML_PREFIX}: {R2RML_URI}' \
+                                         f' PREFIX {RML_PREFIX}: {RML_URI}' \
+                                         f' INSERT {{  ' \
+                                         f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} [ ' \
+                                         f'         {R2RML_PREDICATE} <{dataproperty}> ; ' \
+                                         f'         {R2RML_OBJECT} [ ' \
+                                         f'             {RML_REFERENCE} "XXXX";' \
+                                         f'             {R2RML_DATATYPE} <{property_range}>' \
+                                         f'          ] ]. }}' \
+                                         f'  WHERE {{' \
+                                         f'     ?triplesMap {R2RML_SUBJECT} ?subjectMap . ' \
+                                         f'     ?subjectMap {R2RML_CLASS} <{super_class}>, <{sub_class}> . }} '
+            output_mappings.update(insert_data_property_query)
+
+        query_object_properties = f' SELECT DISTINCT ?objectproperty ?range WHERE {{' \
+                                  f'     ?dataproperty {RDF_TYPE} {OWL_OBJECT_PROPERTY}.' \
+                                  f'     ?dataproperty {RDFS_DOMAIN} <{super_class}> .' \
+                                  f'     ?dataproperty {RDFS_RANGE} ?range.}}'
+
+        for r in ontology.query(query_object_properties):
+            object_property = r["objectproperty"]
+            property_range = r["range"]
+
+            insert_object_property_query = f' PREFIX {R2RML_PREFIX}: {R2RML_URI}' \
+                                           f' PREFIX {RML_PREFIX}: {RML_URI}' \
+                                           f' INSERT {{  ' \
+                                           f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} [ ' \
+                                           f'         {R2RML_PREDICATE} <{object_property}> ; ' \
+                                           f'         {R2RML_OBJECT} [ ' \
+                                           f'             {R2RML_PARENT_TRIPLESMAP} ?parent_triplesMap;' \
+                                           f'             {R2RML_JOIN_CONITION} [ <{property_range}>' \
+                                           f'               {R2RML_CHILD} "XXXX"; {R2RML_PARENT} "XXXX" ' \
+                                           f'          ] ] ]. }}' \
+                                           f'  WHERE {{' \
+                                           f'     ?triplesMap {R2RML_SUBJECT} ?subjectMap . ' \
+                                           f'     ?subjectMap {R2RML_CLASS} <{super_class}>, <{sub_class}> .' \
+                                           f'     ?parent_triplesMap {R2RML_SUBJECT} ?parent_subjectMap . ' \
+                                           f'     ?parent_subjectMap {R2RML_CLASS} {property_range} }}'
+
+            output_mappings.update(insert_object_property_query)
 
 
 # --------------------------------------------------------------------------------------------------------------
@@ -557,8 +544,8 @@ def AddDataProperty(change):
         range = ""
         for r in ontology.query(q2):
             range = r["range"]
-        if range !=  "":    
-         q1 = """
+        if range != "":
+            q1 = """
             PREFIX rr: <http://www.w3.org/ns/r2rml#>
             PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
 
@@ -577,7 +564,7 @@ def AddDataProperty(change):
             }
             """
         if range == "":
-         q1 = """
+            q1 = """
             PREFIX rr: <http://www.w3.org/ns/r2rml#>
             PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
 
@@ -593,7 +580,7 @@ def AddDataProperty(change):
                ?triplesmap rr:subjectMap ?subjectMap .
                ?subjectMap rr:class <""" + domain + """> .
             }
-            """            
+            """
         output_mappings.update(q1)
 
 
@@ -668,11 +655,11 @@ if __name__ == "__main__":
     # Execute query and iterate through the changes to modify accordingly to the change.
     for r in change_data.query(q):
         if r.type == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddClass"):
-            AddClass(r["change"])
+            add_class(r["change"])
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveClass"):
-            RemoveClass(r["change"])
+            remove_class(r["change"])
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddSubClass"):
-            AddSubClass(r["change"])
+            add_super_class(r["change"])
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveSubClass"):
             RemoveSubClass(r["change"])
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddObjectProperty"):
@@ -685,7 +672,7 @@ if __name__ == "__main__":
             RemoveDataProperty(r["change"])
     output_mappings.serialize(destination=args.new_mappings_path)
     yarrrml_content = yatter.inverse_translation(output_mappings)
-    with open(args.new_mappings_path.replace(".ttl",".yml"), "wb") as f:
+    with open(args.new_mappings_path.replace(".ttl", ".yml"), "wb") as f:
         yaml = YAML()
         yaml.default_flow_style = False
         yaml.width = 3000
