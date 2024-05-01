@@ -21,9 +21,11 @@ FORMATS_URI = 'http://www.w3.org/ns/formats/'
 VOID_URI = 'http://rdfs.org/ns/void#'
 FNML_URI = 'http://semweb.mmlab.be/ns/fnml#'
 GREL_URI = 'http://users.ugent.be/~bjdmeest/function/grel.ttl#'
+OCH_URI = 'http://omv.ontoware.org/2009/09/OWLChanges/'
 
 R2RML_PREFIX = 'rr'
 RML_PREFIX = 'rml'
+OCH_PREFIX = 'omv'
 
 TURTLE_PREFIX = '@prefix'
 RML_BASE = '@base'
@@ -92,12 +94,15 @@ D2RQ_PASS = 'd2rq:password'
 ##############################################################################
 #############################  OCH CONSTANTS  ###############################
 ##############################################################################
-# THIS NEEDS TO CHANGE TO OCH once we recreate all change KGs
-OMV_ADDEDCLASS = 'omv:addedClass'
 
-OMV_ADD_SUBCLASS_SUBJECT = 'omv:subAddSubClass'
-OMV_ADD_SUBCLASS_OBJECT = 'omv:objAddSubClass'
+OCH_ADDED_CLASS = f'{OCH_PREFIX}:addedClass'
 
+OCH_ADD_SUBCLASS_DOMAIN = f'{OCH_PREFIX}:subAddSubClass' #ToDo Change to domainAddSubClass
+OCH_ADD_SUBCLASS_RANGE = f'{OCH_PREFIX}:objAddSubClass' #ToDo Change to objAddSubClass
+
+OCH_ADD_OBJECT_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainAddObjectProperty'
+OCH_ADD_OBJECT_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyAddObjectProperty'
+OCH_ADD_OBJECT_PROPERTY_RANGE = f'{OCH_PREFIX}:rangeAddObjectProperty'
 ##############################################################################
 #############################  RDFS&OWL CONSTANTS  ###############################
 ##############################################################################
