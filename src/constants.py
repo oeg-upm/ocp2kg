@@ -103,6 +103,10 @@ OCH_ADD_SUBCLASS_RANGE = f'{OCH_PREFIX}:objAddSubClass' #ToDo Change to objAddSu
 OCH_ADD_OBJECT_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainAddObjectProperty'
 OCH_ADD_OBJECT_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyAddObjectProperty'
 OCH_ADD_OBJECT_PROPERTY_RANGE = f'{OCH_PREFIX}:rangeAddObjectProperty'
+
+OCH_ADD_DATA_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainAddDataProperty'
+OCH_ADD_DATA_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyAddDataProperty'
+OCH_ADD_DATA_PROPERTY_RANGE = f'{OCH_PREFIX}:rangeAddDataProperty'
 ##############################################################################
 #############################  RDFS&OWL CONSTANTS  ###############################
 ##############################################################################

@@ -518,65 +518,55 @@ def RemoveObjectProperty(change):
 
 
 # -------------------------------------------------------------------------------------------------------------------------
-def AddDataProperty(change):
-    # Adds %DATA_PROPERTY% to %CLASS% with datatype %RANGE_DATA_PROPERTY% extracted from the range of %DATA_PROPERTY%. By defaylt, reference is used for the data.
-    q = """
-    SELECT DISTINCT ?domain ?property 
-    WHERE {
-        <""" + change + """> omv:domainAddDataProperty ?domain.
-        <""" + change + """> omv:propertyAddDataProperty ?property.
-    }
+def add_data_property(change):
     """
-    for r in change_data.query(q):
-        domain = r["domain"]
-        predicate = r["property"]
-        q2 = """
-   SELECT DISTINCT ?range
-    WHERE {
-        <""" + predicate + """> rdfs:range ?range.
-    }
-   """
-        range = ""
-        for r in ontology.query(q2):
-            range = r["range"]
-        if range != "":
-            q1 = """
-            PREFIX rr: <http://www.w3.org/ns/r2rml#>
-            PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+       Adds a data property to the TriplesMap indicated in the domain. Ragne is extracted from the input ontology
+       Args:
+           change: the URI of the change which needs to be of the type addObjectProperty
+       Returns:
+           the output_mappings updated with the new predicate object map with empty reference
+        """
+    query = f' SELECT DISTINCT ?domain ?property WHERE {{ ' \
+        f' <{change}> {OCH_ADD_DATA_PROPERTY_DOMAIN} ?domain. '\
+        f' <{change}> {OCH_ADD_DATA_PROPERTY_PROPERTY} ?property. }}'
 
-            INSERT { 
-               ?triplesmap rr:predicateObjectMap [
-                  rr:predicate <""" + predicate + """>;
-                  rr:objectMap [
-                     rml:reference "XXXX";
-                     rr:datatype <""" + range + """>
-                  ]
-               ].
-            }
-            WHERE {
-               ?triplesmap rr:subjectMap ?subjectMap .
-               ?subjectMap rr:class <""" + domain + """> .
-            }
-            """
-        if range == "":
-            q1 = """
-            PREFIX rr: <http://www.w3.org/ns/r2rml#>
-            PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+    for result in change_data.query(query):
+        property_domain = result["domain"]
+        property_predicate = result["property"]
+        q2 = f' SELECT DISTINCT ?property_range WHERE {{ '\
+             f' <{property_predicate} {RDFS_RANGE} ?property_range. }}'
+        property_range = None
+        for results2 in ontology.query(q2):
+            property_range = results2["property_range"]
 
-            INSERT { 
-               ?triplesmap rr:predicateObjectMap [
-                  rr:predicate <""" + predicate + """>;
-                  rr:objectMap [
-                     rml:reference "XXXX";
-                  ]
-               ].
-            }
-            WHERE {
-               ?triplesmap rr:subjectMap ?subjectMap .
-               ?subjectMap rr:class <""" + domain + """> .
-            }
-            """
-        output_mappings.update(q1)
+        if property_range:
+            insert_data_property_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
+                                         f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
+                                         f' INSERT {{  ' \
+                                         f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} [ ' \
+                                         f'         {R2RML_PREDICATE} <{property_predicate}> ; ' \
+                                         f'         {R2RML_OBJECT} [ ' \
+                                         f'             {RML_REFERENCE} "XXXX";' \
+                                         f'             {R2RML_DATATYPE} <{property_range}>' \
+                                         f'          ] ]. }}' \
+                                         f'  WHERE {{' \
+                                         f'     ?triplesMap {R2RML_SUBJECT} ?subjectMap . ' \
+                                         f'     ?subjectMap {R2RML_CLASS} <{property_domain}> . }} '
+
+        else:
+            insert_data_property_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
+                                         f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
+                                         f' INSERT {{  ' \
+                                         f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} [ ' \
+                                         f'         {R2RML_PREDICATE} <{property_predicate}> ; ' \
+                                         f'         {R2RML_OBJECT} [ ' \
+                                         f'             {RML_REFERENCE} "XXXX";' \
+                                         f'          ] ]. }}' \
+                                         f'  WHERE {{' \
+                                         f'     ?triplesMap {R2RML_SUBJECT} ?subjectMap . ' \
+                                         f'     ?subjectMap {R2RML_CLASS} <{property_domain}> . }} '
+
+        output_mappings.update(insert_data_property_query)
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
@@ -665,6 +655,7 @@ if __name__ == "__main__":
             AddDataProperty(r["change"])
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveDataProperty"):
             RemoveDataProperty(r["change"])
+
     output_mappings.serialize(destination=args.new_mappings_path)
     yarrrml_content = yatter.inverse_translation(output_mappings)
     with open(args.new_mappings_path.replace(".ttl", ".yml"), "wb") as f:
