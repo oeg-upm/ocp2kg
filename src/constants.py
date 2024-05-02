@@ -74,7 +74,7 @@ R2RML_BLANK_NODE = f'{R2RML_PREFIX}:BlankNode'
 R2RML_LITERAL = f'{R2RML_PREFIX}:Literal'
 R2RML_REFOBJECT_CLASS = f'{R2RML_PREFIX}:RefObjectMap'
 R2RML_PARENT_TRIPLESMAP = f'{R2RML_PREFIX}:parentTriplesMap'
-R2RML_JOIN_CONITION = f'{R2RML_PREFIX}:joinCondition'
+R2RML_JOIN_CONDITION = f'{R2RML_PREFIX}:joinCondition'
 R2RML_CHILD = f'{R2RML_PREFIX}:child'
 R2RML_PARENT = f'{R2RML_PREFIX}:parent'
 R2RML_LOGICAL_TABLE_CLASS = f'{R2RML_PREFIX}:LogicalTable'
@@ -104,11 +104,10 @@ OCH_REMOVE_OBJECT_PROPERTY = f'{OCH_PREFIX}:RemoveObjectProperty'
 OCH_ADD_DATA_PROPERTY = f'{OCH_PREFIX}:AddDataProperty'
 OCH_REMOVE_DATA_PROPERTY = f'{OCH_PREFIX}:RemoveDataProperty'
 
-
 OCH_ADDED_CLASS = f'{OCH_PREFIX}:addedClass'
 
-OCH_ADD_SUBCLASS_DOMAIN = f'{OCH_PREFIX}:subAddSubClass' #ToDo Change to domainAddSubClass
-OCH_ADD_SUBCLASS_RANGE = f'{OCH_PREFIX}:objAddSubClass' #ToDo Change to objAddSubClass
+OCH_ADD_SUBCLASS_DOMAIN = f'{OCH_PREFIX}:subAddSubClass'  #ToDo Change to domainAddSubClass
+OCH_ADD_SUBCLASS_RANGE = f'{OCH_PREFIX}:objAddSubClass'  #ToDo Change to objAddSubClass
 
 OCH_ADD_OBJECT_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainAddObjectProperty'
 OCH_ADD_OBJECT_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyAddObjectProperty'
@@ -117,8 +116,17 @@ OCH_ADD_OBJECT_PROPERTY_RANGE = f'{OCH_PREFIX}:rangeAddObjectProperty'
 OCH_ADD_DATA_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainAddDataProperty'
 OCH_ADD_DATA_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyAddDataProperty'
 OCH_ADD_DATA_PROPERTY_RANGE = f'{OCH_PREFIX}:rangeAddDataProperty'
+
+OCH_REMOVE_DATA_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainRemoveDataProperty'
+OCH_REMOVE_DATA_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyRemoveDataProperty'
+OCH_REMOVE_DATA_PROPERTY_RANGE = f'{OCH_PREFIX}:rangeRemoveDataProperty'
+
+OCH_REMOVE_OBJECT_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainRemoveObjectProperty'
+OCH_REMOVE_OBJECT_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyRemoveObjectProperty'
+OCH_REMOVE_OBJECT_PROPERTY_RANGE = f'{OCH_PREFIX}:rangeRemoveObjectProperty'
+
 ##############################################################################
-#############################  RDFS&OWL CONSTANTS  ###############################
+#############################  RDFS&OWL CONSTANTS  ###########################
 ##############################################################################
 
 OWL_DATA_PROPERTY = 'owl:DatatypeProperty'

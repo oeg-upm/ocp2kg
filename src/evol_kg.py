@@ -293,7 +293,7 @@ def add_super_class(change):
                                            f'         {R2RML_PREDICATE} <{object_property}> ; ' \
                                            f'         {R2RML_OBJECT} [ ' \
                                            f'             {R2RML_PARENT_TRIPLESMAP} ?parent_triplesMap;' \
-                                           f'             {R2RML_JOIN_CONITION} [ ' \
+                                           f'             {R2RML_JOIN_CONDITION} [ ' \
                                            f'               {R2RML_CHILD} "XXXX"; {R2RML_PARENT} "XXXX" ' \
                                            f'          ] ] ]. }}' \
                                            f'  WHERE {{' \
@@ -462,7 +462,7 @@ def add_object_property(change):
                                        f'         {R2RML_PREDICATE} <{property_predicate}> ; ' \
                                        f'         {R2RML_OBJECT} [ ' \
                                        f'             {R2RML_PARENT_TRIPLESMAP} ?parent_triplesMap;' \
-                                       f'             {R2RML_JOIN_CONITION} [ ' \
+                                       f'             {R2RML_JOIN_CONDITION} [ ' \
                                        f'               {R2RML_CHILD} "XXXX"; {R2RML_PARENT} "XXXX" ' \
                                        f'          ] ] ]. }}' \
                                        f'  WHERE {{' \
@@ -475,46 +475,34 @@ def add_object_property(change):
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------
-def RemoveObjectProperty(change):
-    q = """
-    SELECT DISTINCT ?domain ?property 
-    WHERE {
-        <""" + change + """> omv:domainRemoveObjectProperty ?domain.
-        <""" + change + """> omv:propertyRemoveObjectProperty ?property.
-    }
-    """
-    for r in change_data.query(q):
-        domain = r["domain"]
-        predicate = r["property"]
-    # Removes %OBJECTPROPERTY% from %CLASS%. Extended version is also provided
-    q1 = """
-       PREFIX rr: <http://www.w3.org/ns/r2rml#>
-      PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+def remove_object_property(change):
+    query = f' SELECT DISTINCT ?domain ?property WHERE {{ '\
+            f' <{change}> {OCH_REMOVE_OBJECT_PROPERTY_DOMAIN} ?domain.' \
+            f' <{change}> {OCH_REMOVE_OBJECT_PROPERTY_DOMAIN} ?property. }}'
 
-   DELETE { 
-      ?triplesmap rr:predicateObjectMap ?pom.
-      ?pom rr:predicate <""" + predicate + """> . #if comes from the ontology, it's going to be always constant
+    for result in change_data.query(query):
+        property_domain = result["domain"]
+        property_predicate = result["property"]
+        remove_object_property_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
+                                       f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
+                                       f' DELETE {{'\
+                                       f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} ?pom.' \
+                                       f'     ?pom {R2RML_SHORTCUT_PREDICATE} <{property_predicate}> .' \
+                                       f'     ?pom {R2RML_OBJECT} ?objectMap.' \
+                                       f'     ?objectMap {R2RML_PARENT_TRIPLESMAP} ?parentTriplesMap . '\
+                                       f'     ?objectMap {R2RML_JOIN_CONDITION} ?joinConditions . ' \
+                                       f'     ?joinConditions ?conditions ?condition_values }} . ' \
+                                       f' WHERE {{' \
+                                       f'     ?triplesMap {R2RML_SUBJECT} ?subjectMap.' \
+                                       f'     ?subjectMap {R2RML_CLASS} <{property_domain}> . ' \
+                                       f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} ?pom .' \
+                                       f'     ?pom {R2RML_SHORTCUT_PREDICATE} <{property_predicate}> .' \
+                                       f'     ?pom {R2RML_OBJECT} ?objectMap .' \
+                                       f'     ?objectMap {R2RML_PARENT_TRIPLESMAP} ?parentTriplesMap .'\
+                                       f'     ?objectMap {R2RML_JOIN_CONDITION} ?joinConditions .'\
+                                       f'     OPTIONAL {{ ?joinConditions ?conditions ?condition_values }} . }}'
 
-      ?pom rr:objectMap ?objectMap.
-      ?objectMap rr:parentTriplesMap ?parent_tm .
-      ?objectMap rr:joinCondition ?join_condition .
-      ?join_condition ?conditions ?condition_values .
-   }
-   WHERE {
-      ?triplesmap  rr:subjectMap ?subjectMap.
-      ?subjectMap rr:class <""" + domain + """>.
-
-      ?triplesmap rr:predicateObjectMap ?pom.
-      ?pom rr:predicate <""" + predicate + """> . #if comes from the ontology, it's going to be always constant
-
-      ?pom rr:objectMap ?objectMap.
-      ?objectMap rr:parentTriplesMap ?parent_tm .
-      ?objectMap rr:joinCondition ?join_condition .
-      ?join_condition ?conditions ?condition_values .
-         
-   }
-   """
-    output_mappings.update(q1)
+        output_mappings.update(remove_object_property_query)
 
 
 # -------------------------------------------------------------------------------------------------------------------------
@@ -525,7 +513,7 @@ def add_data_property(change):
            change: the URI of the change which needs to be of the type addObjectProperty
        Returns:
            the output_mappings updated with the new predicate object map with empty reference
-        """
+    """
     query = f' SELECT DISTINCT ?domain ?property WHERE {{ ' \
         f' <{change}> {OCH_ADD_DATA_PROPERTY_DOMAIN} ?domain. '\
         f' <{change}> {OCH_ADD_DATA_PROPERTY_PROPERTY} ?property. }}'
@@ -570,42 +558,38 @@ def add_data_property(change):
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
-def RemoveDataProperty(change):
-    q = """
-    SELECT DISTINCT ?domain ?property
-    WHERE {
-        <""" + change + """> omv:domainRemoveDataProperty ?domain.
-        <""" + change + """> omv:propertyRemoveDataProperty ?property.
-    }
+def remove_data_property(change):
     """
-    for r in change_data.query(q):
-        domain = r["domain"]
-        predicate = r["property"]
-    # Removes %DATAPROPERTY% from %CLASS%. Extended version is also provided
-    q1 = """
-   PREFIX rr: <http://www.w3.org/ns/r2rml#>
-   PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
-   
-   DELETE { 
-      ?triplesmap rr:predicateObjectMap ?pom.
-      ?pom rr:predicate <""" + predicate + """> . #if comes from the ontology, it's going to be always constant
-      
-      ?pom ?object_property ?objectMap. #either rr:objectMap or rr:object
-      ?objectMap ?object_term ?objectValue . #removes everything under objectMap (including language, datatype or termType)
-   }
-   WHERE {
-      ?triplesmap  rr:subjectMap ?subjectMap.
-      ?subjectMap rr:class <""" + domain + """>.
+        Removes the data property indicated in the change as property from its domain
+        Args:
+           change: the URI of the change which needs to be of the type addObjectProperty
+        Returns:
+           the output_mappings updated with the predicate object mapping removed
+    """
+    query = f' SELECT DISTINCT ?domain ?property WHERE {{ '\
+            f' <{change}> {OCH_REMOVE_DATA_PROPERTY_DOMAIN} ?domain.'\
+            f' <{change}> {OCH_REMOVE_DATA_PROPERTY_PROPERTY} ?property.'
 
-      ?triplesmap rr:predicateObjectMap ?pom.
-         ?pom rr:predicate <""" + predicate + """> . #if comes from the ontology, it's going to be always constant
+    for result in change_data.query(query):
+        property_domain = result["domain"]
+        property_predicate = result["property"]
 
-      ?pom rr:objectMap|rr:object ?objectMap.
-      OPTIONAL { ?objectMap ?object_term ?objectValue }.
-         
-   }
-   """
-    output_mappings.update(q1)
+        remove_data_property_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
+                                     f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
+                                     f' DELETE {{'\
+                                     f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} ?pom.' \
+                                     f'     ?pom {R2RML_SHORTCUT_PREDICATE} <{property_predicate}> .' \
+                                     f'     ?pom ?object_property ?objectMap.' \
+                                     f'     ?objectMap ?object_term ?objectValue .}}'\
+                                     f' WHERE {{' \
+                                     f'     ?triplesMap {R2RML_SUBJECT} ?subjectMap.' \
+                                     f'     ?subjectMap {R2RML_CLASS} <{property_domain}> . ' \
+                                     f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} ?pom .' \
+                                     f'     ?pom {R2RML_SHORTCUT_PREDICATE} <{property_predicate}> .' \
+                                     f'     ?pom {R2RML_OBJECT}|{R2RML_SHORTCUT_OBJECT} ?objectMap .'\
+                                     f'     OPTIONAL {{ ?objectMap ?object_term ?objectValue }} . }}'
+
+        output_mappings.update(remove_data_property_query)
 
 
 # -------------------------------------------------------------------------------------------------------------
@@ -638,6 +622,7 @@ if __name__ == "__main__":
     }
     """
     # Execute query and iterate through the changes to modify accordingly to the change.
+    # ToDo: we need to give order to the actions: adding class and sublcass, then adding properties and finally removing
     for r in change_data.query(q):
         if r.type == URIRef(OCH_ADD_CLASS):
             add_class(r["change"])
@@ -650,11 +635,11 @@ if __name__ == "__main__":
         elif r["type"] == URIRef(OCH_ADD_OBJECT_PROPERTY):
             add_object_property(r["change"])
         elif r["type"] == URIRef(OCH_REMOVE_OBJECT_PROPERTY):
-            RemoveObjectProperty(r["change"])
+            remove_object_property(r["change"])
         elif r["type"] == URIRef(OCH_ADD_DATA_PROPERTY):
             add_data_property(r["change"])
         elif r["type"] == URIRef(OCH_REMOVE_DATA_PROPERTY):
-            RemoveDataProperty(r["change"])
+            remove_data_property(r["change"])
 
     output_mappings.serialize(destination=args.new_mappings_path)
     yarrrml_content = yatter.inverse_translation(output_mappings)
