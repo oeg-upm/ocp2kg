@@ -652,7 +652,7 @@ if __name__ == "__main__":
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveObjectProperty"):
             RemoveObjectProperty(r["change"])
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddDataProperty"):
-            AddDataProperty(r["change"])
+            add_data_property(r["change"])
         elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveDataProperty"):
             RemoveDataProperty(r["change"])
 
