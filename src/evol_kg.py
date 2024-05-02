@@ -639,21 +639,21 @@ if __name__ == "__main__":
     """
     # Execute query and iterate through the changes to modify accordingly to the change.
     for r in change_data.query(q):
-        if r.type == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddClass"):
+        if r.type == URIRef(OCH_ADD_CLASS):
             add_class(r["change"])
-        elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveClass"):
+        elif r["type"] == URIRef(OCH_REMOVE_CLASS):
             remove_class(r["change"])
-        elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddSubClass"):
+        elif r["type"] == URIRef(OCH_ADD_SUBCLASS):
             add_super_class(r["change"])
-        elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveSubClass"):
+        elif r["type"] == URIRef(OCH_REMOVE_SUBCLASS):
             RemoveSubClass(r["change"])
-        elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddObjectProperty"):
+        elif r["type"] == URIRef(OCH_ADD_OBJECT_PROPERTY):
             add_object_property(r["change"])
-        elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveObjectProperty"):
+        elif r["type"] == URIRef(OCH_REMOVE_OBJECT_PROPERTY):
             RemoveObjectProperty(r["change"])
-        elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#AddDataProperty"):
+        elif r["type"] == URIRef(OCH_ADD_DATA_PROPERTY):
             add_data_property(r["change"])
-        elif r["type"] == URIRef("http://omv.ontoware.org/2009/09/OWLChanges#RemoveDataProperty"):
+        elif r["type"] == URIRef(OCH_REMOVE_DATA_PROPERTY):
             RemoveDataProperty(r["change"])
 
     output_mappings.serialize(destination=args.new_mappings_path)

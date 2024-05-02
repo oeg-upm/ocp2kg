@@ -21,7 +21,7 @@ FORMATS_URI = 'http://www.w3.org/ns/formats/'
 VOID_URI = 'http://rdfs.org/ns/void#'
 FNML_URI = 'http://semweb.mmlab.be/ns/fnml#'
 GREL_URI = 'http://users.ugent.be/~bjdmeest/function/grel.ttl#'
-OCH_URI = 'http://omv.ontoware.org/2009/09/OWLChanges/'
+OCH_URI = 'http://omv.ontoware.org/2009/09/OWLChanges#'
 
 R2RML_PREFIX = 'rr'
 RML_PREFIX = 'rml'
@@ -94,6 +94,16 @@ D2RQ_PASS = 'd2rq:password'
 ##############################################################################
 #############################  OCH CONSTANTS  ###############################
 ##############################################################################
+
+OCH_ADD_CLASS = f'{OCH_PREFIX}:AddClass'
+OCH_REMOVE_CLASS = f'{OCH_PREFIX}:RemoveClass'
+OCH_ADD_SUBCLASS = f'{OCH_PREFIX}:AddSubClass'
+OCH_REMOVE_SUBCLASS = f'{OCH_PREFIX}:RemoveSubClass'
+OCH_ADD_OBJECT_PROPERTY = f'{OCH_PREFIX}:AddObjectProperty'
+OCH_REMOVE_OBJECT_PROPERTY = f'{OCH_PREFIX}:RemoveObjectProperty'
+OCH_ADD_DATA_PROPERTY = f'{OCH_PREFIX}:AddDataProperty'
+OCH_REMOVE_DATA_PROPERTY = f'{OCH_PREFIX}:RemoveDataProperty'
+
 
 OCH_ADDED_CLASS = f'{OCH_PREFIX}:addedClass'
 
