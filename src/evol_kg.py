@@ -476,6 +476,13 @@ def add_object_property(change):
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------
 def remove_object_property(change):
+    """
+        Removes the object property indicated in the change as property from its domain
+        Args:
+           change: the URI of the change which needs to be of the type addObjectProperty
+        Returns:
+           the output_mappings updated with the reference predicate object mapping removed
+    """
     query = f' SELECT DISTINCT ?domain ?property WHERE {{ '\
             f' <{change}> {OCH_REMOVE_OBJECT_PROPERTY_DOMAIN} ?domain.' \
             f' <{change}> {OCH_REMOVE_OBJECT_PROPERTY_DOMAIN} ?property. }}'
