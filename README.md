@@ -1,5 +1,7 @@
 # OCP2KG: Ontology Change Propagation to Knowledge Graphs
 ![GitHub](https://img.shields.io/github/license/oeg-dataintegration/ocp2kg?style=flat)
+[![DOI](https://zenodo.org/badge/690501188.svg)](https://zenodo.org/doi/10.5281/zenodo.11244236)
+![GitHub Release Date](https://img.shields.io/github/release-date/oeg-upm/ocp2kg)
 
 OCP2KG is a tool for propagating ontology changes to declarative mappings. The tool requires as input the updated 
 version of the ontology in OWL, the outdated mappings in RML, and the change data, that has to be in 
