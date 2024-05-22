@@ -25,10 +25,9 @@ If you used OCP2KG in your work, please cite it as:
 @inproceedings{herreros2024propagating,
     title={{Propagating Ontology Changes to Declarative Mappings in Construction of Knowledge Graphs}},
     author={Diego Conde Herreros and Lise Stork and Romana Pernisch and Mar{\'\i}a Poveda-Villal{\'o}n and Oscar Corcho and David Chaves-Fraga},
-    booktitle={Submitted to Fifth International Workshop on Knowledge Graph Construction\@ESWC2024},
+    booktitle={Fifth International Workshop on Knowledge Graph Construction@ESWC2024},
     year={2024},
-    url={https://openreview.net/forum?id=ONL4LGlHNu},
-    note={Under Review}
+    url={https://openreview.net/forum?id=ONL4LGlHNu}
 }
 ```
 
