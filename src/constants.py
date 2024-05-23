@@ -105,9 +105,13 @@ OCH_ADD_DATA_PROPERTY = f'{OCH_PREFIX}:AddDataProperty'
 OCH_REMOVE_DATA_PROPERTY = f'{OCH_PREFIX}:RemoveDataProperty'
 
 OCH_ADDED_CLASS = f'{OCH_PREFIX}:addedClass'
+OCH_DELETED_CLASS = f'{OCH_PREFIX}:deletedClass'
 
 OCH_ADD_SUBCLASS_DOMAIN = f'{OCH_PREFIX}:subAddSubClass'  #ToDo Change to domainAddSubClass
 OCH_ADD_SUBCLASS_RANGE = f'{OCH_PREFIX}:objAddSubClass'  #ToDo Change to objAddSubClass
+
+OCH_REMOVE_SUBCLASS_DOMAIN = f'{OCH_PREFIX}:subRemoveSubClass' #ToDo Change to domainRemoveSubClass
+OCH_REMOVE_SUBCLASS_RANGE = f'{OCH_PREFIX}:objRemoveSubClass' #ToDo Change to objRemoveSubClass
 
 OCH_ADD_OBJECT_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainAddObjectProperty'
 OCH_ADD_OBJECT_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyAddObjectProperty'

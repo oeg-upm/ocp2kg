@@ -48,12 +48,9 @@ def add_class(change):
 # ---------------------------------------------------------------------------------------------------------------------------
 def remove_class(change):
     # First we query the change data to obtain the class to be deleted.
-    q = """
-    SELECT DISTINCT ?fullname
-    WHERE {
-        <""" + change + """> omv:deletedClass ?fullname .
-    }
-    """
+    q = f' SELECT DISTINCT ?class_name WHERE {{ '\
+        f'      <{change}> {OCH_DELETED_CLASS} ?class_name . }}'
+
     for r in change_data.query(q):
         full_name = r["fullname"]
     ##CHECK wether this class is a subclass from another one for different treatments.
@@ -306,137 +303,75 @@ def add_super_class(change):
 
 
 # --------------------------------------------------------------------------------------------------------------
-def RemoveSubClass(change):
+def remove_super_class(change):
     # When removing the subclass relationship between two classes the child one loses the parent in the rr:class part.
-    q = """
-    SELECT DISTINCT ?parent ?child
-    WHERE {
-        <""" + change + """> omv:subRemoveSubClass ?child.
-        <""" + change + """> omv:objRemoveSubClass ?parent.
-    }
-    """
-    for r in change_data.query(q):
-        parent = r["parent"]
-        child = r["child"]
-    q1 = """
-      PREFIX rr: <http://www.w3.org/ns/r2rml#>
-      PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+    query = f'SELECT DISTINCT ?super_class ?sub_class WHERE {{ ' \
+            f' <{change}> {OCH_REMOVE_SUBCLASS_DOMAIN} ?sub_class.'\
+            f' <{change}> {OCH_REMOVE_SUBCLASS_RANGE} ?super_class. }}'
 
-      DELETE {   
-         ?subjectMap rr:class <""" + parent + """>.
-      }
-      WHERE {
-         ?triplesmap rr:subjectMap ?subjectMap.
-         ?subjectMap rr:class <""" + parent + """>, <""" + child + """>.
-      }
-   """""
-    output_mappings.update(q1)
-    # Query to obtain those Data Properties from the father that the child class has inherited.
-    q2 = """
-   SELECT DISTINCT ?dataproperty 
-   WHERE {
-      ?dataproperty  a owl:DatatypeProperty;
-                     rdfs:domain <""" + parent + """>, <""" + child + """>.
-   } 
-   """
-    for r in ontology.query(q2):
-        dataprop = r["dataproperty"]
-        # This triggers:
-        # Remove DataProperties where %DATAPROPERTY% has as domain %SUBCLASS%
-        # For each DATAPROPERTY of %SUBCLASS%:
-        # Run RemoveDataProperty.rq with %CLASS% = %SUPERCLASS% .
-        q3 = """
-           PREFIX rr: <http://www.w3.org/ns/r2rml#>
-            PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+    for result in change_data.query(query):
+        super_class = result["super_class"]
+        sub_class = result["sub_class"]
+        delete_super_class_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
+                                   f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
+                                   f' DELETE {{ ?subjectMap {R2RML_CLASS} <{super_class}> }}' \
+                                   f' WHERE {{ ' \
+                                   f'       ?triplesMap {R2RML_SUBJECT} ?subjectMap . ' \
+                                   f'       ?triplesMap {R2RML_CLASS} <{super_class}>, <{sub_class}> .}}'
 
+        output_mappings.update(delete_super_class_query)
 
-   DELETE { 
-      ?triplesmap rr:predicateObjectMap ?pom.
-      ?pom rr:predicate <""" + dataprop + """> . #if comes from the ontology, it's going to be always constant
+        inherit_data_properties_query = f' SELECT DISTINCT ?data_property WHERE {{' \
+                                        f'     ?dataProperty {RDF_TYPE} {OWL_DATA_PROPERTY} . '\
+                                        f'     ?dataProperty {RDFS_DOMAIN} <{super_class}>, {sub_class}. }}'
 
-      ?pom rr:objectMap|rr:object ?objectMap. #either rr:objectMap or rr:object
-      ?objectMap ?object_term ?objectValue . #removes everything under objectMap (including language, datatype or termType)
-   }
-   WHERE {
-      ?triplesmap  rr:subjectMap ?subjectMap.
-      ?subjectMap rr:class <""" + child + """>.
+        for result2 in ontology.query(inherit_data_properties_query):
+            data_property = result2["data_property"]
+            remove_data_property_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
+                                         f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
+                                         f' DELETE {{'\
+                                         f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} ?pom.' \
+                                         f'     ?pom {R2RML_SHORTCUT_PREDICATE} <{data_property}> .' \
+                                         f'     ?pom ?object_property ?objectMap.' \
+                                         f'     ?objectMap ?object_term ?objectValue .}}'\
+                                         f' WHERE {{' \
+                                         f'     ?triplesMap {R2RML_SUBJECT} ?subjectMap.' \
+                                         f'     ?subjectMap {R2RML_CLASS} <{sub_class}> . ' \
+                                         f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} ?pom .' \
+                                         f'     ?pom {R2RML_SHORTCUT_PREDICATE} <{data_property}> .' \
+                                         f'     ?pom {R2RML_OBJECT}|{R2RML_SHORTCUT_OBJECT} ?objectMap .'\
+                                         f'     OPTIONAL {{ ?objectMap ?object_term ?objectValue }} . }}'
 
-      ?triplesmap rr:predicateObjectMap ?pom.
-         ?pom rr:predicate <""" + dataprop + """> . #if comes from the ontology, it's going to be always constant
+            output_mappings.update(remove_data_property_query)
 
-      ?pom rr:objectMap|rr:object ?objectMap.
-      OPTIONAL { ?objectMap ?object_term ?objectValue }.
-         
-   }
-   """
-        output_mappings.update(q3)
-    # Remove ObjectProperties where %OBJECTPROPERTY% has as domain %SUBCLASS%
-    # For each OBJECTPROPERTY of %SUBCLASS%:
-    # Run RemoveObjectProperty.rq with %CLASS% = %SUPERCLASS% .
-    q4 = """
-   SELECT DISTINCT ?objectproperty 
-   WHERE {
-      ?objectproperty  a owl:ObjectProperty;
-                     rdfs:domain <""" + parent + """>, <""" + child + """>.
-   } 
-   """
-    for r in ontology.query(q4):
-        objprop = r["objectproperty"]
-        q5 = """
-           PREFIX rr: <http://www.w3.org/ns/r2rml#>
-            PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+        inherit_object_properties_query = f' SELECT DISTINCT ?object_property WHERE {{' \
+                                          f'     ?object_property  {RDF_TYPE} {OWL_OBJECT_PROPERTY}.'\
+                                          f'     ?object_property {RDFS_DOMAIN} <{super_class}>, <{sub_class}>. }} '
+        for results in ontology.query(inherit_object_properties_query):
+            object_property = results["object_property"]
+            remove_object_property_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
+                                           f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
+                                           f' DELETE {{' \
+                                           f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} ?pom.' \
+                                           f'     ?pom {R2RML_SHORTCUT_PREDICATE} <{object_property}> .' \
+                                           f'     ?pom {R2RML_OBJECT} ?objectMap.' \
+                                           f'     ?objectMap {R2RML_PARENT_TRIPLESMAP} ?parentTriplesMap . ' \
+                                           f'     ?objectMap {R2RML_JOIN_CONDITION} ?joinConditions . ' \
+                                           f'     ?joinConditions ?conditions ?condition_values }} . ' \
+                                           f' WHERE {{' \
+                                           f'     ?triplesMap {R2RML_SUBJECT} ?subjectMap.' \
+                                           f'     ?subjectMap {R2RML_CLASS} <{sub_class}> . ' \
+                                           f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} ?pom .' \
+                                           f'     ?pom {R2RML_SHORTCUT_PREDICATE} <{object_property}> .' \
+                                           f'     ?pom {R2RML_OBJECT} ?objectMap .' \
+                                           f'     ?objectMap {R2RML_PARENT_TRIPLESMAP} ?parentTriplesMap .' \
+                                           f'     OPTIONAL {{ ?objectMap {R2RML_JOIN_CONDITION} ?joinConditions .' \
+                                           f'                 ?joinConditions ?conditions ?condition_values . }} }}'
 
-   DELETE { 
-      ?triplesmap rr:predicateObjectMap ?pom.
-      ?pom rr:predicate <""" + objprop + """> . #if comes from the ontology, it's going to be always constant
-
-      ?pom rr:objectMap ?objectMap.
-      ?objectMap rr:parentTriplesMap ?parent_tm .
-      ?objectMap rr:joinCondition ?join_condition .
-      ?join_condition ?conditions ?condition_values .
-   }
-   WHERE {
-      ?triplesmap  rr:subjectMap ?subjectMap.
-      ?subjectMap rr:class <""" + child + """>.
-
-      ?triplesmap rr:predicateObjectMap ?pom.
-      ?pom rr:predicate <""" + objprop + """> . #if comes from the ontology, it's going to be always constant
-
-      ?pom rr:objectMap ?objectMap.
-      ?objectMap rr:parentTriplesMap ?parent_tm .
-      ?objectMap rr:joinCondition ?join_condition .
-      ?join_condition ?conditions ?condition_values .
-   }
-   """
-        output_mappings.update(q5)
-
-        # Remove ObjectProperties where %OBJECTPROPERTY% has as range %SUBCLASS%.
-        # For each OBJECTPROPERTY:
-        q6 = """
-           PREFIX rr: <http://www.w3.org/ns/r2rml#>
-           PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
-
-            DELETE {
-               ?parent_triplesMap rr:predicateObjectMap <%OBJECTPROPERTY%>.
-               ?parent_pom rr:objectMap ?parent_object.
-               ?parent_object rr:parentTriplesMap ?triplesmap.
-               ?parent_object rr:joinConditions ?parent_joinConditions .
-               ?parent_joinConditions ?parent_conditions ?parent_conditions_values . 
-            }
-            WHERE {   
-               ?parent_triplesMap rr:predicateObjectMap <%OBJECTPROPERTY%>.
-               ?parent_pom rr:objectMap ?parent_object.
-               ?parent_object rr:parentTriplesMap ?triplesmap.
-               OPTIONAL {
-                  ?parent_object rr:joinConditions ?parent_joinConditions .
-                  ?parent_joinConditions ?parent_conditions ?parent_conditions_values .
-               } 
-            }
-         """
-        output_mappings.update(q6)
+            output_mappings.update(remove_object_property_query)
+        # ToDo Remove the object_properties where super_class is the range (i.e. RefObjectMap)
 
 
-# ---------------------------------------------------------------------------------------------------------------
 def add_object_property(change):
     """
        Adds an object property to the TriplesMap indicated in the domain.
@@ -506,8 +441,8 @@ def remove_object_property(change):
                                        f'     ?pom {R2RML_SHORTCUT_PREDICATE} <{property_predicate}> .' \
                                        f'     ?pom {R2RML_OBJECT} ?objectMap .' \
                                        f'     ?objectMap {R2RML_PARENT_TRIPLESMAP} ?parentTriplesMap .'\
-                                       f'     ?objectMap {R2RML_JOIN_CONDITION} ?joinConditions .'\
-                                       f'     OPTIONAL {{ ?joinConditions ?conditions ?condition_values }} . }}'
+                                       f'     OPTIONAL {{ ?objectMap {R2RML_JOIN_CONDITION} ?joinConditions .'\
+                                       f'                 ?joinConditions ?conditions ?condition_values }} . }}'
 
         output_mappings.update(remove_object_property_query)
 
@@ -630,6 +565,7 @@ if __name__ == "__main__":
     """
     # Execute query and iterate through the changes to modify accordingly to the change.
     # ToDo: we need to give order to the actions: adding class and sublcass, then adding properties and finally removing
+    # ToDo: removing subclass action needs to be implemented
     for r in change_data.query(q):
         if r.type == URIRef(OCH_ADD_CLASS):
             add_class(r["change"])
@@ -638,7 +574,7 @@ if __name__ == "__main__":
         elif r["type"] == URIRef(OCH_ADD_SUBCLASS):
             add_super_class(r["change"])
         elif r["type"] == URIRef(OCH_REMOVE_SUBCLASS):
-            RemoveSubClass(r["change"])
+            remove_super_class(r["change"])
         elif r["type"] == URIRef(OCH_ADD_OBJECT_PROPERTY):
             add_object_property(r["change"])
         elif r["type"] == URIRef(OCH_REMOVE_OBJECT_PROPERTY):
