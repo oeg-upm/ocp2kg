@@ -1,5 +1,8 @@
 # OCP2KG: Ontology Change Propagation to Knowledge Graphs
 ![GitHub](https://img.shields.io/github/license/oeg-dataintegration/ocp2kg?style=flat)
+[![DOI](https://zenodo.org/badge/690501188.svg)](https://zenodo.org/doi/10.5281/zenodo.11244236)
+![GitHub Release](https://img.shields.io/github/v/release/oeg-upm/ocp2kg)
+
 
 OCP2KG is a tool for propagating ontology changes to declarative mappings. 
 The tool requires as input the updated 
@@ -38,5 +41,5 @@ If you used OCP2KG in your work, please cite it as:
 ```
 
 # Authors
-- Diego Conde Herreros (OEG-UPM) - diego.conde.herreros at upm.es
-- David Chaves-Fraga (CiTIUS-USC) - david.chaves at usc.es
+- Diego Conde Herreros (OEG-UPM) - main contact  diego.conde.herreros at upm.es
+- David Chaves-Fraga (CiTIUS-USC)
