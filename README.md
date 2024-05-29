@@ -25,7 +25,7 @@ Options:
 ````
 
 # Architecture
-![OCP2KG Architecture](figures/arqui.jpg?raw=true "OCP2KG Architecture")
+![OCP2KG Architecture](misc/arqui.jpg?raw=true "OCP2KG Architecture")
 
 ## Cite this work:
 If you used OCP2KG in your work, please cite it as:
