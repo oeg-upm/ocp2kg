@@ -22,6 +22,7 @@ Options:
 -m, --old_mapping_path <arg>       Path to the old mapping rules (previous version) in RML
 -o, --ontology_path <arg>          Path to the new version of the ontology
 -n, --new_mappings_path <arg>      Path to the output files, updated version of the mapping rules
+-y, --yarrrml                      Output mappings will be also translated to YARRRML (RML turtle by default)
 ````
 
 # Architecture
@@ -32,7 +33,7 @@ If you used OCP2KG in your work, please cite it as:
 
 ```bib
 @inproceedings{herreros2024propagating,
-    title={{Propagating Ontology Changes to Declarative Mappings in Construction of Knowledge Graphs}},
+    title={{Propagating Ontology Changes to Declarative Mappings in the Construction of Knowledge Graphs}},
     author={Diego Conde Herreros and Lise Stork and Romana Pernisch and Mar{\'\i}a Poveda-Villal{\'o}n and Oscar Corcho and David Chaves-Fraga},
     booktitle={Fifth International Workshop on Knowledge Graph Construction@ESWC2024},
     year={2024},

@@ -22,16 +22,17 @@ def add_class(change):
 
     results = change_data.query(select_change)
     added_class = results.bindings[0][Variable('class')]
-    check_query = f'ASK {{  ?class {RDF_TYPE} {R2RML_TRIPLES_MAP} .' \
-                  f'        ?class {R2RML_SUBJECT} ?subject . ' \
+    check_query = f'ASK {{  ?triples_map {RDF_TYPE} {R2RML_TRIPLES_MAP} .' \
+                  f'        ?triples_map {R2RML_SUBJECT} ?subject . ' \
                   f'        ?subject {R2RML_CLASS} <{added_class}> }}'
 
     check_res = output_mappings.query(check_query)
     if not check_res.askAnswer:
+        triples_map_id = f'{added_class.split("#")[1]}_TM'
         insert_class_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
                              f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
                              f' INSERT DATA {{' \
-                             f'     <{added_class}> {RDF_TYPE} {R2RML_TRIPLES_MAP}; ' \
+                             f'     <{triples_map_id}> {RDF_TYPE} {R2RML_TRIPLES_MAP}; ' \
                              f'        {RML_LOGICAL_SOURCE} [ ' \
                              f'             {RML_SOURCE} "XXXX"; ' \
                              f'             {RML_REFERENCE_FORMULATION} "XXXX" ' \
@@ -61,13 +62,13 @@ def remove_class(change):
             f'      <{change}> {OCH_DELETED_CLASS} ?class_name . }}'
 
     for result in change_data.query(query):
-        full_name = result["class_name"]
+        class_name = result["class_name"]
         query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
                 f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
                 f' DELETE {{' \
                 f'      ?triples_map {R2RML_SUBJECT} ?subject.' \
                 f'      ?subject ?subject_term ?subject_value .' \
-                f'      ?subject {R2RML_CLASS} <{full_name}> .' \
+                f'      ?subject {R2RML_CLASS} <{class_name}> .' \
                 f'      ?triples_map {RML_LOGICAL_SOURCE} ?logical_source .' \
                 f'      ?logical_source ?logical_source_term ?logical_source_value .' \
                 f'      ?triples_map {R2RML_PREDICATE_OBJECT_MAP} ?pom. ' \
@@ -88,7 +89,7 @@ def remove_class(change):
                 f' WHERE {{ ' \
                 f'      ?triples_map {R2RML_SUBJECT} ?subject.' \
                 f'      ?subject ?subject_term ?subject_value .' \
-                f'      ?subject {R2RML_CLASS} <{full_name}> .' \
+                f'      ?subject {R2RML_CLASS} <{class_name}> .' \
                 f'      ?triples_map {RML_LOGICAL_SOURCE} ?logical_source .' \
                 f'      ?logical_source ?logical_source_term ?logical_source_value .' \
                 f'      OPTIONAL {{ ' \
@@ -154,7 +155,7 @@ def add_super_class(change):
                                 f'     ?dataproperty {RDFS_DOMAIN} <{super_class}> .' \
                                 f'     ?dataproperty {RDFS_RANGE} ?range.}}'
 
-        for result in ontology.query(query_data_properties):
+        for result in ontology.query(query_data_properties): # ToDo: removes references to the ontology
             dataproperty = result["dataproperty"]
             property_range = result["range"]
 
@@ -177,7 +178,7 @@ def add_super_class(change):
                                   f'     ?objectproperty {RDFS_DOMAIN} <{super_class}> .' \
                                   f'     ?objectproperty {RDFS_RANGE} ?range.}}'
 
-        for result in ontology.query(query_object_properties):
+        for result in ontology.query(query_object_properties): # ToDo: removes references to the ontology
             object_property = result["objectproperty"]
             property_range = result["range"]
 
@@ -223,7 +224,7 @@ def remove_super_class(change):
                                         f'     ?dataProperty {RDF_TYPE} {OWL_DATA_PROPERTY} . ' \
                                         f'     ?dataProperty {RDFS_DOMAIN} <{super_class}>, {sub_class}. }}'
 
-        for result2 in ontology.query(inherit_data_properties_query):
+        for result2 in ontology.query(inherit_data_properties_query):  # ToDo: removes references to the ontology
             data_property = result2["data_property"]
             remove_data_property_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
                                          f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
@@ -364,7 +365,7 @@ def add_data_property(change):
         q2 = f' SELECT DISTINCT ?property_range WHERE {{ ' \
              f' <{property_predicate} {RDFS_RANGE} ?property_range. }}'
         property_range = None
-        for results2 in ontology.query(q2):
+        for results2 in ontology.query(q2):  # ToDo: removes references to the ontology
             property_range = results2["property_range"]
 
         if property_range:
@@ -437,42 +438,60 @@ def remove_data_property(change):
 
 def define_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-c", "--changes_kg_path", required=False, help="Change KG following the Change Ontology")
-    parser.add_argument("-m", "--old_mapping_path", required=False, help="Old version of the mappings in RML")
+    parser.add_argument("-c", "--changes_kg_path", required=True, help="Change KG following the Change Ontology")
+    parser.add_argument("-m", "--old_mapping_path", required=True, help="Old version of the mappings in RML")
     parser.add_argument("-o", "--ontology_path", required=False, help="New version of the ontology")
-    parser.add_argument("-n", "--new_mappings_path", required=False, help="Output path for the generated mapping")
+    parser.add_argument("-n", "--new_mappings_path", required=True, help="Output path for the generated mapping")
+    parser.add_argument("-y", "--yarrrml", nargs=argparse.OPTIONAL, required=False, help="Mappings are also converted into YARRRML")
     return parser
 
 
 if __name__ == "__main__":
+    logger.info("Starting the propagation of changes over the mapping rules")
     args = define_args().parse_args()
-    change_data = Graph().parse(args.changes_kg_path, format="turtle")
-    output_mappings = Graph().parse(args.old_mapping_path, format="turtle")
-    ontology = Graph().parse(args.ontology_path)
+    change_data = Graph().parse(args.changes_kg_path, format="ttl")
+
+    if args.old_mapping_path.endswith(".yml") or args.old_mapping_path.endswith(".yaml"):
+        logger.info("Loading old mapping rules from YARRRML using YATTER")
+        output_mappings = Graph()
+        yaml = YAML(typ='safe', pure=True)
+        output_mappings.parse(yatter.translate(yaml.load(open(args.old_mapping_path)), RML_URI), format="ttl")
+    else:
+        output_mappings = Graph().parse(args.old_mapping_path, format="ttl")
+
+    if args.ontology_path:
+        ontology = Graph().parse(args.ontology_path)
+
     review_mappings = Graph()
 
-    q = f'  SELECT DISTINCT ?change ?type WHERE {{ ' \
-        f'  ?change {RDF_TYPE} ?type . }}' \
+    changes_order = (OCH_ADD_CLASS, OCH_ADD_SUBCLASS, OCH_ADD_OBJECT_PROPERTY, OCH_ADD_DATA_PROPERTY, OCH_REMOVE_CLASS,
+                     OCH_REMOVE_SUBCLASS, OCH_REMOVE_OBJECT_PROPERTY, OCH_REMOVE_DATA_PROPERTY)
 
-    # ToDo: we need to give order to the actions: adding class and sublcass, then adding properties and finally removing
     # ToDo: removing subclass action needs to be implemented
-    for r in change_data.query(q):
-        if r.type == URIRef(OCH_ADD_CLASS):
-            add_class(r["change"])
-        elif r["type"] == URIRef(OCH_REMOVE_CLASS):
-            remove_class(r["change"])
-        elif r["type"] == URIRef(OCH_ADD_SUBCLASS):
-            add_super_class(r["change"])
-        elif r["type"] == URIRef(OCH_REMOVE_SUBCLASS):
-            remove_super_class(r["change"])
-        elif r["type"] == URIRef(OCH_ADD_OBJECT_PROPERTY):
-            add_object_property(r["change"])
-        elif r["type"] == URIRef(OCH_REMOVE_OBJECT_PROPERTY):
-            remove_object_property(r["change"])
-        elif r["type"] == URIRef(OCH_ADD_DATA_PROPERTY):
-            add_data_property(r["change"])
-        elif r["type"] == URIRef(OCH_REMOVE_DATA_PROPERTY):
-            remove_data_property(r["change"])
+    for change_type in changes_order:
+
+        q = f'  SELECT DISTINCT ?change WHERE {{ ' \
+            f'  ?change {RDF_TYPE} {URIRef(change_type)} . }}'
+
+        for change_result in change_data.query(q):
+            if URIRef(change_type) == URIRef(OCH_ADD_CLASS):
+                add_class(change_result["change"])
+            elif URIRef(change_type) == URIRef(OCH_REMOVE_CLASS):
+                remove_class(change_result["change"])
+            elif URIRef(change_type) == URIRef(OCH_ADD_SUBCLASS):
+                add_super_class(change_result["change"])
+            elif URIRef(change_type) == URIRef(OCH_REMOVE_SUBCLASS):
+                remove_super_class(change_result["change"])
+            elif URIRef(change_type) == URIRef(OCH_ADD_OBJECT_PROPERTY):
+                add_object_property(change_result["change"])
+            elif URIRef(change_type) == URIRef(OCH_REMOVE_OBJECT_PROPERTY):
+                remove_object_property(change_result["change"])
+            elif URIRef(change_type) == URIRef(OCH_ADD_DATA_PROPERTY):
+                add_data_property(change_result["change"])
+            elif URIRef(change_type) == URIRef(OCH_REMOVE_DATA_PROPERTY):
+                remove_data_property(change_result["change"])
+
+    logger.info("Changes propagated over the mapping rules, writing results...")
 
     output_mappings.serialize(destination=args.new_mappings_path)
     yarrrml_content = yatter.inverse_translation(output_mappings)
