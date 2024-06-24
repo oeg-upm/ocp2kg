@@ -499,11 +499,14 @@ def RemoveObjectProperty(change):
     WHERE {
         <""" + change + """> omv:domainRemoveObjectProperty ?domain.
         <""" + change + """> omv:propertyRemoveObjectProperty ?property.
+        <""" + change + """> omv:rangeAddObjectProperty ?range.
+
     }
     """
     for r in change_data.query(q):
         domain = r["domain"]
         predicate = r["property"]
+        range = r["range"]
     # Removes %OBJECTPROPERTY% from %CLASS%. Extended version is also provided
     q1 = """
        PREFIX rr: <http://www.w3.org/ns/r2rml#>
@@ -529,6 +532,9 @@ def RemoveObjectProperty(change):
       ?objectMap rr:parentTriplesMap ?parent_tm .
       ?objectMap rr:joinCondition ?join_condition .
       ?join_condition ?conditions ?condition_values .
+
+      ?parent_tm rr:subjectMap ?smbnode.
+      ?smbnode rr:class <"""+range+"""> #Range check.
          
    }
    """
@@ -543,22 +549,15 @@ def AddDataProperty(change):
     WHERE {
         <""" + change + """> omv:domainAddDataProperty ?domain.
         <""" + change + """> omv:propertyAddDataProperty ?property.
+        <""" + change + """> omv:rangeAddDataProperty ?range.
+
     }
     """
     for r in change_data.query(q):
         domain = r["domain"]
         predicate = r["property"]
-        q2 = """
-   SELECT DISTINCT ?range
-    WHERE {
-        <""" + predicate + """> rdfs:range ?range.
-    }
-   """
-        range = ""
-        for r in ontology.query(q2):
-            range = r["range"]
-        if range !=  "":    
-         q1 = """
+        range = r["range"]
+        q1 = """
             PREFIX rr: <http://www.w3.org/ns/r2rml#>
             PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
 
@@ -575,25 +574,7 @@ def AddDataProperty(change):
                ?triplesmap rr:subjectMap ?subjectMap .
                ?subjectMap rr:class <""" + domain + """> .
             }
-            """
-        if range == "":
-         q1 = """
-            PREFIX rr: <http://www.w3.org/ns/r2rml#>
-            PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
-
-            INSERT { 
-               ?triplesmap rr:predicateObjectMap [
-                  rr:predicate <""" + predicate + """>;
-                  rr:objectMap [
-                     rml:reference "XXXX";
-                  ]
-               ].
-            }
-            WHERE {
-               ?triplesmap rr:subjectMap ?subjectMap .
-               ?subjectMap rr:class <""" + domain + """> .
-            }
-            """            
+            """           
         output_mappings.update(q1)
 
 
@@ -604,11 +585,14 @@ def RemoveDataProperty(change):
     WHERE {
         <""" + change + """> omv:domainRemoveDataProperty ?domain.
         <""" + change + """> omv:propertyRemoveDataProperty ?property.
+        <""" + change + """> omv:rangeRemoveDataProperty ?range.
+
     }
     """
     for r in change_data.query(q):
         domain = r["domain"]
         predicate = r["property"]
+        range = r["range"]
     # Removes %DATAPROPERTY% from %CLASS%. Extended version is also provided
     q1 = """
    PREFIX rr: <http://www.w3.org/ns/r2rml#>
@@ -629,6 +613,7 @@ def RemoveDataProperty(change):
          ?pom rr:predicate <""" + predicate + """> . #if comes from the ontology, it's going to be always constant
 
       ?pom rr:objectMap|rr:object ?objectMap.
+      ?objectMap rr:datatype <"""+range+""">
       OPTIONAL { ?objectMap ?object_term ?objectValue }.
          
    }
