@@ -6,7 +6,7 @@
 
 OCP2KG is a tool for propagating ontology changes to declarative mappings. The tool requires as input the updated 
 version of the ontology in OWL, the outdated mappings in RML, and the change data, that has to be in 
-RDF following the [OWL Change Ontology](https://diegocondeherreros.github.io/OWLChangeOntology/) model.  
+RDF following the [OWL Change Ontology](https://w3id.org/def/och) model.  
 
 # How to run it?
 
