@@ -433,6 +433,7 @@ def remove_data_property(change):
         output_mappings.update(remove_data_property_query)
 
 
+
 # -------------------------------------------------------------------------------------------------------------
 
 
