@@ -203,6 +203,13 @@ def add_super_class(change):
 
 # --------------------------------------------------------------------------------------------------------------
 def remove_super_class(change):
+    """
+       Removes superclass and its properties from the TriplesMap that instantiate the subclass .
+       Args:
+           change: the URI of the change which needs to be of the type remove_sub_class
+       Returns:
+           the output_mappings updated with the TriplesMap of child removing the parent class and its properties
+    """
     # When removing the subclass relationship between two classes the child one loses the parent in the rr:class part.
     query = f'SELECT DISTINCT ?super_class ?sub_class WHERE {{ ' \
             f' <{change}> {OCH_REMOVE_SUBCLASS_DOMAIN} ?sub_class.' \
@@ -268,7 +275,8 @@ def remove_super_class(change):
                                            f'                 ?joinConditions ?conditions ?condition_values . }} }}'
 
             output_mappings.update(remove_object_property_query)
-        # ToDo Remove the object_properties where super_class is the range (i.e. RefObjectMap)
+       
+# ToDo Remove the object_properties where super_class is the range (i.e. RefObjectMap)
 
 
 def add_object_property(change):
@@ -319,11 +327,13 @@ def remove_object_property(change):
     """
     query = f' SELECT DISTINCT ?domain ?property WHERE {{ ' \
             f' <{change}> {OCH_REMOVE_OBJECT_PROPERTY_DOMAIN} ?domain.' \
-            f' <{change}> {OCH_REMOVE_OBJECT_PROPERTY_DOMAIN} ?property. }}'
-
+            f' <{change}> {OCH_REMOVE_OBJECT_PROPERTY_DOMAIN} ?property.' \
+            f' <{change}> {OCH_REMOVE_OBJECT_PROPERTY_RANGE} ?range .}}'
+            
     for result in change_data.query(query):
         property_domain = result["domain"]
         property_predicate = result["property"]
+        property_range = result["range"]
         remove_object_property_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
                                        f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
                                        f' DELETE {{' \
@@ -340,6 +350,8 @@ def remove_object_property(change):
                                        f'     ?pom {R2RML_SHORTCUT_PREDICATE} <{property_predicate}> .' \
                                        f'     ?pom {R2RML_OBJECT} ?objectMap .' \
                                        f'     ?objectMap {R2RML_PARENT_TRIPLESMAP} ?parentTriplesMap .' \
+                                       f'     ?parent_triplesMap {R2RML_SUBJECT} ?parent_subjectMap . ' \
+                                       f'     ?parent_subjectMap {R2RML_CLASS} {property_range} ' \
                                        f'     OPTIONAL {{ ?objectMap {R2RML_JOIN_CONDITION} ?joinConditions .' \
                                        f'                 ?joinConditions ?conditions ?condition_values }} . }}'
 
@@ -357,43 +369,25 @@ def add_data_property(change):
     """
     query = f' SELECT DISTINCT ?domain ?property WHERE {{ ' \
             f' <{change}> {OCH_ADD_DATA_PROPERTY_DOMAIN} ?domain. ' \
-            f' <{change}> {OCH_ADD_DATA_PROPERTY_PROPERTY} ?property. }}'
+            f' <{change}> {OCH_ADD_DATA_PROPERTY_PROPERTY} ?property. '\
+            f' <{change}> {OCH_ADD_DATA_PROPERTY_RANGE} ?range .}}'
 
     for result in change_data.query(query):
         property_domain = result["domain"]
         property_predicate = result["property"]
-        q2 = f' SELECT DISTINCT ?property_range WHERE {{ ' \
-             f' <{property_predicate} {RDFS_RANGE} ?property_range. }}'
-        property_range = None
-        for results2 in ontology.query(q2):  # ToDo: removes references to the ontology
-            property_range = results2["property_range"]
-
-        if property_range:
-            insert_data_property_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
-                                         f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
-                                         f' INSERT {{  ' \
-                                         f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} [ ' \
-                                         f'         {R2RML_PREDICATE} <{property_predicate}> ; ' \
-                                         f'         {R2RML_OBJECT} [ ' \
-                                         f'             {RML_REFERENCE} "XXXX";' \
-                                         f'             {R2RML_DATATYPE} <{property_range}>' \
-                                         f'          ] ]. }}' \
-                                         f'  WHERE {{' \
-                                         f'     ?triplesMap {R2RML_SUBJECT} ?subjectMap . ' \
-                                         f'     ?subjectMap {R2RML_CLASS} <{property_domain}> . }} '
-
-        else:
-            insert_data_property_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
-                                         f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
-                                         f' INSERT {{  ' \
-                                         f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} [ ' \
-                                         f'         {R2RML_PREDICATE} <{property_predicate}> ; ' \
-                                         f'         {R2RML_OBJECT} [ ' \
-                                         f'             {RML_REFERENCE} "XXXX";' \
-                                         f'          ] ]. }}' \
-                                         f'  WHERE {{' \
-                                         f'     ?triplesMap {R2RML_SUBJECT} ?subjectMap . ' \
-                                         f'     ?subjectMap {R2RML_CLASS} <{property_domain}> . }} '
+        property_range = result["range"]
+        insert_data_property_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
+                                     f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
+                                     f' INSERT {{  ' \
+                                     f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} [ ' \
+                                     f'         {R2RML_PREDICATE} <{property_predicate}> ; ' \
+                                     f'         {R2RML_OBJECT} [ ' \
+                                     f'             {RML_REFERENCE} "XXXX";' \
+                                     f'             {R2RML_DATATYPE} <{property_range}>' \
+                                     f'          ] ]. }}' \
+                                     f'  WHERE {{' \
+                                     f'     ?triplesMap {R2RML_SUBJECT} ?subjectMap . ' \
+                                     f'     ?subjectMap {R2RML_CLASS} <{property_domain}> . }} '
 
         output_mappings.update(insert_data_property_query)
 
@@ -409,11 +403,14 @@ def remove_data_property(change):
     """
     query = f' SELECT DISTINCT ?domain ?property WHERE {{ ' \
             f' <{change}> {OCH_REMOVE_DATA_PROPERTY_DOMAIN} ?domain.' \
-            f' <{change}> {OCH_REMOVE_DATA_PROPERTY_PROPERTY} ?property.'
+            f' <{change}> {OCH_REMOVE_DATA_PROPERTY_PROPERTY} ?property.'\
+            f' <{change}> {OCH_REMOVE_DATA_PROPERTY_RANGE} ?range .}}'
+
 
     for result in change_data.query(query):
         property_domain = result["domain"]
         property_predicate = result["property"]
+        property_range = result["range"]
 
         remove_data_property_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
                                      f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
@@ -428,6 +425,7 @@ def remove_data_property(change):
                                      f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} ?pom .' \
                                      f'     ?pom {R2RML_SHORTCUT_PREDICATE} <{property_predicate}> .' \
                                      f'     ?pom {R2RML_OBJECT}|{R2RML_SHORTCUT_OBJECT} ?objectMap .' \
+                                     f'     ?objectMap {R2RML_DATATYPE} <{property_range}> .' \
                                      f'     OPTIONAL {{ ?objectMap ?object_term ?objectValue }} . }}'
 
         output_mappings.update(remove_data_property_query)
