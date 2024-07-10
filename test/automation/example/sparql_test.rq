@@ -4,15 +4,12 @@ PREFIX rr: <http://www.w3.org/ns/r2rml#>
 PREFIX rml: <http://semweb.mmlab.be/ns/rml#> # current one still in use
 PREFIX epo: <http://data.europa.eu/a4g/ontology#>
 
-# based on LINE 91 of change_data.nt (<http://epo-changes.org/3.0.0-3.0.1/AddClass/epo%3AConcessionEstimate> rdf:type omv:AddClass .)
-
-
 ASK {
-    epo:ConcessionEstimate rdf:type rr:TriplesMap.
-    epo:ConcessionEstimate rml:logicalSource ?logicalSource .
+    ?triples_map rdf:type rr:TriplesMap.
+    ?triples_map rml:logicalSource ?logicalSource .
     ?logicalSource rml:source "XXXX" . #this is not wrong, are referneces to data that will be changed by the knowledge engineer manually
-    ?logicalSource rml:referenceFormularion "XXXX" .
-    epo:ConcessionEstimate rr:subjectMap ?subjectMap .
+    ?logicalSource rml:referenceFormulation "XXXX" .
+    ?triples_map rr:subjectMap ?subjectMap .
     ?subjectMap rr:class epo:ConcessionEstimate .
     ?subjectMap rr:template "XXXX"
 }

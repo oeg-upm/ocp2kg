@@ -1,0 +1,7 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX omv: <http://omv.ontoware.org/2009/09/OWLChanges#>
+PREFIX epo: <http://data.europa.eu/a4g/ontology#>
+
+<http://epo-changes.org/3.0.0-3.0.1/AddClass/epo%3AConcessionEstimate> rdf:type omv:AddClass .
+<http://epo-changes.org/3.0.0-3.0.1/AddClass/epo%3AConcessionEstimate> omv:addedClass_full <http://data.europa.eu/a4g/ontology#ConcessionEstimate> .
+<http://epo-changes.org/3.0.0-3.0.1/AddClass/epo%3AConcessionEstimate> omv:addedClass epo:ConcessionEstimate .

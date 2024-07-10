@@ -1,0 +1,22 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix epo: <http://data.europa.eu/a4g/ontology#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix tedm: <http://data.europa.eu/a4g/mapping/sf-rml/> .
+
+<ConcessionEstimate_TM> a rr:TriplesMap ;
+    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
+            rml:source "XXXX" ] ;
+    rr:subjectMap [ rr:class epo:ConcessionEstimate ;
+            rr:template "XXXX" ] .
+
+tedm:Notice a rr:TriplesMap ;
+    rml:logicalSource [ rml:iterator "/%2$s" ;
+            rml:referenceFormulation ql:XPath ;
+            rml:source "%1$s" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:constant "%3$s" ] ;
+            rr:predicate dct:publisher ] ;
+    rr:subjectMap [ rr:class epo:Notice ;
+            rr:template "http://data.europa.eu/a4g/resource/id_{replace(OBJECT_CONTRACT/REFERENCE_NUMBER, '[^a-zA-Z0-9]', '-')}-{replace(CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID, '[^a-zA-Z0-9]', '-')}_Notice" ] .
+

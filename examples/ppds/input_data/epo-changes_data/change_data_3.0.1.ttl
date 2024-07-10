@@ -1,5 +1,6 @@
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX omv: <http://omv.ontoware.org/2009/09/OWLChanges#>
+
 <http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AannouncesTender> omv:rangeRemoveObjectProperty <http://data.europa.eu/a4g/ontology#Tender> .
 <http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo-cat%3AhasFixedAmount> omv:domainRemoveObjectProperty <http://data.europa.eu/a4g/ontology#ChargeInformation> .
 <http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3AannouncesContract> omv:domainAddObjectProperty <http://data.europa.eu/a4g/ontology#ResultNotice> .

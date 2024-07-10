@@ -1,5 +1,6 @@
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX omv: <http://omv.ontoware.org/2009/09/OWLChanges#>
+
 <http://epo-changes.org/3.0.1-3.1.0/AddClass/epo%3AOtherEntity> omv:addedClass <epo:OtherEntity> .
 <http://epo-changes.org/3.0.1-3.1.0/AddClass/epo%3AProcurementElement> omv:addedClass <epo:ProcurementElement> .
 <http://epo-changes.org/3.0.1-3.1.0/AddClass/epo%3ALeadBuyer> omv:addedClass <epo:LeadBuyer> .
