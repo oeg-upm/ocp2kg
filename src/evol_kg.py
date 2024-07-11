@@ -425,7 +425,7 @@ def remove_data_property(change):
                                      f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} ?pom .' \
                                      f'     ?pom {R2RML_SHORTCUT_PREDICATE} <{property_predicate}> .' \
                                      f'     ?pom {R2RML_OBJECT}|{R2RML_SHORTCUT_OBJECT} ?objectMap .' \
-                                     f'     ?objectMap {R2RML_DATATYPE} <{property_range}> .' \
+                                     f'     OPTIONAL {{ ?objectMap {R2RML_DATATYPE} <{property_range}>}} .' \
                                      f'     OPTIONAL {{ ?objectMap ?object_term ?objectValue }} . }}'
 
         output_mappings.update(remove_data_property_query)
