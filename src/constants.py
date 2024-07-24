@@ -21,11 +21,11 @@ FORMATS_URI = 'http://www.w3.org/ns/formats/'
 VOID_URI = 'http://rdfs.org/ns/void#'
 FNML_URI = 'http://semweb.mmlab.be/ns/fnml#'
 GREL_URI = 'http://users.ugent.be/~bjdmeest/function/grel.ttl#'
-OCH_URI = 'http://omv.ontoware.org/2009/09/OWLChanges#'
+OCH_URI = 'https://w3id.org/def/och#'
 
 R2RML_PREFIX = 'rr'
 RML_PREFIX = 'rml'
-OCH_PREFIX = 'omv'
+OCH_PREFIX = 'och'
 
 TURTLE_PREFIX = '@prefix'
 RML_BASE = '@base'
@@ -105,13 +105,13 @@ OCH_ADD_DATA_PROPERTY = f'{OCH_PREFIX}:AddDataProperty'
 OCH_REMOVE_DATA_PROPERTY = f'{OCH_PREFIX}:RemoveDataProperty'
 
 OCH_ADDED_CLASS = f'{OCH_PREFIX}:addedClass'
-OCH_DELETED_CLASS = f'{OCH_PREFIX}:deletedClass'
+OCH_DELETED_CLASS = f'{OCH_PREFIX}:removedClass'
 
-OCH_ADD_SUBCLASS_DOMAIN = f'{OCH_PREFIX}:subAddSubClass'  #ToDo Change to domainAddSubClass
-OCH_ADD_SUBCLASS_RANGE = f'{OCH_PREFIX}:objAddSubClass'  #ToDo Change to objAddSubClass
+OCH_ADD_SUBCLASS_DOMAIN = f'{OCH_PREFIX}:domainAddSubClass'  #ToDo Change to domainAddSubClass
+OCH_ADD_SUBCLASS_RANGE = f'{OCH_PREFIX}:rangeAddSubClass'  #ToDo Change to objAddSubClass
 
-OCH_REMOVE_SUBCLASS_DOMAIN = f'{OCH_PREFIX}:subRemoveSubClass' #ToDo Change to domainRemoveSubClass
-OCH_REMOVE_SUBCLASS_RANGE = f'{OCH_PREFIX}:objRemoveSubClass' #ToDo Change to objRemoveSubClass
+OCH_REMOVE_SUBCLASS_DOMAIN = f'{OCH_PREFIX}:domainRemoveSubClass' #ToDo Change to domainRemoveSubClass
+OCH_REMOVE_SUBCLASS_RANGE = f'{OCH_PREFIX}:rangeRemoveSubClass' #ToDo Change to objRemoveSubClass
 
 OCH_ADD_OBJECT_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainAddObjectProperty'
 OCH_ADD_OBJECT_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyAddObjectProperty'
@@ -137,6 +137,7 @@ OWL_DATA_PROPERTY = 'owl:DatatypeProperty'
 OWL_OBJECT_PROPERTY = 'owl:ObjectProperty'
 RDFS_DOMAIN = 'rdfs:domain'
 RDFS_RANGE = 'rdfs:range'
+RDFS_SUBCLASS = 'rdfs:subClassOf'
 
 logger = logging.getLogger(__name__)
 coloredlogs.install(level='DEBUG', fmt='%(asctime)s,%(msecs)03d | %(levelname)s: %(message)s')
