@@ -137,6 +137,7 @@ OWL_DATA_PROPERTY = 'owl:DatatypeProperty'
 OWL_OBJECT_PROPERTY = 'owl:ObjectProperty'
 RDFS_DOMAIN = 'rdfs:domain'
 RDFS_RANGE = 'rdfs:range'
+RDFS_SUBCLASS = 'rdfs:subClassOf'
 
 logger = logging.getLogger(__name__)
 coloredlogs.install(level='DEBUG', fmt='%(asctime)s,%(msecs)03d | %(levelname)s: %(message)s')
