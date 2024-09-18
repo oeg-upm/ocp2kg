@@ -4,6 +4,7 @@ import yatter
 from constants import *
 from ruamel.yaml import YAML
 import argparse
+import pprint
 
 
 # ---------------------------------------------------------------------------------------------------------------------------
@@ -66,66 +67,18 @@ def remove_class(change):
         class_name = result["class_name"]
         query = f' ASK {{<{class_name}> {RDFS_SUBCLASS} ?parent}} '
         for result in ontology.query(query):
-
             if result is True:
                 query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
-                            f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
-                            f' INSERT {{' \
-                            f'      ?triples_map {R2RML_PREDICATE_OBJECT_MAP} ?pom. ' \
-                            f'      ?pom ?predicate_property ?predicate . ' \
-                            f'      ?predicate ?predicate_term ?predicate_value . ' \
-                            f'      ?pom ?object_property ?object. ' \
-                            f'      ?object ?object_term ?object_value.' \
-                            f'      ?object {R2RML_PARENT_TRIPLESMAP} ?parent_tm . ' \
-                            f'      ?object {R2RML_JOIN_CONDITION} ?join_condition . ' \
-                            f'      ?join_condition ?condition_term ?condition_value . ' \
-                            f'      ?parent_triples_map {R2RML_PREDICATE_OBJECT_MAP} ?parent_pom . ' \
-                            f'      ?parent_pom ?parent_predicate_property ?parent_predicate .' \
-                            f'      ?parent_predicate ?parent_predicate_term ?parent_predicate_value .' \
-                            f'      ?parent_pom {R2RML_OBJECT} ?parent_object . ' \
-                            f'      ?parent_object {R2RML_PARENT_TRIPLESMAP} ?triples_map . ' \
-                            f'      ?parent_object {R2RML_JOIN_CONDITION} ?parent_join_conditions . ' \
-                            f'      ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .}} ' \
-                            f' WHERE {{ ' \
-                            f'      ?triples_map {R2RML_SUBJECT} ?subject.' \
-                            f'      ?subject {R2RML_CLASS} <{class_name}> .' \
-                            f'      OPTIONAL {{ ' \
-                            f'          ?triples_map {R2RML_PREDICATE_OBJECT_MAP} ?pom.' \
-                            f'          ?pom {R2RML_SHORTCUT_PREDICATE}|{R2RML_PREDICATE} ?predicate .' \
-                            f'          OPTIONAL {{ ?predicate ?predicate_term ?predicate_value . }}' \
-                            f'          ?pom {R2RML_SHORTCUT_OBJECT}|{R2RML_OBJECT} ?object .' \
-                            f'          OPTIONAL {{ ?object ?object_term ?object_value. }}' \
-                            f'          OPTIONAL {{' \
-                            f'              ?object {R2RML_PARENT_TRIPLESMAP} ?parent_tm .' \
-                            f'              OPTIONAL {{ ' \
-                            f'                  ?object {R2RML_JOIN_CONDITION} ?join_condition . ' \
-                            f'                  ?join_condition ?condition_term ?condition_value .' \
-                            f'              }}' \
-                            f'          }}' \
-                            f'      }} ' \
-                            f'      OPTIONAL {{ ' \
-                            f'          ?parent_triples_map {R2RML_PREDICATE_OBJECT_MAP} ?parent_pom.' \
-                            f'          ?parent_pom {R2RML_SHORTCUT_PREDICATE}|{R2RML_PREDICATE} ?parent_predicate .' \
-                            f'          OPTIONAL {{ ?parent_predicate ?parent_predicate_term ?parent_predicate_value . }}' \
-                            f'          ?parent_pom {R2RML_OBJECT} ?parent_object .' \
-                            f'          ?parent_object {R2RML_PARENT_TRIPLESMAP} ?triples_map .' \
-                            f'          OPTIONAL {{ ' \
-                            f'              ?parent_object {R2RML_JOIN_CONDITION} ?parent_join_conditions . ' \
-                            f'              ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .' \
-                            f'          }}' \
-                            f'      }} '
-                review_mappings.update(query) 
-
-            query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
                     f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
-                    f' DELETE {{' \
+                    f' CONSTRUCT {{' \
+                    f'      ?triples_map {RDF_TYPE} {R2RML_TRIPLES_MAP}.' \
                     f'      ?triples_map {R2RML_SUBJECT} ?subject.' \
                     f'      ?subject ?subject_term ?subject_value .' \
                     f'      ?subject {R2RML_CLASS} <{class_name}> .' \
                     f'      ?triples_map {RML_LOGICAL_SOURCE} ?logical_source .' \
                     f'      ?logical_source ?logical_source_term ?logical_source_value .' \
                     f'      ?triples_map {R2RML_PREDICATE_OBJECT_MAP} ?pom. ' \
-                    f'      ?pom ?predicate_property ?predicate . ' \
+                    f'      ?pom  ?predicate_property ?predicate . ' \
                     f'      ?predicate ?predicate_term ?predicate_value . ' \
                     f'      ?pom ?object_property ?object. ' \
                     f'      ?object ?object_term ?object_value.' \
@@ -140,6 +93,7 @@ def remove_class(change):
                     f'      ?parent_object {R2RML_JOIN_CONDITION} ?parent_join_conditions . ' \
                     f'      ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .}} ' \
                     f' WHERE {{ ' \
+                    f'      ?triples_map {RDF_TYPE} {R2RML_TRIPLES_MAP}.' \
                     f'      ?triples_map {R2RML_SUBJECT} ?subject.' \
                     f'      ?subject ?subject_term ?subject_value .' \
                     f'      ?subject {R2RML_CLASS} <{class_name}> .' \
@@ -158,7 +112,7 @@ def remove_class(change):
                     f'                  ?join_condition ?condition_term ?condition_value .' \
                     f'              }}' \
                     f'          }}' \
-                    f'      }} ' \
+                    f'    }}' \
                     f'      OPTIONAL {{ ' \
                     f'          ?parent_triples_map {R2RML_PREDICATE_OBJECT_MAP} ?parent_pom.' \
                     f'          ?parent_pom {R2RML_SHORTCUT_PREDICATE}|{R2RML_PREDICATE} ?parent_predicate .' \
@@ -169,9 +123,74 @@ def remove_class(change):
                     f'              ?parent_object {R2RML_JOIN_CONDITION} ?parent_join_conditions . ' \
                     f'              ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .' \
                     f'          }}' \
-                    f'      }} '
+                    f'      }} ' \
+                    f'  }}'                            
+                hola = output_mappings.query(query)
+                for row in hola:
+                    review_mappings.add(row)
+                
+                
 
+            query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
+                    f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
+                    f' DELETE {{' \
+                    f'      ?triples_map {RDF_TYPE} {R2RML_TRIPLES_MAP}.' \
+                    f'      ?triples_map {R2RML_SUBJECT} ?subject.' \
+                    f'      ?subject ?subject_term ?subject_value .' \
+                    f'      ?subject {R2RML_CLASS} <{class_name}> .' \
+                    f'      ?triples_map {RML_LOGICAL_SOURCE} ?logical_source .' \
+                    f'      ?logical_source ?logical_source_term ?logical_source_value .' \
+                    f'      ?triples_map {R2RML_PREDICATE_OBJECT_MAP} ?pom. ' \
+                    f'      ?pom  ?predicate_property ?predicate . ' \
+                    f'      ?predicate ?predicate_term ?predicate_value . ' \
+                    f'      ?pom ?object_property ?object. ' \
+                    f'      ?object ?object_term ?object_value.' \
+                    f'      ?object {R2RML_PARENT_TRIPLESMAP} ?parent_tm . ' \
+                    f'      ?object {R2RML_JOIN_CONDITION} ?join_condition . ' \
+                    f'      ?join_condition ?condition_term ?condition_value . ' \
+                    f'      ?parent_triples_map {R2RML_PREDICATE_OBJECT_MAP} ?parent_pom . ' \
+                    f'      ?parent_pom ?parent_predicate_property ?parent_predicate .' \
+                    f'      ?parent_predicate ?parent_predicate_term ?parent_predicate_value .' \
+                    f'      ?parent_pom {R2RML_OBJECT} ?parent_object . ' \
+                    f'      ?parent_object {R2RML_PARENT_TRIPLESMAP} ?triples_map . ' \
+                    f'      ?parent_object {R2RML_JOIN_CONDITION} ?parent_join_conditions . ' \
+                    f'      ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .}} ' \
+                    f' WHERE {{ ' \
+                    f'      ?triples_map {RDF_TYPE} {R2RML_TRIPLES_MAP}.' \
+                    f'      ?triples_map {R2RML_SUBJECT} ?subject.' \
+                    f'      ?subject ?subject_term ?subject_value .' \
+                    f'      ?subject {R2RML_CLASS} <{class_name}> .' \
+                    f'      ?triples_map {RML_LOGICAL_SOURCE} ?logical_source .' \
+                    f'      ?logical_source ?logical_source_term ?logical_source_value .' \
+                    f'      OPTIONAL {{ ' \
+                    f'          ?triples_map {R2RML_PREDICATE_OBJECT_MAP} ?pom.' \
+                    f'          ?pom {R2RML_SHORTCUT_PREDICATE}|{R2RML_PREDICATE} ?predicate .' \
+                    f'          OPTIONAL {{ ?predicate ?predicate_term ?predicate_value . }}' \
+                    f'          ?pom {R2RML_SHORTCUT_OBJECT}|{R2RML_OBJECT} ?object .' \
+                    f'          OPTIONAL {{ ?object ?object_term ?object_value. }}' \
+                    f'          OPTIONAL {{' \
+                    f'              ?object {R2RML_PARENT_TRIPLESMAP} ?parent_tm .' \
+                    f'              OPTIONAL {{ ' \
+                    f'                  ?object {R2RML_JOIN_CONDITION} ?join_condition . ' \
+                    f'                  ?join_condition ?condition_term ?condition_value .' \
+                    f'              }}' \
+                    f'          }}' \
+                    f'    }}' \
+                    f'      OPTIONAL {{ ' \
+                    f'          ?parent_triples_map {R2RML_PREDICATE_OBJECT_MAP} ?parent_pom.' \
+                    f'          ?parent_pom {R2RML_SHORTCUT_PREDICATE}|{R2RML_PREDICATE} ?parent_predicate .' \
+                    f'          OPTIONAL {{ ?parent_predicate ?parent_predicate_term ?parent_predicate_value . }}' \
+                    f'          ?parent_pom {R2RML_OBJECT} ?parent_object .' \
+                    f'          ?parent_object {R2RML_PARENT_TRIPLESMAP} ?triples_map .' \
+                    f'          OPTIONAL {{ ' \
+                    f'              ?parent_object {R2RML_JOIN_CONDITION} ?parent_join_conditions . ' \
+                    f'              ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .' \
+                    f'          }}' \
+                    f'      }} ' \
+                    f'  }}'
             output_mappings.update(query)
+            output_mappings.serialize(destination="result_prueba_1.ttl", format="turtle")
+
 
 
 # ---------------------------------------------------------------------------------------------------------------------------------
@@ -547,6 +566,7 @@ if __name__ == "__main__":
     logger.info("Changes propagated over the mapping rules, writing results...")
 
     output_mappings.serialize(destination=args.new_mappings_path)
+    review_mappings.serialize(destination="review_mappings.ttl")
     yarrrml_content = yatter.inverse_translation(output_mappings)
     with open(args.new_mappings_path.replace(".ttl", ".yml"), "wb") as f:
         yaml = YAML()
