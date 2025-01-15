@@ -497,10 +497,7 @@ def define_args():
     parser.add_argument("-y", "--yarrrml", nargs=argparse.OPTIONAL, required=False, help="Mappings are also converted into YARRRML")
     return parser
 
-
-if __name__ == "__main__":
-    logger.info("Starting the propagation of changes over the mapping rules")
-    args = define_args().parse_args()
+def main(args):
     change_data = Graph().parse(args.changes_kg_path, format="ttl")
 
     if args.old_mapping_path.endswith(".yml") or args.old_mapping_path.endswith(".yaml"):
@@ -552,3 +549,9 @@ if __name__ == "__main__":
         yaml.default_flow_style = False
         yaml.width = 3000
         yaml.dump(yarrrml_content, f)
+
+
+if __name__ == "__main__":
+    logger.info("Starting the propagation of changes over the mapping rules")
+    args = define_args().parse_args()
+    main(args)
