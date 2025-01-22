@@ -4,7 +4,7 @@ from .constants import *
 
 # ---------------------------------------------------------------------------------------------------------------------------
 
-def add_class(change):
+def add_class(change, change_data, output_mappings):
     """
     Adds a class defined in the change KG into the output_mappings.
     If there is a TriplesMap that creates instances of that class, the TriplesMap is not created
@@ -43,7 +43,7 @@ def add_class(change):
 
 
 # ---------------------------------------------------------------------------------------------------------------------------
-def remove_class(change):
+def remove_class(change, change_data, ontology, output_mappings, review_mappings):
     """
         Remove a class defined in the change KG into the output_mappings.
         If there is a TriplesMap that creates instances of that class, the TriplesMap and associated POM are removed.
@@ -190,7 +190,7 @@ def remove_class(change):
 
 # ---------------------------------------------------------------------------------------------------------------------------------
 
-def add_super_class(change):
+def add_super_class(change, change_data, output_mappings):
     """
        Adds a superclass and its properties into the TriplesMap that instantiate the subclass .
        Args:
@@ -270,7 +270,7 @@ def add_super_class(change):
 
 
 # --------------------------------------------------------------------------------------------------------------
-def remove_super_class(change):
+def remove_super_class(change, change_data, output_mappings):
     """
        Removes superclass and its properties from the TriplesMap that instantiate the subclass .
        Args:
@@ -347,7 +347,7 @@ def remove_super_class(change):
         output_mappings.update(remove_super_class_pom_query)
     
 
-def add_object_property(change):
+def add_object_property(change, change_data, output_mappings):
     """
        Adds an object property to the TriplesMap indicated in the domain.
        Args:
@@ -385,7 +385,7 @@ def add_object_property(change):
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------
-def remove_object_property(change):
+def remove_object_property(change, change_data, output_mappings):
     """
         Removes the object property indicated in the change as property from its domain
         Args:
@@ -427,7 +427,7 @@ def remove_object_property(change):
 
 
 # -------------------------------------------------------------------------------------------------------------------------
-def add_data_property(change):
+def add_data_property(change, change_data, output_mappings):
     """
        Adds a data property to the TriplesMap indicated in the domain. Ragne is extracted from the input ontology
        Args:
@@ -461,7 +461,7 @@ def add_data_property(change):
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
-def remove_data_property(change):
+def remove_data_property(change, change_data, output_mappings):
     """
         Removes the data property indicated in the change as property from its domain
         Args:

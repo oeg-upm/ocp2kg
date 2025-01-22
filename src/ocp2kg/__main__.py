@@ -23,9 +23,8 @@ if __name__ == "__main__":
     if args.old_mapping_path.endswith(".yml") or args.old_mapping_path.endswith(".yaml"):
         logger.info("Starting the propagation of changes over the mapping rules")
         logger.info("Loading old mapping rules from YARRRML using YATTER")
-        output_mappings = Graph()
         yaml = YAML(typ='safe', pure=True)
-        output_mappings.parse(yatter.translate(yaml.load(open(args.old_mapping_path)), RML_URI), format="ttl")
+        output_mappings = Graph().parse(yatter.translate(yaml.load(open(args.old_mapping_path)), RML_URI), format="ttl")
     else:
         output_mappings = Graph().parse(args.old_mapping_path, format="ttl")
 
@@ -45,21 +44,21 @@ if __name__ == "__main__":
 
         for change_result in change_data.query(q):
             if URIRef(change_type) == URIRef(OCH_ADD_CLASS):
-                add_class(change_result["change"])
+                add_class(change_result["change"], change_data, output_mappings)
             elif URIRef(change_type) == URIRef(OCH_REMOVE_CLASS):
-                remove_class(change_result["change"])
+                remove_class(change_result["change"],change_data, ontology, output_mappings, review_mappings)
             elif URIRef(change_type) == URIRef(OCH_ADD_SUBCLASS):
-                add_super_class(change_result["change"])
+                add_super_class(change_result["change"], change_data, output_mappings)
             elif URIRef(change_type) == URIRef(OCH_REMOVE_SUBCLASS):
-                remove_super_class(change_result["change"])
+                remove_super_class(change_result["change"], change_data, output_mappings)
             elif URIRef(change_type) == URIRef(OCH_ADD_OBJECT_PROPERTY):
-                add_object_property(change_result["change"])
+                add_object_property(change_result["change"], change_data, output_mappings)
             elif URIRef(change_type) == URIRef(OCH_REMOVE_OBJECT_PROPERTY):
-                remove_object_property(change_result["change"])
+                remove_object_property(change_result["change"], change_data, output_mappings)
             elif URIRef(change_type) == URIRef(OCH_ADD_DATA_PROPERTY):
-                add_data_property(change_result["change"])
+                add_data_property(change_result["change"], change_data, output_mappings)
             elif URIRef(change_type) == URIRef(OCH_REMOVE_DATA_PROPERTY):
-                remove_data_property(change_result["change"])
+                remove_data_property(change_result["change"], change_data, output_mappings)
 
     logger.info("Changes propagated over the mapping rules, writing results...")
 
