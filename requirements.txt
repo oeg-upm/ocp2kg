@@ -1,5 +1,0 @@
-beautifulsoup4==4.12.2
-rdflib==7.0.0
-coloredlogs==15.0.1
-yatter==1.1.4
-ruamel.yaml==0.18.6
