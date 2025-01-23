@@ -206,8 +206,8 @@ def add_super_class(change):
     super_class = None
     sub_class = None
     query = f' SELECT DISTINCT ?super_class ?sub_class WHERE {{ ' \
-            f'      <{change}> {OCH_ADD_SUBCLASS_DOMAIN} ?sub_class. ' \
-            f'      <{change}> {OCH_ADD_SUBCLASS_RANGE} ?super_class. }}'
+            f'      <{change}> {OCH_ADD_SUBCLASS_TARGET} ?sub_class. ' \
+            f'      <{change}> {OCH_ADD_SUBCLASS_SOURCE} ?super_class. }}'
 
     for result in change_data.query(query):
         sub_class = result["sub_class"]
@@ -285,8 +285,8 @@ def remove_super_class(change):
     """
     # When removing the subclass relationship between two classes the child one loses the parent in the rr:class part.
     query = f'SELECT DISTINCT ?super_class ?sub_class WHERE {{ ' \
-            f' <{change}> {OCH_REMOVE_SUBCLASS_DOMAIN} ?sub_class.' \
-            f' <{change}> {OCH_REMOVE_SUBCLASS_RANGE} ?super_class. }}'
+            f' <{change}> {OCH_REMOVE_SUBCLASS_TARGET} ?sub_class.' \
+            f' <{change}> {OCH_REMOVE_SUBCLASS_SOURCE} ?super_class. }}'
 
     for result in change_data.query(query):
         super_class = result["super_class"]
