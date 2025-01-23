@@ -1,2 +1,6 @@
 .DS_Store
 .idea/
+poetry.lock
+src/ocp2kg/__pycache__/
+.venv
+.vscode

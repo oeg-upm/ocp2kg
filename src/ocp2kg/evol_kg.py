@@ -351,7 +351,7 @@ def remove_super_class(change):
                                         f'      }} '
         output_mappings.update(remove_super_class_pom_query)
     
-#TODO: Redo these operations, since the ontology has changed a lot, now it is three different change operations
+
 def add_object_property(change):
     """
        Adds an object property to the TriplesMap indicated in the domain.
@@ -388,7 +388,7 @@ def add_object_property(change):
 
         output_mappings.update(insert_object_property_query)
 
-#TODO: Redo these operations, since the ontology has changed a lot, now it is three different change operations
+
 # --------------------------------------------------------------------------------------------------------------------------------------------------
 def remove_object_property(change):
     """
@@ -430,7 +430,7 @@ def remove_object_property(change):
 
         output_mappings.update(remove_object_property_query)
 
-#TODO: Redo these operations, since the ontology has changed a lot, now it is three different change operations
+
 # -------------------------------------------------------------------------------------------------------------------------
 def add_data_property(change):
     """
@@ -464,7 +464,7 @@ def add_data_property(change):
 
         output_mappings.update(insert_data_property_query)
 
-#TODO: Redo these operations, since the ontology has changed a lot, now it is three different change operations
+
 # -----------------------------------------------------------------------------------------------------------------------------------
 def remove_data_property(change):
     """
@@ -539,6 +539,7 @@ if __name__ == "__main__":
     changes_order = (OCH_ADD_CLASS, OCH_ADD_SUBCLASS, OCH_ADD_OBJECT_PROPERTY, OCH_ADD_DATA_PROPERTY, OCH_REMOVE_CLASS,
                      OCH_REMOVE_SUBCLASS, OCH_REMOVE_OBJECT_PROPERTY, OCH_REMOVE_DATA_PROPERTY)
 
+    # ToDo: removing subclass action needs to be implemented
     for change_type in changes_order:
 
         q = f'  SELECT DISTINCT ?change WHERE {{ ' \
