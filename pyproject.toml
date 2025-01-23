@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "ocp2kg"
+version = "0.1"
+description = "Managing the evolution of associated knowledge graph assets"
+authors = ["Diego Conde-Herreros <diego.conde.herreros@upm.es>, David Chaves <david.chaves@usc.es>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+ruamel-yaml = "^0.18.10"
+rdflib = "^7.1.1"
+coloredlogs = "^15.0.1"
+yatter = "^2.0"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.3"
+setuptools = "^75.8.0"
+wheel = "^0.45.1"
+DeepDiff = "^8.1.1"
+pytest-cov = "^6.0.0"
+coverage =  "^7.6.10"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
