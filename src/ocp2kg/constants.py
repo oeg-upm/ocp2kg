@@ -107,27 +107,19 @@ OCH_REMOVE_DATA_PROPERTY = f'{OCH_PREFIX}:RemoveDataProperty'
 OCH_ADDED_CLASS = f'{OCH_PREFIX}:addedClass'
 OCH_DELETED_CLASS = f'{OCH_PREFIX}:removedClass'
 
-OCH_ADD_SUBCLASS_DOMAIN = f'{OCH_PREFIX}:domainAddSubClass'  #ToDo Change to domainAddSubClass
-OCH_ADD_SUBCLASS_RANGE = f'{OCH_PREFIX}:rangeAddSubClass'  #ToDo Change to objAddSubClass
+OCH_ADD_SUBCLASS_SOURCE = f'{OCH_PREFIX}:sourceAddSubClass' 
+OCH_ADD_SUBCLASS_TARGET = f'{OCH_PREFIX}:targetAddSubClass'
 
-OCH_REMOVE_SUBCLASS_DOMAIN = f'{OCH_PREFIX}:domainRemoveSubClass' #ToDo Change to domainRemoveSubClass
-OCH_REMOVE_SUBCLASS_RANGE = f'{OCH_PREFIX}:rangeRemoveSubClass' #ToDo Change to objRemoveSubClass
+OCH_REMOVE_SUBCLASS_SOURCE = f'{OCH_PREFIX}:sourceRemoveSubClass'
+OCH_REMOVE_SUBCLASS_TARGET = f'{OCH_PREFIX}:targetRemoveSubClass'
 
-OCH_ADD_OBJECT_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainAddObjectProperty'
-OCH_ADD_OBJECT_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyAddObjectProperty'
-OCH_ADD_OBJECT_PROPERTY_RANGE = f'{OCH_PREFIX}:rangeAddObjectProperty'
+OCH_ADDED_OBJECT_PROPERTY = f'{OCH_PREFIX}:addedObjectProperty'
 
-OCH_ADD_DATA_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainAddDataProperty'
-OCH_ADD_DATA_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyAddDataProperty'
-OCH_ADD_DATA_PROPERTY_RANGE = f'{OCH_PREFIX}:rangeAddDataProperty'
+OCH_ADDED_DATA_PROPERTY = f'{OCH_PREFIX}:addedDataProperty'
 
-OCH_REMOVE_DATA_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainRemoveDataProperty'
-OCH_REMOVE_DATA_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyRemoveDataProperty'
-OCH_REMOVE_DATA_PROPERTY_RANGE = f'{OCH_PREFIX}:rangeRemoveDataProperty'
+OCH_REMOVED_DATA_PROPERTY = f'{OCH_PREFIX}:removedDataProperty'
 
-OCH_REMOVE_OBJECT_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainRemoveObjectProperty'
-OCH_REMOVE_OBJECT_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyRemoveObjectProperty'
-OCH_REMOVE_OBJECT_PROPERTY_RANGE = f'{OCH_PREFIX}:rangeRemoveObjectProperty'
+OCH_REMOVED_OBJECT_PROPERTY = f'{OCH_PREFIX}:removedObjectProperty'
 
 ##############################################################################
 #############################  RDFS&OWL CONSTANTS  ###########################

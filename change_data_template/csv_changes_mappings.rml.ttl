@@ -1,0 +1,463 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix ex: <http://example.com/ns#> .
+@prefix och: <https://w3id.org/def/och#>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+
+
+<#AddClassTM>
+    rml:logicalSource [
+        rml:source "AddClass_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/AddClass/{Term}";
+        rr:class och:AddClass
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:addedClass;
+        rr:objectMap [ rml:reference "Term" ]
+    ].
+
+<#RemoveClassTM>
+    rml:logicalSource [
+        rml:source "RemoveClass_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/RemoveClass/{Term}";
+        rr:class och:RemoveClass
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:removedClass;
+        rr:objectMap [ rml:reference "Term" ]
+    ].
+
+<#AddSubClassTM>
+    rml:logicalSource [
+        rml:source "AddSubClass_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/AddSubClass/{Child}-{Parent}";
+        rr:class och:AddSubClass
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:sourceAddSubClass;
+        rr:objectMap [ rml:reference "Child" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:targetAddSubClass;
+        rr:objectMap [ rml:reference "Parent" ]
+    ].
+
+<#RemoveSubClassTM>
+    rml:logicalSource [
+        rml:source "RemoveSubClass_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/RemoveSubClass/{Child}-{Parent}";
+        rr:class och:RemoveSubClass
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:sourceRemoveSubClass;
+        rr:objectMap [ rml:reference "Child" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:targetRemoveSubClass;
+        rr:objectMap [ rml:reference "Parent" ]
+    ].
+
+<#AddObjectPropertyTM>
+    rml:logicalSource [
+        rml:source "AddObjectProperty_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/AddObjectProperty/{Predicate}";
+        rr:class och:AddObjectProperty
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:addedObjectProperty;
+        rr:objectMap [ rml:reference "Predicate" ]
+    ].
+
+<#AddDomainOPTM>
+    rml:logicalSource [
+        rml:source "AddObjectProperty_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/AddDomain/{Predicate}-{Domain}";
+        rr:class och:AddDomain
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:addedDomainToProperty;
+        rr:objectMap [ rml:reference "Predicate" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:addedDomain;
+        rr:objectMap [ rml:reference "Domain" ]
+    ].
+
+<#AddRangeOPTM>
+    rml:logicalSource [
+        rml:source "AddObjectProperty_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/AddRange/{Predicate}-{Range}";
+        rr:class och:AddRangeObjectProperty
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:addedRangeToProperty;
+        rr:objectMap [ rml:reference "Predicate" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:addedObjectRange;
+        rr:objectMap [ rml:reference "Range" ]
+    ].
+
+<#RemoveObjectPropertyTM>
+    rml:logicalSource [
+        rml:source "RemoveObjectProperty_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/RemoveObjectProperty/{Predicate}";
+        rr:class och:RemoveObjectProperty
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:removedObjectProperty;
+        rr:objectMap [ rml:reference "Predicate" ]
+    ].
+
+<#RemoveDomainOPTM>
+    rml:logicalSource [
+        rml:source "RemoveObjectProperty_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/RemoveDomain/{Predicate}-{Domain}";
+        rr:class och:RemoveDomain
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:removedDomainFromProperty;
+        rr:objectMap [ rml:reference "Predicate" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:removedDomain;
+        rr:objectMap [ rml:reference "Domain" ]
+    ].
+
+<#RemoveRangeOPTM>
+    rml:logicalSource [
+        rml:source "RemoveObjectProperty_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/RemoveRange/{Predicate}-{Range}";
+        rr:class och:RemoveRangeObjectProperty
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:removedRangeFromProperty;
+        rr:objectMap [ rml:reference "Predicate" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:removedObjectRange;
+        rr:objectMap [ rml:reference "Range" ]
+    ].
+
+<#AddDataPropertyTM>
+    rml:logicalSource [
+        rml:source "AddDataProperty_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/AddDataProperty/{Predicate}";
+        rr:class och:AddDataProperty
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:addedDataProperty;
+        rr:objectMap [ rml:reference "Predicate" ]
+    ].
+
+<#AddDomainDPTM>
+    rml:logicalSource [
+        rml:source "AddDataProperty_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/AddDomain/{Predicate}-{Domain}";
+        rr:class och:AddDomain
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:addedDomainToProperty;
+        rr:objectMap [ rml:reference "Predicate" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:addedDomain;
+        rr:objectMap [ rml:reference "Domain" ]
+    ].
+
+<#AddRangeDPTM>
+    rml:logicalSource [
+        rml:source "AddDataProperty_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/AddRange/{Predicate}-{Range}";
+        rr:class och:AddRangeDataProperty
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:addedRangeToProperty;
+        rr:objectMap [ rml:reference "Predicate" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:addedDataRange;
+        rr:objectMap [ rml:reference "Range" ]
+    ].
+
+<#RemoveDataPropertyTM>
+    rml:logicalSource [
+        rml:source "RemoveDataProperty_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/RemoveDataProperty/{Predicate}";
+        rr:class och:RemoveDataProperty
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:removedDataProperty;
+        rr:objectMap [ rml:reference "Predicate" ]
+    ].
+
+<#RemoveDomainOPTM>
+    rml:logicalSource [
+        rml:source "RemoveDataProperty_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/RemoveDomain/{Predicate}-{Domain}";
+        rr:class och:RemoveDomain
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:removedDomainFromProperty;
+        rr:objectMap [ rml:reference "Predicate" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:removedDomain;
+        rr:objectMap [ rml:reference "Domain" ]
+    ].
+
+<#RemoveRangeOPTM>
+    rml:logicalSource [
+        rml:source "RemoveDataProperty_template.csv";
+        rml:referenceFormulation ql:CSV
+    ];
+    rr:subjectMap [
+        rr:template "http://example.com/changes/RemoveRange/{Predicate}-{Range}";
+        rr:class och:RemoveRangeObjectProperty
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:fromChangelog;
+        rr:objectMap [ rml:reference "Source" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate dcterms:date;
+        rr:objectMap [ rml:reference "Date" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:issuedBy;
+        rr:objectMap [ rml:reference "Author" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:removedRangeFromProperty;
+        rr:objectMap [ rml:reference "Predicate" ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate och:removedDataRange;
+        rr:objectMap [ rml:reference "Range" ]
+    ].
