@@ -1,0 +1,37 @@
+@prefix rml: <http://semweb.mmlab.be/ns/rml#>.
+@prefix ql: <http://semweb.mmlab.be/ns/ql#>.
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix ex: <http://example.com/ns#>.
+@base <http://example.com/ns#>.
+
+<#AirportMapping> a rr:TriplesMap;
+  rml:logicalSource [
+    rml:source "Airport.csv" ;
+    rml:referenceFormulation ql:CSV
+  ];
+  rr:subjectMap [
+    rr:template "http://airport.example.com/{id}";
+    rr:class ex:Stop
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate ex:route;
+    rr:objectMap [
+      rr:parentTriplesMap <#TransportMapping> ;
+      rr:joinCondition [
+        rr:child "bus";
+        rr:parent "transport/bus/@id"
+      ]
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ex:location;
+    rr:objectMap [
+      rr:parentTriplesMap <#VenueMapping> ;
+      rr:joinCondition [
+        rr:child "city";
+        rr:parent "location.city"
+      ]
+    ]
+  ].

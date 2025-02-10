@@ -1,0 +1,19 @@
+@prefix ex: <http://example.com/ns#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+
+<http://example.com/ns##AirportMapping> a rr:TriplesMap ;
+    rml:logicalSource [ rml:referenceFormulation ql:CSV ;
+            rml:source "Airport.csv" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:parentTriplesMap <http://example.com/ns##LocationMapping_CSV> ] ;
+            rr:predicate ex:latlong ] ;
+    rr:subjectMap [ rr:class ex:Stop ;
+            rr:template "http://airport.example.com/{id}" ] .
+
+<http://example.com/ns##LocationMapping_CSV> a rr:TriplesMap ;
+    rml:logicalSource [ rml:referenceFormulation ql:CSV ;
+            rml:source "Airport.csv" ] ;
+    rr:subjectMap [ rr:class ex:Point ;
+            rr:template "http://loc.example.com/latlong/{latitude},{longitude}" ] .
+

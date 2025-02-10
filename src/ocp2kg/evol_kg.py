@@ -78,16 +78,19 @@ def remove_class(change):
                     f'      ?triples_map {RML_LOGICAL_SOURCE} ?logical_source .' \
                     f'      ?logical_source ?logical_source_term ?logical_source_value .' \
                     f'      ?triples_map {R2RML_PREDICATE_OBJECT_MAP} ?pom. ' \
-                    f'      ?pom  ?predicate_property ?predicate . ' \
-                    f'      ?predicate ?predicate_term ?predicate_value . ' \
-                    f'      ?pom ?object_property ?object. ' \
-                    f'      ?object ?object_term ?object_value.' \
-                    f'      ?object {R2RML_PARENT_TRIPLESMAP} ?parent_tm . ' \
-                    f'      ?object {R2RML_JOIN_CONDITION} ?join_condition . ' \
+                    f'      ?pom  {R2RML_SHORTCUT_PREDICATE} ?predicate . ' \
+                    f'      ?pom {R2RML_PREDICATE} ?predicate_bn . ' \
+                    f'      ?predicate_bn ?predicate_term ?predicate_value . ' \
+                    f'      ?pom {R2RML_SHORTCUT_OBJECT} ?object. ' \
+                    f'      ?pom {R2RML_OBJECT} ?object_bn . ' \
+                    f'      ?object_bn ?object_term ?object_value.' \
+                    f'      ?object_bn {R2RML_PARENT_TRIPLESMAP} ?parent_tm . ' \
+                    f'      ?object_bn {R2RML_JOIN_CONDITION} ?join_condition . ' \
                     f'      ?join_condition ?condition_term ?condition_value . ' \
                     f'      ?parent_triples_map {R2RML_PREDICATE_OBJECT_MAP} ?parent_pom . ' \
-                    f'      ?parent_pom ?parent_predicate_property ?parent_predicate .' \
-                    f'      ?parent_predicate ?parent_predicate_term ?parent_predicate_value .' \
+                    f'      ?parent_pom {R2RML_SHORTCUT_PREDICATE} ?parent_predicate .' \
+                    f'      ?parent_pom {R2RML_PREDICATE} ?parent_predicate_bn .' \
+                    f'      ?parent_predicate_bn ?parent_predicate_term ?parent_predicate_value .' \
                     f'      ?parent_pom {R2RML_OBJECT} ?parent_object . ' \
                     f'      ?parent_object {R2RML_PARENT_TRIPLESMAP} ?triples_map . ' \
                     f'      ?parent_object {R2RML_JOIN_CONDITION} ?parent_join_conditions . ' \
@@ -101,22 +104,25 @@ def remove_class(change):
                     f'      ?logical_source ?logical_source_term ?logical_source_value .' \
                     f'      OPTIONAL {{ ' \
                     f'          ?triples_map {R2RML_PREDICATE_OBJECT_MAP} ?pom.' \
-                    f'          ?pom {R2RML_SHORTCUT_PREDICATE}|{R2RML_PREDICATE} ?predicate .' \
-                    f'          OPTIONAL {{ ?predicate ?predicate_term ?predicate_value . }}' \
-                    f'          ?pom {R2RML_SHORTCUT_OBJECT}|{R2RML_OBJECT} ?object .' \
-                    f'          OPTIONAL {{ ?object ?object_term ?object_value. }}' \
+                    f'          OPTIONAL {{?pom {R2RML_SHORTCUT_PREDICATE} ?predicate . }}' \
+                    f'          OPTIONAL {{   ?pom {R2RML_PREDICATE} ?predicate_bn.'\
+                    f'                        ?predicate_bn ?predicate_term ?predicate_value . }}' \
+                    f'          OPTIONAL {{?pom {R2RML_SHORTCUT_OBJECT} ?object .}}' \
+                    f'          OPTIONAL {{?pom {R2RML_OBJECT} ?object_bn .' \
+                    f'                      ?object_bn ?object_term ?object_value. }}' \
                     f'          OPTIONAL {{' \
-                    f'              ?object {R2RML_PARENT_TRIPLESMAP} ?parent_tm .' \
+                    f'              ?object_bn {R2RML_PARENT_TRIPLESMAP} ?parent_tm .' \
                     f'              OPTIONAL {{ ' \
-                    f'                  ?object {R2RML_JOIN_CONDITION} ?join_condition . ' \
+                    f'                  ?object_bn {R2RML_JOIN_CONDITION} ?join_condition . ' \
                     f'                  ?join_condition ?condition_term ?condition_value .' \
                     f'              }}' \
                     f'          }}' \
                     f'    }}' \
                     f'      OPTIONAL {{ ' \
                     f'          ?parent_triples_map {R2RML_PREDICATE_OBJECT_MAP} ?parent_pom.' \
-                    f'          ?parent_pom {R2RML_SHORTCUT_PREDICATE}|{R2RML_PREDICATE} ?parent_predicate .' \
-                    f'          OPTIONAL {{ ?parent_predicate ?parent_predicate_term ?parent_predicate_value . }}' \
+                    f'          OPTIONAL {{?parent_pom {R2RML_SHORTCUT_PREDICATE} ?parent_predicate .}}' \
+                    f'          OPTIONAL {{     ?parent_pom {R2RML_PREDICATE} ?parent_predicate_bn.'\
+                    f'                          ?parent_predicate_bn ?parent_predicate_term ?parent_predicate_value . }}' \
                     f'          ?parent_pom {R2RML_OBJECT} ?parent_object .' \
                     f'          ?parent_object {R2RML_PARENT_TRIPLESMAP} ?triples_map .' \
                     f'          OPTIONAL {{ ' \
@@ -124,12 +130,10 @@ def remove_class(change):
                     f'              ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .' \
                     f'          }}' \
                     f'      }} ' \
-                    f'  }}'                            
-                hola = output_mappings.query(query)
+                    f'  }}'
+                hola=output_mappings.query(query)
                 for row in hola:
                     review_mappings.add(row)
-                
-                
 
             query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
                     f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
@@ -141,16 +145,19 @@ def remove_class(change):
                     f'      ?triples_map {RML_LOGICAL_SOURCE} ?logical_source .' \
                     f'      ?logical_source ?logical_source_term ?logical_source_value .' \
                     f'      ?triples_map {R2RML_PREDICATE_OBJECT_MAP} ?pom. ' \
-                    f'      ?pom  ?predicate_property ?predicate . ' \
-                    f'      ?predicate ?predicate_term ?predicate_value . ' \
-                    f'      ?pom ?object_property ?object. ' \
-                    f'      ?object ?object_term ?object_value.' \
-                    f'      ?object {R2RML_PARENT_TRIPLESMAP} ?parent_tm . ' \
-                    f'      ?object {R2RML_JOIN_CONDITION} ?join_condition . ' \
+                    f'      ?pom  {R2RML_SHORTCUT_PREDICATE} ?predicate . ' \
+                    f'      ?pom {R2RML_PREDICATE} ?predicate_bn . ' \
+                    f'      ?predicate_bn ?predicate_term ?predicate_value . ' \
+                    f'      ?pom {R2RML_SHORTCUT_OBJECT} ?object. ' \
+                    f'      ?pom {R2RML_OBJECT} ?object_bn . ' \
+                    f'      ?object_bn ?object_term ?object_value.' \
+                    f'      ?object_bn {R2RML_PARENT_TRIPLESMAP} ?parent_tm . ' \
+                    f'      ?object_bn {R2RML_JOIN_CONDITION} ?join_condition . ' \
                     f'      ?join_condition ?condition_term ?condition_value . ' \
                     f'      ?parent_triples_map {R2RML_PREDICATE_OBJECT_MAP} ?parent_pom . ' \
-                    f'      ?parent_pom ?parent_predicate_property ?parent_predicate .' \
-                    f'      ?parent_predicate ?parent_predicate_term ?parent_predicate_value .' \
+                    f'      ?parent_pom {R2RML_SHORTCUT_PREDICATE} ?parent_predicate .' \
+                    f'      ?parent_pom {R2RML_PREDICATE} ?parent_predicate_bn .' \
+                    f'      ?parent_predicate_bn ?parent_predicate_term ?parent_predicate_value .' \
                     f'      ?parent_pom {R2RML_OBJECT} ?parent_object . ' \
                     f'      ?parent_object {R2RML_PARENT_TRIPLESMAP} ?triples_map . ' \
                     f'      ?parent_object {R2RML_JOIN_CONDITION} ?parent_join_conditions . ' \
@@ -164,22 +171,25 @@ def remove_class(change):
                     f'      ?logical_source ?logical_source_term ?logical_source_value .' \
                     f'      OPTIONAL {{ ' \
                     f'          ?triples_map {R2RML_PREDICATE_OBJECT_MAP} ?pom.' \
-                    f'          ?pom {R2RML_SHORTCUT_PREDICATE}|{R2RML_PREDICATE} ?predicate .' \
-                    f'          OPTIONAL {{ ?predicate ?predicate_term ?predicate_value . }}' \
-                    f'          ?pom {R2RML_SHORTCUT_OBJECT}|{R2RML_OBJECT} ?object .' \
-                    f'          OPTIONAL {{ ?object ?object_term ?object_value. }}' \
+                    f'          OPTIONAL {{?pom {R2RML_SHORTCUT_PREDICATE} ?predicate . }}' \
+                    f'          OPTIONAL {{   ?pom {R2RML_PREDICATE} ?predicate_bn.'\
+                    f'                        ?predicate_bn ?predicate_term ?predicate_value . }}' \
+                    f'          OPTIONAL {{?pom {R2RML_SHORTCUT_OBJECT} ?object .}}' \
+                    f'          OPTIONAL {{?pom {R2RML_OBJECT} ?object_bn .' \
+                    f'                      ?object_bn ?object_term ?object_value. }}' \
                     f'          OPTIONAL {{' \
-                    f'              ?object {R2RML_PARENT_TRIPLESMAP} ?parent_tm .' \
+                    f'              ?object_bn {R2RML_PARENT_TRIPLESMAP} ?parent_tm .' \
                     f'              OPTIONAL {{ ' \
-                    f'                  ?object {R2RML_JOIN_CONDITION} ?join_condition . ' \
+                    f'                  ?object_bn {R2RML_JOIN_CONDITION} ?join_condition . ' \
                     f'                  ?join_condition ?condition_term ?condition_value .' \
                     f'              }}' \
                     f'          }}' \
                     f'    }}' \
                     f'      OPTIONAL {{ ' \
                     f'          ?parent_triples_map {R2RML_PREDICATE_OBJECT_MAP} ?parent_pom.' \
-                    f'          ?parent_pom {R2RML_SHORTCUT_PREDICATE}|{R2RML_PREDICATE} ?parent_predicate .' \
-                    f'          OPTIONAL {{ ?parent_predicate ?parent_predicate_term ?parent_predicate_value . }}' \
+                    f'          OPTIONAL {{?parent_pom {R2RML_SHORTCUT_PREDICATE} ?parent_predicate .}}' \
+                    f'          OPTIONAL {{     ?parent_pom {R2RML_PREDICATE} ?parent_predicate_bn.'\
+                    f'                          ?parent_predicate_bn ?parent_predicate_term ?parent_predicate_value . }}' \
                     f'          ?parent_pom {R2RML_OBJECT} ?parent_object .' \
                     f'          ?parent_object {R2RML_PARENT_TRIPLESMAP} ?triples_map .' \
                     f'          OPTIONAL {{ ' \
@@ -189,9 +199,6 @@ def remove_class(change):
                     f'      }} ' \
                     f'  }}'
             output_mappings.update(query)
-            output_mappings.serialize(destination="result_prueba_1.ttl", format="turtle")
-
-
 
 # ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -241,8 +248,8 @@ def add_super_class(change):
                                         f'      ?parent_object {R2RML_JOIN_CONDITION} ?parent_join_conditions . ' \
                                         f'      ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .}} ' \
                                         f' WHERE {{ ' \
-                                        f'      ?subclass_triples_map {R2RML_SUBJECT} ?subclass_subject' \
-                                        f'      ?subclass_subject {R2RML_CLASS} <{sub_class}>' \
+                                        f'      ?subclass_triples_map {R2RML_SUBJECT} ?subclass_subject.' \
+                                        f'      ?subclass_subject {R2RML_CLASS} <{sub_class}>.' \
                                         f'      ?triples_map {R2RML_SUBJECT} ?subject.' \
                                         f'      ?subject {R2RML_CLASS} <{super_class}> .' \
                                         f'      OPTIONAL {{ ' \
@@ -269,7 +276,9 @@ def add_super_class(change):
                                         f'              ?parent_object {R2RML_JOIN_CONDITION} ?parent_join_conditions . ' \
                                         f'              ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .' \
                                         f'          }}' \
-                                        f'      }} '
+                                        f'      }} ' \
+                                        f'  }}'
+        #print(insert_super_class_pom_query)
         output_mappings.update(insert_super_class_pom_query)
 
 
@@ -320,8 +329,8 @@ def remove_super_class(change):
                                         f'      ?parent_object {R2RML_JOIN_CONDITION} ?parent_join_conditions . ' \
                                         f'      ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .}} ' \
                                         f' WHERE {{ ' \
-                                        f'      ?subclass_triples_map {R2RML_SUBJECT} ?subclass_subject' \
-                                        f'      ?subclass_subject {R2RML_CLASS} <{sub_class}>' \
+                                        f'      ?subclass_triples_map {R2RML_SUBJECT} ?subclass_subject.' \
+                                        f'      ?subclass_subject {R2RML_CLASS} <{sub_class}>.' \
                                         f'      ?triples_map {R2RML_SUBJECT} ?subject.' \
                                         f'      ?subject {R2RML_CLASS} <{super_class}> .' \
                                         f'      OPTIONAL {{ ' \
@@ -348,22 +357,26 @@ def remove_super_class(change):
                                         f'              ?parent_object {R2RML_JOIN_CONDITION} ?parent_join_conditions . ' \
                                         f'              ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .' \
                                         f'          }}' \
-                                        f'      }} '
+                                        f'      }} '\
+                                        f'  }}' 
         output_mappings.update(remove_super_class_pom_query)
     
 
 def add_object_property(change):
     """
-       Adds an object property to the TriplesMap indicated in the domain.
+       Adds an object property to the TriplesMap indicated in the domain. For a change in the predicate object map the domain, property and range additions are needed.  
        Args:
            change: the URI of the change which needs to be of the type addObjectProperty
        Returns:
-           the output_mappings updated with the
+           the output_mappings updated with the added predicate object maps. 
     """
     query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
-            f' <{change}> {OCH_ADD_OBJECT_PROPERTY_DOMAIN} ?domain .' \
-            f' <{change}> {OCH_ADD_OBJECT_PROPERTY_PROPERTY} ?property .' \
-            f' <{change}> {OCH_ADD_OBJECT_PROPERTY_RANGE} ?range .}}'
+            f' <{change}> {OCH_ADDED_OBJECT_PROPERTY} ?property .' \
+            f' ?domainchange {OCH_ADDED_DOMAIN_TO_PROPERTY} ?property.' \
+            f' ?domainchange {OCH_ADDED_DOMAIN} ?domain.' \
+            f' ?rangechange {OCH_ADDED_RANGE_TO_PROPERTY} ?property.' \
+            f' ?rangechange {OCH_ADDED_OBJECT_RANGE} ?range. }}'
+
 
     for result in change_data.query(query):
         property_domain = result["domain"]
@@ -374,7 +387,7 @@ def add_object_property(change):
                                        f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
                                        f' INSERT {{  ' \
                                        f'     ?triplesMap {R2RML_PREDICATE_OBJECT_MAP} [ ' \
-                                       f'         {R2RML_PREDICATE} <{property_predicate}> ; ' \
+                                       f'         {R2RML_SHORTCUT_PREDICATE} <{property_predicate}> ; ' \
                                        f'         {R2RML_OBJECT} [ ' \
                                        f'             {R2RML_PARENT_TRIPLESMAP} ?parent_triplesMap;' \
                                        f'             {R2RML_JOIN_CONDITION} [ ' \
@@ -392,16 +405,19 @@ def add_object_property(change):
 # --------------------------------------------------------------------------------------------------------------------------------------------------
 def remove_object_property(change):
     """
-        Removes the object property indicated in the change as property from its domain
+        Removes the object property indicated in the change as property from its domain. For a change in the predicate object map the domain, property and range additions are needed.
         Args:
            change: the URI of the change which needs to be of the type addObjectProperty
         Returns:
            the output_mappings updated with the reference predicate object mapping removed
     """
-    query = f' SELECT DISTINCT ?domain ?property WHERE {{ ' \
-            f' <{change}> {OCH_REMOVE_OBJECT_PROPERTY_DOMAIN} ?domain.' \
-            f' <{change}> {OCH_REMOVE_OBJECT_PROPERTY_DOMAIN} ?property.' \
-            f' <{change}> {OCH_REMOVE_OBJECT_PROPERTY_RANGE} ?range .}}'
+    query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
+            f' <{change}> {OCH_REMOVED_OBJECT_PROPERTY} ?property .' \
+            f' ?domainchange {OCH_REMOVED_DOMAIN_TO_PROPERTY} ?property.' \
+            f' ?domainchange {OCH_REMOVED_DOMAIN} ?domain.' \
+            f' ?rangechange {OCH_REMOVED_RANGE_TO_PROPERTY} ?property.' \
+            f' ?rangechange {OCH_REMOVED_OBJECT_RANGE} ?range. }}'
+
             
     for result in change_data.query(query):
         property_domain = result["domain"]
@@ -434,16 +450,18 @@ def remove_object_property(change):
 # -------------------------------------------------------------------------------------------------------------------------
 def add_data_property(change):
     """
-       Adds a data property to the TriplesMap indicated in the domain. Ragne is extracted from the input ontology
+       Adds a data property to the TriplesMap indicated in the domain. For a change in the predicate object map the domain, property and range additions are needed.
        Args:
            change: the URI of the change which needs to be of the type addObjectProperty
        Returns:
            the output_mappings updated with the new predicate object map with empty reference
     """
-    query = f' SELECT DISTINCT ?domain ?property WHERE {{ ' \
-            f' <{change}> {OCH_ADD_DATA_PROPERTY_DOMAIN} ?domain. ' \
-            f' <{change}> {OCH_ADD_DATA_PROPERTY_PROPERTY} ?property. '\
-            f' <{change}> {OCH_ADD_DATA_PROPERTY_RANGE} ?range .}}'
+    query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
+            f' <{change}> {OCH_ADDED_DATA_PROPERTY} ?property .' \
+            f' ?domainchange {OCH_ADDED_DOMAIN_TO_PROPERTY} ?property.' \
+            f' ?domainchange {OCH_ADDED_DOMAIN} ?domain.' \
+            f' ?rangechange {OCH_ADDED_RANGE_TO_PROPERTY} ?property.' \
+            f' ?rangechange {OCH_ADDED_DATA_RANGE} ?range. }}'
 
     for result in change_data.query(query):
         property_domain = result["domain"]
@@ -468,17 +486,18 @@ def add_data_property(change):
 # -----------------------------------------------------------------------------------------------------------------------------------
 def remove_data_property(change):
     """
-        Removes the data property indicated in the change as property from its domain
+        Removes the data property indicated in the change as property from its domain. For a change in the predicate object map the domain, property and range additions are needed.
         Args:
            change: the URI of the change which needs to be of the type addObjectProperty
         Returns:
            the output_mappings updated with the predicate object mapping removed
     """
-    query = f' SELECT DISTINCT ?domain ?property WHERE {{ ' \
-            f' <{change}> {OCH_REMOVE_DATA_PROPERTY_DOMAIN} ?domain.' \
-            f' <{change}> {OCH_REMOVE_DATA_PROPERTY_PROPERTY} ?property.'\
-            f' <{change}> {OCH_REMOVE_DATA_PROPERTY_RANGE} ?range .}}'
-
+    query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
+            f' <{change}> {OCH_REMOVED_DATA_PROPERTY} ?property .' \
+            f' ?domainchange {OCH_REMOVED_DOMAIN_TO_PROPERTY} ?property.' \
+            f' ?domainchange {OCH_REMOVED_DOMAIN} ?domain.' \
+            f' ?rangechange {OCH_REMOVED_RANGE_TO_PROPERTY} ?property.' \
+            f' ?rangechange {OCH_REMOVED_DATA_RANGE} ?range. }}'
 
     for result in change_data.query(query):
         property_domain = result["domain"]
