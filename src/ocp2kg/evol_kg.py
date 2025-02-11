@@ -1,5 +1,5 @@
 from rdflib import Variable
-from constants import *
+from .constants import *
 
 
 

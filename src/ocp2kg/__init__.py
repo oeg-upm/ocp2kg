@@ -1,6 +1,6 @@
 from rdflib import URIRef, Graph
-from constants import *
-from evol_kg import *
+from .constants import *
+from .evol_kg import *
 
 def propagate(change_data, output_mappings, review_mappings, ontology=Graph()):
     changes_order = (OCH_ADD_CLASS, OCH_ADD_SUBCLASS, OCH_ADD_OBJECT_PROPERTY, OCH_ADD_DATA_PROPERTY, OCH_REMOVE_CLASS,
