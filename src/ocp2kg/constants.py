@@ -103,6 +103,12 @@ OCH_ADD_OBJECT_PROPERTY = f'{OCH_PREFIX}:AddObjectProperty'
 OCH_REMOVE_OBJECT_PROPERTY = f'{OCH_PREFIX}:RemoveObjectProperty'
 OCH_ADD_DATA_PROPERTY = f'{OCH_PREFIX}:AddDataProperty'
 OCH_REMOVE_DATA_PROPERTY = f'{OCH_PREFIX}:RemoveDataProperty'
+OCH_ADD_DOMAIN = f'{OCH_PREFIX}:AddDomain'
+OCH_REMOVE_DOMAIN = f'{OCH_PREFIX}:RemoveDomain'
+OCH_ADD_RANGE_OBJECT = f'{OCH_PREFIX}:AddRangeObjectProperty'
+OCH_REMOVE_RANGE_OBJECT = f'{OCH_PREFIX}:RemoveRangeObjectProperty'
+OCH_ADD_RANGE_DATA = f'{OCH_PREFIX}:AddRangeDataProperty'
+OCH_REMOVE_RANGE_DATA = f'{OCH_PREFIX}:RemoveRangeDataProperty'
 
 OCH_ADDED_CLASS = f'{OCH_PREFIX}:addedClass'
 OCH_DELETED_CLASS = f'{OCH_PREFIX}:removedClass'
@@ -120,6 +126,17 @@ OCH_ADDED_DATA_PROPERTY = f'{OCH_PREFIX}:addedDataProperty'
 OCH_REMOVED_DATA_PROPERTY = f'{OCH_PREFIX}:removedDataProperty'
 
 OCH_REMOVED_OBJECT_PROPERTY = f'{OCH_PREFIX}:removedObjectProperty'
+
+OCH_ADDED_DOMAIN = f'{OCH_PREFIX}:addedDomain'
+OCH_REMOVED_DOMAIN = f'{OCH_PREFIX}:removedDomain'
+OCH_ADDED_OBJECT_RANGE= f'{OCH_PREFIX}:addedObjectRange'
+OCH_REMOVED_OBJECT_RANGE= f'{OCH_PREFIX}:removedObjectRange'
+OCH_ADDED_DATA_RANGE= f'{OCH_PREFIX}:addedDataRange'
+OCH_REMOVED_DATA_RANGE= f'{OCH_PREFIX}:removedDataRange'
+OCH_ADDED_DOMAIN_TO_PROPERTY = f'{OCH_PREFIX}:addedDomainToProperty'
+OCH_REMOVED_DOMAIN_TO_PROPERTY = f'{OCH_PREFIX}:removedDomainFromProperty'
+OCH_ADDED_RANGE_TO_PROPERTY = f'{OCH_PREFIX}:addedRangeToProperty'
+OCH_REMOVED_RANGE_TO_PROPERTY = f'{OCH_PREFIX}:removedRangeFromProperty'
 
 ##############################################################################
 #############################  RDFS&OWL CONSTANTS  ###########################

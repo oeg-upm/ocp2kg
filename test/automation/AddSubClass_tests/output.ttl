@@ -1,0 +1,34 @@
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix transit: <http://vocab.org/transit/terms/> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<ex:AirportChildMapping> a rr:TriplesMap ;
+    rml:logicalSource [ rml:referenceFormulation ql:CSV ;
+            rml:source "Airport.csv" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "stop" ;
+                    rr:datatype xsd:int ] ;
+            rr:predicate transit:route ],
+        [ rr:objectMap [ rml:reference "latitude" ] ;
+            rr:predicate wgs84_pos:lat ],
+        [ rr:objectMap [ rml:reference "longitude" ] ;
+            rr:predicate wgs84_pos:long ] ;
+    rr:subjectMap [ rr:class transit:SimpleStop,
+                transit:Stop ;
+            rr:template "http://airport.example.com/{id}" ] .
+
+<ex:AirportMapping> a rr:TriplesMap ;
+    rml:logicalSource [ rml:referenceFormulation ql:CSV ;
+            rml:source "Airport.csv" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rml:reference "stop" ;
+                    rr:datatype xsd:int ] ;
+            rr:predicate transit:route ],
+        [ rr:objectMap [ rml:reference "latitude" ] ;
+            rr:predicate wgs84_pos:lat ],
+        [ rr:objectMap [ rml:reference "longitude" ] ;
+            rr:predicate wgs84_pos:long ] ;
+    rr:subjectMap [ rr:class transit:Stop ;
+            rr:template "http://airport.example.com/{id}" ] .
+
