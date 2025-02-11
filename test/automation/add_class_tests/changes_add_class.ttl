@@ -1,8 +1,0 @@
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX och: <http://w3id.org/def/och>
-PREFIX epo: <http://data.europa.eu/a4g/ontology#>
-PREFIX ex: <http://myexampleuri.org/data#>
-
-<http://myexampleuri/AddClass/testclass> rdf:type och:AddClass .
-<http://myexampleuri/AddClass/testclass> och:addedClass_full <http://myexampleuri#testclass> .
-<http://myexampleuri/AddClass/testclass> och:addedClass ex:testclass .

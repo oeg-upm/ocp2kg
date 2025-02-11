@@ -1,0 +1,15 @@
+@prefix ex: <http://example.com/ns#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.com/ns##AirportMapping> a rr:TriplesMap ;
+    rml:logicalSource [ rml:referenceFormulation ql:CSV ;
+            rml:source "Airport.csv" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:datatype xsd:String ;
+                    rr:reference "XXX" ] ;
+            rr:predicate ex:testproperty ] ;
+    rr:subjectMap [ rr:class ex:Stop ;
+            rr:template "http://airport.example.com/{id}" ] .
+

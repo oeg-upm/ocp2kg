@@ -1,0 +1,13 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX och: <http://w3id.org/def/och>
+PREFIX epo: <http://data.europa.eu/a4g/ontology#>
+PREFIX ex: <http://myexampleuri.org/data#>
+PREFIX transit: <http://vocab.org/transit/terms/>
+
+
+<http://myexampleuri/RemoveObjectProperty/testproperty> rdf:type och:RemoveObjectProperty .
+<http://myexampleuri/RemoveObjectProperty/testproperty> och:removedObjectProperty ex:testproperty .
+<http://myexampleuri/RemoveDomain/testdomain> och:removedDomainToProperty ex:testproperty .
+<http://myexampleuri/RemoveDomain/testdomain> och:removedDomain transit:Stop .
+<http://myexampleuri/RemoveRange/testrange> och:removedRangeToProperty ex:testproperty .
+<http://myexampleuri/RemoveRange/testrange> och:removedObjectRange ex:Point. 

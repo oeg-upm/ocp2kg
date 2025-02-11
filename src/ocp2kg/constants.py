@@ -103,31 +103,40 @@ OCH_ADD_OBJECT_PROPERTY = f'{OCH_PREFIX}:AddObjectProperty'
 OCH_REMOVE_OBJECT_PROPERTY = f'{OCH_PREFIX}:RemoveObjectProperty'
 OCH_ADD_DATA_PROPERTY = f'{OCH_PREFIX}:AddDataProperty'
 OCH_REMOVE_DATA_PROPERTY = f'{OCH_PREFIX}:RemoveDataProperty'
+OCH_ADD_DOMAIN = f'{OCH_PREFIX}:AddDomain'
+OCH_REMOVE_DOMAIN = f'{OCH_PREFIX}:RemoveDomain'
+OCH_ADD_RANGE_OBJECT = f'{OCH_PREFIX}:AddRangeObjectProperty'
+OCH_REMOVE_RANGE_OBJECT = f'{OCH_PREFIX}:RemoveRangeObjectProperty'
+OCH_ADD_RANGE_DATA = f'{OCH_PREFIX}:AddRangeDataProperty'
+OCH_REMOVE_RANGE_DATA = f'{OCH_PREFIX}:RemoveRangeDataProperty'
 
 OCH_ADDED_CLASS = f'{OCH_PREFIX}:addedClass'
 OCH_DELETED_CLASS = f'{OCH_PREFIX}:removedClass'
 
-OCH_ADD_SUBCLASS_DOMAIN = f'{OCH_PREFIX}:domainAddSubClass'  #ToDo Change to domainAddSubClass
-OCH_ADD_SUBCLASS_RANGE = f'{OCH_PREFIX}:rangeAddSubClass'  #ToDo Change to objAddSubClass
+OCH_ADD_SUBCLASS_SOURCE = f'{OCH_PREFIX}:sourceAddSubClass' 
+OCH_ADD_SUBCLASS_TARGET = f'{OCH_PREFIX}:targetAddSubClass'
 
-OCH_REMOVE_SUBCLASS_DOMAIN = f'{OCH_PREFIX}:domainRemoveSubClass' #ToDo Change to domainRemoveSubClass
-OCH_REMOVE_SUBCLASS_RANGE = f'{OCH_PREFIX}:rangeRemoveSubClass' #ToDo Change to objRemoveSubClass
+OCH_REMOVE_SUBCLASS_SOURCE = f'{OCH_PREFIX}:sourceRemoveSubClass'
+OCH_REMOVE_SUBCLASS_TARGET = f'{OCH_PREFIX}:targetRemoveSubClass'
 
-OCH_ADD_OBJECT_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainAddObjectProperty'
-OCH_ADD_OBJECT_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyAddObjectProperty'
-OCH_ADD_OBJECT_PROPERTY_RANGE = f'{OCH_PREFIX}:rangeAddObjectProperty'
+OCH_ADDED_OBJECT_PROPERTY = f'{OCH_PREFIX}:addedObjectProperty'
 
-OCH_ADD_DATA_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainAddDataProperty'
-OCH_ADD_DATA_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyAddDataProperty'
-OCH_ADD_DATA_PROPERTY_RANGE = f'{OCH_PREFIX}:rangeAddDataProperty'
+OCH_ADDED_DATA_PROPERTY = f'{OCH_PREFIX}:addedDataProperty'
 
-OCH_REMOVE_DATA_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainRemoveDataProperty'
-OCH_REMOVE_DATA_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyRemoveDataProperty'
-OCH_REMOVE_DATA_PROPERTY_RANGE = f'{OCH_PREFIX}:rangeRemoveDataProperty'
+OCH_REMOVED_DATA_PROPERTY = f'{OCH_PREFIX}:removedDataProperty'
 
-OCH_REMOVE_OBJECT_PROPERTY_DOMAIN = f'{OCH_PREFIX}:domainRemoveObjectProperty'
-OCH_REMOVE_OBJECT_PROPERTY_PROPERTY = f'{OCH_PREFIX}:propertyRemoveObjectProperty'
-OCH_REMOVE_OBJECT_PROPERTY_RANGE = f'{OCH_PREFIX}:rangeRemoveObjectProperty'
+OCH_REMOVED_OBJECT_PROPERTY = f'{OCH_PREFIX}:removedObjectProperty'
+
+OCH_ADDED_DOMAIN = f'{OCH_PREFIX}:addedDomain'
+OCH_REMOVED_DOMAIN = f'{OCH_PREFIX}:removedDomain'
+OCH_ADDED_OBJECT_RANGE= f'{OCH_PREFIX}:addedObjectRange'
+OCH_REMOVED_OBJECT_RANGE= f'{OCH_PREFIX}:removedObjectRange'
+OCH_ADDED_DATA_RANGE= f'{OCH_PREFIX}:addedDataRange'
+OCH_REMOVED_DATA_RANGE= f'{OCH_PREFIX}:removedDataRange'
+OCH_ADDED_DOMAIN_TO_PROPERTY = f'{OCH_PREFIX}:addedDomainToProperty'
+OCH_REMOVED_DOMAIN_TO_PROPERTY = f'{OCH_PREFIX}:removedDomainFromProperty'
+OCH_ADDED_RANGE_TO_PROPERTY = f'{OCH_PREFIX}:addedRangeToProperty'
+OCH_REMOVED_RANGE_TO_PROPERTY = f'{OCH_PREFIX}:removedRangeFromProperty'
 
 ##############################################################################
 #############################  RDFS&OWL CONSTANTS  ###########################
