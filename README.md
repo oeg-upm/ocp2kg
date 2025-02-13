@@ -12,8 +12,8 @@ RDF following the [OWL Change Ontology](https://w3id.org/def/och) model.
 # How to run it?
 
 ```bash
-python3 -m pip install -r requirements
-python3 evol_kg.py -c path_to_change_kg.nt -m path_to_old_mapping.rml.ttl -o path_to_new_ontology.ttl -n path_output_mappings.rml.ttl
+python3 -m pip install ocp2kg
+python3 -m ocp2kg -c path_to_change_kg.nt -m path_to_old_mapping.rml.ttl -o path_to_new_ontology.ttl -n path_output_mappings.rml.ttl
 ```
 
 Options:
