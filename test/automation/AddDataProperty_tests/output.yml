@@ -39,4 +39,4 @@ mappings:
     s: http://airport.example.com/$(id)
     po:
     - [rdf:type, ex:Stop]
-    - [ex:testproperty, $(na3f1dc0517d349d8b15712f769c56355b4)]
+    - [ex:testproperty, $(n9d63284207594a53bea4033bfae8945db4)]
