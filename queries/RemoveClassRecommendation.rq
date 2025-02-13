@@ -1,45 +1,77 @@
 PREFIX rr: <http://www.w3.org/ns/r2rml#>
-PREFIX epo: <http://data.europa.eu/a4g/ontology#>
-construct { 
-    ?triplesmap a rr:TriplesMap.
-	?triplesmap ?prop ?bnodesubject.
-    ?triplesmap ?prop1 ?obj.
-    ?obj ?prop2 ?obj1.
-    ?bnodesubject rr:class <http://data.europa.eu/a4g/ontology#exampleclass1>.
-    #PART OF THE QUERY To DELETE POM WHEN ITS CONTAINED IN TEMPLATE
-    ?triplesmap rr:subjectMap ?bnodesub.
-    ?bnodesub rr:template ?urisub.
-    ?anothertriplesmap rr:predicateObjectMap ?pombnode.
-    ?pombnode rr:objectMap ?omnode.
-    ?omnode rr:template ?urisub.
-    ?pombnode ?pomprop ?pomobj.
-    #DELETION OF JOINS
-    ?yetanothertriplesmap rr:predicateObjectMap ?pomnode1.
-    ?pomnode1 rr:objectMap ?obnode1.
-    ?obnode1 rr:parentTriplesMap ?triplesmap.
-    ?pomnode1 ?a ?b.
-	
-}
-    
- WHERE{ 
-    ?triplesmap ?prop ?bnodesubject.
-    ?triplesmap ?prop1 ?obj.
-    ?obj ?prop2 ?obj1.
-    ?bnodesubject rr:class <http://data.europa.eu/a4g/ontology#exampleclass1>. 
-    #PART OF THE QUERY To DELETE POM WHEN ITS CONTAINED IN TEMPLATE
-    OPTIONAL{
-    ?triplesmap rr:subjectMap ?bnodesub.
-    ?bnodesub rr:template ?urisub.
-    ?anothertriplesmap rr:predicateObjectMap ?pombnode.
-    ?pombnode rr:objectMap ?omnode.
-    ?omnode rr:template ?urisub.
-    ?pombnode ?pomprop ?pomobj.
-    }
-    #DELETION OF JOINS
-    OPTIONAL{
-    ?yetanothertriplesmap rr:predicateObjectMap ?pomnode1.
-    ?pomnode1 rr:objectMap ?obnode1.
-    ?obnode1 rr:parentTriplesMap ?triplesmap.
-    ?pomnode1 ?a ?b.
-    }
+PREFIX rml: <http://semweb.mmlab.be/ns/rml#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+CONSTRUCT {      
+    ?triples_map rdf:type rr:TriplesMap.      
+    ?triples_map rr:subjectMap ?subject.      
+    ?subject ?subject_term ?subject_value .      
+    ?subject rr:class <%CLASS%>.      
+    ?triples_map rml:logicalSource ?logical_source .      
+    ?logical_source ?logical_source_term ?logical_source_value .      
+    ?triples_map rr:predicateObjectMap ?pom.       
+    ?pom rr:predicate  ?predicate .
+    ?pom rr:predicateMap ?predicate_bn .
+    ?predicate_bn ?predicate_term ?predicate_value .       
+    ?pom rr:object ?object.
+    ?pom rr:objectMap ?object_bn.
+    ?object_bn ?object_term ?object_value.      
+    ?object_bn rr:parentTriplesMap ?parent_tm .       
+    ?object_bn rr:joinCondition ?join_condition .       
+    ?join_condition ?condition_term ?condition_value .       
+    ?parent_triples_map rr:predicateObjectMap ?parent_pom .       
+    ?parent_pom rr:predicate ?parent_predicate . 
+    ?parent_pom rr:predicateMap ?parent_predicate_bn . 
+    ?parent_predicate_bn ?parent_predicate_term ?parent_predicate_value .      
+    ?parent_pom rr:objectMap ?parent_object .       
+    ?parent_object rr:parentTriplesMap ?triples_map .       
+    ?parent_object rr:joinCondition ?parent_join_conditions .       
+    ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .
+}  WHERE {       
+    ?triples_map rdf:type rr:TriplesMap.      
+    ?triples_map rr:subjectMap ?subject.      
+    ?subject ?subject_term ?subject_value .      
+    ?subject rr:class <%CLASS%> .      
+    ?triples_map rml:logicalSource ?logical_source .      
+    ?logical_source ?logical_source_term ?logical_source_value .      
+    OPTIONAL {           
+        ?triples_map rr:predicateObjectMap ?pom.
+        OPTIONAL{
+        	?pom rr:predicate ?predicate . 
+        }
+        OPTIONAL { 
+       		?pom rr:predicateMap ?predicate_bn .          
+            ?predicate_bn ?predicate_term ?predicate_value . 
+        } 
+        OPTIONAL {
+        	?pom rr:object ?object .  
+        }
+        OPTIONAL { 
+            ?pom rr:objectMap ?object_bn .
+            ?object_bn ?object_term ?object_value. 
+        }          
+        OPTIONAL {              
+            ?object_bn rr:parentTriplesMap ?parent_tm .              
+            OPTIONAL {                   
+                ?object_bn rr:joinCondition ?join_condition .                   
+                ?join_condition ?condition_term ?condition_value .              
+            }          
+        }    
+    }      
+    OPTIONAL {           
+        ?parent_triples_map rr:predicateObjectMap ?parent_pom.          
+        OPTIONAL {
+            ?parent_pom rr:predicate ?parent_predicate .
+        }         
+        OPTIONAL {
+            ?parent_pom rr:predicateMap ?parent_predicate_bn.
+            ?parent_predicate_bn ?parent_predicate_term ?parent_predicate_value . 
+        }          
+        ?parent_pom rr:objectMap ?parent_object .
+        ?parent_object rr:parentTriplesMap ?triples_map .          
+        OPTIONAL {               
+            ?parent_object rr:joinCondition ?parent_join_conditions .               
+            ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .          
+        }      
+    }   
 }
