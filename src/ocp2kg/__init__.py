@@ -6,7 +6,6 @@ def propagate(change_data, output_mappings, review_mappings, ontology=Graph()):
     changes_order = (OCH_ADD_CLASS, OCH_ADD_SUBCLASS, OCH_ADD_OBJECT_PROPERTY, OCH_ADD_DATA_PROPERTY, OCH_REMOVE_CLASS,
                      OCH_REMOVE_SUBCLASS, OCH_REMOVE_OBJECT_PROPERTY, OCH_REMOVE_DATA_PROPERTY)
 
-    # ToDo: removing subclass action needs to be implemented
     for change_type in changes_order:
 
         q = f'  SELECT DISTINCT ?change WHERE {{ ' \

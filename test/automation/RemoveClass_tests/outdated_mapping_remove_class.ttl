@@ -20,10 +20,10 @@
             rr:template "http://airport.example.com/{id}" ] .
 
 <ex:testclass_TM> a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
+    rml:logicalSource [ rml:referenceFormulation "XXX" ;
+            rml:source "XXX" ] ;
     rr:subjectMap [ rr:class ex:testclass ;
-            rr:template "XXXX" ] ;
+            rr:template "XXX" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rml:reference "stop" ;
                     rr:datatype xsd:int ] ;
             rr:predicate transit:route ].

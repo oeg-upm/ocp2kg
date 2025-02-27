@@ -33,7 +33,7 @@ if __name__ == "__main__":
 
     review_mappings = Graph()
 
-    new_mapping = propagate(change_data, output_mappings, review_mappings,review_mappings, ontology)
+    new_mapping = propagate(change_data, output_mappings, review_mappings,ontology)
 
     new_mapping.serialize(destination=args.new_mappings_path)
     review_mappings.serialize(destination="review_mappings.ttl")

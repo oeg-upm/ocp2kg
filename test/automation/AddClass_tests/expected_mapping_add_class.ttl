@@ -39,8 +39,8 @@
     ]
   ].
 
-<testclass_TM> a rr:TriplesMap ;
-    rml:logicalSource [ rml:referenceFormulation "XXXX" ;
-            rml:source "XXXX" ] ;
+ex:testclass_TM a rr:TriplesMap ;
+    rml:logicalSource [ rml:referenceFormulation "XXX" ;
+            rml:source "XXX" ] ;
     rr:subjectMap [ rr:class ex:testclass ;
-            rr:template "XXXX" ] .
+            rr:template "XXX" ] .

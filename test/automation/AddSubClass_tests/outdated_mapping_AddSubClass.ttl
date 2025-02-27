@@ -7,14 +7,14 @@
 @prefix ex: <http://myexampleuri.org/data#>.
 
 
-<ex:AirportMapping> a rr:TriplesMap;
+ex:AirportMapping a rr:TriplesMap;
   rml:logicalSource [
     rml:source "Airport.csv" ;
     rml:referenceFormulation ql:CSV
   ];
   rr:subjectMap [
     rr:template "http://airport.example.com/{id}";
-    rr:class transit:Stop
+    rr:class ex:Stop
   ];
 
   rr:predicateObjectMap [
@@ -39,12 +39,12 @@
     ]
   ].
 
-<ex:AirportChildMapping> a rr:TriplesMap;
+ex:AirportChildMapping a rr:TriplesMap;
   rml:logicalSource [
     rml:source "Airport.csv" ;
     rml:referenceFormulation ql:CSV
   ];
   rr:subjectMap [
     rr:template "http://airport.example.com/{id}";
-    rr:class transit:SimpleStop
+    rr:class ex:SimpleStop
   ].
