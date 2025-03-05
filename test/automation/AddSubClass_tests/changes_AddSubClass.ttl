@@ -6,6 +6,6 @@ PREFIX transit: <http://vocab.org/transit/terms/>
 
 
 <http://myexampleuri/AddClass/testclass> rdf:type och:AddSubClass .
-<http://myexampleuri/AddClass/testclass> och:sourceAddSubClass transit:SimpleStop .
-<http://myexampleuri/AddClass/testclass> och:targetAddSubClass transit:Stop .
+<http://myexampleuri/AddClass/testclass> och:sourceAddSubClass ex:SimpleStop .
+<http://myexampleuri/AddClass/testclass> och:targetAddSubClass ex:Stop .
 

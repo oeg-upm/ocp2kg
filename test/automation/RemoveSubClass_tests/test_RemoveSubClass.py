@@ -16,7 +16,7 @@ class TestRemoveSubClass01(unittest.TestCase):
         ontology = Graph()
         review_mappings = Graph()
         updated_mapping=ocp2kg.propagate(change_data, old_mapping, review_mappings, ontology)
-        updated_mapping.serialize(destination=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'output1.ttl'), format='turtle')
+        #updated_mapping.serialize(destination=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'output1.ttl'), format='turtle')
         expected_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'expected_mapping_RemoveSubClass.ttl'))
         self.assertEqual(compare.isomorphic(expected_mapping,updated_mapping),True)
 

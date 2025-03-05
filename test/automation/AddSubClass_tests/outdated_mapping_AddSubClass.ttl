@@ -30,14 +30,8 @@ ex:AirportMapping a rr:TriplesMap;
     rr:objectMap [
       rml:reference "latitude"
     ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate wgs84_pos:long;
-    rr:objectMap [
-      rml:reference "longitude"
-    ]
-  ].
+  ]
+  .
 
 ex:AirportChildMapping a rr:TriplesMap;
   rml:logicalSource [
@@ -47,4 +41,11 @@ ex:AirportChildMapping a rr:TriplesMap;
   rr:subjectMap [
     rr:template "http://airport.example.com/{id}";
     rr:class ex:SimpleStop
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate wgs84_pos:long;
+    rr:objectMap [
+      rml:reference "longitude"
+    ]
   ].
