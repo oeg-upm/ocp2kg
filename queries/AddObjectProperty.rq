@@ -18,9 +18,6 @@ INSERT {
 WHERE {
     ?triplesmap rr:subjectMap ?subjectMap .
     ?subjectMap rr:class <%CLASS%> .
-
     ?parent_tm rr:subjectMap ?parent_subjectMap .
     ?parent_subjectMap rr:class <%RANGE_CLASS%> .
-
-
 }

@@ -2,7 +2,6 @@
 
 PREFIX rr: <http://www.w3.org/ns/r2rml#>
 PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
-
 INSERT DATA { 
     
     <%CLASS%_TM> a rr:TriplesMap;

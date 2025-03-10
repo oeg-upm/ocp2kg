@@ -3,11 +3,12 @@
 PREFIX rr: <http://www.w3.org/ns/r2rml#> 
 PREFIX rml: <http://semweb.mmlab.be/ns/rml#> 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
 DELETE {      
     ?triples_map rdf:type rr:TriplesMap.      
     ?triples_map rr:subjectMap ?subject.      
     ?subject ?subject_term ?subject_value .      
-    ?subject rr:class <http://myexampleuri.org/data#testclass> .      
+    ?subject rr:class <%CLASS%>.      
     ?triples_map rml:logicalSource ?logical_source .      
     ?logical_source ?logical_source_term ?logical_source_value .      
     ?triples_map rr:predicateObjectMap ?pom.       
@@ -17,8 +18,8 @@ DELETE {
     ?pom rr:object ?object.
     ?pom rr:objectMap ?object_bn.
     ?object_bn ?object_term ?object_value.      
-    ?object rr:parentTriplesMap ?parent_tm .       
-    ?object rr:joinCondition ?join_condition .       
+    ?object_bn rr:parentTriplesMap ?parent_tm .       
+    ?object_bn rr:joinCondition ?join_condition .       
     ?join_condition ?condition_term ?condition_value .       
     ?parent_triples_map rr:predicateObjectMap ?parent_pom .       
     ?parent_pom rr:predicate ?parent_predicate . 
@@ -32,7 +33,7 @@ DELETE {
     ?triples_map rdf:type rr:TriplesMap.      
     ?triples_map rr:subjectMap ?subject.      
     ?subject ?subject_term ?subject_value .      
-    ?subject rr:class <http://myexampleuri.org/data#testclass> .      
+    ?subject rr:class <%CLASS%> .      
     ?triples_map rml:logicalSource ?logical_source .      
     ?logical_source ?logical_source_term ?logical_source_value .      
     OPTIONAL {           
@@ -52,9 +53,9 @@ DELETE {
             ?object_bn ?object_term ?object_value. 
         }          
         OPTIONAL {              
-            ?object rr:parentTriplesMap ?parent_tm .              
+            ?object_bn rr:parentTriplesMap ?parent_tm .              
             OPTIONAL {                   
-                ?object rr:joinCondition ?join_condition .                   
+                ?object_bn rr:joinCondition ?join_condition .                   
                 ?join_condition ?condition_term ?condition_value .              
             }          
         }    

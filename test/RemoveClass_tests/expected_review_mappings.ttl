@@ -1,0 +1,13 @@
+@prefix ns1: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ns2: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<ex:testclass_TM> a ns2:TriplesMap ;
+    ns1:logicalSource [ ns1:referenceFormulation "XXX" ;
+            ns1:source "XXXX" ] ;
+    ns2:predicateObjectMap [ ns2:objectMap [ ns1:reference "stop" ;
+                    ns2:datatype xsd:int ] ;
+            ns2:predicate <http://vocab.org/transit/terms/route> ] ;
+    ns2:subjectMap [ ns2:class <http://myexampleuri.org/data#testclass> ;
+            ns2:template "XXXX" ] .
+

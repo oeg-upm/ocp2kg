@@ -1,52 +1,63 @@
 # Adds %SUPERCLASS% to the %SUBCLASS%. This change triggers the second and third query, which add DATAPROPERTY and OBJECTPROPERTY where the domain is SUPERCLASS.
 
-PREFIX rr: <http://www.w3.org/ns/r2rml#>
+    PREFIX rr: <http://www.w3.org/ns/r2rml#>
 
-INSERT {  
-    ?subjectMap rr:class <%SUPERCLASS%>.
-}
-WHERE {
-    ?triplesmap rr:subjectMap ?subjectMap.
-    ?subjectMap rr:class <%SUBCLASS%>.
-}
+    INSERT {  
+        ?subjectMap rr:class <%SUPERCLASS%>.
+    }
+    WHERE {
+        ?triplesmap rr:subjectMap ?subjectMap.
+        ?subjectMap rr:class <%SUBCLASS%>.
+    }
 
+        PREFIX rr: <http://www.w3.org/ns/r2rml#>
+        PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
 
-
-# Adds %DATAPROPERTIES% where their domain are %SUPERCLASS%. This runs after the first query.
-# Needs to be run for each DATAPROPERTY of %SUPERCLASS%
-INSERT {  
-    ?triplesmap rr:predicateObjectMap [
-        rr:predicate <%DATAPROPERTY%>;
-        rr:objectMap [
-            rml:reference "XXXX";
-            rr:datatype <%RANGE_DATAPROPERTY%>
-        ]
-    ].
-}
-WHERE {
-    ?triplesmap rr:subjectMap ?subjectMap .
-    ?subjectMap rr:class <%SUBCLASS%>, <%SUPERCLASS%> .
-}
-
-
-# Adds %OBJECTPROPERTY% where their domain are %SUPERCLASS% and the RANGE is %RANGECLASS%. This runs after the first query.
-# Needs to be run for each OBJECTPROPERTY of %SUPERCLASS%
-INSERT {  
-    ?triplesmap rr:predicateObjectMap [
-        rr:predicate <%OBJECTPROPERTY%>;
-        rr:objectMap [
-            rr:parentTriplesMap ?parent_tm;
-            rr:joinCondition [
-                rr:child "XXXX";
-                rr:parent "XXXX"
-            ]
-        ]
-    ].
-}
-WHERE {
-    ?triplesmap rr:subjectMap ?subjectMap .
-    ?subjectMap rr:class <%SUBCLASS%>, <%SUPERCLASS%> .
-
-    ?parent_tm rr:subjectMap ?parent_subjectMap .
-    ?parent_subjectMap rr:class <%RANGECLASS%> .
-}
+        INSERT {
+            ?subclass_triples_map rr:predicateObjectMap ?pom.
+            ?pom ?predicate_property ?predicate.
+            ?predicate ?predicate_term ?predicate_value.
+            ?pom ?object_property ?object.
+            ?object ?object_term ?object_value.
+            ?object rr:parentTriplesMap ?parent_tm.
+            ?object rr:joinCondition ?join_condition.
+            ?join_condition ?condition_term ?condition_value.
+            ?parent_triples_map rr:predicateObjectMap ?parent_pom.
+            ?parent_pom ?parent_predicate_property ?parent_predicate.
+            ?parent_predicate ?parent_predicate_term ?parent_predicate_value.
+            ?parent_pom rr:object ?parent_object.
+            ?parent_object rr:parentTriplesMap ?triples_map.
+            ?parent_object rr:joinCondition ?parent_join_conditions.
+            ?parent_join_conditions ?parent_condition_term ?parent_conditions_value.
+        }
+        WHERE {
+            ?subclass_triples_map rr:subject ?subclass_subject.
+            ?subclass_subject rr:class <%SUBCLASS%>.
+            ?triples_map rr:subject ?subject.
+            ?subject rr:class <%SUPERCLASS%>.
+            OPTIONAL {
+                ?triples_map rr:predicateObjectMap ?pom.
+                ?pom rr:predicate|rr:predicate ?predicate.
+                OPTIONAL { ?predicate ?predicate_term ?predicate_value. }
+                ?pom rr:object|rr:object ?object.
+                OPTIONAL { ?object ?object_term ?object_value. }
+                OPTIONAL {
+                    ?object rr:parentTriplesMap ?parent_tm.
+                    OPTIONAL {
+                        ?object rr:joinCondition ?join_condition.
+                        ?join_condition ?condition_term ?condition_value.
+                    }
+                }
+            }
+            OPTIONAL {
+                ?parent_triples_map rr:predicateObjectMap ?parent_pom.
+                ?parent_pom rr:predicate|rr:predicate ?parent_predicate.
+                OPTIONAL { ?parent_predicate ?parent_predicate_term ?parent_predicate_value. }
+                ?parent_pom rr:object ?parent_object.
+                ?parent_object rr:parentTriplesMap ?triples_map.
+                OPTIONAL {
+                    ?parent_object rr:joinCondition ?parent_join_conditions.
+                    ?parent_join_conditions ?parent_condition_term ?parent_conditions_value.
+                }
+            }
+        }
