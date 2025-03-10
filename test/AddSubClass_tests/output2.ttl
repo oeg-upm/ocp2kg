@@ -1,0 +1,24 @@
+@prefix ns1: <http://www.w3.org/ns/r2rml#> .
+@prefix ns2: <http://semweb.mmlab.be/ns/rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://myexampleuri.org/data#AirportChildMapping> a ns1:TriplesMap ;
+    ns2:logicalSource [ ns2:referenceFormulation <http://semweb.mmlab.be/ns/ql#CSV> ;
+            ns2:source "Airport.csv" ] ;
+    ns1:predicateObjectMap [ ns1:objectMap [ ns2:reference "longitude" ] ;
+            ns1:predicate <http://www.w3.org/2003/01/geo/wgs84_pos#long> ] ;
+    ns1:subjectMap [ ns1:class <http://myexampleuri.org/data#SimpleStop>,
+                <http://myexampleuri.org/data#Stop> ;
+            ns1:template "http://airport.example.com/{id}" ] .
+
+<http://myexampleuri.org/data#AirportMapping> a ns1:TriplesMap ;
+    ns2:logicalSource [ ns2:referenceFormulation <http://semweb.mmlab.be/ns/ql#CSV> ;
+            ns2:source "Airport.csv" ] ;
+    ns1:predicateObjectMap [ ns1:objectMap [ ns2:reference "stop" ;
+                    ns1:datatype xsd:int ] ;
+            ns1:predicate <http://vocab.org/transit/terms/route> ],
+        [ ns1:objectMap [ ns2:reference "latitude" ] ;
+            ns1:predicate <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ] ;
+    ns1:subjectMap [ ns1:class <http://myexampleuri.org/data#Stop> ;
+            ns1:template "http://airport.example.com/{id}" ] .
+

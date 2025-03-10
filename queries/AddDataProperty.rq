@@ -1,4 +1,4 @@
-# Adds %DATA_PROPERTY% to %CLASS% with datatype %RANGE_DATA_PROPERTY% extracted from the range of %DATA_PROPERTY%. By defaylt, reference is used for the data.
+# Adds %DATA_PROPERTY% to %CLASS% with datatype %RANGE_DATA_PROPERTY% 
 
 PREFIX rr: <http://www.w3.org/ns/r2rml#>
 PREFIX rml: <http://semweb.mmlab.be/ns/rml#>

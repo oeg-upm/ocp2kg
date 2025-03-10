@@ -31,7 +31,7 @@ prefixes:
   rr: http://www.w3.org/ns/r2rml#
   rml: http://semweb.mmlab.be/ns/rml#
   ql: http://semweb.mmlab.be/ns/ql#
-  omv: http://omv.ontoware.org/2009/09/OWLChanges/
+  och: http://och.ontoware.org/2009/09/OWLChanges/
 
 mappings:
   AddedClasses:
@@ -39,10 +39,9 @@ mappings:
     - [Parsed_Changes/added_classes_4.0.csv~csv]
     s: http://epo-changes.org/$(reference_version)-$(target_version)/AddClass/$(name)
     po:
-    - [rdf:type, omv:AddClass]
-    - [omv:addedClass, $(name)~iri]
+    - [rdf:type, och:AddClass]
+    - [och:addedClass, $(name)~iri]
     #- [rdfs:comment, $(comment)]
-    - [omv:addedClass_full, $(name_full)~iri]
 
   DeletedClasses:
     sources:
@@ -50,9 +49,9 @@ mappings:
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/RemoveClass/$(name)
     po:
-    - [rdf:type, omv:RemoveClass]
+    - [rdf:type, och:RemoveClass]
     #- [rdfs:comment, $(comment)]
-    - [omv:deletedClass, $(name_full)~iri]
+    - [och:removedClass, $(name_full)~iri]
 
   AddedSubClasses:
     sources:
@@ -60,10 +59,10 @@ mappings:
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/AddSubClass/$(subject)-$(object)
     po:
-    - [rdf:type, omv:AddSubClass]
+    - [rdf:type, och:AddSubClass]
     #- [rdfs:comment, $(comment)]
-    - [omv:subAddSubClass, $(subject_full)~iri]
-    - [omv:objAddSubClass, $(object_full)~iri]
+    - [och:sourceAddSubClass, $(subject_full)~iri]
+    - [och:targetAddSubClass, $(object_full)~iri]
 
   RemoveSubClasses:
     sources:
@@ -71,10 +70,10 @@ mappings:
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/RemoveSubClass/$(subject)-$(object)
     po:
-    - [rdf:type, omv:RemoveSubClass]
+    - [rdf:type, och:RemoveSubClass]
     #- [rdfs:comment, $(comment)]
-    - [omv:subRemoveSubClass, $(subject_full)~iri]
-    - [omv:objRemoveSubClass, $(object_full)~iri]
+    - [och:sourceRemoveSubClass, $(subject_full)~iri]
+    - [och:targetRemoveSubClass, $(object_full)~iri]
 
   AddedProperties:
     sources:
@@ -82,11 +81,14 @@ mappings:
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/AddObjectProperty/$(predicate)
     po:
-    - [rdf:type, omv:AddObjectProperty]
+    - [rdf:type, och:AddObjectProperty]
     #- [rdfs:comment, $(comment)]
-    - [omv:domainAddObjectProperty, $(subject_full)~iri]
-    - [omv:propertyAddObjectProperty, $(predicate_full)~iri]
-    - [omv:rangeAddObjectProperty, $(object_full)~iri]
+    - [och:addedDomain, $(subject_full)~iri]
+    - [och:addedDomainToProperty, $(predicate_full)~iri]
+    - [och:addedObjectProperty, $(predicate_full)~iri]
+    - [och:addedObjectRange, $(object_full)~iri]
+    - [och:addedRangeToProperty, $(predicate_full)~iri]
+
 
   DeletedProperties:
     sources:
@@ -94,11 +96,13 @@ mappings:
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/RemoveObjectProperty/$(predicate)
     po:
-    - [rdf:type, omv:RemoveObjectProperty]
+    - [rdf:type, och:RemoveObjectProperty]
     #- [rdfs:comment, $(comment)]
-    - [omv:domainRemoveObjectProperty, $(subject_full)~iri]
-    - [omv:propertyRemoveObjectProperty, $(predicate_full)~iri]
-    - [omv:rangeRemoveObjectProperty, $(object_full)~iri]
+    - [och:removedDomain, $(subject_full)~iri]
+    - [och:removedDomainFromProperty, $(predicate_full)~iri]
+    - [och:removedObjectProperty, $(predicate_full)~iri]
+    - [och:removedObjectRange, $(object_full)~iri]
+    - [och:removedRangeFromProperty, $(predicate_full)~iri]
 
   AddedAttributes:
     sources:
@@ -106,10 +110,11 @@ mappings:
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/AddDataProperty/$(added_attributes)
     po:
-    - [rdf:type, omv:AddDataProperty]
+    - [rdf:type, och:AddDataProperty]
     #- [rdfs:comment, $(comment)]
-    - [omv:domainAddDataProperty, $(class_full)~iri]
-    - [omv:propertyAddDataProperty, $(added_attributes_full)~iri]
+    - [och:addedDomain, $(class_full)~iri]
+    - [och:addedDomainToProperty, $(added_attributes_full)~iri]
+    - [och:addedObjectProperty, $(added_attributes_full)~iri]
 
   DeletedAttributes:
     sources:
@@ -117,7 +122,8 @@ mappings:
     s:
       http://epo-changes.org/$(reference_version)-$(target_version)/RemoveDataProperty/$(deleted_attributes)
     po:
-    - [rdf:type, omv:RemoveDataProperty]
+    - [rdf:type, och:RemoveDataProperty]
     #- [rdfs:comment, $(comment)]
-    - [omv:domainRemoveDataProperty, $(class_full)~iri]
-    - [omv:propertyRemoveDataProperty, $(deleted_attributes_full)~iri]
+    - [och:addedDomain, $(class_full)~iri]
+    - [och:addedDomainToProperty, $(deleted_attributes_full)~iri]
+    - [och:addedObjectProperty, $(deleted_attributes_full)~iri]

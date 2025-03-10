@@ -1,0 +1,39 @@
+PREFIX rr: <http://www.w3.org/ns/r2rml#> 
+PREFIX rml: <http://semweb.mmlab.be/ns/rml#> 
+CONSTRUCT {   
+    ?subclass_triples_map rr:predicateObjectMap [       
+     	rr:predicate ?parent_predicate; 
+     	rr:predicateMap [
+    		?parent_predicate_term ?parent_predicate_value 
+    	];       
+     	rr:object ?parent_object;
+     	rr:objectMap [
+    	    ?parent_object_term ?parent_object_value
+    	]
+    ].
+}  WHERE {       
+    ?subclass_triples_map rr:subjectMap ?subclass_subject.      
+    ?subclass_subject rr:class <http://myexampleuri.org/data#SimpleStop>.      
+    ?parent_triples_map rr:subjectMap ?subject.      
+    ?subject rr:class <http://myexampleuri.org/data#Stop> .             
+    OPTIONAL {           
+        ?parent_triples_map rr:predicateObjectMap ?parent_pom.          
+        OPTIONAL{?parent_pom rr:predicate ?parent_predicate}          
+        OPTIONAL { 
+            ?parent_pom rr:predicateMap ?parent_predicate_bn .
+            ?parent_predicate_bn ?parent_predicate_term ?parent_predicate_value .
+        }
+        OPTIONAL{?parent_pom rr:object ?parent_object}
+        OPTIONAL{
+            ?parent_pom rr:objectMap ?parent_object_bn .
+            ?parent_object_bn ?parent_object_term ?parent_object_value.
+            OPTIONAL{
+                ?parent_object_bn rr:parentTriplesMap ?parent_parent_triples_map .         
+                OPTIONAL {               
+                    ?parent_object_bn rr:joinCondition ?parent_join_conditions .               
+                    ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .          
+                }
+            }
+        }
+    }   
+}

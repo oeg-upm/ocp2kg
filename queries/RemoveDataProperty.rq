@@ -1,42 +1,20 @@
-# Removes %DATAPROPERTY% from %CLASS%. Extended version is also provided
-PREFIX rr: <http://www.w3.org/ns/r2rml#>
+# Removes %DATAPROPERTY% from %CLASS%. %RANGE% and %DOMAIN% have to be specified.
 
-DELETE { 
-    ?triplesmap rr:predicateObjectMap ?pom.
-    ?pom rr:predicate <%DATAPROPERTY%> . #if comes from the ontology, it's going to be always constant
+PREFIX rr: <http://www.w3.org/ns/rr#>
+PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
 
-    ?pom ?object_property ?objectMap. #either rr:objectMap or rr:object
-    ?objectMap ?object_term ?objectValue . #removes everything under objectMap (including language, datatype or termType)
+DELETE {
+    ?triplesMap rr:predicateObjectMap ?pom.
+    ?pom rr:predicate <%DATAPROPERTY%> .
+    ?pom ?object_property ?objectMap.
+    ?objectMap ?object_term ?objectValue .
 }
 WHERE {
-    ?triplesmap  rr:subjectMap ?subjectMap.
-    ?subjectMap rr:class <%CLASS%>.
-
-    ?triplesmap rr:predicateObjectMap ?pom.
-   	?pom rr:predicate <%DATAPROPERTY%> . #if comes from the ontology, it's going to be always constant
-
-    ?pom rr:objectMap|rr:object ?objectMap.
-    OPTIONAL { ?objectMap ?object_term ?objectValue }.
-        
-}
-
-#Extended version where shortcuts are not used
-DELETE { 
-    ?triplesmap rr:predicateObjectMap ?pom.
-    ?pom rr:predicateMap ?predicate . #if comes from the ontology, it's going to be always constant
-    ?predicate rr:constant <%DATAPROPERTY%> .
-
-    ?pom ?object_property ?objectMap. #either rr:objectMap or rr:object
-    ?objectMap ?object_term ?objectValue . #removes everything under objectMap (including language, datatype or termType)
-}
-WHERE {
-    ?triplesmap  rr:subjectMap ?subjectMap.
-    ?subjectMap rr:class <%CLASS%>.
-
-    ?triplesmap rr:predicateObjectMap ?pom.
-    ?pom rr:predicateMap ?predicate . #if comes from the ontology, it's going to be always constant
-    ?predicate rr:constant <%DATAPROPERTY%> .
-
-    ?pom rr:objectMap|rr:object ?objectMap.
-    OPTIONAL { ?objectMap ?object_term ?objectValue }.    
+    ?triplesMap rr:subjectMap ?subjectMap.
+    ?subjectMap rr:class <%DOMAIN%> .
+    ?triplesMap rr:predicateObjectMap ?pom .
+    ?pom rr:predicate <%DATAPROPERTY%> .
+    ?pom rr:objectMap|rr:object ?objectMap .
+    OPTIONAL { ?objectMap rr:datatype <%RANGE%>} .
+    OPTIONAL { ?objectMap ?object_term ?objectValue } .
 }
