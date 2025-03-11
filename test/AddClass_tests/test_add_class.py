@@ -12,8 +12,7 @@ class TestAddClass01(unittest.TestCase):
         change_data = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'changes_add_class.ttl'))
         ontology = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ontology.ttl'))
         expected_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'expected_mapping_add_class.ttl'))
-        review_mappings = Graph()
-        updated_mapping=ocp2kg.propagate(change_data, expected_mapping, review_mappings, ontology)
+        updated_mapping = ocp2kg.propagate(change_data, expected_mapping, Graph(), ontology)
         self.assertEqual(compare.isomorphic(expected_mapping,updated_mapping),True)
 
     """Case 1: where the added class is not within the mappings."""
@@ -21,8 +20,7 @@ class TestAddClass01(unittest.TestCase):
         change_data = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'changes_add_class.ttl'))
         old_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'outdated_mapping_add_class.ttl'))
         ontology = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ontology.ttl'))
-        review_mappings = Graph()
-        updated_mapping=ocp2kg.propagate(change_data, old_mapping, review_mappings, ontology)
+        updated_mapping = ocp2kg.propagate(change_data, old_mapping, Graph(), ontology)
         expected_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'expected_mapping_add_class.ttl'))
         self.assertEqual(compare.isomorphic(expected_mapping,updated_mapping),True)
 
