@@ -1,11 +1,8 @@
 import os
-import sys
 import unittest
 import ocp2kg
 from rdflib import Graph, compare
-RML_URI = 'http://semweb.mmlab.be/ns/rml#'
-ruta_relativa = os.path.abspath(os.path.join(os.path.dirname(__file__), '..','..','..'))
-sys.path.append(ruta_relativa)
+
 
 class TestRemoveClass01(unittest.TestCase):
     
@@ -14,9 +11,7 @@ class TestRemoveClass01(unittest.TestCase):
     def test_remove_class00(self):
         change_data = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'changes_remove_class.ttl'))
         old_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'outdated_mapping_remove_class.ttl'))
-        ontology = Graph()
-        review_mappings = Graph()
-        updated_mapping=ocp2kg.propagate(change_data, old_mapping, review_mappings, ontology)
+        updated_mapping=ocp2kg.propagate(change_data, old_mapping, Graph(), Graph())
         expected_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'expected_mapping_remove_class.ttl'))
         self.assertEqual(compare.isomorphic(expected_mapping,updated_mapping),True)
 
@@ -25,8 +20,7 @@ class TestRemoveClass01(unittest.TestCase):
         change_data = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'changes_remove_class.ttl'))
         old_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'outdated_mapping_remove_class.ttl'))
         ontology = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ontology.ttl'))
-        review_mappings = Graph()
-        updated_mapping=ocp2kg.propagate(change_data, old_mapping, review_mappings, ontology)
+        updated_mapping=ocp2kg.propagate(change_data, old_mapping, Graph(), ontology)
         expected_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'expected_mapping_remove_class.ttl'))
         self.assertEqual(compare.isomorphic(expected_mapping,updated_mapping),True)
 
@@ -34,9 +28,7 @@ class TestRemoveClass01(unittest.TestCase):
     def test_remove_class02(self):
         change_data = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ptmchanges_remove_class.ttl'))
         old_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ptmoutdated_mapping_remove_class.ttl'))
-        ontology = Graph()
-        review_mappings = Graph()
-        updated_mapping=ocp2kg.propagate(change_data, old_mapping, review_mappings, ontology)
+        updated_mapping=ocp2kg.propagate(change_data, old_mapping, Graph(), Graph())
         expected_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ptmexpected_mapping_remove_class.ttl'))
         self.assertEqual(compare.isomorphic(expected_mapping,updated_mapping),True)
 
