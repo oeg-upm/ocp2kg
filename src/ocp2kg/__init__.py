@@ -28,6 +28,8 @@ def propagate(change_data, output_mappings, review_mappings, ontology=Graph()):
                 add_data_property(change_result["change"],change_data, output_mappings)
             elif URIRef(change_type) == URIRef(OCH_REMOVE_DATA_PROPERTY):
                 remove_data_property(change_result["change"],change_data, output_mappings)
+            elif URIRef(change_type) == URIRef(OCH_DEPRECATE_ENTITY):
+                deprecate_entity(change_result["change"], change_data, output_mappings, review_mappings, ontology) 
 
     logger.info("Changes propagated over the mapping rules, writing results...")
     return output_mappings

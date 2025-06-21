@@ -1,0 +1,10 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX och: <http://w3id.org/def/och>
+PREFIX epo: <http://data.europa.eu/a4g/ontology#>
+PREFIX ex: <http://myexampleuri.org/data#>
+PREFIX transit: <http://vocab.org/transit/terms/>
+
+ex:SimpleStop rdf:type owl:Class .
+wgs84_pos:lat rdf:type owl:ObjectProperty . 
+transit:route rdf:type owl:DatatypeProperty .
+ex:testclass rdf:type owl:Class .
