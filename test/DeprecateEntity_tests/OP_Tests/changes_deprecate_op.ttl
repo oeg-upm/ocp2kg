@@ -4,4 +4,4 @@ PREFIX ex: <http://myexampleuri.org/data#>
 
 
 <http://myexampleuri/DeprecateEntity/testchange> rdf:type och:DeprecateEntity .
-<http://myexampleuri/DeprecateEntity/testchange> och:deprecatedEntity ex:Point .
+<http://myexampleuri/DeprecateEntity/testchange> och:deprecatedEntity ex:testproperty1 .

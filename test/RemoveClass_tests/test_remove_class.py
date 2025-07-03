@@ -1,11 +1,12 @@
 import os
 import sys
 import unittest
-import ocp2kg
 from rdflib import Graph, compare
 RML_URI = 'http://semweb.mmlab.be/ns/rml#'
-ruta_relativa = os.path.abspath(os.path.join(os.path.dirname(__file__), '..','..','..'))
-sys.path.append(ruta_relativa)
+ruta_relativa = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
+if ruta_relativa not in sys.path:
+    sys.path.insert(0, ruta_relativa)
+import ocp2kg
 
 class TestRemoveClass01(unittest.TestCase):
     

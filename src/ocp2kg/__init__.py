@@ -4,7 +4,7 @@ from .evol_kg import *
 
 def propagate(change_data, output_mappings, review_mappings, ontology=Graph()):
     changes_order = (OCH_ADD_CLASS, OCH_ADD_SUBCLASS, OCH_ADD_OBJECT_PROPERTY, OCH_ADD_DATA_PROPERTY, OCH_REMOVE_CLASS,
-                     OCH_REMOVE_SUBCLASS, OCH_REMOVE_OBJECT_PROPERTY, OCH_REMOVE_DATA_PROPERTY)
+                     OCH_REMOVE_SUBCLASS, OCH_REMOVE_OBJECT_PROPERTY, OCH_REMOVE_DATA_PROPERTY,OCH_DEPRECATE_ENTITY, OCH_REVOKE_DEPRECATE, OCH_RENAME_ENTITY)
 
     for change_type in changes_order:
 
@@ -29,7 +29,11 @@ def propagate(change_data, output_mappings, review_mappings, ontology=Graph()):
             elif URIRef(change_type) == URIRef(OCH_REMOVE_DATA_PROPERTY):
                 remove_data_property(change_result["change"],change_data, output_mappings)
             elif URIRef(change_type) == URIRef(OCH_DEPRECATE_ENTITY):
-                deprecate_entity(change_result["change"], change_data, output_mappings, review_mappings, ontology) 
+                deprecate_entity(change_result["change"], change_data, output_mappings, review_mappings, ontology)
+            elif URIRef(change_type) == URIRef(OCH_REVOKE_DEPRECATE):
+                revoke_deprecate(change_result["change"], change_data, output_mappings, review_mappings, ontology)
+            elif URIRef(change_type) == URIRef(OCH_RENAME_ENTITY):
+                rename_entity(change_result["change"], change_data, output_mappings)
 
     logger.info("Changes propagated over the mapping rules, writing results...")
     return output_mappings

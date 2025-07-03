@@ -110,6 +110,9 @@ OCH_REMOVE_RANGE_OBJECT = f'{OCH_PREFIX}:RemoveRangeObjectProperty'
 OCH_ADD_RANGE_DATA = f'{OCH_PREFIX}:AddRangeDataProperty'
 OCH_REMOVE_RANGE_DATA = f'{OCH_PREFIX}:RemoveRangeDataProperty'
 OCH_DEPRECATE_ENTITY = f'{OCH_PREFIX}:DeprecateEntity'
+OCH_REVOKE_DEPRECATE = f'{OCH_PREFIX}:RevokeDeprecate'
+OCH_RENAME_ENTITY = f'{OCH_PREFIX}:RenameEntity'
+
 
 OCH_ADDED_CLASS = f'{OCH_PREFIX}:addedClass'
 OCH_DELETED_CLASS = f'{OCH_PREFIX}:removedClass'
@@ -139,13 +142,19 @@ OCH_REMOVED_DOMAIN_TO_PROPERTY = f'{OCH_PREFIX}:removedDomainFromProperty'
 OCH_ADDED_RANGE_TO_PROPERTY = f'{OCH_PREFIX}:addedRangeToProperty'
 OCH_REMOVED_RANGE_TO_PROPERTY = f'{OCH_PREFIX}:removedRangeFromProperty'
 OCH_DEPRECATED_ENTITY = f'{OCH_PREFIX}:deprecatedEntity'
+OCH_UNDEPRECATED_ELEMENT= f'{OCH_PREFIX}:undeprecatedElement'
+OCH_OLD_NAME = f'{OCH_PREFIX}:outdatedEntityName'
+OCH_NEW_NAME = f'{OCH_PREFIX}:renamedEntityName'
 
 ##############################################################################
 #############################  RDFS&OWL CONSTANTS  ###########################
 ##############################################################################
 OWL_CLASS = 'owl:Class'
+OWL_CLASS_URI = 'http://www.w3.org/2002/07/owl#Class'
 OWL_DATA_PROPERTY = 'owl:DatatypeProperty'
+OWL_DATA_PROPERTY_URI = 'http://www.w3.org/2002/07/owl#DatatypeProperty'
 OWL_OBJECT_PROPERTY = 'owl:ObjectProperty'
+OWL_OBJECT_PROPERTY_URI = 'http://www.w3.org/2002/07/owl#ObjectProperty'
 RDFS_DOMAIN = 'rdfs:domain'
 RDFS_RANGE = 'rdfs:range'
 RDFS_SUBCLASS = 'rdfs:subClassOf'

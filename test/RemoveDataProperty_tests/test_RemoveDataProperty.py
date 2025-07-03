@@ -1,11 +1,12 @@
 import os
 import sys
-import ocp2kg
 from rdflib.graph import Graph
 from rdflib import compare
 import unittest
-ruta_relativa = os.path.abspath(os.path.join(os.path.dirname(__file__), '..','..','..'))
-sys.path.append(ruta_relativa)
+ruta_relativa = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
+if ruta_relativa not in sys.path:
+    sys.path.insert(0, ruta_relativa)
+import ocp2kg
 
 class TestRemoveDataProperty01(unittest.TestCase):
     

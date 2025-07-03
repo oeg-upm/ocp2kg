@@ -14,7 +14,7 @@ ex:AirportMapping a rr:TriplesMap;
   ];
   rr:subjectMap [
     rr:template "http://airport.example.com/{id}";
-    rr:class ex:Stop
+    rr:class ex:NewStop
   ];
 
   rr:predicateObjectMap [
@@ -40,7 +40,7 @@ ex:AirportChildMapping a rr:TriplesMap;
   ];
   rr:subjectMap [
     rr:template "http://airport.example.com/{id}";
-    rr:class ex:SimpleStop
+    rr:class ex:SimpleStop,ex:NewStop
   ];
 
   rr:predicateObjectMap [
