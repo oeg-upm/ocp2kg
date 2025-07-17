@@ -26,7 +26,11 @@ OCH_URI = 'https://w3id.org/def/och#'
 R2RML_PREFIX = 'rr'
 RML_PREFIX = 'rml'
 OCH_PREFIX = 'och'
-
+RDF_PREFIX = 'rdf'
+RDFS_PREFIX = 'rdfs'
+RDF_FIRST = f'{RDF_PREFIX}:first'
+RDF_REST = f'{RDF_PREFIX}:rest'
+RDF_TYPE = f'{RDF_PREFIX}:type'
 TURTLE_PREFIX = '@prefix'
 RML_BASE = '@base'
 RML_LOGICAL_SOURCE_CLASS = f'{RML_PREFIX}:LogicalSource'
@@ -81,6 +85,22 @@ R2RML_LOGICAL_TABLE_CLASS = f'{R2RML_PREFIX}:LogicalTable'
 R2RML_LOGICAL_TABLE = f'{R2RML_PREFIX}:logicalTable'
 R2RML_TABLE_NAME = f'{R2RML_PREFIX}:tableName'
 R2RML_COLUMN = f'{R2RML_PREFIX}:column'
+
+##############################################################################
+#############################   SHACL CONSTANTS  ###############################
+##############################################################################
+SHACL_URI = 'http://www.w3.org/ns/shacl#'
+SHACL_PREFIX = 'sh'
+SHACL_SHAPE = f'{SHACL_PREFIX}:Shape'
+SHACL_NODE_SHAPE = f'{SHACL_PREFIX}:NodeShape'
+SHACL_PROPERTY_SHAPE = f'{SHACL_PREFIX}:PropertyShape'
+SHACL_TARGET_CLASS = f'{SHACL_PREFIX}:targetClass'
+SHACL_DEACTIVATED = f'{SHACL_PREFIX}:deactivated'
+SHACL_PATH = f'{SHACL_PREFIX}:path'
+SHACL_IN = f'{SHACL_PREFIX}:in'
+SHACL_OR = f'{SHACL_PREFIX}:or'
+SHACL_AND = f'{SHACL_PREFIX}:and'
+SHACL_XONE = f'{SHACL_PREFIX}:xone'
 
 ##############################################################################
 #############################   D2RQ CONSTANTS  ##############################

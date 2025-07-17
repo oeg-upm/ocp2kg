@@ -1,0 +1,31 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX schema: <http://schema.org/>
+DELETE {
+  ?shape ?p ?o .
+  ?propShape ?pp ?po .
+  ?list ?lp ?lo .
+  ?listItem ?listItemP ?listItemO .
+  ?restNode ?restP ?restO .
+}
+WHERE {
+  ?shape a sh:NodeShape ;
+         sh:targetClass schema:Person ;
+         ?p ?o .
+  OPTIONAL {
+    ?shape sh:property ?propShape .
+    FILTER (isBlank(?propShape))
+    ?propShape ?pp ?po .
+    OPTIONAL {
+      ?propShape ?listPred ?list .
+      FILTER(?listPred IN (sh:in, sh:or, sh:and, sh:xone))
+      # Traverse and delete all rdf:first/rdf:rest pairs
+      ?list rdf:rest*/rdf:first ?listItem .
+      ?list ?lp ?lo .
+      OPTIONAL { ?listItem ?listItemP ?listItemO . }
+      # Collect all rdf:rest nodes
+      ?list rdf:rest* ?restNode .
+      ?restNode ?restP ?restO .
+    }
+  }
+}

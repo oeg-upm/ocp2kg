@@ -1,0 +1,19 @@
+#Version where the term that is being deprecated is a class or a property.
+
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX ex: <http://example.org/>
+
+INSERT {
+  ?shape sh:deactivated true .
+}
+WHERE {
+  {
+    ?shape a sh:NodeShape ;
+           sh:targetClass ex:exampleEntity .
+  }
+  UNION
+  {
+    ?shape sh:path ex:exampleEntity .
+  }
+  FILTER NOT EXISTS { ?shape sh:deactivated true }
+}

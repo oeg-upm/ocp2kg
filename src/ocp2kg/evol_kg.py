@@ -5,7 +5,7 @@ import os
 
 # ---------------------------------------------------------------------------------------------------------------------------
 
-def add_class(change, change_data, output_mappings):
+def add_class_rml(change, change_data, output_mappings):
     """
     Adds a class defined in the change KG into the output_mappings.
     If there is a TriplesMap that creates instances of that class, the TriplesMap is not created
@@ -44,7 +44,7 @@ def add_class(change, change_data, output_mappings):
 
 
 # ---------------------------------------------------------------------------------------------------------------------------
-def remove_class(change,change_data, output_mappings, review_mappings, ontology):
+def remove_class_rml(change,change_data, output_mappings, review_mappings, ontology):
     """
         Remove a class defined in the change KG into the output_mappings.
         If there is a TriplesMap that creates instances of that class, the TriplesMap and associated POM are removed.
@@ -198,7 +198,7 @@ def remove_class(change,change_data, output_mappings, review_mappings, ontology)
 
 # ---------------------------------------------------------------------------------------------------------------------------------
 
-def add_super_class(change,change_data, output_mappings):
+def add_super_class_rml(change,change_data, output_mappings):
     """
        Adds a superclass and its properties into the TriplesMap that instantiate the subclass .
        Args:
@@ -280,7 +280,7 @@ def add_super_class(change,change_data, output_mappings):
 """
 
 # --------------------------------------------------------------------------------------------------------------
-def remove_super_class(change,change_data, output_mappings):
+def remove_super_class_rml(change,change_data, output_mappings):
     """
        Removes superclass and its properties from the TriplesMap that instantiate the subclass .
        Args:
@@ -368,7 +368,7 @@ def remove_super_class(change,change_data, output_mappings):
         output_mappings.update(remove_super_class_pom_query)
     """
 
-def add_object_property(change,change_data, output_mappings):
+def add_object_property_rml(change,change_data, output_mappings):
     """
        Adds an object property to the TriplesMap indicated in the domain. For a change in the predicate object map the domain, property and range additions are needed.  
        Args:
@@ -407,7 +407,7 @@ def add_object_property(change,change_data, output_mappings):
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------
-def remove_object_property(change, change_data, output_mappings):
+def remove_object_property_rml(change, change_data, output_mappings):
     """
         Removes the object property indicated in the change as property from its domain. For a change in the predicate object map the domain, property and range additions are needed.
         Args:
@@ -452,7 +452,7 @@ def remove_object_property(change, change_data, output_mappings):
 
 
 # -------------------------------------------------------------------------------------------------------------------------
-def add_data_property(change,change_data, output_mappings):
+def add_data_property_rml(change,change_data, output_mappings):
     """
        Adds a data property to the TriplesMap indicated in the domain. For a change in the predicate object map the domain, property and range additions are needed.
        Args:
@@ -488,7 +488,7 @@ def add_data_property(change,change_data, output_mappings):
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------
-def remove_data_property(change,change_data, output_mappings):
+def remove_data_property_rml(change,change_data, output_mappings):
     """
         Removes the data property indicated in the change as property from its domain. For a change in the predicate object map the domain, property and range additions are needed.
         Args:
@@ -533,7 +533,7 @@ def remove_data_property(change,change_data, output_mappings):
 
 # -------------------------------------------------------------------------------------------------------------
 
-def deprecate_entity(change,change_data, output_mappings, deprecated_mappings,ontology):
+def deprecate_entity_rml(change,change_data, output_mappings, deprecated_mappings,ontology):
     """
        Deprecates an entity in the knowledge graph by removing its triples map and its subject.
        Args:
@@ -541,7 +541,7 @@ def deprecate_entity(change,change_data, output_mappings, deprecated_mappings,on
     """
     query = f' SELECT DISTINCT ?entity WHERE {{ ' \
             f' <{change}> {OCH_DEPRECATED_ENTITY} ?entity. }}'
-    print(query)
+    #print(query)
     for result in change_data.query(query):
         entity = result["entity"]
         query = f' SELECT DISTINCT ?type WHERE {{ ' \
@@ -777,7 +777,7 @@ def deprecate_entity(change,change_data, output_mappings, deprecated_mappings,on
                         f'     OPTIONAL {{ ?objectMap {R2RML_DATATYPE} ?range}}  }} . }}'
                 output_mappings.update(query)
 
-def revoke_deprecate(change, change_data, output_mappings, deprecated_mappings, ontology):
+def revoke_deprecate_entity_rml(change, change_data, output_mappings, deprecated_mappings, ontology):
     """
        Reverts the deprecation of an entity in the knowledge graph by restoring its triples map and its subject from deprecated_mappings.
        Args:
@@ -935,3 +935,198 @@ def rename_entity(change, change_data, output_mappings):
                         f'   FILTER(?s != ?s_new || ?p != ?p_new || ?o != ?o_new) ' \
                         f' }}'
         output_mappings.update(update_query)
+
+#---------------------------------------SHACL CHANGES-------------------------------------------------------------
+
+
+def deprecate_entity_shacl(change,change_data,output_shacl): 
+    """
+       Deprecates an entity in the SHACL shape by adding the "sh:deactivated true" to the corresponding shape.
+       Args:
+           change: the URI of the change which needs to be of the type deprecate_entity 
+    """
+    query = f' SELECT DISTINCT ?entity WHERE {{ ' \
+            f' <{change}> {OCH_DEPRECATED_ENTITY} ?entity. }}'
+    #print(query)
+    for result in change_data.query(query):
+        entity = result["entity"]
+        query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}> '
+            f' INSERT {{ '
+            f'     ?shape {SHACL_DEACTIVATED} true . '
+            f' }} '
+            f' WHERE {{ '
+            f'     {{ '
+            f'         ?shape a {SHACL_NODE_SHAPE} ; '
+            f'                {SHACL_TARGET_CLASS} <{entity}> . '
+            f'     }} '
+            f'     UNION '
+            f'     {{ '
+            f'         ?shape {SHACL_PATH} <{entity}> . '
+            f'     }} '
+            f'     FILTER NOT EXISTS {{ ?shape {SHACL_DEACTIVATED} true }} '
+            f' }}'
+        )
+        #print(query)
+        output_shacl.update(query)
+
+#-----------------------------------------------------------------------------------------------------------------
+
+def revoke_deprecate_entity_shacl(change,change_data,output_shacl): 
+    """
+       Revokes the deprecation of an entity in the SHACL shape by removing the "sh:deactivated true" from the corresponding shape.
+       Args:
+           change: the URI of the change which needs to be of the type revoke_deprecate_entity 
+    """
+    query = f' SELECT DISTINCT ?entity WHERE {{ ' \
+            f' <{change}> {OCH_UNDEPRECATED_ELEMENT} ?entity. }}'
+    #print(query)
+    for result in change_data.query(query):
+        entity = result["entity"]
+        query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}> '
+            f' DELETE {{ '
+            f'     ?shape {SHACL_DEACTIVATED} true . '
+            f' }} '
+            f' WHERE {{ '
+            f'     {{ '
+            f'         ?shape a {SHACL_NODE_SHAPE} ; '
+            f'                {SHACL_TARGET_CLASS} <{entity}> . '
+            f'     }} '
+            f'     UNION '
+            f'     {{ '
+            f'         ?shape {SHACL_PATH} <{entity}> . '
+            f'     }} '
+            f' }}'
+        )
+        #print(query)
+        output_shacl.update(query)
+
+#-----------------------------------------------------------------------------------------------------------------
+
+def add_class_shacl(change, change_data, output_shapes):
+    """
+    Adds a class defined in the change KG into the shacl shape. This takes the form of adding NodeShape with the class as targetClass.
+    Args:
+        change: the URI of the change which needs to be of the type AddClass
+    Returns:
+        the output_shapes updated with a new class
+    """
+    select_change = f' SELECT DISTINCT ?class WHERE {{' \
+                    f' <{change}> {OCH_ADDED_CLASS} ?class .}} '
+
+    for result in change_data.query(select_change):
+        added_class = result["class"]
+        insert_class_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' INSERT DATA {{ '
+            f'   <{EXAMPLE_URI}{added_class.split("#")[1]}Shape> '
+            f'     a {SHACL_NODE_SHAPE} ; '
+            f'     {SHACL_TARGET_CLASS} <{added_class}> ; '
+            f' }}'
+        )
+        output_shapes.update(insert_class_query)
+
+def remove_class_shacl(change, change_data, output_mappings):
+    """
+    Removes a class defined in the change KG from the SHACL shape. This deletes the NodeShape with the class as targetClass and all related property shapes and nested shapes.
+    Args:
+        change: the URI of the change which needs to be of the type RemoveClass
+    Returns:
+        the output_shapes updated with the class and its related shapes removed
+    """
+    select_change = f' SELECT DISTINCT ?class WHERE {{' \
+                    f' <{change}> {OCH_DELETED_CLASS} ?class .}} '
+    
+    for result in change_data.query(select_change):
+        removed_class = result["class"]
+        delete_class_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>\n'
+            f' PREFIX {RDF_PREFIX}: <{RDF_URI}>\n'
+            f' DELETE {{\n'
+            f'   ?shape ?p ?o .\n'
+            f'   ?propShape ?pp ?po .\n'
+            f'   ?list ?lp ?lo .\n'
+            f'   ?listItem ?listItemP ?listItemO .\n'
+            f'   ?restNode ?restP ?restO .\n'
+            f' }}\n'
+            f' WHERE {{\n'
+            f'   ?shape a {SHACL_NODE_SHAPE} ;\n'
+            f'          {SHACL_TARGET_CLASS} <{removed_class}> ;\n'
+            f'          ?p ?o .\n'
+            f'   OPTIONAL {{\n'
+            f'     ?shape {SHACL_PROPERTY_SHAPE} ?propShape .\n'
+            f'     FILTER (isBlank(?propShape))\n'
+            f'     ?propShape ?pp ?po .\n'
+            f'     OPTIONAL {{\n'
+            f'       ?propShape ?listPred ?list .\n'
+            f'       FILTER(?listPred IN ({SHACL_IN}, {SHACL_OR}, {SHACL_AND}, {SHACL_XONE}))\n'
+            f'       ?list {RDF_REST}*/{RDF_FIRST} ?listItem .\n'
+            f'       ?list ?lp ?lo .\n'
+            f'       OPTIONAL {{ ?listItem ?listItemP ?listItemO . }}\n'
+            f'       ?list {RDF_REST}* ?restNode .\n'
+            f'       ?restNode ?restP ?restO .\n'
+            f'     }}\n'
+            f'   }}\n'
+            f' }}'
+        )
+        #print(delete_class_query)
+        output_mappings.update(delete_class_query)
+
+
+def add_super_class_shacl(change, change_data, output_shapes):
+    """
+    Adds a subclass to the SHACL NodeShape of the superclass by inserting the subclas as an additional sh:targetClass.
+    Args:
+        change: the URI of the change which needs to be of the type add_sub_class
+    Returns:
+        The output_shapes updated with the NodeShape of the superclass including the subclass as targetClass.
+    """
+    query = (
+        f' SELECT DISTINCT ?super_class ?sub_class WHERE {{ '
+        f'   <{change}> {OCH_ADD_SUBCLASS_SOURCE} ?sub_class. '
+        f'   <{change}> {OCH_ADD_SUBCLASS_TARGET} ?super_class. }}'
+    )
+    for result in change_data.query(query):
+        sub_class = result["sub_class"]
+        super_class = result["super_class"]
+        insert_super_class_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' INSERT {{ '
+            f'   ?shape {SHACL_TARGET_CLASS} <{sub_class}> . '
+            f' }} '
+            f' WHERE {{ '
+            f'   ?shape a {SHACL_NODE_SHAPE} ; '
+            f'          {SHACL_TARGET_CLASS} <{super_class}> . '
+            f'   FILTER NOT EXISTS {{ ?shape {SHACL_TARGET_CLASS} <{sub_class}> }} '
+            f' }}'
+        )
+        output_shapes.update(insert_super_class_query)
+
+def remove_super_class_shacl(change, change_data, output_shapes):
+    """
+    Removes a subclass from the SHACL NodeShape of the superclass by deleting the subclass from sh:targetClass.
+    Args:
+        change: the URI of the change which needs to be of the type add_sub_class
+    Returns:
+        The output_shapes updated with the NodeShape of the superclass not including the subclass as targetClass.
+    """
+    query = (
+        f' SELECT DISTINCT ?super_class ?sub_class WHERE {{ '
+        f'   <{change}> {OCH_REMOVE_SUBCLASS_SOURCE} ?sub_class. '
+        f'   <{change}> {OCH_REMOVE_SUBCLASS_TARGET} ?super_class. }}'
+    )
+    for result in change_data.query(query):
+        sub_class = result["sub_class"]
+        super_class = result["super_class"]
+        remove_super_class_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' DELETE {{ '
+            f'   ?shape {SHACL_TARGET_CLASS} <{sub_class}> . '
+            f' }} '
+            f' WHERE {{ '
+            f'   ?shape a {SHACL_NODE_SHAPE} ; '
+            f'          {SHACL_TARGET_CLASS} <{super_class}>, <{sub_class}> . '
+            f' }}'
+        )
+        output_shapes.update(remove_super_class_query)

@@ -1,0 +1,22 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX ex: <http://example.org/>
+
+INSERT {
+  ?shape sh:targetClass ?otherClass .
+  ?shape prov:wasDerivedFrom ?originalClass .
+}
+WHERE {
+  VALUES (?originalClass ?otherClass) {
+    (ex:Person ex:Human)
+    (ex:Human ex:Person)
+  }
+
+  ?shape a sh:NodeShape ;
+         sh:targetClass ?originalClass .
+         
+  FILTER NOT EXISTS {
+    ?shape sh:targetClass ?otherClass .
+  }
+}
+
