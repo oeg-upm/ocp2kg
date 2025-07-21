@@ -101,6 +101,9 @@ SHACL_IN = f'{SHACL_PREFIX}:in'
 SHACL_OR = f'{SHACL_PREFIX}:or'
 SHACL_AND = f'{SHACL_PREFIX}:and'
 SHACL_XONE = f'{SHACL_PREFIX}:xone'
+SHACL_SPARQL = f'{SHACL_PREFIX}:sparql'
+SHACL_SPARQL_CONSTRAINT = f'{SHACL_PREFIX}:SPARQLConstraint'
+SHACL_SPARQL_SELECT = f'{SHACL_PREFIX}:select'
 
 ##############################################################################
 #############################   D2RQ CONSTANTS  ##############################
@@ -143,6 +146,18 @@ OCH_ADD_SUBCLASS_TARGET = f'{OCH_PREFIX}:targetAddSubClass'
 OCH_REMOVE_SUBCLASS_SOURCE = f'{OCH_PREFIX}:sourceRemoveSubClass'
 OCH_REMOVE_SUBCLASS_TARGET = f'{OCH_PREFIX}:targetRemoveSubClass'
 
+OCH_ADD_EQUIVALENT_CLASS_SOURCE = f'{OCH_PREFIX}:sourceAddEquivalentClass' 
+OCH_ADD_EQUIVALENT_CLASS_TARGET = f'{OCH_PREFIX}:targetAddEquivalentClass'
+
+OCH_REMOVE_EQUIVALENT_CLASS_SOURCE = f'{OCH_PREFIX}:sourceRemoveEquivalentClass'
+OCH_REMOVE_EQUIVALENT_CLASS_TARGET = f'{OCH_PREFIX}:targetRemoveEquivalentClass'
+
+OCH_ADD_DISJOINT_CLASS_SOURCE = f'{OCH_PREFIX}:sourceAddDisjointClass'
+OCH_ADD_DISJOINT_CLASS_TARGET = f'{OCH_PREFIX}:targetAddDisjointClass'
+
+OCH_REMOVE_DISJOINT_CLASS_SOURCE = f'{OCH_PREFIX}:sourceRemoveDisjointClass'
+OCH_REMOVE_DISJOINT_CLASS_TARGET = f'{OCH_PREFIX}:targetRemoveDisjointClass'
+
 OCH_ADDED_OBJECT_PROPERTY = f'{OCH_PREFIX}:addedObjectProperty'
 
 OCH_ADDED_DATA_PROPERTY = f'{OCH_PREFIX}:addedDataProperty'
@@ -165,6 +180,11 @@ OCH_DEPRECATED_ENTITY = f'{OCH_PREFIX}:deprecatedEntity'
 OCH_UNDEPRECATED_ELEMENT= f'{OCH_PREFIX}:undeprecatedElement'
 OCH_OLD_NAME = f'{OCH_PREFIX}:outdatedEntityName'
 OCH_NEW_NAME = f'{OCH_PREFIX}:renamedEntityName'
+OCH_ADD_EQUIVALENT_CLASS = f'{OCH_PREFIX}:AddEquivalentClass'
+OCH_REMOVE_EQUIVALENT_CLASS = f'{OCH_PREFIX}:RemoveEquivalentClass'
+OCH_ADD_DISJOINT_CLASS = f'{OCH_PREFIX}:AddDisjointClass'
+OCH_REMOVE_DISJOINT_CLASS = f'{OCH_PREFIX}:RemoveDisjointClass'
+
 
 ##############################################################################
 #############################  RDFS&OWL CONSTANTS  ###########################
@@ -178,6 +198,9 @@ OWL_OBJECT_PROPERTY_URI = 'http://www.w3.org/2002/07/owl#ObjectProperty'
 RDFS_DOMAIN = 'rdfs:domain'
 RDFS_RANGE = 'rdfs:range'
 RDFS_SUBCLASS = 'rdfs:subClassOf'
+PROV_PREFIX = 'prov'
+PROV_URI = 'http://www.w3.org/ns/prov#'
+PROV_WAS_DERIVED_FROM = f'{PROV_PREFIX}:wasDerivedFrom'
 
 logger = logging.getLogger(__name__)
 coloredlogs.install(level='DEBUG', fmt='%(asctime)s,%(msecs)03d | %(levelname)s: %(message)s')

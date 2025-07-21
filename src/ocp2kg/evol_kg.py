@@ -1130,3 +1130,159 @@ def remove_super_class_shacl(change, change_data, output_shapes):
             f' }}'
         )
         output_shapes.update(remove_super_class_query)
+
+def add_equivalent_class_shacl(change, change_data, output_shapes):
+    """
+    Adds an equivalent class to the SHACL NodeShape of the class by inserting the equivalent class as an additional sh:targetClass.
+    Args:
+        change: the URI of the change which needs to be of the type add_equivalent_class
+    Returns:
+        The output_shapes updated with the NodeShape of the class including the equivalent class as targetClass.
+    """
+    query = (
+        f' SELECT DISTINCT ?source_class ?target_class WHERE {{ '
+        f'   <{change}> {OCH_ADD_EQUIVALENT_CLASS_SOURCE} ?source_class. '
+        f'   <{change}> {OCH_ADD_EQUIVALENT_CLASS_TARGET} ?target_class. }}'
+    )
+    for result in change_data.query(query):
+        source_class = result["source_class"]
+        target_class = result["target_class"]
+        insert_equivalent_class_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' PREFIX {PROV_PREFIX}: <{PROV_URI}>'
+            f' INSERT {{ '
+            f'   ?shape {SHACL_TARGET_CLASS} ?otherClass . '
+            f'   ?shape {PROV_WAS_DERIVED_FROM} ?originalClass . '
+            f' }} '
+            f' WHERE {{ '
+            f'   ?shape a {SHACL_NODE_SHAPE} ; '
+            f'          {SHACL_TARGET_CLASS} ?originalClass . '
+            f'     VALUES (?originalClass ?otherClass) {{ '
+            f'         (<{source_class}> <{target_class}>) '
+            f'         (<{target_class}> <{source_class}>) '
+            f'     }} '
+            f'   FILTER NOT EXISTS {{ ?shape {SHACL_TARGET_CLASS} ?otherClass }} '
+            f' }}'
+        )
+        #print(insert_equivalent_class_query)
+        output_shapes.update(insert_equivalent_class_query)
+
+def remove_equivalent_class_shacl(change, change_data, output_shapes):
+    """
+    Removes an equivalent class from the SHACL NodeShape of the class by deleting the equivalent class from the sh:targetClass.
+    Args:
+        change: the URI of the change which needs to be of the type remove_equivalent_class
+    Returns:
+        The output_shapes updated with the NodeShape of the class excluding the equivalent class as targetClass.
+    """
+    query = (
+        f' SELECT DISTINCT ?source_class ?target_class WHERE {{ '
+        f'   <{change}> {OCH_REMOVE_EQUIVALENT_CLASS_SOURCE} ?source_class. '
+        f'   <{change}> {OCH_REMOVE_EQUIVALENT_CLASS_TARGET} ?target_class. }}'
+    )
+    for result in change_data.query(query):
+        source_class = result["source_class"]
+        target_class = result["target_class"]
+        delete_equivalent_class_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>\n'
+            f' PREFIX {PROV_PREFIX}: <{PROV_URI}>\n'
+            f' DELETE {{\n'
+            f'   ?shape {SHACL_TARGET_CLASS} ?otherClass .\n'
+            f'   ?shape {PROV_WAS_DERIVED_FROM} ?originalClass .\n'
+            f' }}\n'
+            f' WHERE {{\n'
+            f'   ?shape a {SHACL_NODE_SHAPE} ;\n'
+            f'          {SHACL_TARGET_CLASS} ?originalClass, ?otherClass ;\n'
+            f'          {PROV_WAS_DERIVED_FROM} ?originalClass .\n'
+            f'   VALUES (?originalClass ?otherClass) {{\n'
+            f'     (<{source_class}> <{target_class}>)\n'
+            f'     (<{target_class}> <{source_class}>)\n'
+            f'   }}\n'
+            f' }}'
+        )
+        #print(delete_equivalent_class_query)
+        output_shapes.update(delete_equivalent_class_query)
+
+
+def add_disjoint_class_shacl(change, change_data, output_shapes):
+    """
+    Adds a disjoint class restriction to the SHACL NodeShape via SHACL-SPARQL query.
+    Args:
+        change: the URI of the change which needs to be of the type add_disjoint_class
+    Returns:
+        The output_shapes updated with the constraints that enforce the disjointness of the classes.
+    """
+    query = (
+        f' SELECT DISTINCT ?source_class ?target_class WHERE {{ '
+        f'   <{change}> {OCH_ADD_DISJOINT_CLASS_SOURCE} ?source_class. '
+        f'   <{change}> {OCH_ADD_DISJOINT_CLASS_TARGET} ?target_class. }}'
+    )
+    for result in change_data.query(query):
+        source_class = result["source_class"]
+        target_class = result["target_class"]
+        add_disjoint_class_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>\n'
+            f' INSERT {{\n'
+            f'   ?shapeA {SHACL_SPARQL} [\n'
+            f'     a {SHACL_SPARQL_CONSTRAINT} ;\n'
+            f'     {SHACL_SPARQL_SELECT} """ SELECT ?this WHERE {{ ?this a <{target_class}> .}}"""\n'
+            f'   ] .\n'
+            f'   ?shapeB {SHACL_SPARQL} [\n'
+            f'     a {SHACL_SPARQL_CONSTRAINT} ;\n'
+            f'     {SHACL_SPARQL_SELECT} """ SELECT ?this WHERE {{ ?this a <{source_class}> .}}"""\n'
+            f'   ] .\n'
+            f' }}\n'
+            f' WHERE {{\n'
+            f'   OPTIONAL {{ ?shapeA a {SHACL_NODE_SHAPE} ; {SHACL_TARGET_CLASS} <{source_class}> . }}\n'
+            f'   OPTIONAL {{ ?shapeB a {SHACL_NODE_SHAPE} ; {SHACL_TARGET_CLASS} <{target_class}> . }}\n'
+            f'   FILTER NOT EXISTS {{ ?shapeA {SHACL_SPARQL} ?c1 . ?shapeB {SHACL_SPARQL} ?c2 . }}\n'
+            f' }}'
+        )
+        #print(add_disjoint_class_query)
+        output_shapes.update(add_disjoint_class_query)
+
+def remove_disjoint_class_shacl(change, change_data, output_shapes):
+    """
+    Removes a disjoint class restriction from the SHACL NodeShape via SHACL-SPARQL query.
+    Args:
+        change: the URI of the change which needs to be of the type remove_disjoint_class
+    Returns:
+        The output_shapes updated without the constraints that enforce the disjointness of the classes.
+    """
+    query = (
+        f' SELECT DISTINCT ?source_class ?target_class WHERE {{ '
+        f'   <{change}> {OCH_REMOVE_DISJOINT_CLASS_SOURCE} ?source_class. '
+        f'   <{change}> {OCH_REMOVE_DISJOINT_CLASS_TARGET} ?target_class. }}'
+    )
+    for result in change_data.query(query):
+        source_class = result["source_class"]
+        target_class = result["target_class"]
+        remove_disjoint_class_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>\n'
+            f' DELETE {{\n'
+            f'   ?shapeA {SHACL_SPARQL} ?sparqlA .\n'
+            f'   ?sparqlA a {SHACL_SPARQL_CONSTRAINT} ;\n'
+            f'            {SHACL_SPARQL_SELECT} """ SELECT ?this WHERE {{ ?this a <{target_class}> .}}""" .\n'
+            f'   ?shapeB {SHACL_SPARQL} ?sparqlB .\n'
+            f'   ?sparqlB a {SHACL_SPARQL_CONSTRAINT} ;\n'
+            f'            {SHACL_SPARQL_SELECT} """ SELECT ?this WHERE {{ ?this a <{source_class}> .}}""" .\n'
+            f' }}\n'
+            f' WHERE {{\n'
+            f'   OPTIONAL {{\n'
+            f'     ?shapeA a {SHACL_NODE_SHAPE} ;\n'
+            f'             {SHACL_TARGET_CLASS} <{source_class}> ;\n'
+            f'             {SHACL_SPARQL} ?sparqlA .\n'
+            f'     ?sparqlA a {SHACL_SPARQL_CONSTRAINT} ;\n'
+            f'              {SHACL_SPARQL_SELECT} """ SELECT ?this WHERE {{ ?this a <{target_class}> .}}""" .\n'
+            f'   }}\n'
+            f'   OPTIONAL {{\n'
+            f'     ?shapeB a {SHACL_NODE_SHAPE} ;\n'
+            f'             {SHACL_TARGET_CLASS} <{target_class}> ;\n'
+            f'             {SHACL_SPARQL} ?sparqlB .\n'
+            f'     ?sparqlB a {SHACL_SPARQL_CONSTRAINT} ;\n'
+            f'              {SHACL_SPARQL_SELECT} """ SELECT ?this WHERE {{ ?this a <{source_class}> .}}""" .\n'
+            f'   }}\n'
+            f' }}'
+        )
+        print(remove_disjoint_class_query)
+        output_shapes.update(remove_disjoint_class_query)

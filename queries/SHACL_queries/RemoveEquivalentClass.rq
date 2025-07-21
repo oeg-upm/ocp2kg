@@ -1,0 +1,18 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX ex: <http://example.org/>
+
+DELETE {
+  ?shape sh:targetClass ?otherClass .
+  ?shape prov:wasDerivedFrom ?originalClass .
+}
+WHERE {
+  ?shape a sh:NodeShape ;
+         sh:targetClass ?originalClass , ?otherClass ;
+         prov:wasDerivedFrom ?originalClass .
+
+  VALUES (?originalClass ?otherClass) {
+    (ex:Person ex:Human)
+    (ex:Human ex:Person)
+  }
+}
