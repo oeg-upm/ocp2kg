@@ -104,6 +104,11 @@ SHACL_XONE = f'{SHACL_PREFIX}:xone'
 SHACL_SPARQL = f'{SHACL_PREFIX}:sparql'
 SHACL_SPARQL_CONSTRAINT = f'{SHACL_PREFIX}:SPARQLConstraint'
 SHACL_SPARQL_SELECT = f'{SHACL_PREFIX}:select'
+SHACL_CLASS = f'{SHACL_PREFIX}:class'
+SHACL_PROPERTY = f'{SHACL_PREFIX}:property'
+SHACL_DATATYPE = f'{SHACL_PREFIX}:datatype'
+SHACL_NOT = f'{SHACL_PREFIX}:not'
+SHACL_MAX_COUNT = f'{SHACL_PREFIX}:maxCount'
 
 ##############################################################################
 #############################   D2RQ CONSTANTS  ##############################
@@ -185,16 +190,32 @@ OCH_REMOVE_EQUIVALENT_CLASS = f'{OCH_PREFIX}:RemoveEquivalentClass'
 OCH_ADD_DISJOINT_CLASS = f'{OCH_PREFIX}:AddDisjointClass'
 OCH_REMOVE_DISJOINT_CLASS = f'{OCH_PREFIX}:RemoveDisjointClass'
 
+OCH_ADD_CHARACTERISTIC = f'{OCH_PREFIX}:AddCharacteristic'
+OCH_REMOVE_CHARACTERISTIC = f'{OCH_PREFIX}:RemoveCharacteristic'
+OCH_ADDED_CHARACTERISTIC = f'{OCH_PREFIX}:addedCharacteristic'
+OCH_REMOVED_CHARACTERISTIC = f'{OCH_PREFIX}:removedCharacteristic'
+OCH_ADDED_CHARACTERISTIC_TO_PROPERTY = f'{OCH_PREFIX}:addedCharacteristicToProperty'
+OCH_REMOVED_CHARACTERISTIC_FROM_PROPERTY = f'{OCH_PREFIX}:addedCharacteristicFromProperty'
 
 ##############################################################################
 #############################  RDFS&OWL CONSTANTS  ###########################
 ##############################################################################
-OWL_CLASS = 'owl:Class'
+OWL_PREFIX = 'owl'
+OWL_URI = 'http://www.w3.org/2002/07/owl#'
+OWL_CLASS = '{OWL_PREFIX}:Class'
 OWL_CLASS_URI = 'http://www.w3.org/2002/07/owl#Class'
-OWL_DATA_PROPERTY = 'owl:DatatypeProperty'
+OWL_DATA_PROPERTY = f'{OWL_PREFIX}:DatatypeProperty'
 OWL_DATA_PROPERTY_URI = 'http://www.w3.org/2002/07/owl#DatatypeProperty'
-OWL_OBJECT_PROPERTY = 'owl:ObjectProperty'
+OWL_OBJECT_PROPERTY = f'{OWL_PREFIX}:ObjectProperty'
 OWL_OBJECT_PROPERTY_URI = 'http://www.w3.org/2002/07/owl#ObjectProperty'
+OWL_FUNCTIONAL_PROPERTY_URI = f'{OWL_URI}FunctionalProperty'
+OWL_SYMMETRIC_PROPERTY = f'{OWL_PREFIX}:SymmetricProperty'
+OWL_ASYMMETRIC_PROPERTY = f'{OWL_PREFIX}:AsymmetricProperty'
+OWL_REFLEXIVE_PROPERTY = f'{OWL_PREFIX}:ReflexiveProperty'
+OWL_IRREFLEXIVE_PROPERTY = f'{OWL_PREFIX};IrreflexiveProperty'
+OWL_INVERSE_FUNCTIONAL_PROPERTY = f'{OWL_PREFIX}:InverseFunctionalProperty'
+OWL_TRANSITIVE_PROPERTY = f'{OWL_PREFIX}:TransitiveProperty'
+
 RDFS_DOMAIN = 'rdfs:domain'
 RDFS_RANGE = 'rdfs:range'
 RDFS_SUBCLASS = 'rdfs:subClassOf'

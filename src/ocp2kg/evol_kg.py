@@ -1223,20 +1223,15 @@ def add_disjoint_class_shacl(change, change_data, output_shapes):
         add_disjoint_class_query = (
             f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>\n'
             f' INSERT {{\n'
-            f'   ?shapeA {SHACL_SPARQL} [\n'
-            f'     a {SHACL_SPARQL_CONSTRAINT} ;\n'
-            f'     {SHACL_SPARQL_SELECT} """ SELECT ?this WHERE {{ ?this a <{target_class}> .}}"""\n'
-            f'   ] .\n'
-            f'   ?shapeB {SHACL_SPARQL} [\n'
-            f'     a {SHACL_SPARQL_CONSTRAINT} ;\n'
-            f'     {SHACL_SPARQL_SELECT} """ SELECT ?this WHERE {{ ?this a <{source_class}> .}}"""\n'
-            f'   ] .\n'
+            f'    ?sourceShape {SHACL_NOT} [ {SHACL_CLASS} <{target_class}> ] .\n'
+            f'    ?targetShape {SHACL_NOT} [ {SHACL_CLASS} <{source_class}> ] .\n'
             f' }}\n'
             f' WHERE {{\n'
-            f'   OPTIONAL {{ ?shapeA a {SHACL_NODE_SHAPE} ; {SHACL_TARGET_CLASS} <{source_class}> . }}\n'
-            f'   OPTIONAL {{ ?shapeB a {SHACL_NODE_SHAPE} ; {SHACL_TARGET_CLASS} <{target_class}> . }}\n'
-            f'   FILTER NOT EXISTS {{ ?shapeA {SHACL_SPARQL} ?c1 . ?shapeB {SHACL_SPARQL} ?c2 . }}\n'
-            f' }}'
+            f'   ?sourceShape a {SHACL_NODE_SHAPE} ;\n'
+            f'     {SHACL_TARGET_CLASS} <{source_class}> .\n'
+            f'   ?targetShape a {SHACL_NODE_SHAPE} ;\n'
+            f'     {SHACL_TARGET_CLASS} <{target_class}> .\n'
+            f'}}'
         )
         #print(add_disjoint_class_query)
         output_shapes.update(add_disjoint_class_query)
@@ -1260,29 +1255,276 @@ def remove_disjoint_class_shacl(change, change_data, output_shapes):
         remove_disjoint_class_query = (
             f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>\n'
             f' DELETE {{\n'
-            f'   ?shapeA {SHACL_SPARQL} ?sparqlA .\n'
-            f'   ?sparqlA a {SHACL_SPARQL_CONSTRAINT} ;\n'
-            f'            {SHACL_SPARQL_SELECT} """ SELECT ?this WHERE {{ ?this a <{target_class}> .}}""" .\n'
-            f'   ?shapeB {SHACL_SPARQL} ?sparqlB .\n'
-            f'   ?sparqlB a {SHACL_SPARQL_CONSTRAINT} ;\n'
-            f'            {SHACL_SPARQL_SELECT} """ SELECT ?this WHERE {{ ?this a <{source_class}> .}}""" .\n'
+            f'    ?sourceShape {SHACL_NOT} ?propertyShapeSource.\n'
+            f'    ?propertyShapeSource {SHACL_CLASS} <{target_class}>.\n'
+            f'    ?targetShape {SHACL_NOT} ?propertyShapeTarget. \n'
+            f'    ?propertyShapeTarget {SHACL_CLASS} <{source_class}>.\n'
             f' }}\n'
             f' WHERE {{\n'
-            f'   OPTIONAL {{\n'
-            f'     ?shapeA a {SHACL_NODE_SHAPE} ;\n'
-            f'             {SHACL_TARGET_CLASS} <{source_class}> ;\n'
-            f'             {SHACL_SPARQL} ?sparqlA .\n'
-            f'     ?sparqlA a {SHACL_SPARQL_CONSTRAINT} ;\n'
-            f'              {SHACL_SPARQL_SELECT} """ SELECT ?this WHERE {{ ?this a <{target_class}> .}}""" .\n'
-            f'   }}\n'
-            f'   OPTIONAL {{\n'
-            f'     ?shapeB a {SHACL_NODE_SHAPE} ;\n'
-            f'             {SHACL_TARGET_CLASS} <{target_class}> ;\n'
-            f'             {SHACL_SPARQL} ?sparqlB .\n'
-            f'     ?sparqlB a {SHACL_SPARQL_CONSTRAINT} ;\n'
-            f'              {SHACL_SPARQL_SELECT} """ SELECT ?this WHERE {{ ?this a <{source_class}> .}}""" .\n'
-            f'   }}\n'
+            f'   ?sourceShape a {SHACL_NODE_SHAPE} ;\n'
+            f'     {SHACL_TARGET_CLASS} <{source_class}> .\n'
+            f'   ?targetShape a {SHACL_NODE_SHAPE} ;\n'
+            f'     {SHACL_TARGET_CLASS} <{target_class}> .\n'
+            f'    ?sourceShape {SHACL_NOT} ?propertyShapeSource.\n'
+            f'    ?propertyShapeSource {SHACL_CLASS} <{target_class}>.\n'
+            f'    ?targetShape {SHACL_NOT} ?propertyShapeTarget. \n'
+            f'    ?propertyShapeTarget {SHACL_CLASS} <{source_class}>.\n'
+            f'}}'
+        )
+        #print(remove_disjoint_class_query)
+        output_shapes.update(remove_disjoint_class_query)
+
+def add_object_property_shacl(change,change_data, output_shapes):
+    """
+       Adds an object property to the NodeShape indicated in the domain. For a full change in the Property Shape the domain, property and range additions are needed.  
+       Args:
+           change: the URI of the change which needs to be of the type addObjectProperty
+       Returns:
+           the output_shapes updated with the added predicate object maps. 
+    """
+    query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
+            f' <{change}> {OCH_ADDED_OBJECT_PROPERTY} ?property .' \
+            f' ?domainchange {OCH_ADDED_DOMAIN_TO_PROPERTY} ?property.' \
+            f' ?domainchange {OCH_ADDED_DOMAIN} ?domain.' \
+            f' ?rangechange {OCH_ADDED_RANGE_TO_PROPERTY} ?property.' \
+            f' ?rangechange {OCH_ADDED_OBJECT_RANGE} ?range. }}'
+
+    for result in change_data.query(query):
+        property_domain = result["domain"]
+        property_predicate = result["property"]
+        property_range = result["range"]
+
+        insert_object_property_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' INSERT {{ '
+            f'   ?nodeShape {SHACL_PROPERTY} [ '
+            f'     {SHACL_PATH} <{property_predicate}> ; '
+            f'     {SHACL_CLASS} <{property_range}> '
+            f'   ] . '
+            f' }} '
+            f' WHERE {{ '
+            f'   ?nodeShape a {SHACL_NODE_SHAPE} ; '
+            f'             {SHACL_TARGET_CLASS} <{property_domain}> . '
             f' }}'
         )
-        print(remove_disjoint_class_query)
-        output_shapes.update(remove_disjoint_class_query)
+        #print(insert_object_property_query)
+        output_shapes.update(insert_object_property_query)
+
+def remove_object_property_shacl(change, change_data, output_shapes):
+    """
+       Removes an object property from the NodeShape indicated in the domain. For a full change in the Property Shape the domain, property and range removals are needed.
+       Args:
+           change: the URI of the change which needs to be of the type removeObjectProperty
+       Returns:
+           the output_shapes updated with the property shape removed.
+    """
+    query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
+            f' <{change}> {OCH_REMOVED_OBJECT_PROPERTY} ?property .' \
+            f' ?domainchange {OCH_REMOVED_DOMAIN_TO_PROPERTY} ?property.' \
+            f' ?domainchange {OCH_REMOVED_DOMAIN} ?domain.' \
+            f' ?rangechange {OCH_REMOVED_RANGE_TO_PROPERTY} ?property.' \
+            f' ?rangechange {OCH_REMOVED_OBJECT_RANGE} ?range. }}'
+
+    for result in change_data.query(query):
+        property_domain = result["domain"]
+        property_predicate = result["property"]
+        property_range = result["range"]
+
+        # Remove property shape whether it is a blank node (sh:property) or a full PropertyShape (URI)
+        delete_object_property_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>\n'
+            f' DELETE {{\n'
+            f'   ?nodeShape {SHACL_PROPERTY} ?propertyShape .\n'
+            f'   ?propertyShape {SHACL_PATH} <{property_predicate}> ;\n'
+            f'                 {SHACL_CLASS} <{property_range}> .\n'
+            f'   ?propertyShape ?pp ?po .\n'
+            f'   ?list ?lp ?lo .\n'
+            f'   ?listItem ?listItemP ?listItemO .\n'
+            f'   ?restNode ?restP ?restO .\n'
+            f' }}\n'
+            f' WHERE {{\n'
+            f'   ?nodeShape a {SHACL_NODE_SHAPE} ;\n'
+            f'             {SHACL_TARGET_CLASS} <{property_domain}> ;\n'
+            f'             {SHACL_PROPERTY} ?propertyShape .\n'
+            f'   ?propertyShape {SHACL_PATH} <{property_predicate}> ;\n'
+            f'                 {SHACL_CLASS} <{property_range}> .\n'
+            f'   OPTIONAL {{ ?propertyShape ?pp ?po .\n'
+            f'   OPTIONAL {{\n'
+            f'       ?propertyShape ?listPred ?list .\n'
+            f'       FILTER(?listPred IN ({SHACL_IN}, {SHACL_OR}, {SHACL_AND}, {SHACL_XONE}))\n'
+            f'       ?list {RDF_REST}*/{RDF_FIRST} ?listItem .\n'
+            f'       ?list ?lp ?lo .\n'
+            f'       OPTIONAL {{ ?listItem ?listItemP ?listItemO . }}\n'
+            f'       ?list {RDF_REST}* ?restNode .\n'
+            f'       ?restNode ?restP ?restO .\n'
+            f'     }}\n'
+            f' }}\n'
+            f'}}'
+        )
+        #print(delete_object_property_query)
+        output_shapes.update(delete_object_property_query)
+
+def add_data_property_shacl(change, change_data, output_shapes):
+    """
+       Adds a data property to the NodeShape indicated in the domain. For a full change in the Property Shape the domain, property and range additions are needed.
+       Args:
+           change: the URI of the change which needs to be of the type addDataProperty
+       Returns:
+           the output_shapes updated with the added data property shape.
+    """
+    query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
+            f' <{change}> {OCH_ADDED_DATA_PROPERTY} ?property .' \
+            f' ?domainchange {OCH_ADDED_DOMAIN_TO_PROPERTY} ?property.' \
+            f' ?domainchange {OCH_ADDED_DOMAIN} ?domain.' \
+            f' ?rangechange {OCH_ADDED_RANGE_TO_PROPERTY} ?property.' \
+            f' ?rangechange {OCH_ADDED_DATA_RANGE} ?range. }}'
+
+    for result in change_data.query(query):
+        property_domain = result["domain"]
+        property_predicate = result["property"]
+        property_range = result["range"]
+
+        insert_data_property_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' INSERT {{ '
+            f'   ?nodeShape {SHACL_PROPERTY} [ '
+            f'     {SHACL_PATH} <{property_predicate}> ; '
+            f'     {SHACL_DATATYPE} <{property_range}> '
+            f'   ] . '
+            f' }} '
+            f' WHERE {{ '
+            f'   ?nodeShape a {SHACL_NODE_SHAPE} ; '
+            f'             {SHACL_TARGET_CLASS} <{property_domain}> . '
+            f' }}'
+        )
+        output_shapes.update(insert_data_property_query)
+
+def remove_data_property_shacl(change, change_data, output_shapes):
+    """
+       Removes a data property from the NodeShape indicated in the domain. For a full change in the Property Shape the domain, property and range removals are needed.
+       Args:
+           change: the URI of the change which needs to be of the type removeDataProperty
+       Returns:
+           the output_shapes updated with the data property shape removed.
+    """
+    query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
+            f' <{change}> {OCH_REMOVED_DATA_PROPERTY} ?property .' \
+            f' ?domainchange {OCH_REMOVED_DOMAIN_TO_PROPERTY} ?property.' \
+            f' ?domainchange {OCH_REMOVED_DOMAIN} ?domain.' \
+            f' ?rangechange {OCH_REMOVED_RANGE_TO_PROPERTY} ?property.' \
+            f' ?rangechange {OCH_REMOVED_DATA_RANGE} ?range. }}'
+
+    for result in change_data.query(query):
+        property_domain = result["domain"]
+        property_predicate = result["property"]
+        property_range = result["range"]
+
+        delete_data_property_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>\n'
+            f' DELETE {{\n'
+            f'   ?nodeShape {SHACL_PROPERTY} ?propertyShape .\n'
+            f'   ?propertyShape {SHACL_PATH} <{property_predicate}> ;\n'
+            f'                 {SHACL_DATATYPE} <{property_range}> .\n'
+            f'   ?propertyShape ?pp ?po .\n'
+            f'   ?list ?lp ?lo .\n'
+            f'   ?listItem ?listItemP ?listItemO .\n'
+            f'   ?restNode ?restP ?restO .\n'
+            f' }}\n'
+            f' WHERE {{\n'
+            f'   ?nodeShape a {SHACL_NODE_SHAPE} ;\n'
+            f'             {SHACL_TARGET_CLASS} <{property_domain}> ;\n'
+            f'             {SHACL_PROPERTY} ?propertyShape .\n'
+            f'   ?propertyShape {SHACL_PATH} <{property_predicate}> ;\n'
+            f'                 {SHACL_DATATYPE} <{property_range}> .\n'
+            f'   OPTIONAL {{ ?propertyShape ?pp ?po .\n'
+            f'   OPTIONAL {{\n'
+            f'       ?propertyShape ?listPred ?list .\n'
+            f'       FILTER(?listPred IN ({SHACL_IN}, {SHACL_OR}, {SHACL_AND}, {SHACL_XONE}))\n'
+            f'       ?list {RDF_REST}*/{RDF_FIRST} ?listItem .\n'
+            f'       ?list ?lp ?lo .\n'
+            f'       OPTIONAL {{ ?listItem ?listItemP ?listItemO . }}\n'
+            f'       ?list {RDF_REST}* ?restNode .\n'
+            f'       ?restNode ?restP ?restO .\n'
+            f'     }}\n'
+            f' }}\n'
+            f'}}'
+        )
+        output_shapes.update(delete_data_property_query)
+
+def add_characteristic_shacl(change, change_data, output_shapes):
+    """
+       Modifies the property shape corresponding to a given property to add restrictions based on the added characteristic.
+       Args:
+           change: the URI of the change which needs to be of the type addCharacteristic
+       Returns:
+           the output_shapes updated with the data property shape modified.
+    """
+    print("Entra en la función add_characteristic_shacl")
+    query = f' SELECT DISTINCT ?property ?characteristic WHERE {{ ' \
+            f' <{change}> {OCH_ADDED_CHARACTERISTIC_TO_PROPERTY} ?property ;' \
+            f'            {OCH_ADDED_CHARACTERISTIC} ?characteristic }}'
+    print(query)
+    for result in change_data.query(query):
+        property = result["property"]
+        characteristic = result["characteristic"]
+        print(f"Property: {property}, Characteristic: {characteristic}")
+        print(OWL_FUNCTIONAL_PROPERTY_URI)
+        # Add SHACL restrictions for property characteristics
+        if characteristic == URIRef(OWL_FUNCTIONAL_PROPERTY_URI):
+            print("Entra en la condición de OWL_FUNCTIONAL_PROPERTY")
+            # Functional property: sh:maxCount 1
+            insert_characteristic_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' INSERT {{ ?propertyShape {SHACL_MAX_COUNT} 1 }}'
+            f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
+            )
+            print(insert_characteristic_query)
+            output_shapes.update(insert_characteristic_query)
+        elif characteristic == OWL_SYMMETRIC_PROPERTY:
+            # Symmetric property: custom SHACL-SPARQL constraint
+            insert_characteristic_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' INSERT {{ ?propertyShape {SHACL_CONSTRAINT} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v . FILTER NOT EXISTS {{ ?v <{property}> $this }} }}" ] }}'
+            f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
+            )
+            output_shapes.update(insert_characteristic_query)
+        elif characteristic == OWL_ASYMMETRIC_PROPERTY:
+            # Asymmetric property: custom SHACL-SPARQL constraint
+            insert_characteristic_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' INSERT {{ ?propertyShape {SHACL_CONSTRAINT} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v . FILTER EXISTS {{ ?v <{property}> $this }} }}" ] }}'
+            f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
+            )
+            output_shapes.update(insert_characteristic_query)
+        elif characteristic == OWL_REFLEXIVE_PROPERTY:
+            # Reflexive property: custom SHACL-SPARQL constraint
+            insert_characteristic_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' INSERT {{ ?propertyShape {SHACL_CONSTRAINT} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SELECT} "SELECT $this WHERE {{ FILTER NOT EXISTS {{ $this <{property}> $this }} }}" ] }}'
+            f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
+            )
+            output_shapes.update(insert_characteristic_query)
+        elif characteristic == OWL_IRREFLEXIVE_PROPERTY:
+            # Irreflexive property: custom SHACL-SPARQL constraint
+            insert_characteristic_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' INSERT {{ ?propertyShape {SHACL_CONSTRAINT} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SELECT} "SELECT $this WHERE {{ $this <{property}> $this }}" ] }}'
+            f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
+            )
+            output_shapes.update(insert_characteristic_query)
+        elif characteristic == OWL_INVERSE_FUNCTIONAL_PROPERTY:
+            # Inverse functional property: sh:uniqueLang or custom constraint
+            insert_characteristic_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' INSERT {{ ?propertyShape {SHACL_CONSTRAINT} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SELECT} "SELECT ?value WHERE {{ ?s <{property}> ?value . FILTER(EXISTS {{ ?s2 <{property}> ?value . FILTER(?s2 != ?s) }}) }}" ] }}'
+            f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
+            )
+            output_shapes.update(insert_characteristic_query)
+        elif characteristic == OWL_TRANSITIVE_PROPERTY:
+            # Transitive property: custom SHACL-SPARQL constraint
+            insert_characteristic_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' INSERT {{ ?propertyShape {SHACL_CONSTRAINT} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v1 . ?v1 <{property}> ?v2 . FILTER NOT EXISTS {{ $this <{property}> ?v2 }} }}" ] }}'
+            f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
+            )
+            output_shapes.update(insert_characteristic_query)

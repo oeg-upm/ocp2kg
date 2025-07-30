@@ -4,6 +4,7 @@
 @prefix schema: <http://schema.org/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://myexampleuri.org/data#> .
 
 schema:PersonShape
     a sh:NodeShape ;
@@ -27,9 +28,9 @@ schema:PersonShape
         sh:node schema:AddressShape ;
     ] .
 
-schema:StudentShape
+schema:DogShape;
     a sh:NodeShape ;
-    sh:targetClass schema:Human.
+    sh:targetClass ex:Dog .
 
 
 schema:AddressShape

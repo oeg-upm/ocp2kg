@@ -1,0 +1,10 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX och: <http://w3id.org/def/och>
+PREFIX ex: <http://myexampleuri.org/data#>
+
+<http://myexampleuri/removeObjectProperty/testproperty> rdf:type och:RemoveObjectProperty .
+<http://myexampleuri/removeObjectProperty/testproperty> och:removedObjectProperty ex:testproperty .
+<http://myexampleuri/removeDomain/testdomain> och:removedDomainFromProperty ex:testproperty .
+<http://myexampleuri/removeDomain/testdomain> och:removedDomain ex:testdomain .
+<http://myexampleuri/removeRange/testrange> och:removedRangeFromProperty ex:testproperty .
+<http://myexampleuri/removeRange/testrange> och:removedObjectRange ex:testrange .

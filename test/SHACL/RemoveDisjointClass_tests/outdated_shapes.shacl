@@ -29,18 +29,16 @@ schema:PersonShape
         sh:path schema:address ;
         sh:node schema:AddressShape ;
     ] ;
-    sh:sparql [
-        a sh:SPARQLConstraint ;
-        sh:select """ SELECT ?this WHERE { ?this a <http://schema.org/Human> .}""" ;
-        ] .
+    sh:not [
+        sh:class ex:Dog ;
+    ] .
     
-schema:StudentShape
+schema:DogShape
     a sh:NodeShape ;
-    sh:targetClass schema:Human ;
-    sh:sparql [
-        a sh:SPARQLConstraint ;
-        sh:select """ SELECT ?this WHERE { ?this a <http://schema.org/Person> .}""" ;
-        ] .
+    sh:targetClass ex:Dog ;
+    sh:not [
+       sh:class schema:Person ;
+    ] .
     
 
 schema:AddressShape

@@ -4,8 +4,6 @@
 @prefix schema: <http://schema.org/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix ex: <http://myexampleuri.org/data#> .
-
 
 schema:PersonShape
     a sh:NodeShape ;
@@ -27,23 +25,4 @@ schema:PersonShape
     sh:property [
         sh:path schema:address ;
         sh:node schema:AddressShape ;
-    ] .
-
-schema:DogShape
-    a sh:NodeShape ;
-    sh:targetClass ex:Dog .
-
-
-schema:AddressShape
-    a sh:NodeShape ;
-    sh:closed true ;
-    sh:property [
-        sh:path schema:streetAddress ;
-        sh:datatype xsd:string ;
-    ] ;
-    sh:property [
-        sh:path schema:postalCode ;
-        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype xsd:integer ] ) ;
-        sh:minInclusive 10000 ;
-        sh:maxInclusive 99999 ;
     ] .

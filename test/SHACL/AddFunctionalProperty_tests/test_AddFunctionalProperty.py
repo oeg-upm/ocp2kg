@@ -8,11 +8,10 @@ if ruta_relativa not in sys.path:
     sys.path.insert(0, ruta_relativa)
 import ocp2kg
 
-class TestAddClassSH(unittest.TestCase):
+class TestAddFunctionalPropertySH(unittest.TestCase):
     
-    """Case 0: An OWL Class is added and its corresponding sh:NodeShape is added."""
-    def test_add_class00(self):
-        change_data = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'changes_AddClass.ttl'))
+    def test_add_FunctionalProperty00(self):
+        change_data = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'changes_AddFunctionalProperty.ttl'))
         old_shapes = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'outdated_shapes.shacl'))
         updated_mapping, updated_shapes =   ocp2kg.propagate(change_data, None, None, None, old_shapes)
         #updated_mapping.serialize(destination=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'output1.ttl'), format='turtle')
@@ -21,4 +20,4 @@ class TestAddClassSH(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-    print("Tests AddClass Passed for SHACL Shapes")
+    print("Tests AddFunctionalProperty Passed for SHACL Shapes")

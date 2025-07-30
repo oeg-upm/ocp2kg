@@ -4,5 +4,5 @@ PREFIX ex: <http://myexampleuri.org/data#>
 PREFIX schema: <http://schema.org/> 
 
 <http://myexampleuri/AddDisjointClass/testchange> rdf:type och:AddDisjointClass .
-<http://myexampleuri/AddDisjointClass/testchange> och:sourceAddDisjointClass schema:Human .
-<http://myexampleuri/AddDisjointClass/testchange> och:targetAddDisjointClass schema:Person .
+<http://myexampleuri/AddDisjointClass/testchange> och:sourceAddDisjointClass schema:Person .
+<http://myexampleuri/AddDisjointClass/testchange> och:targetAddDisjointClass ex:Dog .
