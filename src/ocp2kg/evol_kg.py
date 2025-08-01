@@ -1017,14 +1017,21 @@ def add_class_shacl(change, change_data, output_shapes):
 
     for result in change_data.query(select_change):
         added_class = result["class"]
+        if "#" in added_class:
+            class_local = added_class.split("#")[-1]
+        elif "/" in added_class:
+            class_local = added_class.split("/")[-1]
+        else:
+            class_local = added_class
         insert_class_query = (
             f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
             f' INSERT DATA {{ '
-            f'   <{EXAMPLE_URI}{added_class.split("#")[1]}Shape> '
+            f'   <{EXAMPLE_URI}{class_local}Shape> '
             f'     a {SHACL_NODE_SHAPE} ; '
             f'     {SHACL_TARGET_CLASS} <{added_class}> ; '
             f' }}'
         )
+        #print(insert_class_query)
         output_shapes.update(insert_class_query)
 
 def remove_class_shacl(change, change_data, output_mappings):
@@ -1233,7 +1240,7 @@ def add_disjoint_class_shacl(change, change_data, output_shapes):
             f'     {SHACL_TARGET_CLASS} <{target_class}> .\n'
             f'}}'
         )
-        #print(add_disjoint_class_query)
+        print(add_disjoint_class_query)
         output_shapes.update(add_disjoint_class_query)
 
 def remove_disjoint_class_shacl(change, change_data, output_shapes):
@@ -1293,14 +1300,19 @@ def add_object_property_shacl(change,change_data, output_shapes):
         property_domain = result["domain"]
         property_predicate = result["property"]
         property_range = result["range"]
-
+        if "#" in property_predicate:
+            property_local = property_predicate.split("#")[-1]
+        elif "/" in property_predicate:
+            property_local = property_predicate.split("/")[-1]
+        else:
+            property_local = property_predicate
         insert_object_property_query = (
             f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' PREFIX {EXAMPLE_PREFIX}: <{EXAMPLE_URI}>'
             f' INSERT {{ '
-            f'   ?nodeShape {SHACL_PROPERTY} [ '
-            f'     {SHACL_PATH} <{property_predicate}> ; '
-            f'     {SHACL_CLASS} <{property_range}> '
-            f'   ] . '
+            f'   ?nodeShape {SHACL_PROPERTY} {EXAMPLE_PREFIX}:{property_local}Shape . '
+            f'   {EXAMPLE_PREFIX}:{property_local}Shape  {SHACL_PATH} <{property_predicate}> ; '
+            f'     {SHACL_CLASS} <{property_range}> . '
             f' }} '
             f' WHERE {{ '
             f'   ?nodeShape a {SHACL_NODE_SHAPE} ; '
@@ -1383,20 +1395,26 @@ def add_data_property_shacl(change, change_data, output_shapes):
         property_domain = result["domain"]
         property_predicate = result["property"]
         property_range = result["range"]
-
+        if "#" in property_predicate:
+            property_local = property_predicate.split("#")[-1]
+        elif "/" in property_predicate:
+            property_local = property_predicate.split("/")[-1]
+        else:
+            property_local = property_predicate
         insert_data_property_query = (
             f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' PREFIX {EXAMPLE_PREFIX}: <{EXAMPLE_URI}>'
             f' INSERT {{ '
-            f'   ?nodeShape {SHACL_PROPERTY} [ '
-            f'     {SHACL_PATH} <{property_predicate}> ; '
-            f'     {SHACL_DATATYPE} <{property_range}> '
-            f'   ] . '
+            f'   ?nodeShape {SHACL_PROPERTY} {EXAMPLE_PREFIX}:{property_local}Shape . '
+            f'   {EXAMPLE_PREFIX}:{property_local}Shape  {SHACL_PATH} <{property_predicate}> ; '
+            f'     {SHACL_DATATYPE} <{property_range}> . '
             f' }} '
             f' WHERE {{ '
             f'   ?nodeShape a {SHACL_NODE_SHAPE} ; '
             f'             {SHACL_TARGET_CLASS} <{property_domain}> . '
             f' }}'
         )
+        print(insert_data_property_query)
         output_shapes.update(insert_data_property_query)
 
 def remove_data_property_shacl(change, change_data, output_shapes):
@@ -1449,6 +1467,7 @@ def remove_data_property_shacl(change, change_data, output_shapes):
             f' }}\n'
             f'}}'
         )
+        print(delete_data_property_query)
         output_shapes.update(delete_data_property_query)
 
 def add_characteristic_shacl(change, change_data, output_shapes):
@@ -1468,10 +1487,9 @@ def add_characteristic_shacl(change, change_data, output_shapes):
         property = result["property"]
         characteristic = result["characteristic"]
         print(f"Property: {property}, Characteristic: {characteristic}")
-        print(OWL_FUNCTIONAL_PROPERTY_URI)
         # Add SHACL restrictions for property characteristics
         if characteristic == URIRef(OWL_FUNCTIONAL_PROPERTY_URI):
-            print("Entra en la condición de OWL_FUNCTIONAL_PROPERTY")
+            #print("Entra en la condición de OWL_FUNCTIONAL_PROPERTY")
             # Functional property: sh:maxCount 1
             insert_characteristic_query = (
             f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
@@ -1480,51 +1498,184 @@ def add_characteristic_shacl(change, change_data, output_shapes):
             )
             print(insert_characteristic_query)
             output_shapes.update(insert_characteristic_query)
-        elif characteristic == OWL_SYMMETRIC_PROPERTY:
+        elif characteristic == URIRef(OWL_SYMMETRIC_PROPERTY_URI):
             # Symmetric property: custom SHACL-SPARQL constraint
             insert_characteristic_query = (
             f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
-            f' INSERT {{ ?propertyShape {SHACL_CONSTRAINT} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v . FILTER NOT EXISTS {{ ?v <{property}> $this }} }}" ] }}'
+            f' INSERT {{ ?propertyShape {SHACL_SPARQL} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v . FILTER NOT EXISTS {{ ?v <{property}> $this }} }}" ] }}'
             f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
             )
+            print(insert_characteristic_query)
             output_shapes.update(insert_characteristic_query)
-        elif characteristic == OWL_ASYMMETRIC_PROPERTY:
+        elif characteristic == URIRef(OWL_ASYMMETRIC_PROPERTY_URI):
             # Asymmetric property: custom SHACL-SPARQL constraint
             insert_characteristic_query = (
             f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
-            f' INSERT {{ ?propertyShape {SHACL_CONSTRAINT} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v . FILTER EXISTS {{ ?v <{property}> $this }} }}" ] }}'
+            f' INSERT {{ ?propertyShape {SHACL_SPARQL} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v . FILTER EXISTS {{ ?v <{property}> $this }} }}" ] }}'
             f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
             )
+            print(insert_characteristic_query)
             output_shapes.update(insert_characteristic_query)
-        elif characteristic == OWL_REFLEXIVE_PROPERTY:
+        elif characteristic == URIRef(OWL_REFLEXIVE_PROPERTY_URI):
             # Reflexive property: custom SHACL-SPARQL constraint
             insert_characteristic_query = (
             f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
-            f' INSERT {{ ?propertyShape {SHACL_CONSTRAINT} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SELECT} "SELECT $this WHERE {{ FILTER NOT EXISTS {{ $this <{property}> $this }} }}" ] }}'
+            f' INSERT {{ ?propertyShape {SHACL_SPARQL} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ FILTER NOT EXISTS {{ $this <{property}> $this }} }}" ] }}'
             f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
             )
+            print(insert_characteristic_query)
             output_shapes.update(insert_characteristic_query)
-        elif characteristic == OWL_IRREFLEXIVE_PROPERTY:
+        elif characteristic == URIRef(OWL_IRREFLEXIVE_PROPERTY_URI):
             # Irreflexive property: custom SHACL-SPARQL constraint
             insert_characteristic_query = (
             f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
-            f' INSERT {{ ?propertyShape {SHACL_CONSTRAINT} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SELECT} "SELECT $this WHERE {{ $this <{property}> $this }}" ] }}'
+            f' INSERT {{ ?propertyShape {SHACL_SPARQL} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> $this }}" ] }}'
             f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
             )
+            print(insert_characteristic_query)
             output_shapes.update(insert_characteristic_query)
-        elif characteristic == OWL_INVERSE_FUNCTIONAL_PROPERTY:
-            # Inverse functional property: sh:uniqueLang or custom constraint
+        elif characteristic == URIRef(OWL_INVERSE_FUNCTIONAL_PROPERTY_URI):
+            # Inverse functional property: sh:maxCount 1 on inverse path
+            # Use a blank node for the property shape and avoid using a URI for the shape
+            if "#" in property:
+                property_local = property.split("#")[-1]
+            elif "/" in property:
+                property_local = property.split("/")[-1]
+            else:
+                property_local = property
             insert_characteristic_query = (
-            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
-            f' INSERT {{ ?propertyShape {SHACL_CONSTRAINT} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SELECT} "SELECT ?value WHERE {{ ?s <{property}> ?value . FILTER(EXISTS {{ ?s2 <{property}> ?value . FILTER(?s2 != ?s) }}) }}" ] }}'
-            f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
+                f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+                f' PREFIX {EXAMPLE_PREFIX}: <{EXAMPLE_URI}>'
+                f' INSERT DATA {{ '
+                f'   {EXAMPLE_PREFIX}:{property_local}InvFunctShape a {SHACL_PROPERTY_SHAPE} ; '
+                f'      {SHACL_PATH} [ {SHACL_INVERSE_PATH} <{property}> ] ; '
+                f'      {SHACL_MAX_COUNT} 1 . '
+                f' }} '
             )
+            print(insert_characteristic_query)
             output_shapes.update(insert_characteristic_query)
         elif characteristic == OWL_TRANSITIVE_PROPERTY:
             # Transitive property: custom SHACL-SPARQL constraint
             insert_characteristic_query = (
             f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
-            f' INSERT {{ ?propertyShape {SHACL_CONSTRAINT} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v1 . ?v1 <{property}> ?v2 . FILTER NOT EXISTS {{ $this <{property}> ?v2 }} }}" ] }}'
+            f' INSERT {{ ?propertyShape {SHACL_SPARQL} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v1 . ?v1 <{property}> ?v2 . FILTER NOT EXISTS {{ $this <{property}> ?v2 }} }}" ] }}'
             f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
             )
             output_shapes.update(insert_characteristic_query)
+
+def remove_characteristic_shacl(change, change_data, output_shapes):
+    #print("Entra en la función remove_characteristic_shacl")
+    """
+       Modifies the property shape corresponding to a given property to remove restrictions based on the removed characteristic.
+       Args:
+           change: the URI of the change which needs to be of the type removeCharacteristic
+       Returns:
+           the output_shapes updated with the data property shape modified.
+    """
+    query = f' SELECT DISTINCT ?property ?characteristic WHERE {{ ' \
+            f' <{change}> {OCH_REMOVED_CHARACTERISTIC_FROM_PROPERTY} ?property ;' \
+            f'            {OCH_REMOVED_CHARACTERISTIC} ?characteristic }}'
+    print(query)
+    for result in change_data.query(query):
+        property = result["property"]
+        characteristic = result["characteristic"]
+        print(f"Property: {property}, Characteristic: {characteristic}")
+        # Remove SHACL restrictions for property characteristics
+        if characteristic == URIRef(OWL_FUNCTIONAL_PROPERTY_URI):
+            #print("Entra en la condición de OWL_FUNCTIONAL_PROPERTY")
+            # Functional property: sh:maxCount 1
+            delete_characteristic_query = (
+                f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+                f' DELETE {{ ?propertyShape {SHACL_MAX_COUNT} 1 }}'
+                f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
+            )
+            print(delete_characteristic_query)
+            output_shapes.update(delete_characteristic_query)
+        elif characteristic == URIRef(OWL_SYMMETRIC_PROPERTY_URI):
+            print(f"Entra en la condición de remove OWL_SYMMETRIC_PROPERTY: {property}")
+            # Symmetric property: custom SHACL-SPARQL constraint
+            delete_characteristic_query = (
+                f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+                f' DELETE {{ ?propertyShape {SHACL_SPARQL} ?constraintNode .'                
+                f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
+                f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v . FILTER NOT EXISTS {{ ?v <{property}> $this }} }}" }}'
+                f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> . '
+                f' ?propertyShape {SHACL_SPARQL} ?constraintNode . '
+                f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
+                f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v . FILTER NOT EXISTS {{ ?v <{property}> $this }} }}" }}'
+            )
+            print(delete_characteristic_query)
+            output_shapes.update(delete_characteristic_query)
+        elif characteristic == URIRef(OWL_ASYMMETRIC_PROPERTY_URI):
+            # Asymmetric property: custom SHACL-SPARQL constraint
+            #print(f"Entra en la condición de remove OWL_ASYMMETRIC_PROPERTY: {property}")
+            delete_characteristic_query = (
+                f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+                f' DELETE {{ ?propertyShape {SHACL_SPARQL} ?constraintNode .'
+                f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
+                f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v . FILTER EXISTS {{ ?v <{property}> $this }} }}" }}'
+                f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> . '
+                f' ?propertyShape {SHACL_SPARQL} ?constraintNode . '
+                f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
+                f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v . FILTER EXISTS {{ ?v <{property}> $this }} }}" }}'
+            )
+            print(delete_characteristic_query)
+            output_shapes.update(delete_characteristic_query)
+        elif characteristic == URIRef(OWL_REFLEXIVE_PROPERTY_URI):
+            # Reflexive property: custom SHACL-SPARQL constraint
+            delete_characteristic_query = (
+                f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+                f' DELETE {{ ?propertyShape {SHACL_SPARQL} ?constraintNode .'
+                f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
+                f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ FILTER NOT EXISTS {{ $this <{property}> $this }} }}" }}'
+                f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> . '
+                f' ?propertyShape {SHACL_SPARQL} ?constraintNode . '
+                f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
+                f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ FILTER NOT EXISTS {{ $this <{property}> $this }} }}" }}'
+            )
+            print(delete_characteristic_query)
+            output_shapes.update(delete_characteristic_query)
+        elif characteristic == URIRef(OWL_IRREFLEXIVE_PROPERTY_URI):
+            # Irreflexive property: custom SHACL-SPARQL constraint
+            delete_characteristic_query = (
+                f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+                f' DELETE {{ ?propertyShape {SHACL_SPARQL} ?constraintNode .'
+                f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
+                f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> $this }}" }}'
+                f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> . '
+                f' ?propertyShape {SHACL_SPARQL} ?constraintNode . '
+                f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
+                f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> $this }}" }}'
+            )
+            print(delete_characteristic_query)
+            output_shapes.update(delete_characteristic_query)
+        elif characteristic == URIRef(OWL_INVERSE_FUNCTIONAL_PROPERTY_URI):
+            # Inverse functional property: sh:uniqueLang or custom constraint
+            delete_characteristic_query = (
+                f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+                f' PREFIX {EXAMPLE_PREFIX}: <{EXAMPLE_URI}>'
+                f' DELETE {{ '
+                f'    ?shape a {SHACL_PROPERTY_SHAPE} ; '
+                f'      {SHACL_PATH} ?pathbnode . '
+                f'      ?pathbnode {SHACL_INVERSE_PATH} <{property}> . '
+                f'      ?shape {SHACL_MAX_COUNT} 1 . '
+                f' }} '
+                f' WHERE {{ ?shape a {SHACL_PROPERTY_SHAPE} ; '
+                f'      {SHACL_PATH} ?pathbnode . '
+                f'      ?pathbnode {SHACL_INVERSE_PATH} <{property}> . '
+                f'      ?shape {SHACL_MAX_COUNT} 1 . '
+                f' }}'
+            )
+            print(delete_characteristic_query)
+            output_shapes.update(delete_characteristic_query)
+        elif characteristic == OWL_TRANSITIVE_PROPERTY:
+            # Transitive property: custom SHACL-SPARQL constraint
+            delete_characteristic_query = (
+                f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+                f' DELETE {{ ?propertyShape {SHACL_SPARQL} ?constraintNode }}'
+                f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> . '
+                f' ?propertyShape {SHACL_SPARQL} ?constraintNode . '
+                f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
+                f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v1 . ?v1 <{property}> ?v2 . FILTER NOT EXISTS {{ $this <{property}> ?v2 }} }}" }}'
+            )
+            output_shapes.update(delete_characteristic_query)

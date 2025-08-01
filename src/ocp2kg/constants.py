@@ -9,6 +9,7 @@ R2RML_URI = 'http://www.w3.org/ns/r2rml#'
 RDF_URI = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'
 D2RQ_URI = 'http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#'
 QL_URI = 'http://semweb.mmlab.be/ns/ql#'
+EXAMPLE_PREFIX = 'ex'
 EXAMPLE_URI = "http://myexampleuri.org/data#"
 RDFS_URI = 'http://www.w3.org/2000/01/rdf-schema#'
 XSD_URI = 'http://www.w3.org/2001/XMLSchema#'
@@ -109,6 +110,7 @@ SHACL_PROPERTY = f'{SHACL_PREFIX}:property'
 SHACL_DATATYPE = f'{SHACL_PREFIX}:datatype'
 SHACL_NOT = f'{SHACL_PREFIX}:not'
 SHACL_MAX_COUNT = f'{SHACL_PREFIX}:maxCount'
+SHACL_INVERSE_PATH = f'{SHACL_PREFIX}:inversePath'
 
 ##############################################################################
 #############################   D2RQ CONSTANTS  ##############################
@@ -195,7 +197,7 @@ OCH_REMOVE_CHARACTERISTIC = f'{OCH_PREFIX}:RemoveCharacteristic'
 OCH_ADDED_CHARACTERISTIC = f'{OCH_PREFIX}:addedCharacteristic'
 OCH_REMOVED_CHARACTERISTIC = f'{OCH_PREFIX}:removedCharacteristic'
 OCH_ADDED_CHARACTERISTIC_TO_PROPERTY = f'{OCH_PREFIX}:addedCharacteristicToProperty'
-OCH_REMOVED_CHARACTERISTIC_FROM_PROPERTY = f'{OCH_PREFIX}:addedCharacteristicFromProperty'
+OCH_REMOVED_CHARACTERISTIC_FROM_PROPERTY = f'{OCH_PREFIX}:removedCharacteristicFromProperty'
 
 ##############################################################################
 #############################  RDFS&OWL CONSTANTS  ###########################
@@ -210,10 +212,15 @@ OWL_OBJECT_PROPERTY = f'{OWL_PREFIX}:ObjectProperty'
 OWL_OBJECT_PROPERTY_URI = 'http://www.w3.org/2002/07/owl#ObjectProperty'
 OWL_FUNCTIONAL_PROPERTY_URI = f'{OWL_URI}FunctionalProperty'
 OWL_SYMMETRIC_PROPERTY = f'{OWL_PREFIX}:SymmetricProperty'
+OWL_SYMMETRIC_PROPERTY_URI = f'{OWL_URI}SymmetricProperty'
 OWL_ASYMMETRIC_PROPERTY = f'{OWL_PREFIX}:AsymmetricProperty'
+OWL_ASYMMETRIC_PROPERTY_URI = f'{OWL_URI}AsymmetricProperty'
 OWL_REFLEXIVE_PROPERTY = f'{OWL_PREFIX}:ReflexiveProperty'
-OWL_IRREFLEXIVE_PROPERTY = f'{OWL_PREFIX};IrreflexiveProperty'
+OWL_REFLEXIVE_PROPERTY_URI = f'{OWL_URI}ReflexiveProperty'
+OWL_IRREFLEXIVE_PROPERTY = f'{OWL_PREFIX}:IrreflexiveProperty'
+OWL_IRREFLEXIVE_PROPERTY_URI = f'{OWL_URI}IrreflexiveProperty'
 OWL_INVERSE_FUNCTIONAL_PROPERTY = f'{OWL_PREFIX}:InverseFunctionalProperty'
+OWL_INVERSE_FUNCTIONAL_PROPERTY_URI = f'{OWL_URI}InverseFunctionalProperty'
 OWL_TRANSITIVE_PROPERTY = f'{OWL_PREFIX}:TransitiveProperty'
 
 RDFS_DOMAIN = 'rdfs:domain'

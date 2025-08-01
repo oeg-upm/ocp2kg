@@ -1,0 +1,8 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX ex: <http://myexampleuri.org/data#>
+
+INSERT DATA {
+    ex:genderInvFunctShape a sh:PropertyShape ;
+        sh:path [ sh:inversePath <http://schema.org/gender> ] ;
+        sh:maxCount 1 .
+}

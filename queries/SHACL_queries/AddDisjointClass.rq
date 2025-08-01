@@ -1,37 +1,11 @@
-PREFIX sh: <http://www.w3.org/ns/shacl#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX ex: <http://example.org/>
-
-INSERT {
-  ?shapeA sh:sparql [
-    a sh:SPARQLConstraint ;
-    sh:select """
-      SELECT ?this WHERE {
-        ?this a <""" || STR(?classB) || """> .
-      }
-    """
-  ] ;
-  ?shapeB sh:sparql [
-    a sh:SPARQLConstraint ;
-    sh:select """
-      SELECT ?this WHERE {
-        ?this a <""" || STR(?classA) || """> .
-      }
-    """
-  ] .
-}
-WHERE {
-  ?classA owl:disjointWith ?classB .
-
-  ?shapeA a sh:NodeShape ;
-          sh:targetClass ?classA .
-
-  OPTIONAL {
-    ?shapeB a sh:NodeShape ;
-            sh:targetClass ?classB .
-  }
-  FILTER NOT EXISTS {
-    ?shapeA sh:sparql ?c1 .
-    ?shapeB sh:sparql ?c2 .
-  }
+ PREFIX sh: <http://www.w3.org/ns/shacl#>
+ INSERT {
+    ?sourceShape sh:not [ sh:class <http://myexampleuri.org/data#Dog> ] .
+    ?targetShape sh:not [ sh:class <http://schema.org/Person> ] .
+ }
+ WHERE {
+   ?sourceShape a sh:NodeShape ;
+     sh:targetClass <http://schema.org/Person> .
+   ?targetShape a sh:NodeShape ;
+     sh:targetClass <http://myexampleuri.org/data#Dog> .
 }

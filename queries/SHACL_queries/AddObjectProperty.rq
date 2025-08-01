@@ -1,0 +1,10 @@
+ PREFIX sh: <http://www.w3.org/ns/shacl#> 
+ PREFIX ex: <http://myexampleuri.org/data#> 
+ INSERT {    
+    ?nodeShape sh:property ex:testpropertyShape .    
+                ex:testpropertyShape  sh:path <http://myexampleuri.org/data#testproperty> ;      
+                sh:class <http://myexampleuri.org/data#testrange> .  
+    }  WHERE {    
+        ?nodeShape a sh:NodeShape ;              
+        sh:targetClass <http://myexampleuri.org/data#testdomain> .  
+    }

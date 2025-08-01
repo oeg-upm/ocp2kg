@@ -9,7 +9,7 @@
 
 schema:PersonShape
     a sh:NodeShape ;
-    sh:targetClass ex:testdomain ;
+    sh:targetClass schema:Person ;
     sh:property [
         sh:path schema:givenName ;
         sh:datatype xsd:string ;
@@ -22,12 +22,23 @@ schema:PersonShape
     ] ;
     sh:property [
         sh:path schema:gender ;
-        sh:in ( "female" "male" ) ;
+        sh:in ( "female" "male" "other" ) ;
     ] ;
     sh:property [
         sh:path schema:address ;
         sh:node schema:AddressShape ;
-    ];
-    sh:property ex:testpropertyShape.
-    ex:testpropertyShape sh:path ex:testproperty ;
-        sh:class ex:testrange .
+    ] .
+
+schema:AddressShape
+    a sh:NodeShape ;
+    sh:closed true ;
+    sh:property [
+        sh:path schema:streetAddress ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:postalCode ;
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype xsd:integer ] ) ;
+        sh:minInclusive 10000 ;
+        sh:maxInclusive 99999 ;
+    ] .

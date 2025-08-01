@@ -1,0 +1,9 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX och: <http://w3id.org/def/och>
+PREFIX ex: <http://myexampleuri.org/data#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/> 
+
+<http://myexampleuri/RemoveCharacteristic/testchange> rdf:type och:RemoveCharacteristic .
+<http://myexampleuri/RemoveCharacteristic/testchange> och:removedCharacteristic owl:InverseFunctionalProperty .
+<http://myexampleuri/RemoveCharacteristic/testchange> och:removedCharacteristicFromProperty schema:gender .

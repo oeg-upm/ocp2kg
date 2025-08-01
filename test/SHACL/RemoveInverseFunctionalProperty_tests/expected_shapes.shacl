@@ -6,10 +6,9 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix ex: <http://myexampleuri.org/data#> .
 
-
 schema:PersonShape
     a sh:NodeShape ;
-    sh:targetClass ex:testdomain ;
+    sh:targetClass schema:Person ;
     sh:property [
         sh:path schema:givenName ;
         sh:datatype xsd:string ;
@@ -27,7 +26,4 @@ schema:PersonShape
     sh:property [
         sh:path schema:address ;
         sh:node schema:AddressShape ;
-    ];
-    sh:property ex:testpropertyShape.
-    ex:testpropertyShape sh:path ex:testproperty ;
-        sh:class ex:testrange .
+    ] .

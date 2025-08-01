@@ -9,7 +9,7 @@
 
 schema:PersonShape
     a sh:NodeShape ;
-    sh:targetClass ex:testdomain ;
+    sh:targetClass schema:Person ;
     sh:property [
         sh:path schema:givenName ;
         sh:datatype xsd:string ;
@@ -27,7 +27,11 @@ schema:PersonShape
     sh:property [
         sh:path schema:address ;
         sh:node schema:AddressShape ;
-    ];
-    sh:property ex:testpropertyShape.
-    ex:testpropertyShape sh:path ex:testproperty ;
-        sh:class ex:testrange .
+    ] ;
+    sh:property [
+        sh:path ex:knows ;
+        sh:sparql [
+            a sh:SPARQLConstraint ;
+            sh:select "SELECT $this WHERE { $this <http://myexampleuri.org/data#knows> $this }"
+        ] ;
+    ] .

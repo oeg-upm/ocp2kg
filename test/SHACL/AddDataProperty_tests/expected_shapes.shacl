@@ -28,7 +28,6 @@ schema:PersonShape
         sh:path schema:address ;
         sh:node schema:AddressShape ;
     ];
-    sh:property [
-        sh:path ex:testproperty ;
-        sh:datatype ex:testrange ;
-    ] .
+    sh:property ex:testpropertyShape .
+    ex:testpropertyShape sh:path ex:testproperty ;
+        sh:datatype ex:testrange .
