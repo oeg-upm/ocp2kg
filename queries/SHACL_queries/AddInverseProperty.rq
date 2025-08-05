@@ -1,0 +1,29 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX ex: <http://myexampleuri.org/data#>
+
+INSERT {
+  ?shapesource sh:path <http://schema.org/deathDate> ;
+			   sh:sparql [
+				 a sh:SPARQLConstraint ;
+				 sh:select """
+				   SELECT ?this WHERE {
+					 ?sub <http://schema.org/deathDate> ?obj .
+					 FILTER NOT EXISTS { ?obj <http://schema.org/gender> ?sub . }
+				   }
+				 """ ;
+			   ] .
+  ?shapetarget sh:path <http://schema.org/gender> ;
+			   sh:sparql [
+				 a sh:SPARQLConstraint ;
+				 sh:select """
+				   SELECT ?this WHERE {
+					 ?sub <http://schema.org/gender> ?obj .
+					 FILTER NOT EXISTS { ?obj <http://schema.org/deathDate> ?sub . }
+				   }
+				 """ ;
+			   ] .
+}
+WHERE {
+  ?shapesource sh:path <http://schema.org/deathDate> .
+  ?shapetarget sh:path <http://schema.org/gender> .
+}

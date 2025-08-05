@@ -1,0 +1,10 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+
+INSERT {
+    ?shape_source sh:equals <http://schema.org/gender> .
+    ?shape_target sh:equals <http://schema.org/birthDate> .
+}
+WHERE {
+    ?shape_source sh:path <http://schema.org/birthDate> .
+    ?shape_target sh:path <http://schema.org/gender> .
+}

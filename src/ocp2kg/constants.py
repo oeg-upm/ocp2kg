@@ -111,6 +111,8 @@ SHACL_DATATYPE = f'{SHACL_PREFIX}:datatype'
 SHACL_NOT = f'{SHACL_PREFIX}:not'
 SHACL_MAX_COUNT = f'{SHACL_PREFIX}:maxCount'
 SHACL_INVERSE_PATH = f'{SHACL_PREFIX}:inversePath'
+SHACL_DISJOINT = f'{SHACL_PREFIX}:disjoint'
+SHACL_EQUALS = f'{SHACL_PREFIX}:equals'
 
 ##############################################################################
 #############################   D2RQ CONSTANTS  ##############################
@@ -199,6 +201,27 @@ OCH_REMOVED_CHARACTERISTIC = f'{OCH_PREFIX}:removedCharacteristic'
 OCH_ADDED_CHARACTERISTIC_TO_PROPERTY = f'{OCH_PREFIX}:addedCharacteristicToProperty'
 OCH_REMOVED_CHARACTERISTIC_FROM_PROPERTY = f'{OCH_PREFIX}:removedCharacteristicFromProperty'
 
+OCH_ADD_INVERSE_PROPERTY = f'{OCH_PREFIX}:AddInverseProperty'
+OCH_REMOVE_INVERSE_PROPERTY = f'{OCH_PREFIX}:RemoveInverseProperty'
+OCH_ADD_INVERSE_PROPERTY_SOURCE = f'{OCH_PREFIX}:sourceAddInverseProperty'
+OCH_ADD_INVERSE_PROPERTY_TARGET = f'{OCH_PREFIX}:targetAddInverseProperty'
+OCH_REMOVE_INVERSE_PROPERTY_SOURCE = f'{OCH_PREFIX}:sourceRemoveInverseProperty'
+OCH_REMOVE_INVERSE_PROPERTY_TARGET = f'{OCH_PREFIX}:targetRemoveInverseProperty'
+
+OCH_ADD_DISJOINT_PROPERTY = f'{OCH_PREFIX}:AddDisjointProperty'
+OCH_REMOVE_DISJOINT_PROPERTY = f'{OCH_PREFIX}:RemoveDisjointProperty'
+OCH_ADD_DISJOINT_PROPERTY_SOURCE = f'{OCH_PREFIX}:sourceAddDisjointProperty'
+OCH_ADD_DISJOINT_PROPERTY_TARGET = f'{OCH_PREFIX}:targetAddDisjointProperty'
+OCH_REMOVE_DISJOINT_PROPERTY_SOURCE = f'{OCH_PREFIX}:sourceRemoveDisjointProperty'
+OCH_REMOVE_DISJOINT_PROPERTY_TARGET = f'{OCH_PREFIX}:targetRemoveDisjointProperty'
+
+OCH_ADD_SUBPROPERTY = f'{OCH_PREFIX}:AddSubProperty'
+OCH_REMOVE_SUBPROPERTY = f'{OCH_PREFIX}:RemoveSubProperty'
+OCH_ADD_SUBPROPERTY_SOURCE = f'{OCH_PREFIX}:sourceAddSubProperty'
+OCH_ADD_SUBPROPERTY_TARGET = f'{OCH_PREFIX}:targetAddSubProperty'
+OCH_REMOVE_SUBPROPERTY_SOURCE = f'{OCH_PREFIX}:sourceRemoveSubProperty'
+OCH_REMOVE_SUBPROPERTY_TARGET = f'{OCH_PREFIX}:targetRemoveSubProperty'
+
 ##############################################################################
 #############################  RDFS&OWL CONSTANTS  ###########################
 ##############################################################################
@@ -222,6 +245,14 @@ OWL_IRREFLEXIVE_PROPERTY_URI = f'{OWL_URI}IrreflexiveProperty'
 OWL_INVERSE_FUNCTIONAL_PROPERTY = f'{OWL_PREFIX}:InverseFunctionalProperty'
 OWL_INVERSE_FUNCTIONAL_PROPERTY_URI = f'{OWL_URI}InverseFunctionalProperty'
 OWL_TRANSITIVE_PROPERTY = f'{OWL_PREFIX}:TransitiveProperty'
+OWL_TRANSITIVE_PROPERTY_URI = f'{OWL_URI}TransitiveProperty'
+
+OCH_ADD_EQUIVALENT_PROPERTY = f'{OCH_PREFIX}:AddEquivalentProperty'
+OCH_REMOVE_EQUIVALENT_PROPERTY = f'{OCH_PREFIX}:RemoveEquivalentProperty'
+OCH_ADD_EQUIVALENT_PROPERTY_SOURCE = f'{OCH_PREFIX}:sourceAddEquivalentProperty'
+OCH_ADD_EQUIVALENT_PROPERTY_TARGET = f'{OCH_PREFIX}:targetAddEquivalentProperty'
+OCH_REMOVE_EQUIVALENT_PROPERTY_SOURCE = f'{OCH_PREFIX}:sourceRemoveEquivalentProperty'
+OCH_REMOVE_EQUIVALENT_PROPERTY_TARGET = f'{OCH_PREFIX}:targetRemoveEquivalentProperty'
 
 RDFS_DOMAIN = 'rdfs:domain'
 RDFS_RANGE = 'rdfs:range'

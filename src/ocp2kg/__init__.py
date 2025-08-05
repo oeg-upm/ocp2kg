@@ -4,7 +4,7 @@ from .evol_kg import *
 
 def propagate(change_data, output_mappings, review_mappings, ontology, output_shacl):
     changes_order = (OCH_ADD_CLASS, OCH_ADD_SUBCLASS, OCH_ADD_OBJECT_PROPERTY, OCH_ADD_DATA_PROPERTY, OCH_REMOVE_CLASS,
-                     OCH_REMOVE_SUBCLASS, OCH_REMOVE_OBJECT_PROPERTY, OCH_REMOVE_DATA_PROPERTY,OCH_DEPRECATE_ENTITY, OCH_REVOKE_DEPRECATE, OCH_RENAME_ENTITY, OCH_ADD_EQUIVALENT_CLASS, OCH_REMOVE_EQUIVALENT_CLASS, OCH_ADD_DISJOINT_CLASS, OCH_REMOVE_DISJOINT_CLASS, OCH_ADD_CHARACTERISTIC, OCH_REMOVE_CHARACTERISTIC)
+                     OCH_REMOVE_SUBCLASS, OCH_REMOVE_OBJECT_PROPERTY, OCH_REMOVE_DATA_PROPERTY,OCH_DEPRECATE_ENTITY, OCH_REVOKE_DEPRECATE, OCH_RENAME_ENTITY, OCH_ADD_EQUIVALENT_CLASS, OCH_REMOVE_EQUIVALENT_CLASS, OCH_ADD_DISJOINT_CLASS, OCH_REMOVE_DISJOINT_CLASS, OCH_ADD_CHARACTERISTIC, OCH_REMOVE_CHARACTERISTIC, OCH_ADD_INVERSE_PROPERTY, OCH_REMOVE_INVERSE_PROPERTY, OCH_ADD_DISJOINT_PROPERTY, OCH_REMOVE_DISJOINT_PROPERTY, OCH_ADD_SUBPROPERTY, OCH_REMOVE_SUBPROPERTY, OCH_ADD_EQUIVALENT_PROPERTY, OCH_REMOVE_EQUIVALENT_PROPERTY)
 
     for change_type in changes_order:
 
@@ -85,6 +85,30 @@ def propagate(change_data, output_mappings, review_mappings, ontology, output_sh
             elif URIRef(change_type) == URIRef(OCH_REMOVE_CHARACTERISTIC):
                 if output_shacl is not None:
                     remove_characteristic_shacl(change_result["change"], change_data, output_shacl)
+            elif URIRef(change_type) == URIRef(OCH_ADD_INVERSE_PROPERTY):
+                if output_shacl is not None:
+                    add_inverse_property_shacl(change_result["change"], change_data, output_shacl)
+            elif URIRef(change_type) == URIRef(OCH_REMOVE_INVERSE_PROPERTY):
+                if output_shacl is not None:
+                    remove_inverse_property_shacl(change_result["change"], change_data, output_shacl)
+            elif URIRef(change_type) == URIRef(OCH_ADD_DISJOINT_PROPERTY):
+                if output_shacl is not None:
+                    add_disjoint_property_shacl(change_result["change"], change_data, output_shacl)
+            elif URIRef(change_type) == URIRef(OCH_REMOVE_DISJOINT_PROPERTY):
+                if output_shacl is not None:
+                    remove_disjoint_property_shacl(change_result["change"], change_data, output_shacl)
+            elif URIRef(change_type) == URIRef(OCH_ADD_SUBPROPERTY):
+                if output_shacl is not None:
+                    add_superproperty_shacl(change_result["change"], change_data, output_shacl)
+            elif URIRef(change_type) == URIRef(OCH_REMOVE_SUBPROPERTY):
+                if output_shacl is not None:
+                    remove_superproperty_shacl(change_result["change"], change_data, output_shacl)
+            elif URIRef(change_type) == URIRef(OCH_ADD_EQUIVALENT_PROPERTY):
+                if output_shacl is not None:
+                    add_equivalent_property_shacl(change_result["change"], change_data, output_shacl)
+            elif URIRef(change_type) == URIRef(OCH_REMOVE_EQUIVALENT_PROPERTY):
+                if output_shacl is not None:
+                    remove_equivalent_property_shacl(change_result["change"], change_data, output_shacl)
 
     logger.info("Changes propagated over semantic artefacts, writing results...")
     return output_mappings, output_shacl

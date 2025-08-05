@@ -1554,13 +1554,14 @@ def add_characteristic_shacl(change, change_data, output_shapes):
             )
             print(insert_characteristic_query)
             output_shapes.update(insert_characteristic_query)
-        elif characteristic == OWL_TRANSITIVE_PROPERTY:
+        elif characteristic == URIRef(OWL_TRANSITIVE_PROPERTY_URI):
             # Transitive property: custom SHACL-SPARQL constraint
             insert_characteristic_query = (
             f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
             f' INSERT {{ ?propertyShape {SHACL_SPARQL} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v1 . ?v1 <{property}> ?v2 . FILTER NOT EXISTS {{ $this <{property}> ?v2 }} }}" ] }}'
             f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
             )
+            print(insert_characteristic_query)
             output_shapes.update(insert_characteristic_query)
 
 def remove_characteristic_shacl(change, change_data, output_shapes):
@@ -1668,14 +1669,285 @@ def remove_characteristic_shacl(change, change_data, output_shapes):
             )
             print(delete_characteristic_query)
             output_shapes.update(delete_characteristic_query)
-        elif characteristic == OWL_TRANSITIVE_PROPERTY:
+        elif characteristic == URIRef(OWL_TRANSITIVE_PROPERTY_URI):
             # Transitive property: custom SHACL-SPARQL constraint
             delete_characteristic_query = (
                 f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
-                f' DELETE {{ ?propertyShape {SHACL_SPARQL} ?constraintNode }}'
+                f' DELETE {{ ?propertyShape {SHACL_SPARQL} ?constraintNode .'
+                f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
+                f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v1 . ?v1 <{property}> ?v2 . FILTER NOT EXISTS {{ $this <{property}> ?v2 }} }}" }}'
                 f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> . '
                 f' ?propertyShape {SHACL_SPARQL} ?constraintNode . '
                 f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
                 f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v1 . ?v1 <{property}> ?v2 . FILTER NOT EXISTS {{ $this <{property}> ?v2 }} }}" }}'
             )
+            print(delete_characteristic_query)
             output_shapes.update(delete_characteristic_query)
+        
+def add_inverse_property_shacl(change, change_data, output_shapes):
+    """
+    Adds an inverse property relationship to SHACL NodeShapes by inserting a SPARQL constraint that checks for the inverse property.
+    Args:
+        change: The URI of the change, which must be of the type add_inverse_property.
+        change_data: The RDF graph or data source containing information about the change.
+        output_shapes: The collection or graph to be updated with the new SHACL NodeShape including the inverse property restriction.
+    Returns:
+        The output_shapes updated with the data property shape modified.
+    """
+    query = (
+        f' SELECT DISTINCT ?source_prop ?target_prop WHERE {{ '
+        f'   <{change}> {OCH_ADD_INVERSE_PROPERTY_SOURCE} ?source_prop . '
+        f'   <{change}> {OCH_ADD_INVERSE_PROPERTY_TARGET} ?target_prop . }}'
+    )
+    for result in change_data.query(query):
+        source_prop = result["source_prop"]
+        target_prop = result["target_prop"]
+        insert_inverse_property_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' PREFIX {EXAMPLE_PREFIX}: <{EXAMPLE_URI}>'
+            f' INSERT {{ '
+            f'   ?shapesource {SHACL_PATH} <{source_prop}> ; '
+            f'                {SHACL_SPARQL} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SPARQL_SELECT} """ SELECT ?this WHERE {{ ?sub <{source_prop}> ?obj . FILTER NOT EXISTS {{ ?obj <{target_prop}> ?sub . }} }} """ ; ] . '
+            f'   ?shapetarget {SHACL_PATH} <{target_prop}> ; '
+            f'                {SHACL_SPARQL} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SPARQL_SELECT} """ SELECT ?this WHERE {{ ?sub <{target_prop}> ?obj . FILTER NOT EXISTS {{ ?obj <{source_prop}> ?sub . }} }} """ ; ] . '
+            f' }} WHERE {{ '
+            f'   ?shapesource {SHACL_PATH} <{source_prop}> . '
+            f'   ?shapetarget {SHACL_PATH} <{target_prop}> . '
+        f' }}'
+        )
+        print(insert_inverse_property_query)
+        output_shapes.update(insert_inverse_property_query)
+
+def remove_inverse_property_shacl(change, change_data, output_shapes):
+    """
+    Removes an inverse property relationship from SHACL NodeShapes by deleting the SPARQL constraint that checks for the inverse property.
+    Args:
+        change: The URI of the change, which must be of the type add_inverse_property.
+        change_data: The RDF graph or data source containing information about the change.
+        output_shapes: The collection or graph to be updated without the new SHACL NodeShape including the inverse property restriction.
+    Returns:
+        The output_shapes updated with the data property shape modified.
+    """
+    query = (
+        f' SELECT DISTINCT ?source_prop ?target_prop WHERE {{ '
+        f'   <{change}> {OCH_REMOVE_INVERSE_PROPERTY_SOURCE} ?source_prop . '
+        f'   <{change}> {OCH_REMOVE_INVERSE_PROPERTY_TARGET} ?target_prop . }}'
+    )
+    for result in change_data.query(query):
+        source_prop = result["source_prop"]
+        target_prop = result["target_prop"]
+        remove_inverse_property_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' PREFIX {EXAMPLE_PREFIX}: <{EXAMPLE_URI}>'
+            f' DELETE {{ '
+            f'   ?shapesource {SHACL_SPARQL} ?constraintSource . '
+            f'   ?constraintSource a {SHACL_SPARQL_CONSTRAINT} ; '
+            f'                   {SHACL_SPARQL_SELECT} "SELECT ?this WHERE {{ ?sub <{source_prop}> ?obj . FILTER NOT EXISTS {{ ?obj <{target_prop}> ?sub . }} }} " . '
+            f'   ?shapetarget {SHACL_SPARQL} ?constraintTarget . '
+            f'   ?constraintTarget a {SHACL_SPARQL_CONSTRAINT} ; '
+            f'                   {SHACL_SPARQL_SELECT} "SELECT ?this WHERE {{ ?sub <{target_prop}> ?obj . FILTER NOT EXISTS {{ ?obj <{source_prop}> ?sub . }} }} " . '
+            f' }} WHERE {{ '
+            f'   ?shapesource {SHACL_PATH} <{source_prop}> ; '
+            f'                {SHACL_SPARQL} ?constraintSource . '
+            f'   ?constraintSource a {SHACL_SPARQL_CONSTRAINT} ; '
+            f'                   {SHACL_SPARQL_SELECT} "SELECT ?this WHERE {{ ?sub <{source_prop}> ?obj . FILTER NOT EXISTS {{ ?obj <{target_prop}> ?sub . }} }} " . '
+            f'   ?shapetarget {SHACL_PATH} <{target_prop}> ; '
+            f'                {SHACL_SPARQL} ?constraintTarget . '
+            f'   ?constraintTarget a {SHACL_SPARQL_CONSTRAINT} ; '
+            f'                   {SHACL_SPARQL_SELECT} "SELECT ?this WHERE {{ ?sub <{target_prop}> ?obj . FILTER NOT EXISTS {{ ?obj <{source_prop}> ?sub . }} }} " . '
+            f' }}'
+        )
+        print(remove_inverse_property_query)
+        output_shapes.update(remove_inverse_property_query)
+
+def add_disjoint_property_shacl(change, change_data, output_shapes):
+    """
+    Adds a disjoint property restriction to the SHACL NodeShape via SHACL-SPARQL query.
+    Args:
+        change: the URI of the change which needs to be of the type add_disjoint_property
+    Returns:
+        The output_shapes updated with the constraints that enforce the disjointness of the properties.
+    """
+    query = (
+        f' SELECT DISTINCT ?source_property ?target_property WHERE {{ '
+        f'   <{change}> {OCH_ADD_DISJOINT_PROPERTY_SOURCE} ?source_property. '
+        f'   <{change}> {OCH_ADD_DISJOINT_PROPERTY_TARGET} ?target_property. }}'
+    )
+    for result in change_data.query(query):
+        source_prop = result["source_property"]
+        target_prop = result["target_property"]
+        add_disjoint_property_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' PREFIX {EXAMPLE_PREFIX}: <{EXAMPLE_URI}>'
+            f' INSERT {{ '
+            f'  ?shapesource {SHACL_DISJOINT} <{target_prop}> . '
+            f'  ?shapetarget {SHACL_DISJOINT} <{source_prop}> . '
+            f' }} WHERE {{ '
+            f'   ?shapesource {SHACL_PATH} <{source_prop}> . '
+            f'   ?shapetarget {SHACL_PATH} <{target_prop}> . '
+            f' }}'
+        )
+        print(add_disjoint_property_query)
+        output_shapes.update(add_disjoint_property_query)
+
+def remove_disjoint_property_shacl(change, change_data, output_shapes):
+    """
+    Removes a disjoint property restriction from the SHACL NodeShape via SHACL-SPARQL query.
+    Args:
+        change: the URI of the change which needs to be of the type remove_disjoint_property
+    Returns:
+        The output_shapes updated without the constraints that enforce the disjointness of the properties.
+    """
+    query = (
+        f' SELECT DISTINCT ?source_property ?target_property WHERE {{ '
+        f'   <{change}> {OCH_REMOVE_DISJOINT_PROPERTY_SOURCE} ?source_property. '
+        f'   <{change}> {OCH_REMOVE_DISJOINT_PROPERTY_TARGET} ?target_property. }}'
+    )
+    for result in change_data.query(query):
+        source_prop = result["source_property"]
+        target_prop = result["target_property"]
+        remove_disjoint_property_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' PREFIX {EXAMPLE_PREFIX}: <{EXAMPLE_URI}>'
+            f' DELETE {{ '
+            f'  ?shapesource {SHACL_DISJOINT} <{target_prop}> . '
+            f'  ?shapetarget {SHACL_DISJOINT} <{source_prop}> . '
+            f' }} WHERE {{ '
+            f'   ?shapesource {SHACL_PATH} <{source_prop}> . '
+            f'   ?shapetarget {SHACL_PATH} <{target_prop}> . '
+            f'   ?shapesource {SHACL_DISJOINT} <{target_prop}> . '
+            f'   ?shapetarget {SHACL_DISJOINT} <{source_prop}> . '
+            f' }}'
+        )
+        print(remove_disjoint_property_query)
+        output_shapes.update(remove_disjoint_property_query)
+    
+def add_superproperty_shacl(change, change_data, output_shapes):
+    """
+    Adds a subproperty relationship to SHACL NodeShapes by inserting a SPARQL constraint that checks for the subproperty.
+    Args:
+        change: The URI of the change, which must be of the type add_subproperty.
+        change_data: The RDF graph or data source containing information about the change.
+        output_shapes: The collection or graph to be updated with the new SHACL NodeShape including the subproperty restriction.
+    Returns:
+        The output_shapes updated with the data property shape modified.
+    """
+    query = (
+        f' SELECT DISTINCT ?sub_property ?super_property WHERE {{ '
+        f'   <{change}> {OCH_ADD_SUBPROPERTY_SOURCE} ?sub_property . '
+        f'   <{change}> {OCH_ADD_SUBPROPERTY_TARGET} ?super_property . }}'
+    )
+    for result in change_data.query(query):
+        sub_property = result["sub_property"]
+        super_property = result["super_property"]
+        insert_subproperty_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' PREFIX {EXAMPLE_PREFIX}: <{EXAMPLE_URI}>'
+            f' INSERT {{ '
+            f'   ?shapesub {SHACL_SPARQL} [ '
+            f'              a {SHACL_SPARQL_CONSTRAINT} ; '
+            f'                {SHACL_SPARQL_SELECT} "SELECT ?this WHERE {{ ?this <{sub_property}> ?v . FILTER NOT EXISTS {{ ?this <{super_property}> ?v }} }} " ; ] . '
+            f' }} WHERE {{ '
+            f'   ?shapesub {SHACL_PATH} <{sub_property}> . '
+            f' }}'
+        )
+        print(insert_subproperty_query)
+        output_shapes.update(insert_subproperty_query)
+
+def remove_superproperty_shacl(change, change_data, output_shapes):
+    """
+    Removes a subproperty relationship to SHACL NodeShapes by inserting a SPARQL constraint that checks for the subproperty.
+    Args:
+        change: The URI of the change, which must be of the type add_subproperty.
+        change_data: The RDF graph or data source containing information about the change.
+        output_shapes: The collection or graph to be updated with the new SHACL NodeShape including the subproperty restriction.
+    Returns:
+        The output_shapes updated with the data property shape modified.
+    """
+    query = (
+        f' SELECT DISTINCT ?sub_property ?super_property WHERE {{ '
+        f'   <{change}> {OCH_REMOVE_SUBPROPERTY_SOURCE} ?sub_property . '
+        f'   <{change}> {OCH_REMOVE_SUBPROPERTY_TARGET} ?super_property . }}'
+    )
+    for result in change_data.query(query):
+        sub_property = result["sub_property"]
+        super_property = result["super_property"]
+        remove_subproperty_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' DELETE {{ '
+            f'   ?shapesub {SHACL_SPARQL} ?sparqlrestriction . '
+            f'   ?sparqlrestriction a {SHACL_SPARQL_CONSTRAINT} ; '
+            f'                      {SHACL_SPARQL_SELECT} "SELECT ?this WHERE {{ ?this <{sub_property}> ?v . FILTER NOT EXISTS {{ ?this <{super_property}> ?v }} }} " ; '
+            f' }} WHERE {{ '
+            f'   ?shapesub {SHACL_PATH} <{sub_property}> . '
+            f'   ?shapesub {SHACL_SPARQL} ?sparqlrestriction . '
+            f'   ?sparqlrestriction a {SHACL_SPARQL_CONSTRAINT} ; '
+            f'                      {SHACL_SPARQL_SELECT} "SELECT ?this WHERE {{ ?this <{sub_property}> ?v . FILTER NOT EXISTS {{ ?this <{super_property}> ?v }} }} " ; '
+            f' }}'
+        )
+        print(remove_subproperty_query)
+        output_shapes.update(remove_subproperty_query)
+
+def add_equivalent_property_shacl(change, change_data, output_shapes):
+    """
+    Adds a sh:equals constraint to the property shapes involved in the relationship .
+    Args:
+        change: The URI of the change, which must be of the type add_subproperty.
+        change_data: The RDF graph or data source containing information about the change.
+        output_shapes: The collection or graph to be updated with the new SHACL NodeShape including the subproperty restriction.
+    Returns:
+        The output_shapes updated with the data property shape modified.
+    """
+    query = (
+        f' SELECT DISTINCT ?source_property ?target_property WHERE {{ '
+        f'   <{change}> {OCH_ADD_EQUIVALENT_PROPERTY_SOURCE} ?source_property . '
+        f'   <{change}> {OCH_ADD_EQUIVALENT_PROPERTY_TARGET} ?target_property . }}'
+    )
+    for result in change_data.query(query):
+        source_property = result["source_property"]
+        target_property = result["target_property"]
+        insert_subproperty_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' INSERT {{ '
+            f'   ?shape_source {SHACL_EQUALS} <{target_property}> . '
+            f'   ?shape_target {SHACL_EQUALS} <{source_property}> . '
+            f' }} WHERE {{ '
+            f'   ?shape_source {SHACL_PATH} <{source_property}> . '
+            f'   ?shape_target {SHACL_PATH} <{target_property}> . '
+            f' }}'
+        )
+        print(insert_subproperty_query)
+        output_shapes.update(insert_subproperty_query)
+
+def remove_equivalent_property_shacl(change, change_data, output_shapes):
+    """
+    Removes a sh:equals constraint from the property shapes involved in the relationship.
+    Args:
+        change: The URI of the change, which must be of the type add_subproperty.
+        change_data: The RDF graph or data source containing information about the change.
+        output_shapes: The collection or graph to be updated with the new SHACL NodeShape including the subproperty restriction.
+    Returns:
+        The output_shapes updated with the data property shape modified.
+    """
+    query = (
+        f' SELECT DISTINCT ?source_property ?target_property WHERE {{ '
+        f'   <{change}> {OCH_REMOVE_EQUIVALENT_PROPERTY_SOURCE} ?source_property . '
+        f'   <{change}> {OCH_REMOVE_EQUIVALENT_PROPERTY_TARGET} ?target_property . }}'
+    )
+    for result in change_data.query(query):
+        source_property = result["source_property"]
+        target_property = result["target_property"]
+        remove_subproperty_query = (
+            f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
+            f' DELETE {{ '
+            f'   ?shape_source {SHACL_EQUALS} <{target_property}> . '
+            f'   ?shape_target {SHACL_EQUALS} <{source_property}> . '
+            f' }} WHERE {{ '
+            f'   ?shape_source {SHACL_PATH} <{source_property}> ; '
+            f'                 {SHACL_EQUALS} <{target_property}> . '
+            f'   ?shape_target {SHACL_PATH} <{target_property}> ; '
+            f'                 {SHACL_EQUALS} <{source_property}> . '
+            f' }}'
+        )
+        print(remove_subproperty_query)
+        output_shapes.update(remove_subproperty_query)

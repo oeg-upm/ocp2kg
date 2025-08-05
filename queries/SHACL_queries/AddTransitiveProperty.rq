@@ -1,0 +1,17 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+
+INSERT {
+    ?propertyShape sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:select """
+            SELECT $this WHERE {
+                $this <http://schema.org/gender> ?v1 .
+                ?v1 <http://schema.org/gender> ?v2 .
+                FILTER NOT EXISTS { $this <http://schema.org/gender> ?v2 }
+            }
+        """
+    ]
+}
+WHERE {
+    ?propertyShape sh:path <http://schema.org/gender>
+}
