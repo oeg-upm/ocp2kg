@@ -6,7 +6,7 @@ import unittest
 ruta_relativa = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'src'))
 if ruta_relativa not in sys.path:
     sys.path.insert(0, ruta_relativa)
-import ocp2kg
+import ontoripple
 
 
 class TestDeprecateEntity01(unittest.TestCase):
@@ -17,7 +17,7 @@ class TestDeprecateEntity01(unittest.TestCase):
         old_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Class_Tests/outdated_mapping_revoke_deprecate_class.ttl'))
         ontology = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ontology.ttl'))
         deprecated_mappings = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Class_Tests/deprecated_mappings_class.ttl'))
-        updated_mapping, updated_shapes = ocp2kg.propagate(change_data, old_mapping, deprecated_mappings, ontology,None)
+        updated_mapping, updated_shapes = ontoripple.propagate(change_data, old_mapping, deprecated_mappings, ontology,None)
         expected_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Class_Tests/expected_mapping_revoke_deprecate_class.ttl'))
         expected_iso= compare.to_isomorphic(expected_mapping)
         output_iso= compare.to_isomorphic(updated_mapping)
@@ -31,7 +31,7 @@ class TestDeprecateEntity01(unittest.TestCase):
         old_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'OP_Tests/outdated_mapping_revoke_deprecate_op.ttl'))
         ontology = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ontology.ttl'))
         deprecated_mappings = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'OP_Tests/deprecated_mappings_op.ttl'))
-        updated_mapping, updated_shapes = ocp2kg.propagate(change_data, old_mapping, deprecated_mappings, ontology,None)
+        updated_mapping, updated_shapes = ontoripple.propagate(change_data, old_mapping, deprecated_mappings, ontology,None)
         expected_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'OP_Tests/expected_mapping_revoke_deprecate_op.ttl'))
         expected_iso= compare.to_isomorphic(expected_mapping)
         output_iso= compare.to_isomorphic(updated_mapping)
@@ -45,7 +45,7 @@ class TestDeprecateEntity01(unittest.TestCase):
         old_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'DP_Tests/outdated_mapping_revoke_deprecate_dp.ttl'))
         ontology = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ontology.ttl'))
         deprecated_mappings = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'DP_Tests/deprecated_mappings_dp.ttl'))
-        updated_mapping, updated_shapes = ocp2kg.propagate(change_data, old_mapping, deprecated_mappings, ontology,None)
+        updated_mapping, updated_shapes = ontoripple.propagate(change_data, old_mapping, deprecated_mappings, ontology,None)
         expected_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'DP_Tests/expected_mapping_revoke_deprecate_dp.ttl'))
         expected_iso= compare.to_isomorphic(expected_mapping)
         output_iso= compare.to_isomorphic(updated_mapping)

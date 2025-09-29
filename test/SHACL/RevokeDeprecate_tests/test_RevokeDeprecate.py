@@ -7,7 +7,7 @@ src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '
 print(src_path)
 if src_path not in sys.path:
     sys.path.insert(0, src_path)
-import ocp2kg
+import ontoripple
 
 
 class TestDeprecateEntity01(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestDeprecateEntity01(unittest.TestCase):
     def test_revoke_deprecate_entity00(self):
         change_data = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Class_Tests/changes_revoke_deprecate_class.ttl'))
         old_shapes = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Class_Tests/outdated_shapes.shacl'))
-        updated_mapping,updated_shapes=ocp2kg.propagate(change_data, None, None, None, old_shapes)
+        updated_mapping,updated_shapes=ontoripple.propagate(change_data, None, None, None, old_shapes)
         expected_shapes = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Class_Tests/expected_shapes.shacl'))
         expected_iso= compare.to_isomorphic(expected_shapes)
         output_iso= compare.to_isomorphic(updated_shapes)
@@ -28,7 +28,7 @@ class TestDeprecateEntity01(unittest.TestCase):
     def test_revoke_deprecate_entity01(self):
         change_data = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Property_Tests/changes_revoke_deprecate_property.ttl'))
         old_shapes = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Property_Tests/outdated_shapes.shacl'))
-        updated_mapping,updated_shapes=ocp2kg.propagate(change_data, None, None, None, old_shapes)
+        updated_mapping,updated_shapes=ontoripple.propagate(change_data, None, None, None, old_shapes)
         expected_shapes = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Property_Tests/expected_shapes.shacl'))
         expected_iso= compare.to_isomorphic(expected_shapes)
         output_iso= compare.to_isomorphic(updated_shapes)
