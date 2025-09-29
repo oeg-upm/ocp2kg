@@ -28,19 +28,6 @@ Options:
 # Architecture
 ![OCP2KG Architecture](misc/arqui.jpg?raw=true "OCP2KG Architecture")
 
-## Cite this work:
-If you used OCP2KG in your work, please cite it as:
-
-```bib
-@inproceedings{herreros2024propagating,
-    title={{Propagating Ontology Changes to Declarative Mappings in the Construction of Knowledge Graphs}},
-    author={Diego Conde Herreros and Lise Stork and Romana Pernisch and Mar{\'\i}a Poveda-Villal{\'o}n and Oscar Corcho and David Chaves-Fraga},
-    booktitle={Fifth International Workshop on Knowledge Graph Construction@ESWC2024},
-    year={2024},
-    url={https://openreview.net/forum?id=ONL4LGlHNu}
-}
-```
-
 # Authors
 - Diego Conde Herreros (OEG-UPM) - main contact  diego.conde.herreros at upm.es
 - David Chaves-Fraga (CiTIUS-USC)

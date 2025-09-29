@@ -21,11 +21,14 @@ def add_class_rml(change, change_data, output_mappings):
     added_class = results.bindings[0][Variable('class')]
     check_query = f'ASK {{  ?triples_map {RDF_TYPE} {R2RML_TRIPLES_MAP} .' \
                   f'        ?triples_map {R2RML_SUBJECT} ?subject . ' \
-                  f'        ?subject {R2RML_CLASS} <{added_class}> }}'
-
+                  f'        ?subject {R2RML_CLASS} {added_class} }}'
+    #print(check_query)
     check_res = output_mappings.query(check_query)
     if not check_res.askAnswer:
-        triples_map_id = f'{added_class.split("#")[1]}_TM'
+        if added_class.startswith('http://') or added_class.startswith('https://'):
+            triples_map_id = f'{added_class.split("#")[1]}_TM'
+        else: 
+            triples_map_id = added_class+"_TM"
         insert_class_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
                              f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
                              f' INSERT DATA {{' \
@@ -368,7 +371,7 @@ def remove_super_class_rml(change,change_data, output_mappings):
         output_mappings.update(remove_super_class_pom_query)
     """
 
-def add_object_property_rml(change,change_data, output_mappings):
+def add_object_property_rml(change, change_data, output_mappings):
     """
        Adds an object property to the TriplesMap indicated in the domain. For a change in the predicate object map the domain, property and range additions are needed.  
        Args:
