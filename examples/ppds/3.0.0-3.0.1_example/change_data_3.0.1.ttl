@@ -1,0 +1,843 @@
+@prefix och: <https://w3id.org/def/och#> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddClass/epo%3AConcessionEstimate> a och:AddClass ;
+    och:addedClass <epo:ConcessionEstimate> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddClass/epo%3AIndefiniteDuration> a och:AddClass ;
+    och:addedClass <epo:IndefiniteDuration> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddClass/epo%3ASpecificDuration> a och:AddClass ;
+    och:addedClass <epo:SpecificDuration> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/added> a och:AddDataProperty .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AhasBuyerLegalTypeDescription> a och:AddDataProperty ;
+    och:addedDataProperty <http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AhasCalculationMethod> a och:AddDataProperty ;
+    och:addedDataProperty <http://data.europa.eu/a4g/ontology#hasCalculationMethod> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AhasLotAwardCombination> a och:AddDataProperty ;
+    och:addedDataProperty <http://data.europa.eu/a4g/ontology#hasLotAwardCombination> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AhasMainActivityDescription> a och:AddDataProperty ;
+    och:addedDataProperty <http://data.europa.eu/a4g/ontology#hasMainActivityDescription> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AhasMaximumLotSubmissionAllowed> a och:AddDataProperty ;
+    och:addedDataProperty <http://data.europa.eu/a4g/ontology#hasMaximumLotSubmissionAllowed> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AhasMaximumNumberOfLotsToBeAwarded> a och:AddDataProperty ;
+    och:addedDataProperty <http://data.europa.eu/a4g/ontology#hasMaximumNumberOfLotsToBeAwarded> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AhasNationalProcedureRules> a och:AddDataProperty ;
+    och:addedDataProperty <http://data.europa.eu/a4g/ontology#hasNationalProcedureRules> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AhasNonAwardedContractNumber> a och:AddDataProperty ;
+    och:addedDataProperty <http://data.europa.eu/a4g/ontology#hasNonAwardedContractNumber> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AhasNonAwardedContractTitle> a och:AddDataProperty ;
+    och:addedDataProperty <http://data.europa.eu/a4g/ontology#hasNonAwardedContractTitle> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AhasQualificationSystemRenewalDescription> a och:AddDataProperty ;
+    och:addedDataProperty <http://data.europa.eu/a4g/ontology#hasQualificationSystemRenewalDescription> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AhasReceiptExpressionDeadline> a och:AddDataProperty ;
+    och:addedDataProperty <http://data.europa.eu/a4g/ontology#hasReceiptExpressionDeadline> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AisOneLotOnlyAllowed> a och:AddDataProperty ;
+    och:addedDataProperty <http://data.europa.eu/a4g/ontology#isOneLotOnlyAllowed> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/epo%3AisSubmissionForAllLotsAllowed> a och:AddDataProperty ;
+    och:addedDataProperty <http://data.europa.eu/a4g/ontology#isSubmissionForAllLotsAllowed> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDataProperty/time%3AnumericDuration> a och:AddDataProperty ;
+    och:addedDataProperty <http://www.w3.org/2006/time#numericDuration> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/added> a och:AddDomain ;
+    och:addedDomain <http://www.w3.org/ns/org#Organization> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/comprisesCatalogueLine> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#Catalogue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AdefinesContractDuration> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ContractTerm> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#definesContractDuration> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AdefinesContractPeriod> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#MultipleStageProcedureTerm> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#definesContractPeriod> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AdependsOnBuyer> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#Buyer> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#dependsOnBuyer> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AforeseesConcession> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#Tender> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#foreseesConcession> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AforeseesContractSpecificTerm> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#Tender> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#foreseesContractSpecificTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasBuyerLegalType> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#LotAwardOutcome> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasBuyerLegalType> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasBuyerLegalTypeDescription> a och:AddDomain ;
+    och:addedDomain <http://www.w3.org/ns/org#Organization> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasBuyerLegalTypeDescription> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasCalculationMethod> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ConcessionEstimate> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasCalculationMethod> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasEstimatedBuyerConcessionRevenue> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ConcessionEstimate> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasEstimatedBuyerConcessionRevenue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasEstimatedUserConcessionRevenue> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ConcessionEstimate> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasEstimatedUserConcessionRevenue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasLotAwardCombination> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ProcedureTerm> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasLotAwardCombination> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasMainActivity> a och:AddDomain ;
+    och:addedDomain <http://www.w3.org/ns/org#Organization> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasMainActivity> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasMainActivityDescription> a och:AddDomain ;
+    och:addedDomain <http://www.w3.org/ns/org#Organization> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasMainActivityDescription> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasMaximumLotSubmissionAllowed> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ProcedureTerm> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasMaximumLotSubmissionAllowed> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasMaximumNumberOfLotsToBeAwarded> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ProcedureTerm> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasMaximumNumberOfLotsToBeAwarded> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasNationalProcedureRules> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ProcedureTerm> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasNationalProcedureRules> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasNonAwardedContractNumber> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#LotAwardOutcome> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasNonAwardedContractNumber> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasNonAwardedContractTitle> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#LotAwardOutcome> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasNonAwardedContractTitle> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasQualificationSystemDuration> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ProcedureTerm> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasQualificationSystemDuration> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasQualificationSystemPeriod> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#MultipleStageProcedureTerm> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasQualificationSystemPeriod> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasQualificationSystemRenewalDescription> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#MultipleStageProcedureTerm> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasQualificationSystemRenewalDescription> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasReceiptExpressionDeadline> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#SubmissionTerm> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasReceiptExpressionDeadline> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AhasRestatedEstimatedValue> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#Lot> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AisBasedOnImplementingRegulation> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#Document> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#isBasedOnImplementingRegulation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AisOneLotOnlyAllowed> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ProcedureTerm> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#isOneLotOnlyAllowed> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3AisSubmissionForAllLotsAllowed> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ProcedureTerm> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#isSubmissionForAllLotsAllowed> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo%3ArefersToProcedure> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#Duration> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#refersToProcedure> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-cat%3AisSubordinatedToContract> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ChargeInformation> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#isSubordinatedToContract> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3AannouncesContract> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#announcesContract> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3AannouncesLot> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#CompetitionNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#announcesLot> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3AannouncesLotAwardOutcome> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#announcesLotAwardOutcome> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3AannouncesLotGroup> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#CompetitionNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#announcesLotGroup> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3AannouncesLotGroupAwardInformation> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#announcesLotGroupAwardInformation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3AannouncesNonPublishedElement> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#announcesNonPublishedElement> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3AannouncesNoticeAwardInformation> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#announcesNoticeAwardInformation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3AannouncesPlannedProcurementPart> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#PlanningNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#announcesPlannedProcurementPart> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3AannouncesProcedure> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#CompetitionNotice>,
+        <http://data.europa.eu/a4g/ontology#DirectAwardPrenotificationNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#announcesProcedure> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3AannouncesRole> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#CompetitionNotice>,
+        <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#announcesRole> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3AannouncesTender> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#announcesTender> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3ArefersToContractToBeModified> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ContractModificationNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#refersToContractToBeModified> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3ArefersToLot> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#refersToLot> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3ArefersToLotGroup> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#refersToLotGroup> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3ArefersToProcedureTerm> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#refersToProcedureTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3ArefersToReviewTerm> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#refersToReviewTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/epo-not%3ArefersToRole> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:addedDomainToProperty <http://data.europa.eu/a4g/ontology#refersToRole> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/time%3AnumericDuration> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#SpecificDuration> ;
+    och:addedDomainToProperty <http://www.w3.org/2006/time#numericDuration> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddDomain/time%3AunitType> a och:AddDomain ;
+    och:addedDomain <http://data.europa.eu/a4g/ontology#Lot> ;
+    och:addedDomainToProperty <http://www.w3.org/2006/time#unitType> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/comprisesCatalogueLine> a och:AddObjectProperty .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AdefinesContractDuration> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#definesContractDuration> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AdefinesContractPeriod> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#definesContractPeriod> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AdependsOnBuyer> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#dependsOnBuyer> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AforeseesConcession> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#foreseesConcession> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AforeseesContractSpecificTerm> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#foreseesContractSpecificTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AhasBuyerLegalType> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#hasBuyerLegalType> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AhasEstimatedBuyerConcessionRevenue> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#hasEstimatedBuyerConcessionRevenue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AhasEstimatedUserConcessionRevenue> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#hasEstimatedUserConcessionRevenue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AhasMainActivity> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#hasMainActivity> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AhasQualificationSystemDuration> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#hasQualificationSystemDuration> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AhasQualificationSystemPeriod> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#hasQualificationSystemPeriod> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AhasRestatedEstimatedValue> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3AisBasedOnImplementingRegulation> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#isBasedOnImplementingRegulation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo%3ArefersToProcedure> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#refersToProcedure> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-cat%3AisSubordinatedToContract> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#isSubordinatedToContract> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3AannouncesContract> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#announcesContract> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3AannouncesLot> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#announcesLot> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3AannouncesLotAwardOutcome> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#announcesLotAwardOutcome> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3AannouncesLotGroup> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#announcesLotGroup> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3AannouncesLotGroupAwardInformation> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#announcesLotGroupAwardInformation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3AannouncesNonPublishedElement> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#announcesNonPublishedElement> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3AannouncesNoticeAwardInformation> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#announcesNoticeAwardInformation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3AannouncesPlannedProcurementPart> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#announcesPlannedProcurementPart> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3AannouncesProcedure> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#announcesProcedure> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3AannouncesRole> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#announcesRole> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3AannouncesTender> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#announcesTender> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3ArefersToContractToBeModified> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#refersToContractToBeModified> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3ArefersToLot> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#refersToLot> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3ArefersToLotGroup> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#refersToLotGroup> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3ArefersToProcedureTerm> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#refersToProcedureTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3ArefersToReviewTerm> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#refersToReviewTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/epo-not%3ArefersToRole> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://data.europa.eu/a4g/ontology#refersToRole> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddObjectProperty/time%3AunitType> a och:AddObjectProperty ;
+    och:addedObjectProperty <http://www.w3.org/2006/time#unitType> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/comprisesCatalogueLine> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#CatalogueLine> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AdefinesContractDuration> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#Duration> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#definesContractDuration> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AdefinesContractPeriod> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#Period> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#definesContractPeriod> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AdependsOnBuyer> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#Awarder> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#dependsOnBuyer> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AforeseesConcession> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#ConcessionEstimate> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#foreseesConcession> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AforeseesContractSpecificTerm> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#ContractSpecificTerm> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#foreseesContractSpecificTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AhasBuyerLegalType> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://publications.europa.eu/resource/authority/buyer-legal-type> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#hasBuyerLegalType> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AhasEstimatedBuyerConcessionRevenue> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#MonetaryValue> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#hasEstimatedBuyerConcessionRevenue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AhasEstimatedUserConcessionRevenue> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#MonetaryValue> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#hasEstimatedUserConcessionRevenue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AhasMainActivity> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://publications.europa.eu/resource/authority/main-activity> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#hasMainActivity> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AhasQualificationSystemDuration> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#Duration> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#hasQualificationSystemDuration> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AhasQualificationSystemPeriod> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#Period> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#hasQualificationSystemPeriod> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AhasRestatedEstimatedValue> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#MonetaryValue> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#hasRestatedEstimatedValue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AisBasedOnImplementingRegulation> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://publications.europa.eu/resource/authority/legal-basis> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#isBasedOnImplementingRegulation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3ArefersToProcedure> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#Procedure> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#refersToProcedure> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-cat%3AisSubordinatedToContract> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#Contract> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#isSubordinatedToContract> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3AannouncesContract> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#Contract> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#announcesContract> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3AannouncesLot> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#Lot> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#announcesLot> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3AannouncesLotAwardOutcome> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#LotAwardOutcome> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#announcesLotAwardOutcome> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3AannouncesLotGroup> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#LotGroup> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#announcesLotGroup> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3AannouncesLotGroupAwardInformation> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#LotGroupAwardInformation> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#announcesLotGroupAwardInformation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3AannouncesNonPublishedElement> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#PublicationProvision> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#announcesNonPublishedElement> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3AannouncesNoticeAwardInformation> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#NoticeAwardInformation> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#announcesNoticeAwardInformation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3AannouncesPlannedProcurementPart> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#PlannedProcurementPart> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#announcesPlannedProcurementPart> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3AannouncesProcedure> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#Procedure> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#announcesProcedure> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3AannouncesRole> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#AgentInRole> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#announcesRole> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3AannouncesTender> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#Tender> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#announcesTender> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3ArefersToContractToBeModified> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#Contract> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#refersToContractToBeModified> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3ArefersToLot> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#Lot> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#refersToLot> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3ArefersToLotGroup> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#LotGroup> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#refersToLotGroup> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3ArefersToProcedureTerm> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#ProcedureTerm> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#refersToProcedureTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3ArefersToReviewTerm> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#ReviewTerm> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#refersToReviewTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3ArefersToRole> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://data.europa.eu/a4g/ontology#AgentInRole> ;
+    och:addedRangeToProperty <http://data.europa.eu/a4g/ontology#refersToRole> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/time%3AunitType> a och:AddRangeObjectProperty ;
+    och:addedObjectRange <http://www.w3.org/2006/time#TemporalUnit> ;
+    och:addedRangeToProperty <http://www.w3.org/2006/time#unitType> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddSubClass/http%3A%2F%2Fepo-changes.org%2F3.0.0-3.0.1-epo%3ADuration> a och:AddSubClass ;
+    och:sourceAddSubClass <http://data.europa.eu/a4g/ontology#SpecificDuration> ;
+    och:targetAddSubClass <http://data.europa.eu/a4g/ontology#Duration> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddSubClass/http%3A%2F%2Fepo-changes.org%2F3.0.0-3.0.1-epo%3AEstimate> a och:AddSubClass ;
+    och:sourceAddSubClass <http://data.europa.eu/a4g/ontology#Document> ;
+    och:targetAddSubClass <http://data.europa.eu/a4g/ontology#Estimate> .
+
+<http://epo-changes.org/3.0.0-3.0.1/AddSubClass/http%3A%2F%2Fepo-changes.org%2F3.0.0-3.0.1-epo%3AProcedureSpecificTerm> a och:AddSubClass ;
+    och:sourceAddSubClass <http://data.europa.eu/a4g/ontology#SubmissionTerm> ;
+    och:targetAddSubClass <http://data.europa.eu/a4g/ontology#ProcedureSpecificTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDataProperty/deleted> a och:RemoveDataProperty .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDataProperty/epo%3AhasBuyerTypeDescription> a och:RemoveDataProperty ;
+    och:removedDataProperty <http://data.europa.eu/a4g/ontology#hasBuyerTypeDescription> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDataProperty/epo%3AhasCalculationMethod> a och:RemoveDataProperty ;
+    och:removedDataProperty <http://data.europa.eu/a4g/ontology#hasCalculationMethod> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDataProperty/epo%3AhasLotMinimumSubmission> a och:RemoveDataProperty ;
+    och:removedDataProperty <http://data.europa.eu/a4g/ontology#hasLotMinimumSubmission> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDataProperty/epo%3AhasLotSubmissionLimit> a och:RemoveDataProperty ;
+    och:removedDataProperty <http://data.europa.eu/a4g/ontology#hasLotSubmissionLimit> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDataProperty/epo%3AhasMaximumNumberOfLotsToBeAwarded> a och:RemoveDataProperty ;
+    och:removedDataProperty <http://data.europa.eu/a4g/ontology#hasMaximumNumberOfLotsToBeAwarded> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDataProperty/epo-cat%3AhasPricePercentage> a och:RemoveDataProperty ;
+    och:removedDataProperty <http://data.europa.eu/a4g/ontology#hasPricePercentage> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDataProperty/time%3AnumericDuration> a och:RemoveDataProperty ;
+    och:removedDataProperty <http://www.w3.org/2006/time#numericDuration> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/deleted> a och:RemoveDomain ;
+    och:removedDomain <http://www.w3.org/ns/org#Organization> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AannouncesContract> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#announcesContract> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AannouncesLot> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#CompetitionNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#announcesLot> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AannouncesLotAwardOutcome> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#announcesLotAwardOutcome> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AannouncesLotGroup> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#CompetitionNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#announcesLotGroup> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AannouncesLotGroupAwardInformation> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#announcesLotGroupAwardInformation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AannouncesNonPublishedElement> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#announcesNonPublishedElement> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AannouncesPlannedProcurementPart> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#PlanningNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#announcesPlannedProcurementPart> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AannouncesProcedure> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#CompetitionNotice>,
+        <http://data.europa.eu/a4g/ontology#DirectAwardPrenotificationNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#announcesProcedure> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AannouncesRole> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#CompetitionNotice>,
+        <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#announcesRole> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AannouncesTender> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#announcesTender> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AdependsOnBuyer> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#Buyer> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#dependsOnBuyer> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AhasBuyerTypeDescription> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#Buyer>,
+        <http://www.w3.org/ns/org#Organization> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AhasCalculationMethod> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#Tender> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#hasCalculationMethod> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AhasEstimatedBuyerConcessionRevenue> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#BuyerSignatorySide> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#hasEstimatedBuyerConcessionRevenue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AhasEstimatedUserConcessionRevenue> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#Tender> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#hasEstimatedUserConcessionRevenue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AhasImplementingRegulation> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#Document> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#hasImplementingRegulation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AhasLegalType> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#LotAwardOutcome> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#hasLegalType> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AhasLotMinimumSubmission> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#Procedure> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#hasLotMinimumSubmission> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AhasLotSubmissionLimit> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#Procedure>,
+        <http://data.europa.eu/a4g/ontology#ProcedureTerm> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#hasLotSubmissionLimit> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AhasMainActivityType> a och:RemoveDomain ;
+    och:removedDomain <http://www.w3.org/ns/org#Organization> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#hasMainActivityType> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3AhasMaximumNumberOfLotsToBeAwarded> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#Procedure> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#hasMaximumNumberOfLotsToBeAwarded> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3ArefersToContractToBeModified> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#ContractModificationNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#refersToContractToBeModified> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3ArefersToLot> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#refersToLot> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3ArefersToLotGroup> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#refersToLotGroup> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3ArefersToProcedureTerm> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#refersToProcedureTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3ArefersToReviewTerm> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#refersToReviewTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo%3ArefersToRole> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#refersToRole> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo-cat%3AhasFixedAmount> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#ChargeInformation> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#hasFixedAmount> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo-cat%3AhasPricePercentage> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#ChargeInformation> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#hasPricePercentage> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo-cat%3AisSubordinatedTo> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#ChargeInformation> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#isSubordinatedTo> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/epo-not%3AannouncesNoticeAwardInformation> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#ResultNotice> ;
+    och:removedDomainFromProperty <http://data.europa.eu/a4g/ontology#announcesNoticeAwardInformation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/time%3AnumericDuration> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#Duration> ;
+    och:removedDomainFromProperty <http://www.w3.org/2006/time#numericDuration> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveDomain/time%3AunitType> a och:RemoveDomain ;
+    och:removedDomain <http://data.europa.eu/a4g/ontology#IndefiniteDuration> ;
+    och:removedDomainFromProperty <http://www.w3.org/2006/time#unitType> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AannouncesContract> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#announcesContract> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AannouncesLot> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#announcesLot> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AannouncesLotAwardOutcome> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#announcesLotAwardOutcome> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AannouncesLotGroup> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#announcesLotGroup> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AannouncesLotGroupAwardInformation> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#announcesLotGroupAwardInformation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AannouncesNonPublishedElement> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#announcesNonPublishedElement> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AannouncesPlannedProcurementPart> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#announcesPlannedProcurementPart> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AannouncesProcedure> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#announcesProcedure> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AannouncesRole> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#announcesRole> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AannouncesTender> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#announcesTender> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AdependsOnBuyer> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#dependsOnBuyer> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AhasEstimatedBuyerConcessionRevenue> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#hasEstimatedBuyerConcessionRevenue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AhasEstimatedUserConcessionRevenue> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#hasEstimatedUserConcessionRevenue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AhasImplementingRegulation> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#hasImplementingRegulation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AhasLegalType> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#hasLegalType> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3AhasMainActivityType> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#hasMainActivityType> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3ArefersToContractToBeModified> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#refersToContractToBeModified> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3ArefersToLot> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#refersToLot> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3ArefersToLotGroup> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#refersToLotGroup> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3ArefersToProcedureTerm> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#refersToProcedureTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3ArefersToReviewTerm> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#refersToReviewTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo%3ArefersToRole> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#refersToRole> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo-cat%3AhasFixedAmount> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#hasFixedAmount> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo-cat%3AisSubordinatedTo> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#isSubordinatedTo> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/epo-not%3AannouncesNoticeAwardInformation> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://data.europa.eu/a4g/ontology#announcesNoticeAwardInformation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveObjectProperty/time%3AunitType> a och:RemoveObjectProperty ;
+    och:removedObjectProperty <http://www.w3.org/2006/time#unitType> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AannouncesContract> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#Contract> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#announcesContract> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AannouncesLot> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#Lot> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#announcesLot> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AannouncesLotAwardOutcome> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#LotAwardOutcome> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#announcesLotAwardOutcome> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AannouncesLotGroup> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#LotGroup> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#announcesLotGroup> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AannouncesLotGroupAwardInformation> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#LotGroupAwardInformation> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#announcesLotGroupAwardInformation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AannouncesNonPublishedElement> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#PublicationProvision> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#announcesNonPublishedElement> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AannouncesPlannedProcurementPart> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#PlannedProcurementPart> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#announcesPlannedProcurementPart> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AannouncesProcedure> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#Procedure> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#announcesProcedure> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AannouncesRole> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#AgentInRole> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#announcesRole> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AannouncesTender> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#Tender> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#announcesTender> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AdependsOnBuyer> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#Buyer> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#dependsOnBuyer> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AhasEstimatedBuyerConcessionRevenue> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#MonetaryValue> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#hasEstimatedBuyerConcessionRevenue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AhasEstimatedUserConcessionRevenue> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#MonetaryValue> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#hasEstimatedUserConcessionRevenue> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AhasImplementingRegulation> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://publications.europa.eu/resource/authority/implementation-regulation> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#hasImplementingRegulation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AhasLegalType> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://publications.europa.eu/resource/authority/buyer-legal-type> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#hasLegalType> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3AhasMainActivityType> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://publications.europa.eu/resource/authority/main-activity> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#hasMainActivityType> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3ArefersToContractToBeModified> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#Contract> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#refersToContractToBeModified> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3ArefersToLot> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#Lot> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#refersToLot> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3ArefersToLotGroup> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#LotGroup> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#refersToLotGroup> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3ArefersToProcedureTerm> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#ProcedureTerm> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#refersToProcedureTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3ArefersToReviewTerm> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#ReviewTerm> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#refersToReviewTerm> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo%3ArefersToRole> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#AgentInRole> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#refersToRole> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo-cat%3AhasFixedAmount> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#MonetaryValue> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#hasFixedAmount> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo-cat%3AisSubordinatedTo> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#Contract> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#isSubordinatedTo> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/epo-not%3AannouncesNoticeAwardInformation> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://data.europa.eu/a4g/ontology#NoticeAwardInformation> ;
+    och:removedRangeFromProperty <http://data.europa.eu/a4g/ontology#announcesNoticeAwardInformation> .
+
+<http://epo-changes.org/3.0.0-3.0.1/RemoveRangeObjectProperty/time%3AunitType> a och:RemoveRangeObjectProperty ;
+    och:removedObjectRange <http://www.w3.org/2006/time#TemporalUnit> ;
+    och:removedRangeFromProperty <http://www.w3.org/2006/time#unitType> .
+

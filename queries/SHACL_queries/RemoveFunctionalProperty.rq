@@ -1,0 +1,6 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#> 
+DELETE { 
+    ?propertyShape sh:maxCount 1 
+} WHERE { 
+    ?propertyShape sh:path <http://schema.org/gender> 
+}

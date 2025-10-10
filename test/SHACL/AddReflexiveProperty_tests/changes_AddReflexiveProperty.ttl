@@ -1,0 +1,11 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX och: <http://w3id.org/def/och#>
+PREFIX ex: <http://myexampleuri.org/data#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX schema: <http://schema.org/> 
+PREFIX ex: <http://myexampleuri.org/data#> 
+
+
+<http://myexampleuri/AddCharacteristic/testchange> rdf:type och:AddCharacteristic .
+<http://myexampleuri/AddCharacteristic/testchange> och:addedCharacteristic owl:ReflexiveProperty .
+<http://myexampleuri/AddCharacteristic/testchange> och:addedCharacteristicToProperty ex:knows .

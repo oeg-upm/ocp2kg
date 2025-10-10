@@ -1,0 +1,11 @@
+ PREFIX sh: <http://www.w3.org/ns/shacl#>
+ INSERT {
+    ?sourceShape sh:not [ sh:class <http://myexampleuri.org/data#Dog> ] .
+    ?targetShape sh:not [ sh:class <http://schema.org/Person> ] .
+ }
+ WHERE {
+   ?sourceShape a sh:NodeShape ;
+     sh:targetClass <http://schema.org/Person> .
+   ?targetShape a sh:NodeShape ;
+     sh:targetClass <http://myexampleuri.org/data#Dog> .
+}

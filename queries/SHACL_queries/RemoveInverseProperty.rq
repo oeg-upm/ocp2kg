@@ -1,0 +1,23 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX ex: <http://myexampleuri.org/data#>
+
+DELETE {
+    ?shapesource sh:path <http://schema.org/birthDate> ;
+                             sh:sparql ?constraintSource .
+    ?constraintSource a sh:SPARQLConstraint ;
+                                     sh:select "SELECT ?this WHERE { ?sub <http://schema.org/birthDate> ?obj . FILTER NOT EXISTS { ?obj <http://schema.org/gender> ?sub . } }" .
+    ?shapetarget sh:path <http://schema.org/gender> ;
+                             sh:sparql ?constraintTarget .
+    ?constraintTarget a sh:SPARQLConstraint ;
+                                     sh:select "SELECT ?this WHERE { ?sub <http://schema.org/gender> ?obj . FILTER NOT EXISTS { ?obj <http://schema.org/birthDate> ?sub . } }" .
+}
+WHERE {
+    ?shapesource sh:path <http://schema.org/birthDate> ;
+                             sh:sparql ?constraintSource .
+    ?constraintSource a sh:SPARQLConstraint ;
+                                     sh:select "SELECT ?this WHERE { ?sub <http://schema.org/birthDate> ?obj . FILTER NOT EXISTS { ?obj <http://schema.org/gender> ?sub . } }" .
+    ?shapetarget sh:path <http://schema.org/gender> ;
+                             sh:sparql ?constraintTarget .
+    ?constraintTarget a sh:SPARQLConstraint ;
+                                     sh:select "SELECT ?this WHERE { ?sub <http://schema.org/gender> ?obj . FILTER NOT EXISTS { ?obj <http://schema.org/birthDate> ?sub . } }" .
+}

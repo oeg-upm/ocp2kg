@@ -1,0 +1,28 @@
+ PREFIX sh: <http://www.w3.org/ns/shacl#>
+ DELETE {
+   ?nodeShape sh:property ?propertyShape .
+   ?propertyShape sh:path <http://myexampleuri.org/data#testproperty> ;
+                 sh:datatype <http://myexampleuri.org/data#testrange> .
+   ?propertyShape ?pp ?po .
+   ?list ?lp ?lo .
+   ?listItem ?listItemP ?listItemO .
+   ?restNode ?restP ?restO .
+ }
+ WHERE {
+   ?nodeShape a sh:NodeShape ;
+             sh:targetClass <http://myexampleuri.org/data#testdomain> ;
+             sh:property ?propertyShape .
+   ?propertyShape sh:path <http://myexampleuri.org/data#testproperty> ;
+                 sh:datatype <http://myexampleuri.org/data#testrange> .
+   OPTIONAL { ?propertyShape ?pp ?po .
+   OPTIONAL {
+       ?propertyShape ?listPred ?list .
+       FILTER(?listPred IN (sh:in, sh:or, sh:and, sh:xone))
+       ?list rdf:rest*/rdf:first ?listItem .
+       ?list ?lp ?lo .
+       OPTIONAL { ?listItem ?listItemP ?listItemO . }
+       ?list rdf:rest* ?restNode .
+       ?restNode ?restP ?restO .
+     }
+ }
+}

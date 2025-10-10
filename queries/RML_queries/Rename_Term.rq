@@ -1,0 +1,17 @@
+#### This is a specific case where the name of the term is changed to a different one without affecting any of the semantics involved. 
+
+DELETE {
+  ?s ?p ?o .
+}
+INSERT {
+  ?s_new ?p_new ?o_new .
+}
+WHERE {
+  {
+    ?s ?p ?o .
+    BIND(IF(?s = <%OLDTERM%>, <%NEWTERM%>, ?s) AS ?s_new)
+    BIND(IF(?p = <%OLDTERM%>, <%NEWTERM%>, ?p) AS ?p_new)
+    BIND(IF(?o = <%OLDTERM%>, <%NEWTERM%>, ?o) AS ?o_new)
+        FILTER(?s != ?s_new || ?p != ?p_new || ?o != ?o_new)
+  }
+}

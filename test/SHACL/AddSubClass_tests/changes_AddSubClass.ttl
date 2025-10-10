@@ -1,0 +1,8 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX och: <http://w3id.org/def/och#>
+PREFIX ex: <http://myexampleuri.org/data#>
+PREFIX schema: <http://schema.org/> 
+
+<http://myexampleuri/AddSubClass/testclass> rdf:type och:AddSubClass .
+<http://myexampleuri/AddSubClass/testclass> och:sourceAddSubClass schema:Student .
+<http://myexampleuri/AddSubClass/testclass> och:targetAddSubClass schema:Person .

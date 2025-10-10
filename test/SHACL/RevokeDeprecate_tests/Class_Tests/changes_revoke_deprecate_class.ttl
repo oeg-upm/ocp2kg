@@ -1,0 +1,8 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX och: <http://w3id.org/def/och#>
+PREFIX schema: <http://schema.org/>
+
+
+
+<http://myexampleuri/RevokeDeprecate/testchange> rdf:type och:RevokeDeprecate .
+<http://myexampleuri/RevokeDeprecate/testchange> och:undeprecatedElement schema:Person .

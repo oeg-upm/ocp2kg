@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "ocp2kg"
-version = "0.1"
+name = "ontoripple"
+version = "0.2.2"
 description = "Managing the evolution of associated knowledge graph assets"
 authors = ["Diego Conde-Herreros <diego.conde.herreros@upm.es>, David Chaves <david.chaves@usc.es>"]
 readme = "README.md"

@@ -1,0 +1,13 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX ex: <http://myexampleuri.org/data#>
+
+DELETE {
+    ?shapesource sh:disjoint <http://schema.org/gender> .
+    ?shapetarget sh:disjoint <http://schema.org/birthDate> .
+}
+WHERE {
+    ?shapesource sh:path <http://schema.org/birthDate> .
+    ?shapetarget sh:path <http://schema.org/gender> .
+    ?shapesource sh:disjoint <http://schema.org/gender> .
+    ?shapetarget sh:disjoint <http://schema.org/birthDate> .
+}

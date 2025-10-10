@@ -1,0 +1,11 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX och: <http://w3id.org/def/och#>
+PREFIX ex: <http://myexampleuri.org/data#>
+
+
+<http://myexampleuri/AddDataProperty/testproperty> rdf:type och:AddDataProperty .
+<http://myexampleuri/AddDataProperty/testproperty> och:addedDataProperty ex:testproperty .
+<http://myexampleuri/AddDomain/testdomain> och:addedDomainToProperty ex:testproperty .
+<http://myexampleuri/AddDomain/testdomain> och:addedDomain ex:testdomain .
+<http://myexampleuri/AddRange/testrange> och:addedRangeToProperty ex:testproperty .
+<http://myexampleuri/AddRange/testrange> och:addedDataRange ex:testrange.

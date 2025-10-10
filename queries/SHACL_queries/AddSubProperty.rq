@@ -1,0 +1,17 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX ex: <http://myexampleuri.org/data#>
+
+INSERT {
+    ?shapesub sh:sparql [
+                            a sh:SPARQLConstraint ;
+                            sh:select """
+                                SELECT ?this WHERE {
+                                    ?this <http://schema.org/birthDate> ?v .
+                                    FILTER NOT EXISTS { ?this <http://schema.org/gender> ?v }
+                                }
+                            """ ;
+                        ] .
+}
+WHERE {
+    ?shapesub sh:path <http://schema.org/birthDate> .
+}

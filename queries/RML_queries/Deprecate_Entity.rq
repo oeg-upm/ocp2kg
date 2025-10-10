@@ -1,0 +1,160 @@
+### This is made up of three distinct queries, one for classes, one for object properties, and one for data properties ###
+### 1. For classes, this is the Remove Class recommendation reused, it goes to review mappings as well, since being deprecated it may still be used or removed. 
+### This goes into the deprecated mappings graph.
+PREFIX rr: <http://www.w3.org/ns/r2rml#>
+PREFIX rml: <http://semweb.mmlab.be/ns/rml#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+CONSTRUCT {      
+    ?triples_map rdf:type rr:TriplesMap.      
+    ?triples_map rr:subjectMap ?subject.      
+    ?subject ?subject_term ?subject_value .      
+    ?subject rr:class <%CLASS%>.      
+    ?triples_map rml:logicalSource ?logical_source .      
+    ?logical_source ?logical_source_term ?logical_source_value .      
+    ?triples_map rr:predicateObjectMap ?pom.       
+    ?pom rr:predicate  ?predicate .
+    ?pom rr:predicateMap ?predicate_bn .
+    ?predicate_bn ?predicate_term ?predicate_value .       
+    ?pom rr:object ?object.
+    ?pom rr:objectMap ?object_bn.
+    ?object_bn ?object_term ?object_value.      
+    ?object_bn rr:parentTriplesMap ?parent_tm .       
+    ?object_bn rr:joinCondition ?join_condition .       
+    ?join_condition ?condition_term ?condition_value .       
+    ?parent_triples_map rr:predicateObjectMap ?parent_pom .       
+    ?parent_pom rr:predicate ?parent_predicate . 
+    ?parent_pom rr:predicateMap ?parent_predicate_bn . 
+    ?parent_predicate_bn ?parent_predicate_term ?parent_predicate_value .      
+    ?parent_pom rr:objectMap ?parent_object .       
+    ?parent_object rr:parentTriplesMap ?triples_map .       
+    ?parent_object rr:joinCondition ?parent_join_conditions .       
+    ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .
+}  WHERE {       
+    ?triples_map rdf:type rr:TriplesMap.      
+    ?triples_map rr:subjectMap ?subject.      
+    ?subject ?subject_term ?subject_value .      
+    ?subject rr:class <%CLASS%> .      
+    ?triples_map rml:logicalSource ?logical_source .      
+    ?logical_source ?logical_source_term ?logical_source_value .      
+    OPTIONAL {           
+        ?triples_map rr:predicateObjectMap ?pom.
+        OPTIONAL{
+        	?pom rr:predicate ?predicate . 
+        }
+        OPTIONAL { 
+       		?pom rr:predicateMap ?predicate_bn .          
+            ?predicate_bn ?predicate_term ?predicate_value . 
+        } 
+        OPTIONAL {
+        	?pom rr:object ?object .  
+        }
+        OPTIONAL { 
+            ?pom rr:objectMap ?object_bn .
+            ?object_bn ?object_term ?object_value. 
+        }          
+        OPTIONAL {              
+            ?object_bn rr:parentTriplesMap ?parent_tm .              
+            OPTIONAL {                   
+                ?object_bn rr:joinCondition ?join_condition .                   
+                ?join_condition ?condition_term ?condition_value .              
+            }          
+        }    
+    }      
+    OPTIONAL {           
+        ?parent_triples_map rr:predicateObjectMap ?parent_pom.          
+        OPTIONAL {
+            ?parent_pom rr:predicate ?parent_predicate .
+        }         
+        OPTIONAL {
+            ?parent_pom rr:predicateMap ?parent_predicate_bn.
+            ?parent_predicate_bn ?parent_predicate_term ?parent_predicate_value . 
+        }          
+        ?parent_pom rr:objectMap ?parent_object .
+        ?parent_object rr:parentTriplesMap ?triples_map .          
+        OPTIONAL {               
+            ?parent_object rr:joinCondition ?parent_join_conditions .               
+            ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .          
+        }      
+    }   
+}
+
+### 2. For for object properties , it goes to review mappings as well, since being deprecated it may still be used or removed. 
+### This goes into the deprecated mappings graph.
+
+# Removes %OBJECTPROPERTY% from %CLASS%. Extended version is also provided
+
+PREFIX rr: <http://www.w3.org/ns/r2rml#>
+
+DELETE { 
+    ?triplesmap rr:predicateObjectMap ?pom.
+    ?pom rr:predicate <%OBJECTPROPERTY%> . #if comes from the ontology, it's going to be always constant
+
+    ?pom rr:objectMap ?objectMap.
+    ?objectMap rr:parentTriplesMap ?parent_tm .
+    ?objectMap rr:joinCondition ?join_condition .
+    ?join_condition ?conditions ?condition_values .
+}
+WHERE {
+    ?triplesmap  rr:subjectMap ?subjectMap.
+    ?subjectMap rr:class <%CLASS%>.
+
+    ?triplesmap rr:predicateObjectMap ?pom.
+    ?pom rr:predicate <%OBJECTPROPERTY%> . #if comes from the ontology, it's going to be always constant
+
+    ?pom rr:objectMap ?objectMap.
+    ?objectMap rr:parentTriplesMap ?parent_tm .
+    ?objectMap rr:joinCondition ?join_condition .
+    ?join_condition ?conditions ?condition_values .
+        
+}
+
+
+
+# Extended version
+DELETE { 
+    ?triplesmap rr:predicateObjectMap ?pom.
+    ?pom rr:predicateMap ?predicate . #if comes from the ontology, it's going to be always constant
+    ?predicate rr:constant <%OBJECTPROPERTY%> .
+
+    ?pom rr:objectMap ?objectMap.
+    ?objectMap rr:parentTriplesMap ?parent_tm .
+    ?objectMap rr:joinCondition ?join_condition .
+    ?join_condition ?conditions ?condition_values .
+}
+WHERE {
+    ?triplesmap  rr:subjectMap ?subjectMap.
+    ?subjectMap rr:class <%CLASS%>.
+
+    ?triplesmap rr:predicateObjectMap ?pom.
+    ?pom rr:predicateMap ?predicate . #if comes from the ontology, it's going to be always constant
+    ?predicate rr:constant <%OBJECTPROPERTY%> .
+
+    ?pom rr:objectMap ?objectMap.
+    ?objectMap rr:parentTriplesMap ?parent_tm .
+    ?objectMap rr:joinCondition ?join_condition .
+    ?join_condition ?conditions ?condition_values .
+        
+}
+
+### 3. For data properties , it goes to review mappings as well, since being deprecated it may still be used or removed. 
+### This goes into the deprecated mappings graph.
+
+PREFIX rr: <http://www.w3.org/ns/rr#>
+PREFIX rml: <http://semweb.mmlab.be/ns/rml#>
+
+DELETE {
+    ?triplesMap rr:predicateObjectMap ?pom.
+    ?pom rr:predicate <%DATAPROPERTY%> .
+    ?pom ?object_property ?objectMap.
+    ?objectMap ?object_term ?objectValue .
+}
+WHERE {
+    ?triplesMap rr:subjectMap ?subjectMap.
+    ?subjectMap rr:class <%DOMAIN%> .
+    ?triplesMap rr:predicateObjectMap ?pom .
+    ?pom rr:predicate <%DATAPROPERTY%> .
+    ?pom rr:objectMap|rr:object ?objectMap .
+    OPTIONAL { ?objectMap rr:datatype <%RANGE%>} .
+    OPTIONAL { ?objectMap ?object_term ?objectValue } .
+}

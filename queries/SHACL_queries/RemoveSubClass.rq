@@ -1,0 +1,8 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+DELETE {
+  ?shape sh:targetClass ?subclass .
+}
+WHERE {
+  ?shape a sh:NodeShape ;
+         sh:targetClass ?parentClass, ?subclass .
+}

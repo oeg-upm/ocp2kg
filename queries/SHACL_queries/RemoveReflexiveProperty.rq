@@ -1,0 +1,21 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+
+DELETE {
+    ?propertyShape sh:sparql ?constraintNode .
+    ?constraintNode a sh:SPARQLConstraint ;
+                                 sh:select """
+                                     SELECT $this WHERE {
+                                         FILTER NOT EXISTS { $this <http://myexampleuri.org/data#knows> $this }
+                                     }
+                                 """ .
+}
+WHERE {
+    ?propertyShape sh:path <http://myexampleuri.org/data#knows> .
+    ?propertyShape sh:sparql ?constraintNode .
+    ?constraintNode a sh:SPARQLConstraint ;
+                                 sh:select """
+                                     SELECT $this WHERE {
+                                         FILTER NOT EXISTS { $this <http://myexampleuri.org/data#knows> $this }
+                                     }
+                                 """ .
+}

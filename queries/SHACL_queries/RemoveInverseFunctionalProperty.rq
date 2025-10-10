@@ -1,0 +1,15 @@
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX ex: <http://myexampleuri.org/data#>
+
+DELETE {
+    ?shape a sh:PropertyShape ;
+           sh:path ?pathbnode .
+    ?pathbnode sh:inversePath <http://schema.org/gender> .
+    ?shape sh:maxCount 1 .
+}
+WHERE {
+    ?shape a sh:PropertyShape ;
+           sh:path ?pathbnode .
+    ?pathbnode sh:inversePath <http://schema.org/gender> .
+    ?shape sh:maxCount 1 .
+}

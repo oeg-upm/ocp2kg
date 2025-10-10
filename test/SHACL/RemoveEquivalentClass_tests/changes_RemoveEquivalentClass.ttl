@@ -1,0 +1,8 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX och: <http://w3id.org/def/och#>
+PREFIX ex: <http://myexampleuri.org/data#>
+PREFIX schema: <http://schema.org/> 
+
+<http://myexampleuri/RemoveEquivalentClass/testchange> rdf:type och:RemoveEquivalentClass .
+<http://myexampleuri/RemoveEquivalentClass/testchange> och:sourceRemoveEquivalentClass schema:Human .
+<http://myexampleuri/RemoveEquivalentClass/testchange> och:targetRemoveEquivalentClass schema:Person .
