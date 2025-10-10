@@ -1,0 +1,39 @@
+name: Publish ontoripple to PyPI on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Poetry
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry update
+
+      - name: Install dependencies (no dev)
+        run: poetry install --no-root --only main
+
+      - name: Build distributions
+        run: poetry build
+
+      - name: Publish to PyPI
+        env:
+          # Add this secret in your repo: Settings → Secrets and variables → Actions
+          # Name it PYPI_API_TOKEN and paste the token from PyPI (starts with "pypi-")
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_API_TOKEN }}
+        run: poetry publish --no-interaction
