@@ -1,5 +1,4 @@
 import os
-import sys
 import unittest
 from rdflib import Graph, compare
 RML_URI = 'http://semweb.mmlab.be/ns/rml#'

@@ -18,8 +18,8 @@ class TestRemoveDataProperty01(unittest.TestCase):
         review_mappings = Graph()
         updated_mapping, updated_shapes = ontoripple.propagate(change_data, old_mapping, review_mappings, ontology,None)
         expected_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'expected_mapping_RemoveDataProperty.ttl'))
-        #updated_mapping.serialize(destination=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'output1.ttl'), format='turtle')
         self.assertEqual(compare.isomorphic(expected_mapping,updated_mapping),True)
+
 if __name__ == "__main__":
     unittest.main()
     print("Tests RemoveDataProperty Passed")

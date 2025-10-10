@@ -21,8 +21,6 @@ class TestAddSubClass01(unittest.TestCase):
         expected_mapping = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'expected_mapping_AddSubClass.ttl'))
         expected_iso= compare.to_isomorphic(expected_mapping)
         output_iso= compare.to_isomorphic(updated_mapping)
-        expected_iso.serialize(destination=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'output1.ttl'), format='turtle')
-        output_iso.serialize(destination=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'output2.ttl'), format='turtle')
         self.assertEqual(compare.isomorphic(expected_iso,output_iso),True)
 
 if __name__ == "__main__":
