@@ -22,7 +22,7 @@ FORMATS_URI = 'http://www.w3.org/ns/formats/'
 VOID_URI = 'http://rdfs.org/ns/void#'
 FNML_URI = 'http://semweb.mmlab.be/ns/fnml#'
 GREL_URI = 'http://users.ugent.be/~bjdmeest/function/grel.ttl#'
-OCH_URI = 'https://w3id.org/def/och#'
+OCH_URI = 'http://w3id.org/def/och#'
 
 R2RML_PREFIX = 'rr'
 RML_PREFIX = 'rml'
@@ -117,7 +117,7 @@ SHACL_EQUALS = f'{SHACL_PREFIX}:equals'
 ##############################################################################
 #############################   D2RQ CONSTANTS  ##############################
 ##############################################################################
-D2RQ_DATABASE_CLASS = 'd2rq:Database'
+D2RQ_DATABASE_CLASS = 'd2rq:Database'#
 D2RQ_DSN = 'd2rq:jdbcDSN'
 D2RQ_DRIVER = 'd2rq:jdbcDriver'
 D2RQ_USER = 'd2rq:username'

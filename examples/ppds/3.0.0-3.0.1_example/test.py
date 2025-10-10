@@ -10,8 +10,8 @@ import ontoripple
 
 change_data = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'change_data_3.0.1.ttl'), format='turtle')
 old_mappings = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ePO_mappings.rml.ttl'), format='turtle')
-old_shapes = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ePO_shacl_shapes_3.0.0.rdf'), format='xml')
-ontology = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ePO_owl_core_3.0.1.rdf'), format='xml')
+old_shapes = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ePO_shacl_shapes_3.0.0.xml'), format='xml')
+ontology = Graph().parse(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'ePO_owl_core_3.0.1.xml'), format='xml')
 updated_mapping, updated_shapes =   ontoripple.propagate(change_data, old_mappings, None, ontology, old_shapes)
 updated_shapes.serialize(destination=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'updated_shapes.ttl'), format='turtle')
 updated_mapping.serialize(destination=os.path.join(os.path.dirname(os.path.realpath(__file__)), 'updated_mappings.ttl'), format='turtle')

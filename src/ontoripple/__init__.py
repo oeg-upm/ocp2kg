@@ -36,10 +36,11 @@ def propagate(change_data, output_mappings, review_mappings, ontology, output_sh
 
     for change_type in changes_order:
 
-        q = f'  SELECT DISTINCT ?change WHERE {{ ' \
+        q = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f'  SELECT DISTINCT ?change WHERE {{ ' \
             f'  ?change {RDF_TYPE} {URIRef(change_type)} . }}'
-        #print(q)
         for change_result in change_data.query(q):
+            change_result.change = change_result["change"]
             if URIRef(change_type) == URIRef(OCH_ADD_CLASS):
                 if output_mappings is not None:
                     add_class_rml(change_result["change"], change_data, output_mappings)

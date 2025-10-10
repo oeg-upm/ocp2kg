@@ -342,8 +342,7 @@
 <http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-cat%3AisSubordinatedToContract> <https://w3id.org/def/och#addedObjectRange> <http://data.europa.eu/a4g/ontology#Contract> .
 <http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/comprisesCatalogueLine> <https://w3id.org/def/och#addedObjectRange> <http://data.europa.eu/a4g/ontology#CatalogueLine> .
 <http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3ArefersToLot> <https://w3id.org/def/och#addedObjectRange> <http://data.europa.eu/a4g/ontology#Lot> .
-<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AhasEstimatedUserConcessionRevenue> <https://w3id.org/def/och#addedObjectRange> <http://data.europa.eu/a4g/ontology#MonetaryValue
-> .
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AhasEstimatedUserConcessionRevenue> <https://w3id.org/def/och#addedObjectRange> <http://data.europa.eu/a4g/ontology#MonetaryValue> .
 <http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3AannouncesContract> <https://w3id.org/def/och#addedObjectRange> <http://data.europa.eu/a4g/ontology#Contract> .
 <http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AforeseesConcession> <https://w3id.org/def/och#addedObjectRange> <http://data.europa.eu/a4g/ontology#ConcessionEstimate> .
 <http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AhasQualificationSystemDuration> <https://w3id.org/def/och#addedObjectRange> <http://data.europa.eu/a4g/ontology#Duration> .
@@ -354,8 +353,7 @@
 <http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AdefinesContractDuration> <https://w3id.org/def/och#addedObjectRange> <http://data.europa.eu/a4g/ontology#Duration> .
 <http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3AannouncesRole> <https://w3id.org/def/och#addedObjectRange> <http://data.europa.eu/a4g/ontology#AgentInRole> .
 <http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3AannouncesLotGroup> <https://w3id.org/def/och#addedObjectRange> <http://data.europa.eu/a4g/ontology#LotGroup> .
-<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AhasEstimatedBuyerConcessionRevenue> <https://w3id.org/def/och#addedObjectRange> <http://data.europa.eu/a4g/ontology#MonetaryValue
-> .
+<http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AhasEstimatedBuyerConcessionRevenue> <https://w3id.org/def/och#addedObjectRange> <http://data.europa.eu/a4g/ontology#MonetaryValue> .
 <http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3ArefersToLotGroup> <https://w3id.org/def/och#addedObjectRange> <http://data.europa.eu/a4g/ontology#LotGroup> .
 <http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo%3AhasMainActivity> <https://w3id.org/def/och#addedObjectRange> <http://publications.europa.eu/resource/authority/main-activity> .
 <http://epo-changes.org/3.0.0-3.0.1/AddRangeObjectProperty/epo-not%3ArefersToRole> <https://w3id.org/def/och#addedObjectRange> <http://data.europa.eu/a4g/ontology#AgentInRole> .

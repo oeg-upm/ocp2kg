@@ -1,7 +1,7 @@
 # OntoRipple: A Tool to Propagate Changes to Semantic Artifacts.
-![GitHub](https://github.com/oeg-upm/OntoRipple/tree/main)
+![GitHub]![GitHub](https://img.shields.io/github/license/oeg-upm/ontoripple?style=flat)
 [![DOI](https://zenodo.org/badge/690501188.svg)](https://zenodo.org/doi/10.5281/zenodo.11244236)
-![GitHub Release](https://img.shields.io/github/v/release/oeg-upm/ocp2kg)
+![GitHub Release](https://img.shields.io/github/v/release/oeg-upm/ontoripple)
 
 
 OntoRipple is a tool for propagating ontology changes to declarative mappings in [RML](https://kg-construct.github.io/rml-resources/portal/), and validation shapes in [SHACL](https://www.w3.org/TR/shacl/).  The tool requires as input the updated version of the ontology in OWL, the outdated mappings in RML if there are, the outdated shapes in SHACL if there are, and the change data, that has to be in RDF, and compliant with the [OWL Change Ontology](https://w3id.org/def/och) model.  

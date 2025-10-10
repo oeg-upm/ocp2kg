@@ -1,5 +1,6 @@
 
 from rdflib import Graph, URIRef, Variable
+import rdflib
 from . import propagate
 import yatter
 import argparse
@@ -20,7 +21,7 @@ def define_args():
 
 if __name__ == "__main__":
     args = define_args().parse_args()
-    change_data = Graph().parse(args.changes_kg_path, format="ttl")
+    change_data = Graph().parse(args.changes_kg_path, format=rdflib.util.guess_format(args.changes_kg_path))
 
     # Case 1: Both mapping and SHACL parameters are provided
     if (
@@ -33,18 +34,18 @@ if __name__ == "__main__":
             logger.info("Loading old mapping rules from YARRRML using YATTER")
             yaml = YAML(typ='safe', pure=True)
             output_mappings = Graph().parse(
-                yatter.translate(yaml.load(open(args.old_mapping_path)), RML_URI), format="ttl"
+                yatter.translate(yaml.load(open(args.old_mapping_path)), RML_URI), format=rdflib.util.guess_format(args.old_mapping_path)
             )
         else:
-            output_mappings = Graph().parse(args.old_mapping_path, format="ttl")
+            output_mappings = Graph().parse(args.old_mapping_path, format=rdflib.util.guess_format(args.old_mapping_path))
         ontology = None
         if args.ontology_path:
             ontology = Graph().parse(args.ontology_path)
 
         logger.info("Starting the propagation of changes over RML mappings and SHACL shapes")
         review_mappings = Graph()
-        output_shapes = Graph().parse(args.old_shacl_path, format="ttl")
-        
+        output_shapes = Graph().parse(args.old_shacl_path, format=rdflib.util.guess_format(args.old_shacl_path))
+
         new_mapping,new_shapes = propagate(change_data, output_mappings, review_mappings, ontology, output_shapes)
         new_mapping.serialize(destination=args.new_mappings_path)
         new_shapes.serialize(destination=args.new_shapes_path)
@@ -63,10 +64,10 @@ if __name__ == "__main__":
             logger.info("Loading old mapping rules from YARRRML using YATTER")
             yaml = YAML(typ='safe', pure=True)
             output_mappings = Graph().parse(
-                yatter.translate(yaml.load(open(args.old_mapping_path)), RML_URI), format="ttl"
+                yatter.translate(yaml.load(open(args.old_mapping_path)), RML_URI), format=rdflib.util.guess_format(args.old_mapping_path)
             )
         else:
-            output_mappings = Graph().parse(args.old_mapping_path, format="ttl")
+            output_mappings = Graph().parse(args.old_mapping_path, format=rdflib.util.guess_format(args.old_mapping_path))
 
         ontology = None
         if args.ontology_path:
@@ -86,7 +87,7 @@ if __name__ == "__main__":
     # Case 3: Only SHACL parameters are provided
     elif args.old_shacl_path and args.new_shapes_path:
         logger.info("Starting the propagation of changes over the SHACL shapes")
-        output_shapes = Graph().parse(args.old_shacl_path, format="ttl")
+        output_shapes = Graph().parse(args.old_shacl_path, format=rdflib.util.guess_format(args.old_shacl_path))
         ontology = None
         if args.ontology_path:
             ontology = Graph().parse(args.ontology_path)

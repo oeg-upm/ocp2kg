@@ -2,7 +2,6 @@ from rdflib import URIRef, Variable
 from .constants import *
 import os
 
-
 # ---------------------------------------------------------------------------------------------------------------------------
 
 def add_class_rml(change, change_data, output_mappings):
@@ -14,14 +13,17 @@ def add_class_rml(change, change_data, output_mappings):
     Returns:
         the output_mappings updated with a new class
     """
-    select_change = f' SELECT DISTINCT ?class WHERE {{' \
+    select_change = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+                    f' SELECT DISTINCT ?class WHERE {{' \
                     f' <{change}> {OCH_ADDED_CLASS} ?class .}} '
-
+    #print(select_change)
     results = change_data.query(select_change)
     added_class = results.bindings[0][Variable('class')]
-    check_query = f'ASK {{  ?triples_map {RDF_TYPE} {R2RML_TRIPLES_MAP} .' \
+    check_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
+                  f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
+                  f'ASK {{  ?triples_map {RDF_TYPE} {R2RML_TRIPLES_MAP} .' \
                   f'        ?triples_map {R2RML_SUBJECT} ?subject . ' \
-                  f'        ?subject {R2RML_CLASS} {added_class} }}'
+                  f'        ?subject {R2RML_CLASS} <{added_class}> }}'
     #print(check_query)
     check_res = output_mappings.query(check_query)
     if not check_res.askAnswer:
@@ -59,7 +61,8 @@ def remove_class_rml(change,change_data, output_mappings, review_mappings, ontol
         Returns:
             the output_mappings updated with the data
         """
-    query = f' SELECT DISTINCT ?class_name WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?class_name WHERE {{ ' \
             f'      <{change}> {OCH_DELETED_CLASS} ?class_name . }}'
 
     for result in change_data.query(query):
@@ -211,7 +214,8 @@ def add_super_class_rml(change,change_data, output_mappings):
     """
     super_class = None
     sub_class = None
-    query = f' SELECT DISTINCT ?super_class ?sub_class WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?super_class ?sub_class WHERE {{ ' \
             f'      <{change}> {OCH_ADD_SUBCLASS_SOURCE} ?sub_class. ' \
             f'      <{change}> {OCH_ADD_SUBCLASS_TARGET} ?super_class. }}'
 
@@ -227,61 +231,6 @@ def add_super_class_rml(change,change_data, output_mappings):
         #print(insert_super_class_query)
         output_mappings.update(insert_super_class_query)
 
-    # Query that takes the Predicate Object Maps from the parent class triples map and inserts them into the child triples map.
-    """"
-    insert_super_class_pom_query =  f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
-                                    f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
-                                    f' INSERT {{' \
-                                    f'      ?subclass_triples_map {R2RML_PREDICATE_OBJECT_MAP} ?pom. ' \
-                                    f'      ?pom ?predicate_property ?predicate . ' \
-                                    f'      ?predicate ?predicate_term ?predicate_value . ' \
-                                    f'      ?pom ?object_property ?object. ' \
-                                    f'      ?object ?object_term ?object_value.' \
-                                    f'      ?object {R2RML_PARENT_TRIPLESMAP} ?parent_tm . ' \
-                                    f'      ?object {R2RML_JOIN_CONDITION} ?join_condition . ' \
-                                    f'      ?join_condition ?condition_term ?condition_value . ' \
-                                    f'      ?parent_triples_map {R2RML_PREDICATE_OBJECT_MAP} ?parent_pom . ' \
-                                    f'      ?parent_pom ?parent_predicate_property ?parent_predicate .' \
-                                    f'      ?parent_predicate ?parent_predicate_term ?parent_predicate_value .' \
-                                    f'      ?parent_pom {R2RML_OBJECT} ?parent_object . ' \
-                                    f'      ?parent_object {R2RML_PARENT_TRIPLESMAP} ?triples_map . ' \
-                                    f'      ?parent_object {R2RML_JOIN_CONDITION} ?parent_join_conditions.'\
-                                    f'      ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .}} '\
-                                    f' WHERE {{ ' \
-                                    f'      ?subclass_triples_map {R2RML_SUBJECT} ?subclass_subject.' \
-                                    f'      ?subclass_subject {R2RML_CLASS} <{sub_class}>.' \
-                                    f'      ?triples_map {R2RML_SUBJECT} ?subject.' \
-                                    f'      ?subject {R2RML_CLASS} <{super_class}> .' \
-                                    f'      OPTIONAL {{ ' \
-                                    f'          ?triples_map {R2RML_PREDICATE_OBJECT_MAP} ?pom.' \
-                                    f'          ?pom {R2RML_SHORTCUT_PREDICATE}|{R2RML_PREDICATE} ?predicate .' \
-                                    f'          OPTIONAL {{ ?predicate ?predicate_term ?predicate_value . }}' \
-                                    f'          ?pom {R2RML_SHORTCUT_OBJECT}|{R2RML_OBJECT} ?object .' \
-                                    f'          OPTIONAL {{ ?object ?object_term ?object_value. }}' \
-                                    f'          OPTIONAL {{' \
-                                        f'              ?object {R2RML_PARENT_TRIPLESMAP} ?parent_tm .' \
-                                        f'              OPTIONAL {{ ' \
-                                        f'                  ?object {R2RML_JOIN_CONDITION} ?join_condition . ' \
-                                        f'                  ?join_condition ?condition_term ?condition_value .' \
-                                        f'              }}' \
-                                        f'          }}' \
-                                        f'      }} ' \
-                                        f'      OPTIONAL {{ ' \
-                                        f'          ?parent_triples_map {R2RML_PREDICATE_OBJECT_MAP} ?parent_pom.' \
-                                        f'          ?parent_pom {R2RML_SHORTCUT_PREDICATE}|{R2RML_PREDICATE} ?parent_predicate .' \
-                                        f'          OPTIONAL {{ ?parent_predicate ?parent_predicate_term ?parent_predicate_value . }}' \
-                                    f'          ?parent_pom {R2RML_OBJECT} ?parent_object .' \
-                                    f'          ?parent_object {R2RML_PARENT_TRIPLESMAP} ?triples_map .' \
-                                    f'          OPTIONAL {{ ' \
-                                    f'              ?parent_object {R2RML_JOIN_CONDITION} ?parent_join_conditions . ' \
-                                        f'              ?parent_join_conditions ?parent_condition_term ?parent_conditions_value .' \
-                                        f'          }}' \
-                                        f'      }} ' \
-                                        f'  }}'
-        print(insert_super_class_pom_query)
-        output_mappings.update(insert_super_class_pom_query)
-"""
-
 # --------------------------------------------------------------------------------------------------------------
 def remove_super_class_rml(change,change_data, output_mappings):
     """
@@ -292,7 +241,8 @@ def remove_super_class_rml(change,change_data, output_mappings):
            the output_mappings updated with the TriplesMap of child removing the parent class and its properties
     """
     # When removing the subclass relationship between two classes the child one loses the parent in the rr:class part.
-    query = f'SELECT DISTINCT ?super_class ?sub_class WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f'  SELECT DISTINCT ?super_class ?sub_class WHERE {{ ' \
             f' <{change}> {OCH_REMOVE_SUBCLASS_SOURCE} ?sub_class.' \
             f' <{change}> {OCH_REMOVE_SUBCLASS_TARGET} ?super_class. }}'
 
@@ -308,68 +258,6 @@ def remove_super_class_rml(change,change_data, output_mappings):
         #print(delete_super_class_query)
         output_mappings.update(delete_super_class_query)
 
-        #Query that takes the Predicate Object Maps from the parent class triples map and inserts them into the child triples map.
-        """
-        remove_super_class_pom_query =  f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
-                                        f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
-                                        f' DELETE {{' \
-                                        f'      ?subclass_triples_map {R2RML_PREDICATE_OBJECT_MAP} ?pom. ' \
-                                        f'      ?pom {R2RML_SHORTCUT_PREDICATE} ?parent_predicate . ' \
-                                        f'      ?pom {R2RML_PREDICATE} ?predicate_bn . ' \
-                                        f'      ?predicate_bn ?parent_predicate_term ?parent_predicate_value . ' \
-                                        f'      ?pom {R2RML_SHORTCUT_OBJECT} ?parent_object. ' \
-                                        f'      ?pom {R2RML_OBJECT} ?object_bn . ' \
-                                        f'      ?object_bn ?parent_object_term ?parent_object_value.' \
-                                        f'      ?object_bn {R2RML_PARENT_TRIPLESMAP} ?parent_tm . ' \
-                                        f'      ?object_bn {R2RML_JOIN_CONDITION} ?join_condition . ' \
-                                        f'      ?join_condition ?parent_condition_term ?parent_condition_value . }} ' \
-                                        f' WHERE {{ ' \
-                                        f'      ?subclass_triples_map {R2RML_SUBJECT} ?subclass_subject.' \
-                                        f'      ?subclass_subject {R2RML_CLASS} <{sub_class}>.' \
-                                        f'      ?parent_triples_map {R2RML_SUBJECT} ?parent_subject.' \
-                                        f'      ?parent_subject {R2RML_CLASS} <{super_class}> .' \
-                                        f'      OPTIONAL {{ ' \
-                                        f'          ?subclass_triples_map {R2RML_PREDICATE_OBJECT_MAP} ?pom.' \
-                                        f'          OPTIONAL {{?pom {R2RML_SHORTCUT_PREDICATE} ?parent_predicate }}' \
-                                        f'          OPTIONAL {{ '\
-                                        f'                    ?pom {R2RML_PREDICATE} ?predicate_bn . ' \
-                                        f'                    ?predicate_bn ?parent_predicate_term ?parent_predicate_value . }}' \
-                                        f'          OPTIONAL {{?pom {R2RML_SHORTCUT_OBJECT} ?parent_object }}' \
-                                        f'          OPTIONAL {{ '\
-                                        f'                     ?pom {R2RML_OBJECT} ?object_bn . ' \
-                                        f'                     ?object_bn ?parent_object_term ?parent_object_value. ' \
-                                        f'                      OPTIONAL {{' \
-                                        f'                          ?object_bn {R2RML_PARENT_TRIPLESMAP} ?parent_tm .' \
-                                        f'                          OPTIONAL {{ ' \
-                                        f'                              ?object_bn {R2RML_JOIN_CONDITION} ?join_condition . ' \
-                                        f'                              ?join_condition ?parent_condition_term ?parent_condition_value .' \
-                                        f'                          }}' \
-                                        f'                      }}' \
-                                        f'          }} ' \
-                                        f'      }} ' \
-                                        f'      OPTIONAL {{ ' \
-                                        f'          ?parent_triples_map {R2RML_PREDICATE_OBJECT_MAP} ?parent_pom.' \
-                                        f'          OPTIONAL {{?parent_pom {R2RML_SHORTCUT_PREDICATE} ?parent_predicate }}' \
-                                        f'          OPTIONAL {{ '\
-                                        f'                    ?parent_pom {R2RML_PREDICATE} ?parent_predicate_bn . ' \
-                                        f'                    ?parent_predicate_bn ?parent_predicate_term ?parent_predicate_value . }}' \
-                                        f'          OPTIONAL {{?parent_pom {R2RML_SHORTCUT_OBJECT} ?parent_object }}' \
-                                        f'          OPTIONAL {{ '\
-                                        f'                     ?parent_pom {R2RML_OBJECT} ?parent_object_bn . ' \
-                                        f'                     ?parent_object_bn ?parent_object_term ?parent_object_value. ' \
-                                        f'                      OPTIONAL {{' \
-                                        f'                          ?parent_object_bn {R2RML_PARENT_TRIPLESMAP} ?parent_tm .' \
-                                        f'                          OPTIONAL {{ ' \
-                                        f'                              ?object_bn_bn {R2RML_JOIN_CONDITION} ?parent_join_condition . ' \
-                                        f'                              ?parent_join_condition ?parent_condition_term ?parent_condition_value .' \
-                                        f'                          }}' \
-                                        f'                      }}' \
-                                        f'          }} ' \
-                                        f'      }} ' \
-                                        f'  }}'
-        print(remove_super_class_pom_query)
-        output_mappings.update(remove_super_class_pom_query)
-    """
 
 def add_object_property_rml(change, change_data, output_mappings):
     """
@@ -379,7 +267,8 @@ def add_object_property_rml(change, change_data, output_mappings):
        Returns:
            the output_mappings updated with the added predicate object maps. 
     """
-    query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
             f' <{change}> {OCH_ADDED_OBJECT_PROPERTY} ?property .' \
             f' ?domainchange {OCH_ADDED_DOMAIN_TO_PROPERTY} ?property.' \
             f' ?domainchange {OCH_ADDED_DOMAIN} ?domain.' \
@@ -418,7 +307,8 @@ def remove_object_property_rml(change, change_data, output_mappings):
         Returns:
            the output_mappings updated with the reference predicate object mapping removed
     """
-    query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
             f' <{change}> {OCH_REMOVED_OBJECT_PROPERTY} ?property .' \
             f' ?domainchange {OCH_REMOVED_DOMAIN_TO_PROPERTY} ?property.' \
             f' ?domainchange {OCH_REMOVED_DOMAIN} ?domain.' \
@@ -463,7 +353,8 @@ def add_data_property_rml(change,change_data, output_mappings):
        Returns:
            the output_mappings updated with the new predicate object map with empty reference
     """
-    query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
             f' <{change}> {OCH_ADDED_DATA_PROPERTY} ?property .' \
             f' ?domainchange {OCH_ADDED_DOMAIN_TO_PROPERTY} ?property.' \
             f' ?domainchange {OCH_ADDED_DOMAIN} ?domain.' \
@@ -499,7 +390,8 @@ def remove_data_property_rml(change,change_data, output_mappings):
         Returns:
            the output_mappings updated with the predicate object mapping removed
     """
-    query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
             f' <{change}> {OCH_REMOVED_DATA_PROPERTY} ?property .' \
             f' ?domainchange {OCH_REMOVED_DOMAIN_TO_PROPERTY} ?property.' \
             f' ?domainchange {OCH_REMOVED_DOMAIN} ?domain.' \
@@ -542,7 +434,8 @@ def deprecate_entity_rml(change,change_data, output_mappings, deprecated_mapping
        Args:
            change: the URI of the change which needs to be of the type deprecate_entity 
     """
-    query = f' SELECT DISTINCT ?entity WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?entity WHERE {{ ' \
             f' <{change}> {OCH_DEPRECATED_ENTITY} ?entity. }}'
     #print(query)
     for result in change_data.query(query):
@@ -780,13 +673,16 @@ def deprecate_entity_rml(change,change_data, output_mappings, deprecated_mapping
                         f'     OPTIONAL {{ ?objectMap {R2RML_DATATYPE} ?range}}  }} . }}'
                 output_mappings.update(query)
 
+# -------------------------------------------------------------------------------------------------------------------------
+
 def revoke_deprecate_entity_rml(change, change_data, output_mappings, deprecated_mappings, ontology):
     """
        Reverts the deprecation of an entity in the knowledge graph by restoring its triples map and its subject from deprecated_mappings.
        Args:
            change: the URI of the change which needs to be of the type revoke_deprecate_entity 
     """
-    query = f' SELECT DISTINCT ?entity WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?entity WHERE {{ ' \
             f' <{change}> {OCH_UNDEPRECATED_ELEMENT} ?entity. }}'
     #print(query)
     for result in change_data.query(query):
@@ -921,7 +817,8 @@ def rename_entity(change, change_data, output_mappings):
     Args:
        change: the URI of the change which needs to be of the type RenameEntity
     """
-    query = f'SELECT DISTINCT ?old_entity ?new_entity WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f'SELECT DISTINCT ?old_entity ?new_entity WHERE {{ ' \
             f'<{change}> {OCH_OLD_NAME} ?old_entity. ' \
             f'<{change}> {OCH_NEW_NAME} ?new_entity. }}'
     for result in change_data.query(query):
@@ -948,7 +845,8 @@ def deprecate_entity_shacl(change,change_data,output_shacl):
        Args:
            change: the URI of the change which needs to be of the type deprecate_entity 
     """
-    query = f' SELECT DISTINCT ?entity WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?entity WHERE {{ ' \
             f' <{change}> {OCH_DEPRECATED_ENTITY} ?entity. }}'
     #print(query)
     for result in change_data.query(query):
@@ -981,7 +879,8 @@ def revoke_deprecate_entity_shacl(change,change_data,output_shacl):
        Args:
            change: the URI of the change which needs to be of the type revoke_deprecate_entity 
     """
-    query = f' SELECT DISTINCT ?entity WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?entity WHERE {{ ' \
             f' <{change}> {OCH_UNDEPRECATED_ELEMENT} ?entity. }}'
     #print(query)
     for result in change_data.query(query):
@@ -1015,7 +914,8 @@ def add_class_shacl(change, change_data, output_shapes):
     Returns:
         the output_shapes updated with a new class
     """
-    select_change = f' SELECT DISTINCT ?class WHERE {{' \
+    select_change = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+                    f' SELECT DISTINCT ?class WHERE {{' \
                     f' <{change}> {OCH_ADDED_CLASS} ?class .}} '
 
     for result in change_data.query(select_change):
@@ -1045,7 +945,8 @@ def remove_class_shacl(change, change_data, output_mappings):
     Returns:
         the output_shapes updated with the class and its related shapes removed
     """
-    select_change = f' SELECT DISTINCT ?class WHERE {{' \
+    select_change = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+                    f' SELECT DISTINCT ?class WHERE {{' \
                     f' <{change}> {OCH_DELETED_CLASS} ?class .}} '
     
     for result in change_data.query(select_change):
@@ -1065,8 +966,7 @@ def remove_class_shacl(change, change_data, output_mappings):
             f'          {SHACL_TARGET_CLASS} <{removed_class}> ;\n'
             f'          ?p ?o .\n'
             f'   OPTIONAL {{\n'
-            f'     ?shape {SHACL_PROPERTY_SHAPE} ?propShape .\n'
-            f'     FILTER (isBlank(?propShape))\n'
+            f'     ?shape {SHACL_PROPERTY} ?propShape .\n'
             f'     ?propShape ?pp ?po .\n'
             f'     OPTIONAL {{\n'
             f'       ?propShape ?listPred ?list .\n'
@@ -1093,6 +993,7 @@ def add_super_class_shacl(change, change_data, output_shapes):
         The output_shapes updated with the NodeShape of the superclass including the subclass as targetClass.
     """
     query = (
+        f'  PREFIX och: <http://w3id.org/def/och#> ' \
         f' SELECT DISTINCT ?super_class ?sub_class WHERE {{ '
         f'   <{change}> {OCH_ADD_SUBCLASS_SOURCE} ?sub_class. '
         f'   <{change}> {OCH_ADD_SUBCLASS_TARGET} ?super_class. }}'
@@ -1122,6 +1023,7 @@ def remove_super_class_shacl(change, change_data, output_shapes):
         The output_shapes updated with the NodeShape of the superclass not including the subclass as targetClass.
     """
     query = (
+        f'  PREFIX och: <http://w3id.org/def/och#> ' \
         f' SELECT DISTINCT ?super_class ?sub_class WHERE {{ '
         f'   <{change}> {OCH_REMOVE_SUBCLASS_SOURCE} ?sub_class. '
         f'   <{change}> {OCH_REMOVE_SUBCLASS_TARGET} ?super_class. }}'
@@ -1150,6 +1052,7 @@ def add_equivalent_class_shacl(change, change_data, output_shapes):
         The output_shapes updated with the NodeShape of the class including the equivalent class as targetClass.
     """
     query = (
+        f' PREFIX och: <http://w3id.org/def/och#> ' \
         f' SELECT DISTINCT ?source_class ?target_class WHERE {{ '
         f'   <{change}> {OCH_ADD_EQUIVALENT_CLASS_SOURCE} ?source_class. '
         f'   <{change}> {OCH_ADD_EQUIVALENT_CLASS_TARGET} ?target_class. }}'
@@ -1186,6 +1089,7 @@ def remove_equivalent_class_shacl(change, change_data, output_shapes):
         The output_shapes updated with the NodeShape of the class excluding the equivalent class as targetClass.
     """
     query = (
+        f'  PREFIX och: <http://w3id.org/def/och#> ' \
         f' SELECT DISTINCT ?source_class ?target_class WHERE {{ '
         f'   <{change}> {OCH_REMOVE_EQUIVALENT_CLASS_SOURCE} ?source_class. '
         f'   <{change}> {OCH_REMOVE_EQUIVALENT_CLASS_TARGET} ?target_class. }}'
@@ -1223,6 +1127,7 @@ def add_disjoint_class_shacl(change, change_data, output_shapes):
         The output_shapes updated with the constraints that enforce the disjointness of the classes.
     """
     query = (
+        f'  PREFIX och: <http://w3id.org/def/och#> ' \
         f' SELECT DISTINCT ?source_class ?target_class WHERE {{ '
         f'   <{change}> {OCH_ADD_DISJOINT_CLASS_SOURCE} ?source_class. '
         f'   <{change}> {OCH_ADD_DISJOINT_CLASS_TARGET} ?target_class. }}'
@@ -1243,7 +1148,7 @@ def add_disjoint_class_shacl(change, change_data, output_shapes):
             f'     {SHACL_TARGET_CLASS} <{target_class}> .\n'
             f'}}'
         )
-        print(add_disjoint_class_query)
+        #print(add_disjoint_class_query)
         output_shapes.update(add_disjoint_class_query)
 
 def remove_disjoint_class_shacl(change, change_data, output_shapes):
@@ -1255,6 +1160,7 @@ def remove_disjoint_class_shacl(change, change_data, output_shapes):
         The output_shapes updated without the constraints that enforce the disjointness of the classes.
     """
     query = (
+        f'  PREFIX och: <http://w3id.org/def/och#> ' \
         f' SELECT DISTINCT ?source_class ?target_class WHERE {{ '
         f'   <{change}> {OCH_REMOVE_DISJOINT_CLASS_SOURCE} ?source_class. '
         f'   <{change}> {OCH_REMOVE_DISJOINT_CLASS_TARGET} ?target_class. }}'
@@ -1292,7 +1198,8 @@ def add_object_property_shacl(change,change_data, output_shapes):
        Returns:
            the output_shapes updated with the added predicate object maps. 
     """
-    query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
             f' <{change}> {OCH_ADDED_OBJECT_PROPERTY} ?property .' \
             f' ?domainchange {OCH_ADDED_DOMAIN_TO_PROPERTY} ?property.' \
             f' ?domainchange {OCH_ADDED_DOMAIN} ?domain.' \
@@ -1333,7 +1240,8 @@ def remove_object_property_shacl(change, change_data, output_shapes):
        Returns:
            the output_shapes updated with the property shape removed.
     """
-    query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
             f' <{change}> {OCH_REMOVED_OBJECT_PROPERTY} ?property .' \
             f' ?domainchange {OCH_REMOVED_DOMAIN_TO_PROPERTY} ?property.' \
             f' ?domainchange {OCH_REMOVED_DOMAIN} ?domain.' \
@@ -1387,7 +1295,8 @@ def add_data_property_shacl(change, change_data, output_shapes):
        Returns:
            the output_shapes updated with the added data property shape.
     """
-    query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
             f' <{change}> {OCH_ADDED_DATA_PROPERTY} ?property .' \
             f' ?domainchange {OCH_ADDED_DOMAIN_TO_PROPERTY} ?property.' \
             f' ?domainchange {OCH_ADDED_DOMAIN} ?domain.' \
@@ -1417,7 +1326,7 @@ def add_data_property_shacl(change, change_data, output_shapes):
             f'             {SHACL_TARGET_CLASS} <{property_domain}> . '
             f' }}'
         )
-        print(insert_data_property_query)
+        #print(insert_data_property_query)
         output_shapes.update(insert_data_property_query)
 
 def remove_data_property_shacl(change, change_data, output_shapes):
@@ -1428,7 +1337,8 @@ def remove_data_property_shacl(change, change_data, output_shapes):
        Returns:
            the output_shapes updated with the data property shape removed.
     """
-    query = f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?domain ?property ?range WHERE {{ ' \
             f' <{change}> {OCH_REMOVED_DATA_PROPERTY} ?property .' \
             f' ?domainchange {OCH_REMOVED_DOMAIN_TO_PROPERTY} ?property.' \
             f' ?domainchange {OCH_REMOVED_DOMAIN} ?domain.' \
@@ -1470,7 +1380,7 @@ def remove_data_property_shacl(change, change_data, output_shapes):
             f' }}\n'
             f'}}'
         )
-        print(delete_data_property_query)
+        #print(delete_data_property_query)
         output_shapes.update(delete_data_property_query)
 
 def add_characteristic_shacl(change, change_data, output_shapes):
@@ -1481,15 +1391,16 @@ def add_characteristic_shacl(change, change_data, output_shapes):
        Returns:
            the output_shapes updated with the data property shape modified.
     """
-    print("Entra en la función add_characteristic_shacl")
-    query = f' SELECT DISTINCT ?property ?characteristic WHERE {{ ' \
+    #print("Entra en la función add_characteristic_shacl")
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?property ?characteristic WHERE {{ ' \
             f' <{change}> {OCH_ADDED_CHARACTERISTIC_TO_PROPERTY} ?property ;' \
             f'            {OCH_ADDED_CHARACTERISTIC} ?characteristic }}'
-    print(query)
+    #print(query)
     for result in change_data.query(query):
         property = result["property"]
         characteristic = result["characteristic"]
-        print(f"Property: {property}, Characteristic: {characteristic}")
+        #print(f"Property: {property}, Characteristic: {characteristic}")
         # Add SHACL restrictions for property characteristics
         if characteristic == URIRef(OWL_FUNCTIONAL_PROPERTY_URI):
             #print("Entra en la condición de OWL_FUNCTIONAL_PROPERTY")
@@ -1499,7 +1410,7 @@ def add_characteristic_shacl(change, change_data, output_shapes):
             f' INSERT {{ ?propertyShape {SHACL_MAX_COUNT} 1 }}'
             f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
             )
-            print(insert_characteristic_query)
+            #print(insert_characteristic_query)
             output_shapes.update(insert_characteristic_query)
         elif characteristic == URIRef(OWL_SYMMETRIC_PROPERTY_URI):
             # Symmetric property: custom SHACL-SPARQL constraint
@@ -1508,7 +1419,7 @@ def add_characteristic_shacl(change, change_data, output_shapes):
             f' INSERT {{ ?propertyShape {SHACL_SPARQL} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v . FILTER NOT EXISTS {{ ?v <{property}> $this }} }}" ] }}'
             f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
             )
-            print(insert_characteristic_query)
+            #print(insert_characteristic_query)
             output_shapes.update(insert_characteristic_query)
         elif characteristic == URIRef(OWL_ASYMMETRIC_PROPERTY_URI):
             # Asymmetric property: custom SHACL-SPARQL constraint
@@ -1517,7 +1428,7 @@ def add_characteristic_shacl(change, change_data, output_shapes):
             f' INSERT {{ ?propertyShape {SHACL_SPARQL} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v . FILTER EXISTS {{ ?v <{property}> $this }} }}" ] }}'
             f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
             )
-            print(insert_characteristic_query)
+            #print(insert_characteristic_query)
             output_shapes.update(insert_characteristic_query)
         elif characteristic == URIRef(OWL_REFLEXIVE_PROPERTY_URI):
             # Reflexive property: custom SHACL-SPARQL constraint
@@ -1526,7 +1437,7 @@ def add_characteristic_shacl(change, change_data, output_shapes):
             f' INSERT {{ ?propertyShape {SHACL_SPARQL} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ FILTER NOT EXISTS {{ $this <{property}> $this }} }}" ] }}'
             f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
             )
-            print(insert_characteristic_query)
+            #print(insert_characteristic_query)
             output_shapes.update(insert_characteristic_query)
         elif characteristic == URIRef(OWL_IRREFLEXIVE_PROPERTY_URI):
             # Irreflexive property: custom SHACL-SPARQL constraint
@@ -1535,7 +1446,7 @@ def add_characteristic_shacl(change, change_data, output_shapes):
             f' INSERT {{ ?propertyShape {SHACL_SPARQL} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> $this }}" ] }}'
             f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
             )
-            print(insert_characteristic_query)
+            #print(insert_characteristic_query)
             output_shapes.update(insert_characteristic_query)
         elif characteristic == URIRef(OWL_INVERSE_FUNCTIONAL_PROPERTY_URI):
             # Inverse functional property: sh:maxCount 1 on inverse path
@@ -1555,7 +1466,7 @@ def add_characteristic_shacl(change, change_data, output_shapes):
                 f'      {SHACL_MAX_COUNT} 1 . '
                 f' }} '
             )
-            print(insert_characteristic_query)
+            #print(insert_characteristic_query)
             output_shapes.update(insert_characteristic_query)
         elif characteristic == URIRef(OWL_TRANSITIVE_PROPERTY_URI):
             # Transitive property: custom SHACL-SPARQL constraint
@@ -1564,7 +1475,7 @@ def add_characteristic_shacl(change, change_data, output_shapes):
             f' INSERT {{ ?propertyShape {SHACL_SPARQL} [ a {SHACL_SPARQL_CONSTRAINT} ; {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v1 . ?v1 <{property}> ?v2 . FILTER NOT EXISTS {{ $this <{property}> ?v2 }} }}" ] }}'
             f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
             )
-            print(insert_characteristic_query)
+            #print(insert_characteristic_query)
             output_shapes.update(insert_characteristic_query)
 
 def remove_characteristic_shacl(change, change_data, output_shapes):
@@ -1576,14 +1487,15 @@ def remove_characteristic_shacl(change, change_data, output_shapes):
        Returns:
            the output_shapes updated with the data property shape modified.
     """
-    query = f' SELECT DISTINCT ?property ?characteristic WHERE {{ ' \
+    query = f'  PREFIX och: <http://w3id.org/def/och#> ' \
+            f' SELECT DISTINCT ?property ?characteristic WHERE {{ ' \
             f' <{change}> {OCH_REMOVED_CHARACTERISTIC_FROM_PROPERTY} ?property ;' \
             f'            {OCH_REMOVED_CHARACTERISTIC} ?characteristic }}'
-    print(query)
+    #print(query)
     for result in change_data.query(query):
         property = result["property"]
         characteristic = result["characteristic"]
-        print(f"Property: {property}, Characteristic: {characteristic}")
+        #print(f"Property: {property}, Characteristic: {characteristic}")
         # Remove SHACL restrictions for property characteristics
         if characteristic == URIRef(OWL_FUNCTIONAL_PROPERTY_URI):
             #print("Entra en la condición de OWL_FUNCTIONAL_PROPERTY")
@@ -1593,10 +1505,10 @@ def remove_characteristic_shacl(change, change_data, output_shapes):
                 f' DELETE {{ ?propertyShape {SHACL_MAX_COUNT} 1 }}'
                 f' WHERE {{ ?propertyShape {SHACL_PATH} <{property}> }}'
             )
-            print(delete_characteristic_query)
+            #print(delete_characteristic_query)
             output_shapes.update(delete_characteristic_query)
         elif characteristic == URIRef(OWL_SYMMETRIC_PROPERTY_URI):
-            print(f"Entra en la condición de remove OWL_SYMMETRIC_PROPERTY: {property}")
+            #print(f"Entra en la condición de remove OWL_SYMMETRIC_PROPERTY: {property}")
             # Symmetric property: custom SHACL-SPARQL constraint
             delete_characteristic_query = (
                 f' PREFIX {SHACL_PREFIX}: <{SHACL_URI}>'
@@ -1608,7 +1520,7 @@ def remove_characteristic_shacl(change, change_data, output_shapes):
                 f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
                 f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v . FILTER NOT EXISTS {{ ?v <{property}> $this }} }}" }}'
             )
-            print(delete_characteristic_query)
+            #print(delete_characteristic_query)
             output_shapes.update(delete_characteristic_query)
         elif characteristic == URIRef(OWL_ASYMMETRIC_PROPERTY_URI):
             # Asymmetric property: custom SHACL-SPARQL constraint
@@ -1623,7 +1535,7 @@ def remove_characteristic_shacl(change, change_data, output_shapes):
                 f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
                 f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v . FILTER EXISTS {{ ?v <{property}> $this }} }}" }}'
             )
-            print(delete_characteristic_query)
+            #print(delete_characteristic_query)
             output_shapes.update(delete_characteristic_query)
         elif characteristic == URIRef(OWL_REFLEXIVE_PROPERTY_URI):
             # Reflexive property: custom SHACL-SPARQL constraint
@@ -1637,7 +1549,7 @@ def remove_characteristic_shacl(change, change_data, output_shapes):
                 f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
                 f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ FILTER NOT EXISTS {{ $this <{property}> $this }} }}" }}'
             )
-            print(delete_characteristic_query)
+            #print(delete_characteristic_query)
             output_shapes.update(delete_characteristic_query)
         elif characteristic == URIRef(OWL_IRREFLEXIVE_PROPERTY_URI):
             # Irreflexive property: custom SHACL-SPARQL constraint
@@ -1651,7 +1563,7 @@ def remove_characteristic_shacl(change, change_data, output_shapes):
                 f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
                 f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> $this }}" }}'
             )
-            print(delete_characteristic_query)
+            #print(delete_characteristic_query)
             output_shapes.update(delete_characteristic_query)
         elif characteristic == URIRef(OWL_INVERSE_FUNCTIONAL_PROPERTY_URI):
             # Inverse functional property: sh:uniqueLang or custom constraint
@@ -1670,7 +1582,7 @@ def remove_characteristic_shacl(change, change_data, output_shapes):
                 f'      ?shape {SHACL_MAX_COUNT} 1 . '
                 f' }}'
             )
-            print(delete_characteristic_query)
+            #print(delete_characteristic_query)
             output_shapes.update(delete_characteristic_query)
         elif characteristic == URIRef(OWL_TRANSITIVE_PROPERTY_URI):
             # Transitive property: custom SHACL-SPARQL constraint
@@ -1684,7 +1596,7 @@ def remove_characteristic_shacl(change, change_data, output_shapes):
                 f' ?constraintNode a {SHACL_SPARQL_CONSTRAINT} ; '
                 f' {SHACL_SPARQL_SELECT} "SELECT $this WHERE {{ $this <{property}> ?v1 . ?v1 <{property}> ?v2 . FILTER NOT EXISTS {{ $this <{property}> ?v2 }} }}" }}'
             )
-            print(delete_characteristic_query)
+            #print(delete_characteristic_query)
             output_shapes.update(delete_characteristic_query)
         
 def add_inverse_property_shacl(change, change_data, output_shapes):
@@ -1698,6 +1610,7 @@ def add_inverse_property_shacl(change, change_data, output_shapes):
         The output_shapes updated with the data property shape modified.
     """
     query = (
+        f'  PREFIX och: <http://w3id.org/def/och#> ' \
         f' SELECT DISTINCT ?source_prop ?target_prop WHERE {{ '
         f'   <{change}> {OCH_ADD_INVERSE_PROPERTY_SOURCE} ?source_prop . '
         f'   <{change}> {OCH_ADD_INVERSE_PROPERTY_TARGET} ?target_prop . }}'
@@ -1718,7 +1631,7 @@ def add_inverse_property_shacl(change, change_data, output_shapes):
             f'   ?shapetarget {SHACL_PATH} <{target_prop}> . '
         f' }}'
         )
-        print(insert_inverse_property_query)
+        #print(insert_inverse_property_query)
         output_shapes.update(insert_inverse_property_query)
 
 def remove_inverse_property_shacl(change, change_data, output_shapes):
@@ -1732,6 +1645,7 @@ def remove_inverse_property_shacl(change, change_data, output_shapes):
         The output_shapes updated with the data property shape modified.
     """
     query = (
+        f'  PREFIX och: <http://w3id.org/def/och#> ' \
         f' SELECT DISTINCT ?source_prop ?target_prop WHERE {{ '
         f'   <{change}> {OCH_REMOVE_INVERSE_PROPERTY_SOURCE} ?source_prop . '
         f'   <{change}> {OCH_REMOVE_INVERSE_PROPERTY_TARGET} ?target_prop . }}'
@@ -1760,7 +1674,7 @@ def remove_inverse_property_shacl(change, change_data, output_shapes):
             f'                   {SHACL_SPARQL_SELECT} "SELECT ?this WHERE {{ ?sub <{target_prop}> ?obj . FILTER NOT EXISTS {{ ?obj <{source_prop}> ?sub . }} }} " . '
             f' }}'
         )
-        print(remove_inverse_property_query)
+        #print(remove_inverse_property_query)
         output_shapes.update(remove_inverse_property_query)
 
 def add_disjoint_property_shacl(change, change_data, output_shapes):
@@ -1772,6 +1686,7 @@ def add_disjoint_property_shacl(change, change_data, output_shapes):
         The output_shapes updated with the constraints that enforce the disjointness of the properties.
     """
     query = (
+        f'  PREFIX och: <http://w3id.org/def/och#> ' \
         f' SELECT DISTINCT ?source_property ?target_property WHERE {{ '
         f'   <{change}> {OCH_ADD_DISJOINT_PROPERTY_SOURCE} ?source_property. '
         f'   <{change}> {OCH_ADD_DISJOINT_PROPERTY_TARGET} ?target_property. }}'
@@ -1790,7 +1705,7 @@ def add_disjoint_property_shacl(change, change_data, output_shapes):
             f'   ?shapetarget {SHACL_PATH} <{target_prop}> . '
             f' }}'
         )
-        print(add_disjoint_property_query)
+        #print(add_disjoint_property_query)
         output_shapes.update(add_disjoint_property_query)
 
 def remove_disjoint_property_shacl(change, change_data, output_shapes):
@@ -1802,6 +1717,7 @@ def remove_disjoint_property_shacl(change, change_data, output_shapes):
         The output_shapes updated without the constraints that enforce the disjointness of the properties.
     """
     query = (
+        f'  PREFIX och: <http://w3id.org/def/och#> ' \
         f' SELECT DISTINCT ?source_property ?target_property WHERE {{ '
         f'   <{change}> {OCH_REMOVE_DISJOINT_PROPERTY_SOURCE} ?source_property. '
         f'   <{change}> {OCH_REMOVE_DISJOINT_PROPERTY_TARGET} ?target_property. }}'
@@ -1822,7 +1738,7 @@ def remove_disjoint_property_shacl(change, change_data, output_shapes):
             f'   ?shapetarget {SHACL_DISJOINT} <{source_prop}> . '
             f' }}'
         )
-        print(remove_disjoint_property_query)
+        #print(remove_disjoint_property_query)
         output_shapes.update(remove_disjoint_property_query)
     
 def add_superproperty_shacl(change, change_data, output_shapes):
@@ -1836,6 +1752,7 @@ def add_superproperty_shacl(change, change_data, output_shapes):
         The output_shapes updated with the data property shape modified.
     """
     query = (
+        f'  PREFIX och: <http://w3id.org/def/och#> ' \
         f' SELECT DISTINCT ?sub_property ?super_property WHERE {{ '
         f'   <{change}> {OCH_ADD_SUBPROPERTY_SOURCE} ?sub_property . '
         f'   <{change}> {OCH_ADD_SUBPROPERTY_TARGET} ?super_property . }}'
@@ -1854,7 +1771,7 @@ def add_superproperty_shacl(change, change_data, output_shapes):
             f'   ?shapesub {SHACL_PATH} <{sub_property}> . '
             f' }}'
         )
-        print(insert_subproperty_query)
+        #print(insert_subproperty_query)
         output_shapes.update(insert_subproperty_query)
 
 def remove_superproperty_shacl(change, change_data, output_shapes):
@@ -1868,6 +1785,7 @@ def remove_superproperty_shacl(change, change_data, output_shapes):
         The output_shapes updated with the data property shape modified.
     """
     query = (
+        f'  PREFIX och: <http://w3id.org/def/och#> ' \
         f' SELECT DISTINCT ?sub_property ?super_property WHERE {{ '
         f'   <{change}> {OCH_REMOVE_SUBPROPERTY_SOURCE} ?sub_property . '
         f'   <{change}> {OCH_REMOVE_SUBPROPERTY_TARGET} ?super_property . }}'
@@ -1888,7 +1806,7 @@ def remove_superproperty_shacl(change, change_data, output_shapes):
             f'                      {SHACL_SPARQL_SELECT} "SELECT ?this WHERE {{ ?this <{sub_property}> ?v . FILTER NOT EXISTS {{ ?this <{super_property}> ?v }} }} " ; '
             f' }}'
         )
-        print(remove_subproperty_query)
+        #print(remove_subproperty_query)
         output_shapes.update(remove_subproperty_query)
 
 def add_equivalent_property_shacl(change, change_data, output_shapes):
@@ -1902,6 +1820,7 @@ def add_equivalent_property_shacl(change, change_data, output_shapes):
         The output_shapes updated with the data property shape modified.
     """
     query = (
+        f'  PREFIX och: <http://w3id.org/def/och#> ' \
         f' SELECT DISTINCT ?source_property ?target_property WHERE {{ '
         f'   <{change}> {OCH_ADD_EQUIVALENT_PROPERTY_SOURCE} ?source_property . '
         f'   <{change}> {OCH_ADD_EQUIVALENT_PROPERTY_TARGET} ?target_property . }}'
@@ -1919,7 +1838,7 @@ def add_equivalent_property_shacl(change, change_data, output_shapes):
             f'   ?shape_target {SHACL_PATH} <{target_property}> . '
             f' }}'
         )
-        print(insert_subproperty_query)
+        #print(insert_subproperty_query)
         output_shapes.update(insert_subproperty_query)
 
 def remove_equivalent_property_shacl(change, change_data, output_shapes):
@@ -1933,6 +1852,7 @@ def remove_equivalent_property_shacl(change, change_data, output_shapes):
         The output_shapes updated with the data property shape modified.
     """
     query = (
+        f'  PREFIX och: <http://w3id.org/def/och#> ' \
         f' SELECT DISTINCT ?source_property ?target_property WHERE {{ '
         f'   <{change}> {OCH_REMOVE_EQUIVALENT_PROPERTY_SOURCE} ?source_property . '
         f'   <{change}> {OCH_REMOVE_EQUIVALENT_PROPERTY_TARGET} ?target_property . }}'
@@ -1952,5 +1872,5 @@ def remove_equivalent_property_shacl(change, change_data, output_shapes):
             f'                 {SHACL_EQUALS} <{source_property}> . '
             f' }}'
         )
-        print(remove_subproperty_query)
+        #print(remove_subproperty_query)
         output_shapes.update(remove_subproperty_query)

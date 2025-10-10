@@ -571,11 +571,11 @@ tedm:Lot a rr:TriplesMap ;
             rml:source "%1$s" ] ;
     rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "XXX" ;
                             rr:parent "XXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
+                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
             rr:predicate epo:hasRestatedEstimatedValue ],
         [ rr:objectMap [ rr:joinCondition [ rr:child "XXX" ;
                             rr:parent "XXX" ] ;
-                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValue ] ;
+                    rr:parentTriplesMap tedm:LotAwardOutcomeAwardedMonetaryValueModification ] ;
             rr:predicate epo:hasRestatedEstimatedValue ],
         [ rr:objectMap [ rml:reference "../OBJECT_DESCR/TITLE/P" ] ;
             rr:predicate epo:hasTitle ],
