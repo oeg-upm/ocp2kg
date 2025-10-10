@@ -1,5 +1,5 @@
 # OntoRipple: A Tool to Propagate Changes to Semantic Artifacts.
-![GitHub]![GitHub](https://img.shields.io/github/license/oeg-upm/ontoripple?style=flat)
+![GitHub](https://img.shields.io/github/license/oeg-upm/ontoripple?style=flat)
 [![DOI](https://zenodo.org/badge/690501188.svg)](https://zenodo.org/doi/10.5281/zenodo.11244236)
 ![GitHub Release](https://img.shields.io/github/v/release/oeg-upm/ontoripple)
 
