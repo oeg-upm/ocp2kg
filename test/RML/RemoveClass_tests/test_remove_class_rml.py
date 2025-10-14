@@ -1,5 +1,6 @@
 import os
 import unittest
+import sys
 from rdflib import Graph, compare
 RML_URI = 'http://semweb.mmlab.be/ns/rml#'
 ruta_relativa = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'src'))

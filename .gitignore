@@ -7,3 +7,4 @@ src/ocp2kg/__pycache__/
 .pytest_cache/
 __pycache__/
 output*
+dist
