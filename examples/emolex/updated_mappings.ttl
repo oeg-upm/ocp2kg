@@ -1,0 +1,296 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix emolex: <https://w3id.org/def/emolex#> .
+@prefix ex: <http://example.org/> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix rb: <https://w3id.org/riverbench/schema/metadata#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:amusement_0 a rr:TriplesMap ;
+    rml:logicalSource [ a rml:LogicalSource ;
+            rml:referenceFormulation ql:CSV ;
+            rml:source "hinojosa_2024.csv" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:constant <https://w3id.org/citius-kg/emofinder/resource/lexicon/hinojosa_2024> ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant dcterms:source ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:template "https://w3id.org/citius-kg/emofinder/resource/lexical_entry/hinojosa_2024/{palabra_noaccents}" ;
+                    rr:termType rr:IRI ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant emolex:affects ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "mean_amusement" ;
+                    rr:datatype xsd:float ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rb:mean ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "sd_amusement" ;
+                    rr:datatype xsd:float ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rb:standardDeviation ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:constant emolex:Annotation ],
+                [ a rr:ObjectMap ;
+                    rr:constant emolex:DiscreteEmotionalCategory ],
+                [ a rr:ObjectMap ;
+                    rr:constant emolex:Amusement ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rdf:type ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "palabra" ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rdfs:label ] ] ;
+    rr:subjectMap [ a rr:SubjectMap ;
+            rr:template "https://w3id.org/citius-kg/emofinder/resource/annotation/discreteEmotionalCategory/amusement/hinojosa_2024/{palabra_noaccents}" ] .
+
+ex:awe_0 a rr:TriplesMap ;
+    rml:logicalSource [ a rml:LogicalSource ;
+            rml:referenceFormulation ql:CSV ;
+            rml:source "hinojosa_2024.csv" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:constant emolex:Annotation ],
+                [ a rr:ObjectMap ;
+                    rr:constant emolex:DiscreteEmotionalCategory ],
+                [ a rr:ObjectMap ;
+                    rr:constant emolex:Awe ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rdf:type ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "palabra" ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rdfs:label ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:constant <https://w3id.org/citius-kg/emofinder/resource/lexicon/hinojosa_2024> ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant dcterms:source ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:template "https://w3id.org/citius-kg/emofinder/resource/lexical_entry/hinojosa_2024/{palabra_noaccents}" ;
+                    rr:termType rr:IRI ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant emolex:affects ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "mean_awe" ;
+                    rr:datatype xsd:float ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rb:mean ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "sd_awe" ;
+                    rr:datatype xsd:float ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rb:standardDeviation ] ] ;
+    rr:subjectMap [ a rr:SubjectMap ;
+            rr:template "https://w3id.org/citius-kg/emofinder/resource/annotation/discreteEmotionalCategory/awe/hinojosa_2024/{palabra_noaccents}" ] .
+
+ex:contentment_0 a rr:TriplesMap ;
+    rml:logicalSource [ a rml:LogicalSource ;
+            rml:referenceFormulation ql:CSV ;
+            rml:source "hinojosa_2024.csv" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:constant emolex:Annotation ],
+                [ a rr:ObjectMap ;
+                    rr:constant emolex:DiscreteEmotionalCategory ],
+                [ a rr:ObjectMap ;
+                    rr:constant emolex:Contentment ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rdf:type ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "palabra" ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rdfs:label ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:constant <https://w3id.org/citius-kg/emofinder/resource/lexicon/hinojosa_2024> ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant dcterms:source ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:template "https://w3id.org/citius-kg/emofinder/resource/lexical_entry/hinojosa_2024/{palabra_noaccents}" ;
+                    rr:termType rr:IRI ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant emolex:affects ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "mean_contentment" ;
+                    rr:datatype xsd:float ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rb:mean ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "sd_contentment" ;
+                    rr:datatype xsd:float ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rb:standardDeviation ] ] ;
+    rr:subjectMap [ a rr:SubjectMap ;
+            rr:template "https://w3id.org/citius-kg/emofinder/resource/annotation/discreteEmotionalCategory/contentment/hinojosa_2024/{palabra_noaccents}" ] .
+
+ex:excitement_0 a rr:TriplesMap ;
+    rml:logicalSource [ a rml:LogicalSource ;
+            rml:referenceFormulation ql:CSV ;
+            rml:source "hinojosa_2024.csv" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:constant emolex:Annotation ],
+                [ a rr:ObjectMap ;
+                    rr:constant emolex:DiscreteEmotionalCategory ],
+                [ a rr:ObjectMap ;
+                    rr:constant emolex:Excitement ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rdf:type ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "palabra" ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rdfs:label ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:constant <https://w3id.org/citius-kg/emofinder/resource/lexicon/hinojosa_2024> ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant dcterms:source ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:template "https://w3id.org/citius-kg/emofinder/resource/lexical_entry/hinojosa_2024/{palabra_noaccents}" ;
+                    rr:termType rr:IRI ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant emolex:affects ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "mean_excitement" ;
+                    rr:datatype xsd:float ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rb:mean ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "sd_excitement" ;
+                    rr:datatype xsd:float ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rb:standardDeviation ] ] ;
+    rr:subjectMap [ a rr:SubjectMap ;
+            rr:template "https://w3id.org/citius-kg/emofinder/resource/annotation/discreteEmotionalCategory/excitement/hinojosa_2024/{palabra_noaccents}" ] .
+
+ex:pleasure_0 a rr:TriplesMap ;
+    rml:logicalSource [ a rml:LogicalSource ;
+            rml:referenceFormulation ql:CSV ;
+            rml:source "hinojosa_2024.csv" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:template "https://w3id.org/citius-kg/emofinder/resource/lexical_entry/hinojosa_2024/{palabra_noaccents}" ;
+                    rr:termType rr:IRI ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant emolex:affects ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "mean_pleasure" ;
+                    rr:datatype xsd:float ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rb:mean ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "sd_pleasure" ;
+                    rr:datatype xsd:float ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rb:standardDeviation ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:constant emolex:Annotation ],
+                [ a rr:ObjectMap ;
+                    rr:constant emolex:DiscreteEmotionalCategory ],
+                [ a rr:ObjectMap ;
+                    rr:constant emolex:Pleasure ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rdf:type ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "palabra" ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rdfs:label ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:constant <https://w3id.org/citius-kg/emofinder/resource/lexicon/hinojosa_2024> ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant dcterms:source ] ] ;
+    rr:subjectMap [ a rr:SubjectMap ;
+            rr:template "https://w3id.org/citius-kg/emofinder/resource/annotation/discreteEmotionalCategory/pleasure/hinojosa_2024/{palabra_noaccents}" ] .
+
+ex:relief_0 a rr:TriplesMap ;
+    rml:logicalSource [ a rml:LogicalSource ;
+            rml:referenceFormulation ql:CSV ;
+            rml:source "hinojosa_2024.csv" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:constant emolex:Annotation ],
+                [ a rr:ObjectMap ;
+                    rr:constant emolex:DiscreteEmotionalCategory ],
+                [ a rr:ObjectMap ;
+                    rr:constant emolex:Relief ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rdf:type ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "palabra" ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rdfs:label ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:constant <https://w3id.org/citius-kg/emofinder/resource/lexicon/hinojosa_2024> ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant dcterms:source ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:template "https://w3id.org/citius-kg/emofinder/resource/lexical_entry/hinojosa_2024/{palabra_noaccents}" ;
+                    rr:termType rr:IRI ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant emolex:affects ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "mean_relief" ;
+                    rr:datatype xsd:float ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rb:mean ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "sd_relief" ;
+                    rr:datatype xsd:float ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rb:standardDeviation ] ] ;
+    rr:subjectMap [ a rr:SubjectMap ;
+            rr:template "https://w3id.org/citius-kg/emofinder/resource/annotation/discreteEmotionalCategory/relief/hinojosa_2024/{palabra_noaccents}" ] .
+
+ex:serenity_0 a rr:TriplesMap ;
+    rml:logicalSource [ a rml:LogicalSource ;
+            rml:referenceFormulation ql:CSV ;
+            rml:source "hinojosa_2024.csv" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:constant emolex:Annotation ],
+                [ a rr:ObjectMap ;
+                    rr:constant emolex:DiscreteEmotionalCategory ],
+                [ a rr:ObjectMap ;
+                    rr:constant emolex:Serenity ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rdf:type ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "palabra" ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rdfs:label ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:constant <https://w3id.org/citius-kg/emofinder/resource/lexicon/hinojosa_2024> ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant dcterms:source ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rr:template "https://w3id.org/citius-kg/emofinder/resource/lexical_entry/hinojosa_2024/{palabra_noaccents}" ;
+                    rr:termType rr:IRI ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant emolex:affects ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "mean_serenity" ;
+                    rr:datatype xsd:float ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rb:mean ] ],
+        [ rr:objectMap [ a rr:ObjectMap ;
+                    rml:reference "sd_serenity" ;
+                    rr:datatype xsd:float ] ;
+            rr:predicateMap [ a rr:PredicateMap ;
+                    rr:constant rb:standardDeviation ] ] ;
+    rr:subjectMap [ a rr:SubjectMap ;
+            rr:template "https://w3id.org/citius-kg/emofinder/resource/annotation/discreteEmotionalCategory/serenity/hinojosa_2024/{palabra_noaccents}" ] .
+
+<http://myexampleuri.org/data#BehavioralMeasures_TM> a rr:TriplesMap ;
+    rml:logicalSource [ rml:referenceFormulation "XXX" ;
+            rml:source "XXX" ] ;
+    rr:subjectMap [ rr:class emolex:BehavioralMeasures ;
+            rr:template "XXX" ] .
+
+<http://myexampleuri.org/data#ErrorLDT_TM> a rr:TriplesMap ;
+    rml:logicalSource [ rml:referenceFormulation "XXX" ;
+            rml:source "XXX" ] ;
+    rr:subjectMap [ rr:class emolex:BehavioralMeasures,
+                emolex:ErrorLDT ;
+            rr:template "XXX" ] .
+
+<http://myexampleuri.org/data#TimeLdt_TM> a rr:TriplesMap ;
+    rml:logicalSource [ rml:referenceFormulation "XXX" ;
+            rml:source "XXX" ] ;
+    rr:subjectMap [ rr:class emolex:TimeLdt ;
+            rr:template "XXX" ] .
+

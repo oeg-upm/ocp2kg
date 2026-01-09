@@ -1,0 +1,91 @@
+prefixes:
+  emo-resource: 'https://w3id.org/citius-kg/emofinder/resource/'
+  emolex: 'https://w3id.org/def/emolex#'
+  rdfs: 'http://www.w3.org/2000/01/rdf-schema#'
+  skos: 'http://www.w3.org/2004/02/skos/core#'
+  ontolex: 'http://www.w3.org/ns/lemon/ontolex#'
+  rb: 'https://w3id.org/riverbench/schema/metadata#'
+  bibo: 'http://purl.org/ontology/bibo/'
+  lexinfo: 'http://www.lexinfo.net/ontology/3.0/lexinfo#'
+  lime: 'http://www.w3.org/ns/lemon/lime#'
+  dcterms: 'http://purl.org/dc/terms/'
+  vartrans: 'http://www.w3.org/ns/lemon/vartrans#'
+
+mappings:
+  amusement:
+    sources:
+    - [hinojosa_2024.csv~csv]
+    s: emo-resource:annotation/discreteEmotionalCategory/amusement/hinojosa_2024/$(palabra_noaccents)
+    po:
+    - [a, ['emolex:Annotation', 'emolex:DiscreteEmotionalCategory', 'emolex:Amusement']]
+    - ['rdfs:label', $(palabra)]
+    - ['dcterms:source', 'https://w3id.org/citius-kg/emofinder/resource/lexicon/hinojosa_2024']
+    - ['emolex:affects', 'emo-resource:lexical_entry/hinojosa_2024/$(palabra_noaccents)~iri']
+    - ['rb:mean', $(mean_amusement), 'xsd:float']
+    - ['rb:standardDeviation', $(sd_amusement), 'xsd:float']
+  awe:
+    sources:
+    - [hinojosa_2024.csv~csv]
+    s: emo-resource:annotation/discreteEmotionalCategory/awe/hinojosa_2024/$(palabra_noaccents)
+    po:
+    - [a, ['emolex:Annotation', 'emolex:DiscreteEmotionalCategory', 'emolex:Awe']]
+    - ['rdfs:label', $(palabra)]
+    - ['dcterms:source', 'https://w3id.org/citius-kg/emofinder/resource/lexicon/hinojosa_2024']
+    - ['emolex:affects', 'emo-resource:lexical_entry/hinojosa_2024/$(palabra_noaccents)~iri']
+    - ['rb:mean', $(mean_awe), 'xsd:float']
+    - ['rb:standardDeviation', $(sd_awe), 'xsd:float']
+  contentment:
+    sources:
+    - [hinojosa_2024.csv~csv]
+    s: emo-resource:annotation/discreteEmotionalCategory/contentment/hinojosa_2024/$(palabra_noaccents)
+    po:
+    - [a, ['emolex:Annotation', 'emolex:DiscreteEmotionalCategory', 'emolex:Contentment']]
+    - ['rdfs:label', $(palabra)]
+    - ['dcterms:source', 'https://w3id.org/citius-kg/emofinder/resource/lexicon/hinojosa_2024']
+    - ['emolex:affects', 'emo-resource:lexical_entry/hinojosa_2024/$(palabra_noaccents)~iri']
+    - ['rb:mean', $(mean_contentment), 'xsd:float']
+    - ['rb:standardDeviation', $(sd_contentment), 'xsd:float']
+  excitement:
+    sources:
+    - [hinojosa_2024.csv~csv]
+    s: emo-resource:annotation/discreteEmotionalCategory/excitement/hinojosa_2024/$(palabra_noaccents)
+    po:
+    - [a, ['emolex:Annotation', 'emolex:DiscreteEmotionalCategory', 'emolex:Excitement']]
+    - ['rdfs:label', $(palabra)]
+    - ['dcterms:source', 'https://w3id.org/citius-kg/emofinder/resource/lexicon/hinojosa_2024']
+    - ['emolex:affects', 'emo-resource:lexical_entry/hinojosa_2024/$(palabra_noaccents)~iri']
+    - ['rb:mean', $(mean_excitement), 'xsd:float']
+    - ['rb:standardDeviation', $(sd_excitement), 'xsd:float']
+  pleasure:
+    sources:
+    - [hinojosa_2024.csv~csv]
+    s: emo-resource:annotation/discreteEmotionalCategory/pleasure/hinojosa_2024/$(palabra_noaccents)
+    po:
+    - [a, ['emolex:Annotation', 'emolex:DiscreteEmotionalCategory', 'emolex:Pleasure']]
+    - ['rdfs:label', $(palabra)]
+    - ['dcterms:source', 'https://w3id.org/citius-kg/emofinder/resource/lexicon/hinojosa_2024']
+    - ['emolex:affects', 'emo-resource:lexical_entry/hinojosa_2024/$(palabra_noaccents)~iri']
+    - ['rb:mean', $(mean_pleasure), 'xsd:float']
+    - ['rb:standardDeviation', $(sd_pleasure), 'xsd:float']
+  relief:
+    sources:
+    - [hinojosa_2024.csv~csv]
+    s: emo-resource:annotation/discreteEmotionalCategory/relief/hinojosa_2024/$(palabra_noaccents)
+    po:
+    - [a, ['emolex:Annotation', 'emolex:DiscreteEmotionalCategory', 'emolex:Relief']]
+    - ['rdfs:label', $(palabra)]
+    - ['dcterms:source', 'https://w3id.org/citius-kg/emofinder/resource/lexicon/hinojosa_2024']
+    - ['emolex:affects', 'emo-resource:lexical_entry/hinojosa_2024/$(palabra_noaccents)~iri']
+    - ['rb:mean', $(mean_relief), 'xsd:float']
+    - ['rb:standardDeviation', $(sd_relief), 'xsd:float']
+  serenity:
+    sources:
+    - [hinojosa_2024.csv~csv]
+    s: emo-resource:annotation/discreteEmotionalCategory/serenity/hinojosa_2024/$(palabra_noaccents)
+    po:
+    - [a, ['emolex:Annotation', 'emolex:DiscreteEmotionalCategory', 'emolex:Serenity']]
+    - ['rdfs:label', $(palabra)]
+    - ['dcterms:source', 'https://w3id.org/citius-kg/emofinder/resource/lexicon/hinojosa_2024']
+    - ['emolex:affects', 'emo-resource:lexical_entry/hinojosa_2024/$(palabra_noaccents)~iri']
+    - ['rb:mean', $(mean_serenity), 'xsd:float']
+    - ['rb:standardDeviation', $(sd_serenity), 'xsd:float']

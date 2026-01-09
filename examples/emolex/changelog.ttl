@@ -1,0 +1,97 @@
+@prefix och: <http://w3id.org/def/och#> .
+@prefix emolex_changes: <https://w3id.org/def/emolex-changes> .
+@prefix emolex: <https://w3id.org/def/emolex#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/3.0/lexinfo#> .
+
+emolex_changes:changelog_v1 a och:Changelog ; 
+    och:prevVersion <https://w3id.org/def/emolex/0.1> ;
+    och:newVersion  <https://w3id.org/def/emolex/1.0> .
+
+emolex_changes:aate1 a och:AddAnnotationToEntity;
+    och:sourceAddAnnotationToEntity emolex:affects ; 
+    och:addedAnnotationToEntity rdfs:comment ;
+    och:targetAddAnnotationToEntity "This property assigns an Annotation to a Lexical Entry."@en .
+
+emolex_changes:rdp1 a och:RemoveDataProperty ;
+    och:removedDataProperty lexinfo:gener .
+
+emolex_changes:adp1 a och:AddDataProperty ;
+    och:addedDataProperty lexinfo:gender .
+
+emolex_changes:rd1 a och:RemoveDomain ;
+    och:removedDomain emolex:RecognitionTime ;
+    och:removedDomainFromProperty emolex:recognitionTime .
+
+emolex_changes:ad1 a och:AddDomain ;
+    och:addedDomain emolex:BehavioralMeasures ;
+    och:addedDomainToProperty emolex:recognitionTime .
+
+emolex_changes:rc1 a och:RemoveClass ;
+    och:removedClass emolex:RecognitionErrorPercentage .
+
+emolex_changes:ac1 a och:AddClass;
+    och:addedClass emolex:ErrorLDT.
+
+emolex_changes:asc1 a och:AddSubClass ;
+    och:sourceAddSubClass emolex:ErrorLDT ;
+    och:targetAddSubClass emolex:BehavioralMeasures.
+
+emolex_changes:aate2 a och:AddAnnotationToEntity;
+    och:sourceAddAnnotationToEntity emolex:ErrorLDT ; 
+    och:addedAnnotationToEntity rdfs:comment ;
+    och:targetAddAnnotationToEntity "Percentage of incorrect word identification in a lexical decision task."@en .
+
+emolex_changes:rc2 a och:RemoveClass ;
+    och:removedClass emolex:RecognitionTime .
+
+emolex_changes:ac2 a och:AddClass;
+    och:addedClass emolex:BehavioralMeasures .
+
+emolex_changes:aate3 a och:AddAnnotationToEntity;
+    och:sourceAddAnnotationToEntity emolex:BehavioralMeasures ; 
+    och:addedAnnotationToEntity rdfs:comment ;
+    och:targetAddAnnotationToEntity "Medida conductual obtenida a partir de la respuesta del participante ante la presentación de la palabra."@es .
+
+emolex_changes:aate4 a och:AddAnnotationToEntity;
+    och:sourceAddAnnotationToEntity emolex:BehavioralMeasures ; 
+    och:addedAnnotationToEntity rdfs:comment ;
+    och:targetAddAnnotationToEntity "Behavioral measure obtained from the participant's response to the presentation of the word."@en .
+
+emolex_changes:aate5 a och:AddAnnotationToEntity;
+    och:sourceAddAnnotationToEntity emolex:BehavioralMeasures ; 
+    och:addedAnnotationToEntity rdfs:label ;
+    och:targetAddAnnotationToEntity "Behavioral Measures"@en .
+
+emolex_changes:aate6 a och:AddAnnotationToEntity;
+    och:sourceAddAnnotationToEntity emolex:BehavioralMeasures ; 
+    och:addedAnnotationToEntity rdfs:label ;
+    och:targetAddAnnotationToEntity "Medidas Conductuales"@es .
+
+emolex_changes:aate7 a och:AddAnnotationToEntity;
+    och:sourceAddAnnotationToEntity emolex::SocialInteraction ; 
+    och:addedAnnotationToEntity rdfs:comment ;
+    och:targetAddAnnotationToEntity  "It refers to the degree to which the word is related to relationships between people."@en .
+
+emolex_changes:aate8 a och:AddAnnotationToEntity ;
+    och:sourceAddAnnotationToEntity emolex::SocialInteraction ; 
+    och:addedAnnotationToEntity rdfs:comment ;
+    och:targetAddAnnotationToEntity  "Se refiere al grado en que la palabra está relacionada con las relaciones entre personas."@es .
+
+emolex_changes:rsc1 a och:RemoveSubClass ;
+    och:sourceRemoveSubClass emolex:TimeNaming ;
+    och:targetRemoveSubClass emolex:RecognitionTime.
+
+emolex_changes:asc2 a och:AddSubClass ;
+    och:sourceAddSubClass emolex:TimeNaming ;
+    och:targetRemoveSubClass emolex:BehavioralMeasures .
+
+emolex_changes:rc3 a och:RemoveClass ;
+    och:addedClass emolex:TimeTdl .
+
+emolex_changes:ac3 a och:AddClass ;
+    och:addedClass emolex:TimeLdt .
+
+emolex_changes:asc3 a och:AddSubClass ;
+    och:sourceAddSubClass emolex:TimeLdt ;
+    och:targetRemoveSubClass emolex:BehavioralMeasures .

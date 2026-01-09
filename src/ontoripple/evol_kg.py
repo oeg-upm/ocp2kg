@@ -16,15 +16,15 @@ def add_class_rml(change, change_data, output_mappings):
     select_change = f'  PREFIX och: <http://w3id.org/def/och#> ' \
                     f' SELECT DISTINCT ?class WHERE {{' \
                     f' <{change}> {OCH_ADDED_CLASS} ?class .}} '
-    #print(select_change)
+    print(select_change)
     results = change_data.query(select_change)
     added_class = results.bindings[0][Variable('class')]
     check_query = f' PREFIX {R2RML_PREFIX}: <{R2RML_URI}>' \
                   f' PREFIX {RML_PREFIX}: <{RML_URI}>' \
-                  f'ASK {{  ?triples_map {RDF_TYPE} {R2RML_TRIPLES_MAP} .' \
+                  f' ASK {{  ?triples_map {RDF_TYPE} {R2RML_TRIPLES_MAP} .' \
                   f'        ?triples_map {R2RML_SUBJECT} ?subject . ' \
                   f'        ?subject {R2RML_CLASS} <{added_class}> }}'
-    #print(check_query)
+    print(check_query)
     check_res = output_mappings.query(check_query)
     if not check_res.askAnswer:
         if added_class.startswith('http://') or added_class.startswith('https://'):
@@ -43,6 +43,7 @@ def add_class_rml(change, change_data, output_mappings):
                              f'             {R2RML_TEMPLATE} "XXX"; ' \
                              f'             {R2RML_CLASS} <{added_class}> ' \
                              f'         ]. }} '
+        print(insert_class_query)
         output_mappings.update(insert_class_query)
     else:
         print(f'The input mappings already has rules to create instances of {added_class}.')

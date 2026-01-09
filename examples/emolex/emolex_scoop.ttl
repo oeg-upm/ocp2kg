@@ -1,0 +1,602 @@
+@prefix : <https://w3id.org/def/emolex#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix lime: <http://www.w3.org/ns/lemon/lime#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix rb: <https://w3id.org/riverbench/schema/metadata#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://astrea.linkeddata.es/shapes#03feba56ddcc21bf2ac0221716d7b2e7> a sh:NodeShape ;
+    rdfs:label "Feeling"@en,
+        "Sentimiento"@es ;
+    sh:description "It refers to the degree of the word's connection with feelings."@en,
+        "Se refiere al grado de relación de la palabra con sentimientos."@es ;
+    sh:name "Feeling"@en,
+        "Sentimiento"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Feeling .
+
+<https://astrea.linkeddata.es/shapes#055b02e300ddc4640f57db053c3e3d93> a sh:NodeShape ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass bibo:Document .
+
+<https://astrea.linkeddata.es/shapes#0d80972d6c234f511957988abf9d7983> a sh:PropertyShape ;
+    rdfs:label "Standard deviation"@en,
+        "Standard deviation of a distribution"@en ;
+    sh:datatype xsd:double ;
+    sh:description "Standard deviation of a distribution"@en ;
+    sh:name "Standard deviation"@en ;
+    sh:nodeKind sh:Literal ;
+    sh:path rb:standardDeviation ;
+    sh:pattern "(\\+|-)?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)([Ee](\\+|-)?[0-9]+)?|(\\+|-)?INF|NaN" .
+
+<https://astrea.linkeddata.es/shapes#0e94214512e21085c9cc668481f86ac8> a sh:NodeShape ;
+    rdfs:label "Objective Estimation"@en,
+        "Estimación Objetiva"@es ;
+    sh:name "Objective Estimation"@en,
+        "Estimación Objetiva"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :ObjectiveEstimation .
+
+<https://astrea.linkeddata.es/shapes#108cefa710c9820fe8ffe597b4028615> a sh:NodeShape ;
+    rdfs:label "Contentment"@en,
+        "Satisfacción"@es ;
+    sh:description "It refers to the degree of contentment conveyed by a word."@en,
+        "Se refiere al grado de satisfacción que transmite una palabra."@es ;
+    sh:name "Contentment"@en,
+        "Satisfacción"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Contentment .
+
+<https://astrea.linkeddata.es/shapes#135d0672f452661586622d5dc4b4c003> a sh:NodeShape ;
+    rdfs:label "Relief"@en,
+        "Alivio"@es ;
+    sh:description "It refers to the degree of relief conveyed by a word."@es,
+        "Se refiere al grado de alivio que transmite una palabra."@es ;
+    sh:name "Relief"@en,
+        "Alivio"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Relief .
+
+<https://astrea.linkeddata.es/shapes#1b41135f42fabf938996ebcb3960d9e5> a sh:NodeShape ;
+    rdfs:label "Evaluation"@en,
+        "Evaluación"@es ;
+    sh:description "It refers to the degree of the word's connection with situations that are important for well-being and/or survival."@en,
+        "Se refiere al grado de relación de la palabra con situaciones importantes para el bienestar y/o supervivencia."@es ;
+    sh:name "Evaluation"@en,
+        "Evaluación"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Evaluation .
+
+<https://astrea.linkeddata.es/shapes#25caee71ca0a4848c897a4f54e097da8> a sh:PropertyShape ;
+    rdfs:label "Arithmetic mean of a distribution"@en,
+        "Mean"@en ;
+    sh:datatype xsd:double ;
+    sh:description "Arithmetic mean of a distribution"@en ;
+    sh:name "Mean"@en ;
+    sh:nodeKind sh:Literal ;
+    sh:path rb:mean ;
+    sh:pattern "(\\+|-)?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)([Ee](\\+|-)?[0-9]+)?|(\\+|-)?INF|NaN" .
+
+<https://astrea.linkeddata.es/shapes#2cea00027178649fad265cb35245da9e> a sh:NodeShape ;
+    rdfs:label "Disgust"@en,
+        "Asco"@es ;
+    sh:description "It refers to the degree of disgust conveyed by a word."@en,
+        "Se refiere al grado de asco que transmite una palabra."@es ;
+    sh:name "Disgust"@en,
+        "Asco"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Disgust .
+
+<https://astrea.linkeddata.es/shapes#303ba1d0261fa9aaaaf98aec911bea0a> a sh:NodeShape ;
+    rdfs:label "Happiness"@en,
+        "Felicidad"@es ;
+    sh:description "It refers to the degree of happiness conveyed by a word."@en,
+        "Se refiere al grado de felicidad que transmite una palabra."@es ;
+    sh:name "Happiness"@en,
+        "Felicidad"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Happiness .
+
+<https://astrea.linkeddata.es/shapes#305f5261afd9d25b76ecf33d5f3e724b> a sh:PropertyShape ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:path ontolex:lexicalForm .
+
+<https://astrea.linkeddata.es/shapes#3fb6ff86370e59e28c2d3851e5b3f004> a sh:NodeShape ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass void:Dataset .
+
+<https://astrea.linkeddata.es/shapes#4095453e246404dba71751860f717dd9> a sh:NodeShape ;
+    rdfs:label "Sensory Experience"@en,
+        "Experiencia sensorial"@es ;
+    sh:description "It indicates the extent to which the word evokes a sensory/perceptual experience (taste, touch, sight, sound, and smell)."@en,
+        "Indica hasta qué punto la palabra evoca una experiencia sensorial/perceptiva (sabor, tacto, vista, sonido y olor)."@es ;
+    sh:name "Sensory Experience"@en,
+        "Experiencia sensorial"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :SensoryExperience .
+
+<https://astrea.linkeddata.es/shapes#41e77c2f330c01f0cdd742305298c81f> a sh:PropertyShape ;
+    sh:nodeKind sh:Literal ;
+    sh:path lime:language .
+
+<https://astrea.linkeddata.es/shapes#428a34967896e61729350adf0b11e26e> a sh:NodeShape ;
+    rdfs:label "Awe"@en,
+        "Admiración"@es ;
+    sh:description "It refers to the degree of awe conveyed by a word."@en,
+        "Se refiere al grado de admiración que transmite una palabra."@es ;
+    sh:name "Awe"@en,
+        "Admiración"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Awe .
+
+<https://astrea.linkeddata.es/shapes#4b5dfb919ba67e61af6c38d808833603> a sh:NodeShape ;
+    rdfs:label "Body Expression"@en,
+        "Expresión Corporal"@es ;
+    sh:description "It refers to the degree of the word's connection with changes in parts of the body such as the voice, posture, gestures, or facial expression."@en,
+        "Se refiere al grado de relación de la palabra con cambios en partes del cuerpo como la voz, la postura, los gestos, o la expresión de la cara"@es ;
+    sh:name "Body Expression"@en,
+        "Expresión Corporal"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :BodyExpression .
+
+<https://astrea.linkeddata.es/shapes#537e65e8eee46e84b9f08ec9f11ae87b> a sh:NodeShape ;
+    rdfs:label "Action"@en,
+        "Actuación"@es ;
+    sh:description "It refers to the degree of the word's connection with acting, doing, and influencing."@en,
+        "Se refiere al grado de relación de la palabra con actuar, hacer, e influir."@es ;
+    sh:name "Action"@en,
+        "Actuación"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Action .
+
+<https://astrea.linkeddata.es/shapes#5ea3e49979d3bd3c5a33c74aebf24be3> a sh:NodeShape ;
+    rdfs:label "Prototipicality"@en,
+        "Prototipicalidad"@es ;
+    sh:description "It refers to the degree of the word’s connection with an emotion."@en,
+        "Se refiere al grado de relación de la palabra con una emoción."@es ;
+    sh:name "Prototipicality"@en,
+        "Prototipicalidad"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Prototipicality .
+
+<https://astrea.linkeddata.es/shapes#63c071f302ae1e979b5fd92884bb622e> a sh:NodeShape ;
+    rdfs:label "Recognition Error Percentage"@en,
+        "Porcentaje de error de reconocimiento (LDT)"@es ;
+    sh:description "%E"@en,
+        "Percentage of incorrect word identification in a lexical decision task."@en,
+        "Porcentaje de identificación incorrecta de la palabra en una tarea de decisión léxica."@es ;
+    sh:name "Recognition Error Percentage"@en,
+        "Porcentaje de error de reconocimiento (LDT)"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :RecognitionErrorPercentage .
+
+<https://astrea.linkeddata.es/shapes#66eac1175879d0dc8b56afa38503c11e> a sh:NodeShape ;
+    rdfs:label "Subjective Dimension"@en,
+        "Dimensión subjetiva"@es ;
+    sh:name "Subjective Dimension"@en,
+        "Dimensión subjetiva"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :SubjectiveDimension .
+
+<https://astrea.linkeddata.es/shapes#67dd61831121c7b9299e299629711c58> a sh:NodeShape ;
+    rdfs:label "Serenity"@en,
+        "Serenidad"@es ;
+    sh:description "It refers to the degree of serenity conveyed by a word."@en,
+        "Se refiere al grado de serenidad que transmite una palabra."@es ;
+    sh:name "Serenity"@en,
+        "Serenidad"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Serenity .
+
+<https://astrea.linkeddata.es/shapes#69303d074534678d2503b0ea01835b1c> a sh:NodeShape ;
+    rdfs:label "Dominance"@en,
+        "Dominancia"@es ;
+    sh:description "Dominance refers to the perception of control evoked by a word, that is, the extent to which a person feels weak/submissive or strong/dominant in relation to the concept the word represents."@en,
+        "La dominancia hace referencia a la percepción de control que evoca una palabra, es decir, hasta qué punto la persona se siente débil/sumisa o fuerte/dominante ante el concepto que designa la palabra."@es ;
+    sh:name "Dominance"@en,
+        "Dominancia"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Dominance .
+
+<https://astrea.linkeddata.es/shapes#6c50d4f07a7da8a2273f365685323f41> rdfs:label "Esta propiedad asigna una Anotación a una Lexical Entry."@en,
+        "affects"@en,
+        "affecta a"@es ;
+    sh:description "Esta propiedad asigna una Anotación a una Lexical Entry."@en ;
+    sh:name "affects"@en,
+        "affecta a"@es ;
+    sh:nodeKind sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#7156b76ab0075cf41c84e37b6d28332a> a sh:NodeShape ;
+    rdfs:label "Contextual Availability"@en,
+        "Disponibilidad contextual"@es ;
+    sh:description "Contextual availability refers to the ease with which we can think of a context to which the word could be associated."@en,
+        "La disponibilidad contextual se refiere a la facilidad con la que podemos pensar en un contexto al cual se podría asociar la palabra."@es ;
+    sh:name "Contextual Availability"@en,
+        "Disponibilidad contextual"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :ContextualAvailability .
+
+<https://astrea.linkeddata.es/shapes#7159df231d55982f93118e9c1dc430e3> a sh:NodeShape ;
+    rdfs:label "Discrete emotional category"@en,
+        "Categoría emocional discreta"@es ;
+    sh:name "Discrete emotional category"@en,
+        "Categoría emocional discreta"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :DiscreteEmotionalCategory .
+
+<https://astrea.linkeddata.es/shapes#7602c614fc10b53e61cb9f01adc5c71b> a sh:NodeShape ;
+    rdfs:label "Familiarity"@en,
+        "Familiaridad"@es ;
+    sh:description "Familiarity refers to how familiar or known a word feels to a person."@en,
+        "La familiaridad hace referencia a cuán familiar o conocida resulta una palabra para la persona."@es ;
+    sh:name "Familiarity"@en,
+        "Familiaridad"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Familiarity .
+
+<https://astrea.linkeddata.es/shapes#7edff73be9d889430b68b0d99b97bd4f> a sh:NodeShape ;
+    rdfs:label "leksikale inskrywing"@af,
+        "Lexikoneintrag"@de,
+        "lexical entry"@en,
+        "entrada léxica"@es,
+        "entrée lexicale"@fr,
+        "entrata lessicale"@it,
+        "lexikaal item"@nl,
+        "înregistrare lexicală"@ro,
+        "словарная единица"@ru,
+        "lexikoningång"@sv ;
+    rdfs:isDefinedBy <http://www.w3.org/ns/lemon/ontolex> ;
+    sh:description "A lexical entry represents a unit of analysis of the lexicon that consists of a set of forms that are grammatically related and a set of base meanings that are associated with all of these forms. Thus, a lexical entry is a word, multiword expression or affix with a single part-of-speech, morphological pattern, etymology and set of senses."@en,
+        "'Словарная единица' представляет собой единицу анализа словаря, которая состоит из совокупности грамматически связанных форм и совокупности основных значений, ассоциирующихся со всеми этими формами. 'Словарная единица' - это слово, словосочетание или аффикс одной части речи, морфологической модели, этимологии и набора значений."@ru ;
+    sh:name "leksikale inskrywing"@af,
+        "Lexikoneintrag"@de,
+        "lexical entry"@en,
+        "entrada léxica"@es,
+        "entrée lexicale"@fr,
+        "entrata lessicale"@it,
+        "lexikaal item"@nl,
+        "înregistrare lexicală"@ro,
+        "словарная единица"@ru,
+        "lexikoningång"@sv ;
+    sh:nodeKind sh:IRI ;
+    sh:property <https://astrea.linkeddata.es/shapes#247f5f4f73d9f1056c0311cd80f31016>,
+        <https://astrea.linkeddata.es/shapes#31854da01ff26aff9c9cfeb1558112f2> ;
+    sh:targetClass ontolex:LexicalEntry .
+
+<https://astrea.linkeddata.es/shapes#8261cb77b0f1e824ba7cb564a6274c6a> a sh:NodeShape ;
+    rdfs:label "Morality"@en,
+        "Moralidad"@es ;
+    sh:description "It refers to the degree of the word's connection with morality, rules, or any other principle that guides behavior."@en,
+        "Se refiere al grado de relación de la palabra con la moralidad, las reglas, o cualquier otro principio que guía la conducta."@es ;
+    sh:name "Morality"@en,
+        "Moralidad"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Morality .
+
+<https://astrea.linkeddata.es/shapes#833b05164d9ecc6255e40173525ef19e> a sh:NodeShape ;
+    rdfs:label "Article"@en ;
+    rdfs:isDefinedBy "http://purl.org/ontology/bibo/"^^xsd:anyURI ;
+    sh:description "A written composition in prose, usually nonfiction, on a specific topic, forming an independent part of a book or other publication, as a newspaper or magazine."@en ;
+    sh:name "Article"@en ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass bibo:Article .
+
+<https://astrea.linkeddata.es/shapes#848c729691b6bf9ea7bb2b69f2af9fdc> a sh:NodeShape ;
+    rdfs:label "Valence"@en,
+        "Valencia"@es ;
+    sh:description "Valence refers to the level of pleasantness or unpleasantness evoked by a word, that is, how positive or negative it feels to the person."@en,
+        "La valencia hace referencia al nivel de agrado o desagrado que evoca una palabra, es decir, cuán positiva o negativa le resulta a la persona."@es ;
+    sh:name "Valence"@en,
+        "Valencia"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Valence .
+
+<https://astrea.linkeddata.es/shapes#86139c548cd1cefd2b7d8c6534d5f53d> a sh:NodeShape ;
+    rdfs:label "Thought"@en,
+        "Pensamiento"@es ;
+    sh:description "It refers to the degree of the word's connection with mental activity, ideas, opinions, and judgments."@en,
+        "Se refiere al grado de relación de la palabra con la actividad mental, las ideas, las opiniones y los juicios."@es ;
+    sh:name "Thought"@en,
+        "Pensamiento"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Thought .
+
+<https://astrea.linkeddata.es/shapes#8be74a69bf2a47d6dec0860b8aa8626a> a sh:NodeShape ;
+    rdfs:label "Objective Acquisition Age"@en,
+        "Edad de adquisición objetiva"@es ;
+    sh:description "It refers to the age at which the word was acquired."@en,
+        "Se refiere a la edad en la que se ha adquirido la palabra."@es ;
+    sh:name "Objective Acquisition Age"@en,
+        "Edad de adquisición objetiva"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :ObjectiveAcquisitionAge .
+
+<https://astrea.linkeddata.es/shapes#8ccb0e85341ae98fc2ff4e3611c615e4> a sh:NodeShape ;
+    rdfs:label "Concreteness"@en,
+        "Concreción"@es ;
+    sh:description "Concreteness refers to the extent to which a word refers to an entity that can be perceived with the senses."@en,
+        "La concreción se refiere a hasta qué punto la palabra se refiere a una entidad que puede percibirse con los sentidos."@es ;
+    sh:name "Concreteness"@en,
+        "Concreción"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Concreteness .
+
+<https://astrea.linkeddata.es/shapes#8fd4b41227dc971480fd9ee63b484c1b> a sh:NodeShape ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass <http://www.ontologydesignpatterns.org/cp/owl/semiotics.owl#Expression> .
+
+<https://astrea.linkeddata.es/shapes#91ca3416f1eeeba4cd4bb3706c0e647b> a sh:NodeShape ;
+    rdfs:label "Recognition Time"@en,
+        "Tiempo de reconocimiento"@es ;
+    sh:name "Recognition Time"@en,
+        "Tiempo de reconocimiento"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:property <https://astrea.linkeddata.es/shapes#b38cb80e4157e47d11c3eb5790f8ef3c> ;
+    sh:targetClass :RecognitionTime .
+
+<https://astrea.linkeddata.es/shapes#9def51b6f71bc5692277f714c0bad91b> a sh:NodeShape ;
+    rdfs:label "Amusement"@en,
+        "Diversión"@es ;
+    sh:description "It refers to the degree of amusement conveyed by a word."@en,
+        "Se refiere al grado de diversión que transmite una palabra."@es ;
+    sh:name "Amusement"@en,
+        "Diversión"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Amusement .
+
+<https://astrea.linkeddata.es/shapes#a2dd910a418adc44843f339d1bfa2224> a sh:PropertyShape ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:path ontolex:canonicalForm .
+
+<https://astrea.linkeddata.es/shapes#a491c41cba6ea559fbc3ec6340e3863d> a sh:NodeShape ;
+    rdfs:label "Imageability"@en,
+        "Imaginabilidad"@es ;
+    sh:description "Imaginability refers to the ease with which a mental image of the concept designated by the word can be formed."@en,
+        "La imaginabilidad hace referencia a la facilidad para formarse una imagen mental del concepto que designa la palabra."@es ;
+    sh:name "Imageability"@en,
+        "Imaginabilidad"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Imageability .
+
+<https://astrea.linkeddata.es/shapes#a57fb6b6b172e5f67922b83b3df5a424> a sh:NodeShape ;
+    rdfs:label "Interoception"@en,
+        "Interocepción"@es ;
+    sh:description "It refers to the degree of the word's connection with internal bodily sensations."@en,
+        "Se refiere al grado de relación de la palabra con sensaciones corporales internas."@es ;
+    sh:name "Interoception"@en,
+        "Interocepción"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Interoception .
+
+<https://astrea.linkeddata.es/shapes#a87e2c18270dad5d82c2162284207e68> a sh:PropertyShape ;
+    sh:nodeKind sh:Literal ;
+    sh:path rb:statisticalProperty .
+
+<https://astrea.linkeddata.es/shapes#b175889e8ceb2fa74b02b44213bbb16b> a sh:NodeShape ;
+    rdfs:label "Pleasure"@en,
+        "Placer"@es ;
+    sh:description "It refers to the degree of pleasure conveyed by a word."@en,
+        "Se refiere al grado de placer que transmite una palabra."@es ;
+    sh:name "Pleasure"@en,
+        "Placer"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Pleasure .
+
+<https://astrea.linkeddata.es/shapes#b347ff401b9ac0de5e54f810597a5ef8> a sh:NodeShape ;
+    rdfs:label "Iconicity"@en,
+        "Iconicidad"@es ;
+    sh:description "It refers to the degree of the word’s sound relation to its meaning."@en,
+        "Se refiere al grado de relación del sonido de la palabra con su significado."@es ;
+    sh:name "Iconicity"@en,
+        "Iconicidad"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Iconicity .
+
+<https://astrea.linkeddata.es/shapes#bbbc0ddb35dfa54c1085b5bec3356de5> a sh:NodeShape ;
+    rdfs:label "Acquisition Age"@en,
+        "Edad de adquisición"@es ;
+    sh:description "This variable indicates the approximate age (in years) at which an individual believes they learned a particular word."@en,
+        "Esta variable indica la edad aproximada (en años) a la que un individuo cree que aprendió una determinada palabra."@es ;
+    sh:name "Acquisition Age"@en,
+        "Edad de adquisición"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :AcquisitionAge .
+
+<https://astrea.linkeddata.es/shapes#c0b3c845d1591150fd13af906c5dbb00> a sh:NodeShape ;
+    rdfs:label "leksikon"@af,
+        "Lexikon"@de,
+        "lexicon"@en,
+        "lexicón"@es,
+        "Lexique"@fr,
+        "Lessico"@it,
+        "Lexicon"@nl,
+        "lexicon"@ro,
+        "лексикон"@ru,
+        "lexikon"@sv ;
+    rdfs:isDefinedBy "http://www.w3.org/ns/lemon/lime" ;
+    sh:description "A lexicon represents a collection of lexical entries for a particular language or domain."@en,
+        "Лексикон представляет собой набор словарных единиц для определенного языка или домена."@ru ;
+    sh:name "leksikon"@af,
+        "Lexikon"@de,
+        "lexicon"@en,
+        "lexicón"@es,
+        "Lexique"@fr,
+        "Lessico"@it,
+        "Lexicon"@nl,
+        "lexicon"@ro,
+        "лексикон"@ru,
+        "lexikon"@sv ;
+    sh:nodeKind sh:IRI ;
+    sh:property <https://astrea.linkeddata.es/shapes#858198aaf0f7e520c6533e839be0f924>,
+        <https://astrea.linkeddata.es/shapes#ae785ac4c8235659f933f8494b730fce>,
+        <https://astrea.linkeddata.es/shapes#fc89a8253f3433c365b832d809a64b94> ;
+    sh:targetClass lime:Lexicon .
+
+<https://astrea.linkeddata.es/shapes#c2ea5789dcb903a31d6420babb3f552e> a sh:NodeShape ;
+    rdfs:label "Arousal"@en,
+        "Activación"@es ;
+    sh:description "Arousal refers to the level of calmness or excitement evoked by a word, that is, how relaxing or intense it feels to the person."@en,
+        "La activación hace referencia al nivel de calma o excitación que evoca una palabra, es decir, cuán relajante o intensa le resulta a la persona."@es ;
+    sh:name "Arousal"@en,
+        "Activación"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Arousal .
+
+<https://astrea.linkeddata.es/shapes#c8f11d59354442336d866398dc526434> a sh:NodeShape ;
+    rdfs:label "Annotation"@en,
+        "Anotación"@es ;
+    sh:name "Annotation"@en,
+        "Anotación"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Annotation .
+
+<https://astrea.linkeddata.es/shapes#cbe9e83217bc609ef25d06ff0ff17ae4> a sh:NodeShape ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass ontolex:Form .
+
+<https://astrea.linkeddata.es/shapes#ccc643f50918fc30f4da3361e96d7988> a sh:NodeShape ;
+    rdfs:label "Response time (TDL)"@en,
+        "Tiempo de respuesta (LDT)"@es ;
+    sh:description "The variable response time in Lexical Decision tasks refers to the time it takes for a participant to recognize whether a presented stimulus is a real word, that is, one that exists in the language."@en,
+        "La variable tiempo de respuesta en tareas de Decisión Léxica se refiere al tiempo que tarda un participante en reconocer si un estímulo presentado es una palabra real, esto es, que existe en el idioma."@es ;
+    sh:name "Response time (TDL)"@en,
+        "Tiempo de respuesta (LDT)"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :TimeTdl .
+
+<https://astrea.linkeddata.es/shapes#d325f0928b7421616bbebc506928fd5e> a sh:NodeShape ;
+    rdfs:label "Sadness"@en,
+        "Tristeza"@es ;
+    sh:description "It refers to the degree of sadness conveyed by a word."@en,
+        "Se refiere al grado de tristeza que transmite una palabra."@es ;
+    sh:name "Sadness"@en,
+        "Tristeza"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Sadness .
+
+<https://astrea.linkeddata.es/shapes#da91d87368a7bded9258276d74049497> a sh:NodeShape ;
+    rdfs:label "Excitement"@en,
+        "Entusiasmo"@es ;
+    sh:description "It refers to the degree of excitement conveyed by a word."@en,
+        "Se refiere al grado de entusiasmo que transmite una palabra."@es ;
+    sh:name "Excitement"@en,
+        "Entusiasmo"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Excitement .
+
+<https://astrea.linkeddata.es/shapes#df83ecf87538a620321a13f0667a4b3e> a sh:NodeShape ;
+    rdfs:label "Fear"@en,
+        "Miedo"@es ;
+    sh:description "It refers to the degree of fear conveyed by a word."@en,
+        "Se refiere al grado de miedo que transmite una palabra."@es ;
+    sh:name "Fear"@en,
+        "Miedo"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Fear .
+
+<https://astrea.linkeddata.es/shapes#e2a95adc29793223657a623996b795d1> a sh:PropertyShape ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:path terms:rights .
+
+<https://astrea.linkeddata.es/shapes#e4ed836e776e22adcd91956196ff9358> a sh:NodeShape ;
+    rdfs:label "Anger"@en,
+        "Enfado"@es ;
+    sh:description "It refers to the degree of anger conveyed by a word."@en,
+        "Se refiere al grado de enfado que transmite una palabra."@es ;
+    sh:name "Anger"@en,
+        "Enfado"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :Anger .
+
+<https://astrea.linkeddata.es/shapes#e50c7277c48aafc04fa4de4bb26b9b9e> a sh:NodeShape ;
+    rdfs:label "Social Interaction"@en,
+        "Interacción social"@es ;
+    sh:name "Social Interaction"@en,
+        "Interacción social"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :SocialInteraction .
+
+<https://astrea.linkeddata.es/shapes#f13e7b05e058c40b424e223efd5e3023> a sh:NodeShape ;
+    rdfs:label "Emotional Dimension"@en,
+        "Dimensión emocional"@es ;
+    sh:name "Emotional Dimension"@en,
+        "Dimensión emocional"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :EmotionalDimension .
+
+<https://astrea.linkeddata.es/shapes#fcef6fd1e4d485cda313af79029c86e7> a sh:NodeShape ;
+    rdfs:label "Naming time"@en,
+        "Tiempo de nombrado"@es ;
+    sh:description "Se refiere al tiempo de nombrado de la palabra, esto es, de lectura de la palabra en voz alta."@en,
+        "Se refiere al tiempo de nombrado de la palabra, esto es, de lectura de la palabra en voz alta."@es ;
+    sh:name "Naming time"@en,
+        "Tiempo de nombrado"@es ;
+    sh:nodeKind sh:IRI ;
+    sh:targetClass :TimeNaming .
+
+<https://astrea.linkeddata.es/shapes#247f5f4f73d9f1056c0311cd80f31016> a sh:PropertyShape ;
+    sh:nodeKind sh:IRIOrLiteral ;
+    sh:path ontolex:canonicalForm ;
+    sh:qualifiedMaxCount 1 ;
+    sh:qualifiedValueShape [ sh:class ontolex:Form ] .
+
+<https://astrea.linkeddata.es/shapes#31854da01ff26aff9c9cfeb1558112f2> a sh:PropertyShape ;
+    sh:nodeKind sh:IRIOrLiteral ;
+    sh:path ontolex:lexicalForm ;
+    sh:qualifiedMinCount 1 ;
+    sh:qualifiedValueShape [ sh:class ontolex:Form ] .
+
+<https://astrea.linkeddata.es/shapes#858198aaf0f7e520c6533e839be0f924> a sh:PropertyShape ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:nodeKind sh:IRIOrLiteral ;
+    sh:path lime:language .
+
+<https://astrea.linkeddata.es/shapes#ae785ac4c8235659f933f8494b730fce> a sh:PropertyShape ;
+    rdfs:label "inskrywing"@af,
+        "Eintrag"@de,
+        "The 'entry' property relates a lexicon to one of the lexical entries contained in it."@en,
+        "entry"@en,
+        "entrada"@es,
+        "entrée"@fr,
+        "entrata"@it,
+        "Item"@nl,
+        "entrada"@pt,
+        "înregistrare"@ro,
+        "Свойство 'запись' связывает лексикон с одной из содержащихся в нем словарных единиц."@ru,
+        "запись"@ru,
+        "ingång"@sv ;
+    rdfs:isDefinedBy "http://www.w3.org/ns/lemon/lime" ;
+    sh:class ontolex:LexicalEntry ;
+    sh:description "The 'entry' property relates a lexicon to one of the lexical entries contained in it."@en,
+        "Свойство 'запись' связывает лексикон с одной из содержащихся в нем словарных единиц."@ru ;
+    sh:name "inskrywing"@af,
+        "Eintrag"@de,
+        "entry"@en,
+        "entrada"@es,
+        "entrée"@fr,
+        "entrata"@it,
+        "Item"@nl,
+        "entrada"@pt,
+        "înregistrare"@ro,
+        "запись"@ru,
+        "ingång"@sv ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:path lime:entry .
+
+<https://astrea.linkeddata.es/shapes#b38cb80e4157e47d11c3eb5790f8ef3c> a sh:PropertyShape ;
+    sh:datatype xsd:float ;
+    sh:nodeKind sh:Literal ;
+    sh:path :recognitionTime ;
+    sh:pattern "(\\+|-)?([0-9]+(\\.[0-9]*)?|\\.[0-9]+)([Ee](\\+|-)?[0-9]+)?|(\\+|-)?INF|NaN" .
+
+<https://astrea.linkeddata.es/shapes#fc89a8253f3433c365b832d809a64b94> a sh:PropertyShape ;
+    sh:nodeKind sh:IRIOrLiteral ;
+    sh:path lime:entry ;
+    sh:qualifiedMinCount 1 ;
+    sh:qualifiedValueShape [ sh:class ontolex:LexicalEntry ] .
+
